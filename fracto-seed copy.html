@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fracto · Seed Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f6fb;
+      --panel: #ffffff;
+      --fg: #0f172a;
+      --muted: #475467;
+      --accent: #01684d;
+      --border: #d7dbe7;
+      --card-bg: #ffffff;
+      --card-alt: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      padding: clamp(16px, 4vw, 48px);
+      line-height: 1.5;
+    }
+    .deck-shell {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(200px, 240px) 1fr;
+      gap: clamp(16px, 3vw, 32px);
+      min-height: 80vh;
+    }
+    .nav-rail {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .rail-brand { display: flex; gap: 12px; align-items: center; font-size: 14px; }
+    .rail-brand strong { font-size: 16px; }
+    .rail-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 8px;
+      background: var(--card-alt);
+      object-fit: contain;
+    }
+    .rail-brand-copy { display: flex; flex-direction: column; gap: 2px; }
+    .rail-meta { font-size: 12px; color: var(--muted); }
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-list button {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 8px 10px;
+      display: flex;
+      gap: 8px;
+      font-size: 13px;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      text-align: left;
+    }
+    .nav-list li.active button,
+    .nav-list button:hover {
+      border-color: var(--border);
+      color: var(--fg);
+      background: var(--card-alt);
+    }
+    .deck-stage { display: flex; flex-direction: column; gap: 14px; }
+    .deck { position: relative; }
+    .slide {
+      display: none;
+      background: none;
+      border-radius: 20px;
+      padding: 0;
+      min-height: 70vh;
+    }
+    .slide.active { display: grid; gap: 18px; }
+    header.topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .topbar-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .slide-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 4px;
+      background: var(--card-alt);
+      object-fit: contain;
+    }
+    .slide-body { display: grid; gap: 18px; }
+    .card-block {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: 0 2px 8px rgba(15,23,42,0.04);
+    }
+    .split { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .slide-head { display: grid; gap: 8px; }
+    .slide-head h1,
+    .slide-head h2 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 600;
+    }
+    .slide-head p { margin: 0; font-size: 16px; color: var(--muted); }
+    h3 { margin: 0 0 8px; font-size: 18px; font-weight: 600; }
+    p, li, td, th { font-size: 16px; }
+    ul.list { list-style: disc; padding-left: 20px; margin: 0; display: grid; gap: 8px; color: var(--muted); }
+    ul.stats { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    ul.stats li { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 6px; font-weight: 500; }
+    ul.stats strong { font-size: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 0; border-bottom: 1px solid var(--border); text-align: left; color: var(--muted); }
+    th { font-size: 12px; letter-spacing: 0.5px; text-transform: uppercase; color: #7c869b; }
+    .client-logos { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; align-items: center; }
+    .client-logos img { max-width: 110px; max-height: 40px; filter: grayscale(0.2); }
+    .funnel-visual { display: grid; gap: 12px; }
+    .funnel-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: stretch; }
+    .funnel-stage {
+      position: relative;
+      padding: 14px;
+      border-radius: 14px;
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 6px;
+    }
+    .funnel-stage:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #94a3b8;
+    }
+    .funnel-title { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: #7c869b; }
+    .funnel-metric { font-size: 20px; font-weight: 600; color: var(--fg); }
+    .funnel-note { font-size: 14px; color: var(--muted); }
+    .timeline-card { display: grid; gap: 18px; }
+    .timeline-line {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      padding: 36px 18px 0;
+    }
+    .timeline-line::before {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 36px;
+      right: 36px;
+      height: 6px;
+      background: var(--fg);
+      border-radius: 4px;
+    }
+    .timeline-line::after {
+      content: "";
+      position: absolute;
+      top: 13px;
+      right: 8px;
+      border-left: 28px solid var(--fg);
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+    }
+    .timeline-node {
+      position: relative;
+      text-align: center;
+      flex: 1;
+      display: grid;
+      gap: 6px;
+    }
+    .timeline-node:not(:first-child) { margin-left: 12px; }
+    .timeline-node::before {
+      content: "";
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background: rgba(71,84,103,0.4);
+    }
+    .timeline-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      margin: 0 auto;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      background: var(--card-alt);
+      border: 1px solid var(--border);
+      color: var(--fg);
+    }
+    .timeline-label { font-weight: 600; font-size: 16px; color: var(--fg); margin: 0; }
+    .timeline-year { font-size: 14px; color: var(--muted); }
+    .timeline-era {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      color: var(--fg);
+      text-align: center;
+      margin: 0;
+    }
+    .chart-panel { margin-top: 18px; display: grid; gap: 12px; }
+    .chart-wrapper {
+      background: #0e1523;
+      border-radius: 18px;
+      padding: 20px 24px 24px;
+      color: #fff;
+      position: relative;
+    }
+    .chart-inner {
+      display: flex;
+      gap: 18px;
+    }
+    .chart-axis {
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: right;
+      font-size: 12px;
+      color: #94a3b8;
+      padding-right: 12px;
+      border-right: 1px dashed rgba(255,255,255,0.2);
+    }
+    .chart-axis span {
+      position: relative;
+      padding-right: 6px;
+    }
+    .chart-axis span::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      width: 6px;
+      border-top: 1px dashed rgba(255,255,255,0.15);
+    }
+    .chart-bars {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      gap: 22px;
+      padding: 0 6px;
+      min-height: 220px;
+      position: relative;
+    }
+    .chart-bars::before,
+    .chart-bars::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      border-top: 1px dashed rgba(255,255,255,0.08);
+    }
+    .chart-bars::before { top: 60px; }
+    .chart-bars::after { top: 120px; }
+    .chart-bar {
+      border: none;
+      background: transparent;
+      flex: 1;
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+      color: #cbd5f5;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .chart-bar:focus-visible {
+      outline: 2px solid #c084fc;
+      outline-offset: 4px;
+    }
+    .bar-track {
+      width: 60px;
+      height: 170px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 6px;
+    }
+    .bar-fill {
+      width: 100%;
+      border-radius: 10px 10px 4px 4px;
+      background: var(--bar-color, #5b8def);
+      height: 0;
+      transition: height 600ms ease, box-shadow 200ms ease;
+    }
+    .chart-bar.visible .bar-fill { height: calc(var(--height, 0) * 100%); }
+    .chart-bar:hover .bar-fill,
+    .chart-bar:focus-visible .bar-fill {
+      box-shadow: 0 0 12px rgba(255,255,255,0.3);
+    }
+    .value-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #cbd5f5;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      transition: color 150ms ease, background 150ms ease;
+    }
+    .chart-bar:hover .value-label,
+    .chart-bar:focus-visible .value-label {
+      color: #fff;
+      background: rgba(255,255,255,0.18);
+    }
+    .chart-quarter { font-weight: 600; color: #fff; }
+    .chart-tooltip {
+      position: absolute;
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 6px 10px;
+      font-size: 12px;
+      pointer-events: none;
+      color: #fff;
+      opacity: 0;
+      transform: translate(-50%, -12px);
+      transition: opacity 120ms ease;
+      white-space: nowrap;
+    }
+    .chart-tooltip.visible { opacity: 1; }
+    .viz-placeholder {
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      background: var(--card-alt);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer { font-size: 12px; color: #98a2b3; text-transform: uppercase; letter-spacing: 0.6px; }
+    .control-bar {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .nav-btn {
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+    }
+    .nav-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .progress { width: 100%; height: 4px; border-radius: 999px; background: #e4e7ec; overflow: hidden; }
+    .progress > i { display: block; height: 100%; width: 0%; background: var(--accent); }
+    @media (max-width: 960px) {
+      .deck-shell { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-shell">
+    <aside class="nav-rail" aria-label="Slide navigation">
+      <div class="rail-brand">
+        <img src="fracto_logo.png" alt="Fracto logo" class="rail-logo">
+        <div class="rail-brand-copy">
+          <span>Fracto</span>
+          <strong>Seed Round Deck</strong>
+          <span>YC template · 2024</span>
+        </div>
+      </div>
+      <ol class="nav-list" id="navList"></ol>
+      <div class="rail-meta">← / → to navigate · Press F for fullscreen · P to print.</div>
+    </aside>
+    <div class="deck-stage">
+      <div class="deck" id="deck">
+        <!-- Slide 1 -->
+        <section class="slide active" data-title="Documents → Decisions">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>Fracto</span>
+            </div>
+            <span>Slide 01</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h1>Documents → Decisions in 30 Seconds</h1>
+              <p>Template-less IDP for BFSI & logistics — India/UAE-residency, closed-loop, agentic-by-design.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <ul class="stats">
+                  <li><strong>1M+</strong><span>Pages processed since Sep ’24</span></li>
+                  <li><strong>90%+</strong><span>STP on live pods</span></li>
+                  <li><strong>~82%</strong><span>Software gross margin</span></li>
+                  <li><strong>India · GCC</strong><span>Residency deployments</span></li>
+                </ul>
+              </div>
+              <div class="card-block">
+                <h3>Momentum Bridge Thesis</h3>
+                <ul class="list">
+                  <li>Agentic DocumentOps replacing brittle template stacks.</li>
+                  <li>Residency-ready VPCs + SOC evidence unlock regulated spend.</li>
+                  <li>Write-back automations turn documents into actions.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Raising a 12-month Momentum Bridge to ₹ 5 Cr ARR · SOC-2 · 100% Agentic Accuracy</div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide" data-title="Hidden Tax">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>The Hidden Tax of Manual Docs</span>
+            </div>
+            <span>Slide 02</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>The Hidden Tax of Manual Docs</h2>
+              <p>Manual document workflows quietly erode margins & breach SLAs.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <ul class="list">
+                  <li>10,000 documents/day × 4 min manual handling ≈ 667 work-hours/day.</li>
+                  <li>At ₹ 300/hour cost → ~₹ 2 L/day hidden cost (~₹ 60 L/month).</li>
+                  <li>An estimated 4% error-rate on critical data → ripple cost to audits/regulators.</li>
+                </ul>
+              </div>
+              <div class="card-block">
+                <div class="funnel-visual">
+                  <div class="funnel-track">
+                    <div class="funnel-stage">
+                      <span class="funnel-title">Document intake</span>
+                      <span class="funnel-metric">10,000 / day</span>
+                      <p class="funnel-note">Scans, PDFs, e-mails entering ops.</p>
+                    </div>
+                    <div class="funnel-stage">
+                      <span class="funnel-title">Manual handling</span>
+                      <span class="funnel-metric">4 min / doc</span>
+                      <p class="funnel-note">≅667 analyst hours every day.</p>
+                    </div>
+                    <div class="funnel-stage">
+                      <span class="funnel-title">Error leakage</span>
+                      <span class="funnel-metric">4% *</span>
+                      <p class="funnel-note">Critical data corrections & rework.</p>
+                    </div>
+                    <div class="funnel-stage">
+                      <span class="funnel-title">Hidden cost</span>
+                      <span class="funnel-metric">₹ 60 L / mo</span>
+                      <p class="funnel-note">₹ 2 L/day burn + audit exposure.</p>
+                    </div>
+                  </div>
+                  <p class="funnel-note"><em>*Ripple: audit flags, SLA misses, capital release delays.</em></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 02 · Hidden Tax</div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide" data-title="Why Now">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>Why This Moment Is Different</span>
+            </div>
+            <span>Slide 03</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>Why This Moment Is Different</h2>
+              <p>Gen-LLMs matured · Data-residency mandated · Buyers demand outcomes, not toolkits.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <ul class="list">
+                  <li>“Agentic DocumentOps” becoming enterprise expectation.</li>
+                  <li>India + GCC buyers insist on local VPC, audit logs, STP ≥ 90%.</li>
+                  <li>Timing: Fracto enters as the first residency-ready, closed-loop IDP.</li>
+                </ul>
+              </div>
+              <div class="card-block timeline-card">
+                <div class="timeline-line">
+                  <div class="timeline-node">
+                    <div class="timeline-icon" aria-hidden="true">🧠</div>
+                    <p class="timeline-label">Gen-LLMs matured</p>
+                    <span class="timeline-year">2019 – 2022</span>
+                  </div>
+                  <div class="timeline-node">
+                    <div class="timeline-icon" aria-hidden="true">🛡️</div>
+                    <p class="timeline-label">Data-residency mandated</p>
+                    <span class="timeline-year">2023</span>
+                  </div>
+                  <div class="timeline-node">
+                    <div class="timeline-icon" aria-hidden="true">🎯</div>
+                    <p class="timeline-label">Buyers demand outcomes</p>
+                    <span class="timeline-year">2024 – 2025</span>
+                  </div>
+                </div>
+                <p class="timeline-era">Agentic Document Ops Era</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 03 · Why Now</div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide" data-title="Closed-Loop Answer">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>The Answer</span>
+            </div>
+            <span>Slide 04</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>The Answer: Closed-Loop, Agentic DocumentOps</h2>
+              <p>Read → Validate → Reconcile → Write-back in ≤ 30 s.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <div class="pillars">
+                  <div class="pillar-card">
+                    <span class="pillar-step">1 · Read</span>
+                    <strong>Template-less capture</strong>
+                    <p>OCR + bounding-box rebuild across PDFs, scans, inbox streams.</p>
+                  </div>
+                  <div class="pillar-card">
+                    <span class="pillar-step">2 · Validate</span>
+                    <strong>Domain guardrails</strong>
+                    <p>Validator studio encodes BFSI/logistics rules, policy graphs, and risk flags.</p>
+                  </div>
+                  <div class="pillar-card">
+                    <span class="pillar-step">3 · Reconcile</span>
+                    <strong>Operator-in-loop</strong>
+                    <p>Exception agents surface diffs, reconcile ledgers, and attach explanations.</p>
+                  </div>
+                  <div class="pillar-card">
+                    <span class="pillar-step">4 · Write-back</span>
+                    <strong>Closed-loop delivery</strong>
+                    <p>APIs push to LOS/LMS/TMS with SOC-ready evidence inside managed VPCs.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-block">
+                <div class="micro-diagram">
+                  <h3>Agentic loop</h3>
+                  <div class="diagram-flow">
+                    <div class="diagram-node">Agents<span>LLM router + policy graph</span></div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-node">Validators<span>Rules & packs for BFSI/logistics</span></div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-node">Operators<span>Recon workspace + explainability</span></div>
+                    <div class="diagram-arrow"></div>
+                    <div class="diagram-node">Systems<span>VPC write-back + audit logs</span></div>
+                  </div>
+                  <p class="funnel-note">Every document follows the same closed-loop swimlane: read, validate, reconcile, and write-back inside 30 seconds.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 04 · Closed-loop answer</div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide" data-title="Proof of Adoption">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>Proof of Adoption</span>
+            </div>
+            <span>Slide 05</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>Proof of Adoption at Scale</h2>
+              <p>Real usage, rising STP, expanding footprint.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <ul class="stats">
+                  <li><strong>400K+</strong><span>Pages processed monthly</span></li>
+                  <li><strong>~92%</strong><span>STP on top-2 flows</span></li>
+                  <li><strong>₹ 12 L</strong><span>MRR → ~₹ 1.44 Cr implied ARR</span></li>
+                  <li><strong>~82%</strong><span>Gross margin (software)</span></li>
+                </ul>
+                <div class="chart-panel" data-chart="pages">
+                  <h3>Quarterly pages processed</h3>
+                  <div class="chart-wrapper">
+                    <div class="chart-inner">
+                      <div class="chart-axis" aria-hidden="true"></div>
+                      <div class="chart-bars"></div>
+                    </div>
+                    <div class="chart-tooltip" role="status" aria-live="polite"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-block">
+                <h3>Client logos</h3>
+                <div class="client-logos">
+                  <img src="clients/121Finance.png" alt="BFSI logo 1">
+                  <img src="clients/NBHC.png" alt="BFSI logo 2">
+                  <img src="clients/ambit.png" alt="BFSI logo 3">
+                  <img src="clients/navata.png" alt="Logistics logo 1">
+                  <img src="clients/ODeX.png" alt="Logistics logo 2">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 05 · Proof</div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide" data-title="Why We Win">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>Why We Win</span>
+            </div>
+            <span>Slide 06</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>Outcome-First, Compliance-Ready Platform</h2>
+              <p>Platform + domain + compliance + outcomes — not just a toolkit.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <table>
+                  <thead>
+                    <tr><th>Feature</th><th>Fracto</th><th>Typical IDP Vendors</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>India/UAE VPC option</td><td>✅</td><td>✘ / limited</td></tr>
+                    <tr><td>Closed-loop (write-back)</td><td>✅</td><td>Partial / add-on</td></tr>
+                    <tr><td>Domain validators</td><td>BFSI / Logistics</td><td>Generic</td></tr>
+                    <tr><td>STP focus</td><td>≥ 90% target</td><td>50–70%</td></tr>
+                    <tr><td>Time-to-live</td><td>≤ 2 weeks</td><td>4–12 weeks</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card-block">
+                <div class="viz-placeholder">Narrative block reinforcing “Outcome over toolkit”.</div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 06 · Advantage</div>
+        </section>
+
+        <!-- Slide 7 -->
+        <section class="slide" data-title="Pricing">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>Pricing</span>
+            </div>
+            <span>Slide 07</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>Simple, Scale-Ready Pricing</h2>
+              <p>Predictable platform fee + page usage + optional add-ons.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <ul class="list">
+                  <li>Platform fee: ₹ 2 L/month.</li>
+                  <li>Usage: ₹ 10 per page processed.</li>
+                  <li>Add-ons: Validator library, VPC deployment, Recon-studio.</li>
+                </ul>
+              </div>
+              <div class="card-block">
+                <p>Clients start small, scale across flows, and avoid heavy capex or multi-year SI programs. Same integration, larger footprint.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 07 · Pricing</div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section class="slide" data-title="Efficiency">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>Efficiency Under Pressure</span>
+            </div>
+            <span>Slide 08</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>Efficiency Under Pressure</h2>
+              <p>Burn multiple & CAC payback prove discipline.</p>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <ul class="stats">
+                  <li><strong>₹ 25 L</strong><span>Q2 Net New ARR</span></li>
+                  <li><strong>₹ 22 L</strong><span>Net burn → Burn multiple ~0.88×</span></li>
+                  <li><strong>5.3 months</strong><span>CAC payback</span></li>
+                </ul>
+              </div>
+              <div class="card-block">
+                <p>Every rupee of burn builds ARR, accuracy, or compliance — no experiments. GTM pods, validator automation, and residency rollouts share the same code-path.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 08 · Efficiency</div>
+        </section>
+
+        <!-- Slide 9 -->
+        <section class="slide" data-title="Momentum Bridge">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>12-Month Bridge</span>
+            </div>
+            <span>Slide 09</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>The 12-Month Momentum Bridge</h2>
+              <p>Bridge to ₹ 5 Cr ARR · SOC-2 Type II · 100% agentic accuracy (top 5 flows).</p>
+            </div>
+            <div class="card-block">
+              <table>
+                <thead>
+                  <tr><th>Quarter</th><th>Revenue Run-rate</th><th>Product Milestone</th><th>Compliance</th><th>Deployments</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Q1</td><td>₹ X L MRR (~₹ X×12 = ~₹ Y Cr)</td><td>95–98% accuracy on top-2 flows</td><td>SOC-2 Type I</td><td>India VPC #1</td></tr>
+                  <tr><td>Q2</td><td>₹ X+L MRR</td><td>100% accuracy on top-5 workflows</td><td>Controls up</td><td>UAE VPC</td></tr>
+                  <tr><td>Q3</td><td>₹ Y L MRR</td><td>Recon-studio + self-serve validators</td><td>Type II audit window</td><td>India VPC #2</td></tr>
+                  <tr><td>Q4</td><td>₹ 5 Cr ARR run-rate</td><td>DMS + Q&A add-on GA</td><td>Type II ready</td><td>GCC region expansion</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="footer">Slide 09 · Bridge plan</div>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide" data-title="The Ask">
+          <header class="topbar">
+            <div class="topbar-brand">
+              <img src="fracto_logo.png" alt="Fracto logo" class="slide-logo">
+              <span>The Ask</span>
+            </div>
+            <span>Slide 10</span>
+          </header>
+          <div class="slide-body">
+            <div class="card-block slide-head">
+              <h2>Raising ₹ 2.5 Cr – 4 Cr Convertible Note (12-month Bridge)</h2>
+            </div>
+            <div class="split">
+              <div class="card-block">
+                <h3>Use of funds</h3>
+                <ul class="list">
+                  <li>40% GTM (BFSI/logistics pods + partnerships).</li>
+                  <li>35% Product (Validators, Recon Studio, DMS add-on).</li>
+                  <li>15% Compliance (SOC-2 Type I→II, audits).</li>
+                  <li>10% Infra (India/UAE VPC deployments).</li>
+                </ul>
+              </div>
+              <div class="card-block">
+                <h3>Outcome by June 2026</h3>
+                <ul class="list">
+                  <li>₹ 5 Cr ARR.</li>
+                  <li>SOC-2 Type II completed.</li>
+                  <li>100% agentic accuracy on top-5 workflows.</li>
+                  <li>Two regional VPC footprints live.</li>
+                </ul>
+                <p><strong>CTA:</strong> Join us for the 12-month Momentum Bridge – outcomes, not experiments.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 10 · The Ask</div>
+        </section>
+      </div>
+      <div class="control-bar" aria-label="navigation">
+        <button class="nav-btn" type="button" data-nav="prev">← Previous</button>
+        <div class="progress"><i id="progress"></i></div>
+        <button class="nav-btn primary" type="button" data-nav="next">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const root = document.querySelector('[data-chart="pages"]');
+      if (!root) return;
+      const axisEl = root.querySelector('.chart-axis');
+      const barsEl = root.querySelector('.chart-bars');
+      const tooltip = root.querySelector('.chart-tooltip');
+      const wrapper = root.querySelector('.chart-wrapper');
+
+      const data = [
+        { quarter: '2024-Q4', value: 202862, color: '#5b8def' },
+        { quarter: '2025-Q1', value: 345573, color: '#f5c84c' },
+        { quarter: '2025-Q2', value: 464017, color: '#34d399' },
+        { quarter: '2025-Q3', value: 1694002, color: '#c084fc' },
+      ];
+      const maxValue = 2000000;
+      const axisValues = [2000000, 1500000, 1000000, 500000, 0];
+
+      if (axisEl) {
+        axisEl.innerHTML = axisValues
+          .map(value => `<span>${formatAxis(value)}</span>`)
+          .join('');
+      }
+
+      if (barsEl) {
+        barsEl.innerHTML = data
+          .map(({ quarter, value, color }) => {
+            const height = (value / maxValue).toFixed(3);
+            return `
+              <button class="chart-bar" type="button" data-quarter="${quarter}" data-value="${formatFull(value)}">
+                <span class="value-label">${formatShort(value)}</span>
+                <div class="bar-track">
+                  <div class="bar-fill" style="--bar-color:${color}; --height:${height};"></div>
+                </div>
+                <span class="chart-quarter">${quarter}</span>
+              </button>
+            `;
+          })
+          .join('');
+      }
+
+      const bars = barsEl?.querySelectorAll('.chart-bar') || [];
+      bars.forEach((bar, index) => {
+        setTimeout(() => bar.classList.add('visible'), 150 + index * 120);
+        bar.addEventListener('mouseenter', () => showTooltip(bar));
+        bar.addEventListener('focus', () => showTooltip(bar));
+        bar.addEventListener('mouseleave', hideTooltip);
+        bar.addEventListener('blur', hideTooltip);
+      });
+
+      function showTooltip(bar) {
+        if (!tooltip || !wrapper) return;
+        tooltip.textContent = `${bar.dataset.quarter}: ${bar.dataset.value} pages`;
+        const barRect = bar.getBoundingClientRect();
+        const wrapRect = wrapper.getBoundingClientRect();
+        tooltip.style.left = `${barRect.left + barRect.width / 2 - wrapRect.left}px`;
+        tooltip.style.top = `${barRect.top - wrapRect.top - 8}px`;
+        tooltip.classList.add('visible');
+      }
+
+      function hideTooltip() {
+        tooltip?.classList.remove('visible');
+      }
+
+      function formatAxis(value) {
+        if (value >= 1000000) return `${(value / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
+        if (value >= 1000) return `${Math.round(value / 1000)}K`;
+        return String(value);
+      }
+      function formatShort(value) {
+        if (value >= 1000000) return `${(value / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
+        if (value >= 1000) return `${Math.round(value / 1000)}K`;
+        return value.toString();
+      }
+      function formatFull(value) {
+        return new Intl.NumberFormat('en-US').format(value);
+      }
+    })();
+  </script>
+
+  <script>
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const navList = document.getElementById('navList');
+      const progress = document.getElementById('progress');
+      const buttons = document.querySelectorAll('[data-nav]');
+      let idx = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
+
+      function buildNav(){
+        navList.innerHTML = '';
+        slides.forEach((slide, i) => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.dataset.index = i;
+          btn.innerHTML = `<span>${String(i + 1).padStart(2,'0')}</span><span>${slide.dataset.title || 'Slide ' + (i + 1)}</span>`;
+          li.appendChild(btn);
+          navList.appendChild(li);
+        });
+      }
+
+      function updateNav(){
+        const items = navList.querySelectorAll('li');
+        items.forEach((item, i) => item.classList.toggle('active', i === idx));
+      }
+
+      function show(i){
+        if (i < 0 || i >= slides.length) return;
+        slides[idx]?.classList.remove('active');
+        idx = i;
+        slides[idx].classList.add('active');
+        if (progress) progress.style.width = `${((idx + 1)/slides.length)*100}%`;
+        updateNav();
+        buttons.forEach(btn => {
+          if (btn.dataset.nav === 'prev') btn.disabled = idx === 0;
+          if (btn.dataset.nav === 'next') btn.disabled = idx === slides.length - 1;
+        });
+        document.title = `${slides[idx].dataset.title || 'Slide'} — Fracto`;
+        location.replace('#' + idx);
+      }
+
+      buildNav();
+      show(idx);
+
+      navList.addEventListener('click', (e) => {
+        const target = e.target.closest('button[data-index]');
+        if (!target) return;
+        const next = parseInt(target.dataset.index, 10);
+        if (!Number.isNaN(next)) show(next);
+      });
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.dataset.nav === 'next') show(idx + 1);
+          if (btn.dataset.nav === 'prev') show(idx - 1);
+        });
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if(['ArrowRight','PageDown',' '].includes(e.key)) show(idx + 1);
+        else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)) show(idx - 1);
+        else if(e.key.toLowerCase() === 'f') {
+          const el = document.documentElement;
+          if (!document.fullscreenElement) el.requestFullscreen?.();
+          else document.exitFullscreen?.();
+        }
+        else if(e.key.toLowerCase() === 'p') window.print();
+        else if(e.key === 'Home') show(0);
+        else if(e.key === 'End') show(slides.length - 1);
+      });
+
+      window.addEventListener('click', (e) => {
+        const sel = window.getSelection();
+        if (sel && sel.toString().length) return;
+        const tag = e.target.tagName.toLowerCase();
+        if (!['button','a','input','textarea','select','label'].includes(tag)) show(idx + 1);
+      });
+    })();
+  </script>
+</body>
+</html>

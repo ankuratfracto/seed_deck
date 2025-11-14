@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fracto · Appendix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f6fb;
+      --panel: #ffffff;
+      --fg: #0f172a;
+      --muted: #475467;
+      --accent: #01684d;
+      --border: #d7dbe7;
+      --card-bg: #ffffff;
+      --card-alt: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--fg); padding: clamp(16px, 4vw, 48px); }
+    .container { max-width: 1200px; margin: 0 auto; display: grid; gap: 20px; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); }
+    h2 { margin: 0 0 6px; font-size: clamp(20px, 2.4vw, 28px); color: var(--muted); }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 18px; box-shadow: 0 2px 8px rgba(15,23,42,.05); }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .list { margin: 0; padding-left: 18px; color: var(--muted); }
+    .quote { border-left: 3px solid var(--accent); padding-left: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 0; border-bottom: 1px solid var(--border); text-align: left; color: var(--muted); }
+    th { font-size: 12px; letter-spacing: .5px; text-transform: uppercase; color: #7c869b; }
+    .logo-marquee { border: 1px solid var(--border); border-radius: 16px; padding: 14px; background: var(--card-alt); overflow: hidden; }
+    .track { display: flex; gap: 36px; animation: scroll 18s linear infinite; align-items: center; }
+    .track img { max-height: 40px; max-width: 140px; object-fit: contain; filter: grayscale(.15); }
+    @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background: rgba(1,104,77,.1); color: var(--accent); font-size: 12px; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Fracto — Appendix</h1>
+    <h2>Deeper proof points, tables, and references</h2>
+
+    <section class="card">
+      <h3>Customer Quote</h3>
+      <p class="quote">“Fracto took our trade finance flow from 4 analysts to <strong>sub‑30 second</strong> turnarounds. Every new pod starts with a customer reference call.”<br><small>— COO, Tier‑1 NBFC</small></p>
+    </section>
+
+    <section class="card">
+      <h3>Customer Logos (extended)</h3>
+      <div class="logo-marquee">
+        <div class="track">
+          <img src="clients/121Finance.png" alt="121 Finance">
+          <img src="clients/NBHC.png" alt="NBHC">
+          <img src="clients/ambit.png" alt="Ambit">
+          <img src="clients/navata.png" alt="Navata">
+          <img src="clients/ODeX.png" alt="ODeX">
+          <img src="clients/trukker.png" alt="Trukker">
+          <img src="clients/petpooja.png" alt="Petpooja">
+          <img src="clients/jaikisan.png" alt="Jai Kisan">
+          <img src="clients/ambit.png" alt="Ambit">
+          <img src="clients/navata.png" alt="Navata">
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Expansion Flywheel (details)</h3>
+      <ol class="list">
+        <li><strong>Design partners → references:</strong> 8 pods now referenceable across BFSI + logistics.</li>
+        <li><strong>Playbooked validators:</strong> Reusable packs cut launch time and power expansions.</li>
+        <li><strong>Partner‑led pods:</strong> Alliances bring pre‑qualified volumes without extra GTM headcount.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h3>Comparison Table (full)</h3>
+      <table>
+        <thead><tr><th>Feature</th><th>Fracto</th><th>Typical IDP</th></tr></thead>
+        <tbody>
+          <tr><td>India/UAE VPC option</td><td>✅</td><td>✘ / limited</td></tr>
+          <tr><td>Closed‑loop (write‑back)</td><td>✅</td><td>Partial / add‑on</td></tr>
+          <tr><td>Domain validators</td><td>BFSI / Logistics</td><td>Generic</td></tr>
+          <tr><td>STP focus</td><td>≥ 90% target</td><td>50–70%</td></tr>
+          <tr><td>Time‑to‑live</td><td>≤ 2 weeks</td><td>4–12 weeks</td></tr>
+          <tr><td>Audit evidence automation</td><td>Built‑in packs</td><td>Manual exports</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h3>Pricing Math (worked example)</h3>
+      <p><span class="pill">BFSI Pod</span> 35K pages/month → ₹ 5.5 L (platform + usage) delivering ~90% STP and <em>≤ 2 weeks</em> implementation.</p>
+      <ul class="list">
+        <li>Platform: ₹ 2 L/month</li>
+        <li>Usage: ₹ 10/page</li>
+        <li>Add‑ons: Validator Library, Recon Studio, VPC</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h3>Risks & Mitigations (detail)</h3>
+      <ul class="list">
+        <li><strong>Enterprise procurement:</strong> Dual GTM pods + pre‑approved MSAs keep diligence inside 6–8 weeks.</li>
+        <li><strong>Audit runway:</strong> 15% of bridge ring‑fenced for controls + evidence capture; SOC advisors embedded.</li>
+        <li><strong>Infra latency:</strong> Redundant VPC kits for India + GCC with shared observability + SRE cover.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h3>Capital Discipline (playbook)</h3>
+      <ul class="list">
+        <li><strong>Automation leverage:</strong> Validator templates → burn multiple moved from 1.1× to 0.88× QoQ.</li>
+        <li><strong>Pipeline > headcount:</strong> Partner referrals + founder‑led pods → CAC payback 5.3 months.</li>
+        <li><strong>Shared compliance track:</strong> Residency rollouts and SOC work reuse infra with Recon Studio.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h3>Contact</h3>
+      <p><strong>Ankur Gupta · CEO</strong><br/>ankur@fracto.tech · +91‑XXX‑XXX‑XXXX</p>
+    </section>
+  </div>
+</body>
+</html>

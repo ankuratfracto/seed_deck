@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fracto · YC Deck · Dual Mode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --fg: #0f172a;
+      --muted: #475467;
+      --accent: #01684d;
+      --border: #d7dbe7;
+      --hover: #f0f2f9;
+      --progress-bg: #e4e7ec;
+      --card-shadow: rgba(15,23,42,0.05);
+    }
+
+    body.theme-dark {
+      color-scheme: dark;
+      --bg: #030712;
+      --panel: #111a2c;
+      --panel-soft: #0c1422;
+      --fg: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #2dd4bf;
+      --border: #1f2b3f;
+      --hover: rgba(148,163,184,0.12);
+      --progress-bg: rgba(148,163,184,0.28);
+      --card-shadow: rgba(2,6,23,0.55);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      padding: clamp(16px, 4vw, 48px);
+      line-height: 1.5;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    * { box-sizing: border-box; }
+
+    .deck-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) 1fr;
+      gap: clamp(16px, 3vw, 32px);
+      min-height: 80vh;
+    }
+
+    @media (max-width: 900px) {
+      .deck-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .nav-rail {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .rail-brand { display: grid; gap: 6px; }
+    .rail-brand strong { font-size: 1.15rem; }
+    .rail-meta { font-size: 0.78rem; color: var(--muted); }
+
+    .theme-switch {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      background: var(--panel-soft);
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .theme-switch[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .theme-switch-icon {
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav-list button {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .nav-list li.active button,
+    .nav-list button:hover {
+      border-color: var(--border);
+      background: var(--hover);
+      color: var(--fg);
+    }
+
+    .deck-stage { display: flex; flex-direction: column; gap: 18px; }
+    .deck { position: relative; }
+
+    .slide {
+      display: none;
+      background: none;
+      border-radius: 20px;
+      padding: 0;
+      min-height: 60vh;
+    }
+
+    .slide.active { display: grid; gap: 18px; }
+
+    header.topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: 0 2px 12px var(--card-shadow);
+      display: grid;
+      gap: 14px;
+    }
+
+    .slide-head h1,
+    .slide-head h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 600;
+    }
+
+    .slide-head p {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    ul.list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    ul.list li {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    ul.list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--panel-soft);
+      display: grid;
+      gap: 4px;
+    }
+
+    .stat-card span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .stat-card strong {
+      font-size: 1.6rem;
+    }
+
+    table.simple {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    table.simple th,
+    table.simple td {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .footer { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; }
+
+    .control-bar {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 18px;
+      background: var(--panel-soft);
+      color: var(--fg);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .nav-btn.primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .progress {
+      flex: 1;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--progress-bg);
+      overflow: hidden;
+    }
+
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 200ms ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-shell">
+    <aside class="nav-rail" aria-label="Slide navigation">
+      <div class="rail-brand">
+        <strong>Fracto</strong>
+        <span>YC-style update deck</span>
+      </div>
+      <button class="theme-switch" type="button" id="themeToggle" aria-pressed="false">
+        <span class="theme-switch-icon" aria-hidden="true">🌙</span>
+        <span class="theme-switch-label">Dark mode</span>
+      </button>
+      <ol class="nav-list" id="navList"></ol>
+      <div class="rail-meta">Use ← → or tap slides to advance.</div>
+    </aside>
+
+    <div class="deck-stage">
+      <div class="deck" id="deck">
+
+        <!-- Slide 1: Intro -->
+        <section class="slide active" data-title="Intro">
+          <header class="topbar">
+            <span>Fracto</span>
+            <span>Slide 01</span>
+          </header>
+          <div class="card slide-head">
+            <div class="tagline">Documents → Decisions in 30 seconds</div>
+            <h1>Fracto</h1>
+            <p>Agentic IDP for BFSI & logistics. Residency-ready, closed loop, and priced to win regulated ops.</p>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <span>ARR run-rate</span>
+                <strong>₹1.4Cr</strong>
+                <small>Growing 3× YoY</small>
+              </div>
+              <div class="stat-card">
+                <span>Customers</span>
+                <strong>50+</strong>
+                <small>India + GCC logos</small>
+              </div>
+              <div class="stat-card">
+                <span>STP</span>
+                <strong>92%</strong>
+                <small>Top workflows</small>
+              </div>
+              <div class="stat-card">
+                <span>Gross margin</span>
+                <strong>90%</strong>
+                <small>Software-first delivery</small>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Fracto · Intro</div>
+        </section>
+
+        <!-- Slide 2: Problem -->
+        <section class="slide" data-title="Problem">
+          <header class="topbar">
+            <span>Problem</span>
+            <span>Slide 02</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Manual DocumentOps silently taxes margins</h2>
+            <p>Regulated lenders and logistics teams still hand-key critical documents across inboxes, portals, and spreadsheets.</p>
+            <div class="split">
+              <div class="card">
+                <h3>Why teams hurt</h3>
+                <ul class="list">
+                  <li>Docs scattered across email/WhatsApp → 10+ touchpoints per decision.</li>
+                  <li>667 analyst hours/month at ₹300/hr before a decision hits LOS/ERP.</li>
+                  <li>4–8% leakage triggers SLA fines and re-audits.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Hidden tax per 10k docs</h3>
+                <table class="simple">
+                  <tr><th>Step</th><th>Cost</th></tr>
+                  <tr><td>Reading + keying (4 min)</td><td>₹2L / month</td></tr>
+                  <tr><td>Error rework (4%)</td><td>₹40k / month</td></tr>
+                  <tr><td>SLA hits & audits</td><td>₹15k / month</td></tr>
+                  <tr><td><strong>Total drag</strong></td><td><strong>₹2.55L / month</strong></td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Fracto · Problem</div>
+        </section>
+
+        <!-- Slide 3: Solution -->
+        <section class="slide" data-title="Solution">
+          <header class="topbar">
+            <span>Solution</span>
+            <span>Slide 03</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Closed-loop, agentic DocumentOps</h2>
+            <p>One queue, four stages, full telemetry. Docs land, validators run, recon bots clear, and systems update inside 30 seconds.</p>
+            <div class="split">
+              <div class="card">
+                <h3>Product pillars</h3>
+                <ul class="list">
+                  <li>Residency-ready VPC ingestion (email/API/WhatsApp) with queueing + policy routing.</li>
+                  <li>Validator studio with BFSI/logistics guardrails → ≥90% straight-through processing.</li>
+                  <li>Write-back automations for LOS/ERP/TMS with immutable audit trails.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Agentic runbook</h3>
+                <ol class="list" style="counter-reset:item; list-style:none;">
+                  <li style="counter-increment:item; padding-left:26px;">Read & classify — single queue across channels.</li>
+                  <li style="counter-increment:item; padding-left:26px;">Validate — policy/compliance/LLM validators enforce guardrails.</li>
+                  <li style="counter-increment:item; padding-left:26px;">Reconcile — recon bots resolve 90%+ exceptions.</li>
+                  <li style="counter-increment:item; padding-left:26px;">Write-back — systems update with replayable telemetry.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Fracto · Solution</div>
+        </section>
+
+        <!-- Slide 4: Why Now -->
+        <section class="slide" data-title="Why Now">
+          <header class="topbar">
+            <span>Why Now</span>
+            <span>Slide 04</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Timing is compounding in our favor</h2>
+            <p>Regulation, buyer expectations, and LLM maturity align in India + GCC.</p>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <span>Regs</span>
+                <strong>2023</strong>
+                <small>India/GCC residency mandates make foreign IDPs unusable.</small>
+              </div>
+              <div class="stat-card">
+                <span>Tech</span>
+                <strong>2024</strong>
+                <small>LLMs stable enough for production validators.</small>
+              </div>
+              <div class="stat-card">
+                <span>Buyers</span>
+                <strong>Outcome</strong>
+                <small>Ops leaders buy STP, not tooling; references close deals.</small>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Fracto · Why Now</div>
+        </section>
+
+        <!-- Slide 5: Market + Business -->
+        <section class="slide" data-title="Market">
+          <header class="topbar">
+            <span>Market + Model</span>
+            <span>Slide 05</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Beachhead market + simple pricing</h2>
+            <div class="split">
+              <div class="card">
+                <h3>Beachhead TAM (India + GCC)</h3>
+                <ul class="list">
+                  <li>6k regulated BFSI + logistics pods with residency requirements.</li>
+                  <li>Avg spend ₹60L/yr when STP ≥85% and audit-ready.</li>
+                  <li>Service-light delivery keeps gross margins >85%.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Business model</h3>
+                <table class="simple">
+                  <tr><td>Platform fee</td><td>₹1.5–2L / month per pod</td></tr>
+                  <tr><td>Usage</td><td>₹8–12 per doc banded</td></tr>
+                  <tr><td>Add-ons</td><td>Validator packs, dual-VPC kits</td></tr>
+                  <tr><td>Payback</td><td>~11 months CAC</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Fracto · Market & Model</div>
+        </section>
+
+        <!-- Slide 6: Traction -->
+        <section class="slide" data-title="Traction">
+          <header class="topbar">
+            <span>Traction</span>
+            <span>Slide 06</span>
+          </header>
+          <div class="card slide-head">
+            <h2>References pull demand</h2>
+            <p>Design partners → reference wins → repeatable pods.</p>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <span>Logos</span>
+                <strong>50+</strong>
+                <small>0% logo churn</small>
+              </div>
+              <div class="stat-card">
+                <span>Pages / mo</span>
+                <strong>400k+</strong>
+                <small>Targeting 2M by Q4</small>
+              </div>
+              <div class="stat-card">
+                <span>Pods</span>
+                <strong>4</strong>
+                <small>Live expansions last 45 days</small>
+              </div>
+              <div class="stat-card">
+                <span>Burn multiple</span>
+                <strong>1.9×</strong>
+                <small>Tracking to ≤1×</small>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Simple flywheel</h3>
+              <ul class="list">
+                <li>Reference demo → signed pilot in ≤4 weeks.</li>
+                <li>Playbooked validators cut go-live to ≤2 weeks.</li>
+                <li>Usage → ARR growth (₹12L MRR) with gross margin 90%.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer">Fracto · Traction</div>
+        </section>
+
+        <!-- Slide 7: Team + Ask -->
+        <section class="slide" data-title="Ask">
+          <header class="topbar">
+            <span>Team & Ask</span>
+            <span>Slide 07</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Team + Momentum Bridge ask</h2>
+            <div class="split">
+              <div class="card">
+                <h3>Team</h3>
+                <ul class="list">
+                  <li><strong>Ankur Gupta</strong> — ex-Razorpay, scaled regulated ops products.</li>
+                  <li><strong>Sanjana Rao</strong> — ex-Delhivery, led logistics automation pods.</li>
+                  <li><strong>11-person</strong> builder pod: validators, infra, and GTM.</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Raise</h3>
+                <ul class="list">
+                  <li>₹4Cr convertible (momentum bridge) → ₹5Cr ARR.</li>
+                  <li>Use: GTM pods (40%), product/validators (35%), compliance + dual VPC (25%).</li>
+                  <li>Milestones: SOC-2 Type II, 100% agentic accuracy on top 5 flows, dual residency footprints.</li>
+                </ul>
+              </div>
+            </div>
+            <p><strong>Call to action:</strong> Intro us to regulated pods needing ≥90% STP next quarter. ankur@fracto.tech</p>
+          </div>
+          <div class="footer">Fracto · Team & Ask</div>
+        </section>
+
+        <!-- Slide 8: Why We Win -->
+        <section class="slide" data-title="Why We Win">
+          <header class="topbar">
+            <span>Why We Win</span>
+            <span>Slide 08</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Outcome-first, compliance-ready platform</h2>
+            <p>We ship the full loop (ingest → validate → reconcile → write-back) inside residency-ready VPCs, so regulated buyers can hit ≥90% STP with audit trails.</p>
+          </div>
+          <div class="split">
+            <div class="card">
+              <h3>What regulated buyers now expect</h3>
+              <ul class="list">
+                <li>Local VPCs, immutable logs, and SOC evidence baked in.</li>
+                <li>Domain validators for lending, KYC/KYB, logistics, and trade.</li>
+                <li>Closed-loop write-back so LOS/ERP/TMS stay the source of truth.</li>
+              </ul>
+              <p class="tagline">Fracto is the only India + GCC-native agentic DocumentOps stack.</p>
+            </div>
+            <div class="card">
+              <h3>Advantage snapshot</h3>
+              <table class="simple">
+                <thead>
+                  <tr><th>Feature</th><th>Fracto</th><th>Traditional IDP</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Residency</td><td>India & UAE VPC option</td><td>✕ / limited</td></tr>
+                  <tr><td>Loop coverage</td><td>Read → validate → write-back</td><td>Partial, no automations</td></tr>
+                  <tr><td>Domain depth</td><td>BFSI + logistics validators</td><td>Generic templates</td></tr>
+                  <tr><td>STP target</td><td>≥90% on top flows</td><td>50–70%</td></tr>
+                  <tr><td>Time-to-live</td><td>≤2 weeks</td><td>4–12 weeks</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="footer">Fracto · Why We Win</div>
+        </section>
+
+        <!-- Slide 9: Pricing -->
+        <section class="slide" data-title="Pricing">
+          <header class="topbar">
+            <span>Pricing</span>
+            <span>Slide 09</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Simple, scale-ready pricing</h2>
+            <p>Predictable platform fee + page usage + optional validator/infra add-ons.</p>
+          </div>
+          <div class="split">
+            <div class="card">
+              <h3>Starter pod</h3>
+              <p>₹2L / month platform · ₹10 per page</p>
+              <ul class="list">
+                <li>Single pod, managed VPC, and validator studio.</li>
+                <li>Founders-as-POC GTM keeps CAC tight.</li>
+                <li>Used for first regulated workflows per customer.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Scale & multi-pod</h3>
+              <p>Custom platform + usage bands</p>
+              <ul class="list">
+                <li>Multi-pod coverage across BFSI + logistics teams.</li>
+                <li>Recon Studio, DMS, and residency kits bundled.</li>
+                <li>SLA-backed support with shared SRE/validators.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Proof points</h3>
+            <ul class="list">
+              <li>Sample BFSI pod (35k pages/mo) → ₹5.5L in platform + usage delivering ≥90% STP.</li>
+              <li>Customers scale via usage bands instead of new integrations or SI work.</li>
+              <li>Add-ons: validator packs, dual-VPC deployments, Recon insights.</li>
+            </ul>
+          </div>
+          <div class="footer">Fracto · Pricing</div>
+        </section>
+
+        <!-- Slide 10: Efficiency -->
+        <section class="slide" data-title="Efficiency">
+          <header class="topbar">
+            <span>Efficiency</span>
+            <span>Slide 10</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Efficiency under pressure</h2>
+            <p>Usage growth, validator reuse, and shared infra keep unit economics trending up.</p>
+          </div>
+          <div class="split">
+            <div class="card">
+              <div class="stat-grid">
+                <div class="stat-card">
+                  <span>Burn multiple (Q3)</span>
+                  <strong>1.91×</strong>
+                  <small>₹54.95L net burn / ₹28.74L net new ARR.</small>
+                </div>
+                <div class="stat-card">
+                  <span>CAC payback</span>
+                  <strong>~11 mo</strong>
+                  <small>₹21.9L S&M / ₹2.395L new MRR @ 82% GM.</small>
+                </div>
+                <div class="stat-card">
+                  <span>Gross margin</span>
+                  <strong>90.4%</strong>
+                  <small>Software-first delivery.</small>
+                </div>
+                <div class="stat-card">
+                  <span>Net burn (Q3)</span>
+                  <strong>₹54.95L</strong>
+                  <small>Ring-fenced for ARR + compliance work.</small>
+                </div>
+                <div class="stat-card">
+                  <span>Net new ARR</span>
+                  <strong>₹28.74L</strong>
+                  <small>Existing platform upsells.</small>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Capital discipline loop</h3>
+              <ul class="list">
+                <li><strong>Automation first:</strong> validator templates + shared workflows keep services low.</li>
+                <li><strong>Pipeline over headcount:</strong> founder-led + referrals hold CAC in check.</li>
+                <li><strong>Shared compliance & infra:</strong> residency + SOC work reused across pods.</li>
+              </ul>
+              <p><strong>Now:</strong> Sub-2× burn multiple with improving GM and CAC payback.</p>
+              <p><strong>Next 2–3 quarters:</strong> More workflows per customer + GCC expansion push toward ≤1× burn multiple.</p>
+            </div>
+          </div>
+          <div class="footer">Fracto · Efficiency</div>
+        </section>
+
+        <!-- Slide 11: Bridge Plan -->
+        <section class="slide" data-title="Bridge Plan">
+          <header class="topbar">
+            <span>Momentum Bridge</span>
+            <span>Slide 11</span>
+          </header>
+          <div class="card slide-head">
+            <h2>The 12-month momentum bridge</h2>
+            <p>Bridge to ₹5Cr ARR, SOC-2 Type II, dual residency footprints, and 100% agentic accuracy on top workflows.</p>
+          </div>
+          <div class="split">
+            <div class="card">
+              <h3>Deliverables</h3>
+              <ul class="list">
+                <li><strong>Revenue engine:</strong> 8+ enterprise customers, heavier usage bands, ≤1× burn multiple.</li>
+                <li><strong>Product:</strong> Recon Studio, DMS, Q&A add-ons, workflow marketplace.</li>
+                <li><strong>Compliance + residency:</strong> SOC evidence automation and dual VPC kits with shared observability.</li>
+                <li><strong>Operations:</strong> Dual GTM pods plus shared SRE + validator squads.</li>
+              </ul>
+              <p class="tagline">Bridge capital = ARR creation + compliance evidence + residency. No science projects.</p>
+            </div>
+            <div class="card">
+              <h3>Risks & mitigation</h3>
+              <ul class="list">
+                <li><strong>Enterprise procurement:</strong> Dual GTM teams + pre-approved MSAs keep diligence to 6–8 weeks.</li>
+                <li><strong>Audit runway:</strong> SOC advisors embedded; 15% of bridge ring-fenced for controls/evidence.</li>
+                <li><strong>Infra latency:</strong> Redundant India + GCC VPC kits with shared observability + SRE cover.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer">Fracto · Bridge Plan</div>
+        </section>
+
+        <!-- Slide 12: Use of Funds -->
+        <section class="slide" data-title="Use of Funds">
+          <header class="topbar">
+            <span>The Ask</span>
+            <span>Slide 12</span>
+          </header>
+          <div class="card slide-head">
+            <h2>₹4Cr convertible (momentum bridge)</h2>
+            <p>12-month runway to hit ₹5Cr ARR, SOC-2 Type II, dual residency, and 100% agentic accuracy.</p>
+          </div>
+          <div class="card">
+            <div class="stat-grid">
+              <div class="stat-card">
+                <span>ARR run-rate</span>
+                <strong>₹1.4Cr</strong>
+                <small>Today</small>
+              </div>
+              <div class="stat-card">
+                <span>Target</span>
+                <strong>₹5Cr</strong>
+                <small>12-month goal</small>
+              </div>
+              <div class="stat-card">
+                <span>Raise</span>
+                <strong>₹4Cr</strong>
+                <small>Convertible note</small>
+              </div>
+            </div>
+          </div>
+          <div class="split">
+            <div class="card">
+              <h3>Use of funds</h3>
+              <table class="simple">
+                <thead>
+                  <tr><th>Category</th><th>Share</th><th>Deliverable</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>GTM pods</td><td>40%</td><td>BFSI/logistics pods + partnerships</td></tr>
+                  <tr><td>Product</td><td>35%</td><td>Validators, Recon Studio, DMS add-ons</td></tr>
+                  <tr><td>Compliance</td><td>15%</td><td>SOC-2 Type I→II, audits</td></tr>
+                  <tr><td>Infra</td><td>10%</td><td>India/UAE VPC deployments</td></tr>
+                </tbody>
+              </table>
+              <p class="tagline">Capital earmarked only for ARR, accuracy, and compliance milestones.</p>
+            </div>
+            <div class="card">
+              <h3>Milestones</h3>
+              <ul class="list">
+                <li>₹5Cr ARR run-rate.</li>
+                <li>SOC-2 Type II complete.</li>
+                <li>100% agentic accuracy on top-5 workflows.</li>
+                <li>India + GCC VPC footprints live.</li>
+              </ul>
+              <p><strong>What this bridge is not:</strong> Not a research round — every rupee ties back to GTM, validators, compliance, or residency.</p>
+            </div>
+          </div>
+          <div class="footer">Fracto · Use of Funds</div>
+        </section>
+
+        <!-- Slide 13: Next Steps -->
+        <section class="slide" data-title="Next Steps">
+          <header class="topbar">
+            <span>Next Steps</span>
+            <span>Slide 13</span>
+          </header>
+          <div class="card slide-head">
+            <h2>Ready to institutionalize agentic DocumentOps?</h2>
+            <p>We’re locking the 12-month bridge with partners who need compliance-grade automation now.</p>
+          </div>
+          <div class="split">
+            <div class="card">
+              <h3>Call to action</h3>
+              <ul class="list">
+                <li>Book a 30-second live workflow demo this week.</li>
+                <li>Share top workflows so we can preload validators + ROI math.</li>
+                <li>Align diligence → bridge close by <strong>March ’25</strong>.</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Contact</h3>
+              <p><strong>Ankur Gupta · CEO</strong><br>ankur@fracto.tech · +91-XXX-XXX-XXXX</p>
+              <p><strong>Data room / memo:</strong> Available on request via secure VPC share.</p>
+              <p>cal.com/fracto · docs.fracto.tech</p>
+            </div>
+          </div>
+          <div class="footer">Fracto · Close</div>
+        </section>
+
+      </div>
+
+      <div class="control-bar" aria-label="navigation">
+        <button class="nav-btn" type="button" data-nav="prev">← Previous</button>
+        <div class="progress"><i id="progress"></i></div>
+        <button class="nav-btn primary" type="button" data-nav="next">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const navList = document.getElementById('navList');
+      const progress = document.getElementById('progress');
+      const buttons = document.querySelectorAll('[data-nav]');
+      const body = document.body;
+      const themeToggle = document.getElementById('themeToggle');
+      const THEME_KEY = 'fracto-theme';
+      const prefersDark = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : { matches: false, addEventListener: () => {} };
+      let idx = 0;
+
+      function syncThemeToggle(){
+        if (!themeToggle) return;
+        const isDark = body.classList.contains('theme-dark');
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        const label = themeToggle.querySelector('.theme-switch-label');
+        const icon = themeToggle.querySelector('.theme-switch-icon');
+        if (label) label.textContent = isDark ? 'Light mode' : 'Dark mode';
+        if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+      }
+
+      function applyInitialTheme(){
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          const wantsDark = stored ? stored === 'dark' : prefersDark.matches;
+          body.classList.toggle('theme-dark', wantsDark);
+        } catch (_) {
+          body.classList.toggle('theme-dark', prefersDark.matches);
+        }
+        syncThemeToggle();
+      }
+
+      function buildNav(){
+        slides.forEach((slide, i) => {
+          const li = document.createElement('li');
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.dataset.index = i;
+          btn.textContent = `${String(i + 1).padStart(2,'0')} · ${slide.dataset.title}`;
+          li.appendChild(btn);
+          navList.appendChild(li);
+        });
+      }
+
+      function updateNav(){
+        const items = navList.querySelectorAll('li');
+        items.forEach((item, i) => item.classList.toggle('active', i === idx));
+        if (progress) progress.style.width = `${((idx + 1) / slides.length) * 100}%`;
+      }
+
+      function show(i){
+        if (i < 0 || i >= slides.length) return;
+        document.querySelector('.slide.active')?.classList.remove('active');
+        idx = i;
+        slides[idx].classList.add('active');
+        updateNav();
+        buttons.forEach(btn => {
+          if (btn.dataset.nav === 'prev') btn.disabled = idx === 0;
+          if (btn.dataset.nav === 'next') btn.disabled = idx === slides.length - 1;
+        });
+      }
+
+      applyInitialTheme();
+      buildNav();
+      updateNav();
+
+      navList.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-index]');
+        if (!btn) return;
+        show(parseInt(btn.dataset.index, 10));
+      });
+
+      buttons.forEach(btn => btn.addEventListener('click', () => {
+        if (btn.dataset.nav === 'next') show(idx + 1);
+        if (btn.dataset.nav === 'prev') show(idx - 1);
+      }));
+
+      window.addEventListener('keydown', (e) => {
+        if(['ArrowRight','PageDown',' '].includes(e.key)) show(idx + 1);
+        else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)) show(idx - 1);
+      });
+
+      window.addEventListener('click', (e) => {
+        const sel = window.getSelection();
+        if (sel && sel.toString().length) return;
+        if (e.target.closest('button') || e.target.closest('a')) return;
+        show(idx + 1);
+      });
+
+      themeToggle?.addEventListener('click', () => {
+        body.classList.toggle('theme-dark');
+        const isDark = body.classList.contains('theme-dark');
+        try {
+          localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light');
+        } catch (_) {}
+        syncThemeToggle();
+      });
+
+      prefersDark.addEventListener?.('change', (event) => {
+        if (typeof localStorage !== 'undefined') {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (stored) return;
+        }
+        body.classList.toggle('theme-dark', event.matches);
+        syncThemeToggle();
+      });
+    })();
+  </script>
+</body>
+</html>
