@@ -1148,6 +1148,14 @@
       font-size: 13px;
       color: var(--muted);
     }
+    @media (max-width: 600px) {
+      .yc-proof-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    body.is-mobile .yc-proof-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
     .pillar-list {
       list-style: none;
       margin: 0;
@@ -2181,7 +2189,7 @@
     .chart-wrapper {
       background: #fff;
       border-radius: 20px;
-      padding: 28px 24px 70px;
+      padding: 28px 24px 90px;
       color: var(--fg);
       border: 1px solid rgba(148,163,184,0.35);
       box-shadow: 0 16px 40px rgba(15,23,42,0.08);
@@ -2309,7 +2317,7 @@
       font-size: 12px;
       position: absolute;
       left: 50%;
-      bottom: -36px;
+      bottom: -50px;
       transform: translateX(-50%);
     }
     .chart-quarter {
@@ -2326,6 +2334,8 @@
       background: rgba(148,163,184,0.2);
       color: #475467;
       white-space: nowrap;
+      text-align: center;
+      line-height: 1.2;
     }
     .delta-chip.positive { background: rgba(16,185,129,0.18); color: #047857; }
     .delta-chip.negative { background: rgba(239,68,68,0.2); color: #b91c1c; }
@@ -2870,90 +2880,17 @@
           <div class="footer">Slide 03 · Why Now</div>
         </section>
 
-        <!-- Slide 4 -->
-        <section class="slide slide-01a" data-title="Closed-Loop Answer">
+        <!-- Slide 4A -->
+        <section class="slide slide-01a" data-title="Solution · YC Template" data-slide-number="04A">
           <header class="topbar">
-            <span>The Answer</span>
+            <span>Solution · YC Template</span>
             <span>Slide 04</span>
           </header>
 
           <div class="slide-body">
             <div class="slide-head">
-              <h2>The Answer: Closed-Loop, Agentic DocumentOps</h2>
+              <h2>Solution — Closed-Loop, Agentic DocumentOps</h2>
               <p>One queue, four stages, full telemetry — docs land, validators run, recon bots clear, and systems update inside 30 seconds.</p>
-            </div>
-
-            <div class="split">
-              <!-- LEFT: FEATURES (shortened) -->
-              <div class="card-block">
-                <h3>Product pillars</h3>
-                <ul class="pillar-list">
-                  <li>
-                    <strong>Residency-ready ingestion</strong>
-                    <p>VPC email/API/WhatsApp connectors with queueing and policy-based routing.</p>
-                  </li>
-                  <li>
-                    <strong>Validator studio</strong>
-                    <p>BFSI and logistics guardrails deliver ≥90% straight-through processing.</p>
-                  </li>
-                  <li>
-                    <strong>Write-back automations</strong>
-                    <p>LOS/ERP/TMS updates ride on immutable, auditable trails.</p>
-                  </li>
-                </ul>
-                <div class="doc-highlight">
-                  <strong>Closed-loop promise</strong>
-                  Closed-loop, agentic DocumentOps — one queue, four stages, full telemetry.
-                </div>
-              </div>
-
-              <!-- RIGHT: LOOP (simplified text, same structure) -->
-              <div class="card-block loop-card">
-                <h3>Agentic runbook</h3>
-                <div class="loop-graphic" aria-hidden="true">
-                  <!-- <div class="loop-ring"></div> -->
-                  <div class="loop-center">Agentic Runbook</div>
-
-                  <div class="loop-step read">
-                    <div class="loop-badge">1</div>
-                    <strong>Read &amp; classify</strong>
-                    <span>Single queue across email, API, WhatsApp.</span>
-                  </div>
-                  <div class="loop-step validate">
-                    <div class="loop-badge">2</div>
-                    <strong>Validate</strong>
-                    <span>Policy, compliance, and LLM validators enforce guardrails.</span>
-                  </div>
-                  <div class="loop-step reconcile">
-                    <div class="loop-badge">3</div>
-                    <strong>Reconcile</strong>
-                    <span>Recon bots auto-resolve 90%+ exceptions.</span>
-                  </div>
-                  <div class="loop-step writeback">
-                    <div class="loop-badge">4</div>
-                    <strong>Write-back</strong>
-                    <span>Systems update with replayable telemetry.</span>
-                  </div>
-                </div>
-                <!-- <p class="loop-caption">Same loop for every document, without more headcount.</p> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="footer">Slide 04 · Closed-loop answer</div>
-        </section>
-
-        <!-- Slide 4A -->
-        <section class="slide slide-01a" data-title="Solution · YC Template" data-slide-number="04A">
-          <header class="topbar">
-            <span>Solution · YC Template</span>
-            <span>Slide 04A</span>
-          </header>
-
-          <div class="slide-body">
-            <div class="slide-head">
-              <h2>Solution — Closed-loop DocumentOps OS</h2>
-              <p>YC-style breakdown: what we built, how it works, and why customers switch today.</p>
             </div>
 
             <div class="yc-solution-grid">
@@ -3036,7 +2973,7 @@
             </div>
           </div>
 
-          <div class="footer">Slide 04A · YC solution template</div>
+          <div class="footer">Slide 04 · YC solution template</div>
         </section>
 
         <!-- Slide 5 -->
@@ -3053,6 +2990,23 @@
 
             <!-- NOTE: added equal-columns here -->
             <div class="split traction-layout equal-columns">
+
+              <div class="card-block chart-card">
+                <div class="chart-stack">
+                  <div class="chart-panel" data-chart="companies">
+                    <h3>Companies onboarded per quarter</h3>
+                    <div class="chart-meta" aria-live="polite"></div>
+                    <div class="chart-wrapper">
+                      <div class="chart-inner">
+                        <div class="chart-axis" aria-hidden="true"></div>
+                        <div class="chart-bars"></div>
+                      </div>
+                      <div class="chart-tooltip" role="status" aria-live="polite"></div>
+                    </div>
+                    <p class="funnel-note">Design partners → references → repeatable deployments.</p>
+                  </div>
+                </div>
+              </div>
 
               <div class="traction-board">
                 <!-- <div class="traction-hero-card">
@@ -3118,23 +3072,6 @@
                   </div>
                 </div>
                 <!-- <p class="funnel-note">Dual sliders spotlight India + GCC logos; tap appendix for the full customer wall.</p> -->
-              </div>
-
-              <div class="card-block chart-card">
-                <div class="chart-stack">
-                  <div class="chart-panel" data-chart="companies">
-                    <h3>Companies onboarded per quarter</h3>
-                    <div class="chart-meta" aria-live="polite"></div>
-                    <div class="chart-wrapper">
-                      <div class="chart-inner">
-                        <div class="chart-axis" aria-hidden="true"></div>
-                        <div class="chart-bars"></div>
-                      </div>
-                      <div class="chart-tooltip" role="status" aria-live="polite"></div>
-                    </div>
-                    <p class="funnel-note">Design partners → references → repeatable deployments.</p>
-                  </div>
-                </div>
               </div>
 
             </div>
@@ -3631,24 +3568,24 @@
           </header>
           <div class="slide-body">
             <div class="slide-head">
-              <h2>Ready to institutionalize agentic DocumentOps?</h2>
-              <p>We’re locking the 12-month Momentum Bridge with partners who need compliance-grade automation now.</p>
+              <h2>Partnering on the Momentum Bridge</h2>
+              <p>We’re inviting a small set of partners to participate in a 12-month Momentum Bridge as we institutionalize agentic DocumentOps for BFSI and logistics.</p>
             </div>
             <div class="split">
               <div class="card-block">
-                <h3>Call to action</h3>
+                <h3>How we propose to engage</h3>
                 <ul class="list">
-                  <li>Book a 30-sec demo (live customer workflow walk-through) this week.</li>
-                  <li>Share top workflows so we can preload validators and ROI math.</li>
-                  <li>Align on diligence → bridge close by <strong>March ’25</strong>.</li>
+                  <li><strong>30-minute working session (this week)</strong><br>Walk through Fracto’s go-to-market, compliance roadmap, and bridge milestones.</li>
+                  <li><strong>Tailored deep dive</strong><br>Share your priority workflows and questions in advance so we can preload proof points, sample flows, and relevant case studies.</li>
+                  <li><strong>Diligence and closing path</strong><br>Align on a diligence plan and follow-up cadence targeting a Momentum Bridge close by <strong>December ’25</strong>.</li>
                 </ul>
               </div>
               <div class="card-block">
                 <h3>Contact</h3>
-                <p><strong>Ankur Gupta · CEO</strong><br>ankur@fracto.tech · +91-XXX-XXX-XXXX</p>
-                <p><strong>Data room / memo</strong><br>Available on request via secure VPC share.</p>
+                <p><strong>Ankur Gupta · CEO</strong><br>ceo@fracto.tech · +91 98994 88100</p>
+                <p><strong>Data room / memo</strong><br>Available on request.</p>
                 <div class="hero-actions">
-                  <span>cal.com/fracto · docs.fracto.tech</span>
+                  <span>https://fracto.tech</span>
                 </div>
               </div>
             </div>
@@ -3782,9 +3719,13 @@
               const prev = dataset[index - 1]?.value;
               const delta = typeof prev === 'number' && prev > 0 ? ((value - prev) / prev) * 100 : null;
               const deltaClass = delta === null ? 'baseline' : delta > 0 ? 'positive' : delta < 0 ? 'negative' : 'flat';
-              const deltaLabel = delta === null
+              const deltaLabelRaw = delta === null
                 ? (cfg.baselineLabel || 'Base qtr')
                 : `${delta > 0 ? '+' : ''}${Math.round(delta)}% QoQ`;
+              const deltaLabelParts = deltaLabelRaw.split(' ');
+              const deltaLabel = deltaLabelParts.length > 1
+                ? `${deltaLabelParts.shift()}<br>${deltaLabelParts.join(' ')}`
+                : deltaLabelRaw;
               const isPeak = peakValue && value === peakValue;
               return `
                 <button class="chart-bar${isPeak ? ' is-peak' : ''}" type="button" data-quarter="${quarter}" data-value="${formatFullValue(value)}">
