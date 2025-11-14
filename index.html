@@ -152,17 +152,19 @@
       color: var(--fg);
       background: var(--hover);
     }
-    .mobile-shell {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
-    .mobile-rail {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .mobile-ui { display: none; flex-direction: column; gap: 14px; }
+    .mobile-shell { display: flex; flex-direction: column; gap: 8px; }
+    .mobile-rail { display: flex; flex-direction: column; gap: 10px; }
+    .mobile-ui { display: none; flex-direction: column; gap: 12px; }
     .mobile-jump {
       display: flex;
       flex-direction: column;
@@ -206,19 +208,36 @@
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(1,104,77,0.15);
     }
+    .mobile-top {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+    .mobile-top .rail-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mobile-inline-jump {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-inline-jump .mobile-jump-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
     body[data-theme="dark"] .mobile-jump .select-wrap::after {
       border-color: var(--fg);
     }
     .mobile-progress {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 14px;
+      display: grid;
+      gap: 4px;
+      font-size: 13px;
       color: var(--muted);
-    }
-    .mobile-progress strong {
-      font-weight: 600;
-      color: var(--fg);
     }
     .mobile-progress-bar {
       flex: 1;
@@ -244,32 +263,29 @@
     body.is-mobile .mobile-shell {
       position: fixed;
       top: var(--mobile-rail-gap);
-      left: clamp(16px, 4vw, 48px);
-      right: clamp(16px, 4vw, 48px);
+      left: clamp(12px, 4vw, 40px);
+      right: clamp(12px, 4vw, 40px);
       z-index: 22;
-      padding: 18px;
+      padding: 14px 18px;
       margin: 0;
-      border: 1px solid rgba(15,23,42,0.12);
-      border-radius: 28px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(245,247,251,0.92));
-      box-shadow: 0 22px 65px rgba(15,23,42,0.18);
-      gap: 16px;
+      border: 1px solid rgba(15,23,42,0.1);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 18px 55px rgba(15,23,42,0.16);
+      gap: 12px;
     }
     body.is-mobile .mobile-ui {
       display: flex;
-      padding-top: 8px;
-      border-top: 1px solid rgba(148,163,184,0.35);
-      gap: 14px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(148,163,184,0.25);
+      gap: 12px;
     }
     body.is-mobile .mobile-progress {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-      font-size: 15px;
+      font-size: 14px;
     }
     body.is-mobile .mobile-progress-bar {
       width: 100%;
-      height: 8px;
+      height: 6px;
       background: rgba(1,104,77,0.15);
     }
     body.is-mobile .mobile-progress-bar i {
@@ -278,7 +294,7 @@
     body.is-mobile .mobile-actions .nav-btn {
       border-radius: 999px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
     }
     body.is-mobile .nav-rail {
       padding: 0;
@@ -301,12 +317,23 @@
       background: none;
       box-shadow: none;
     }
+    body.is-mobile .rail-logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+    }
+    body.is-mobile .rail-brand strong {
+      font-size: 1rem;
+    }
     body.is-mobile .deck-shell {
       position: relative;
       margin-top: calc(var(--mobile-rail-height) + var(--mobile-rail-gap));
     }
     .deck-stage { display: flex; flex-direction: column; gap: 18px; }
-    .deck { position: relative; }
+    .deck {
+      position: relative;
+      touch-action: pan-y pinch-zoom;
+    }
     .slide {
       display: none;
       background: none;
@@ -580,7 +607,7 @@
       border-radius: 16px;
       padding: 14px 0;
       overflow: hidden;
-      background: var(--card-alt);
+      background: #ffffff;
       box-shadow: var(--card-shadow-sm);
       display: flex;
       align-items: center;
@@ -2608,23 +2635,25 @@
   <div class="deck-shell">
     <aside class="nav-rail" aria-label="Slide navigation">
       <div class="mobile-shell" id="mobileShell">
-        <div class="rail-brand">
-          <img src="fracto_logo.svg" alt="Fracto logo" class="rail-logo">
-          <div class="rail-brand-copy">
-            <span>Fracto</span>
-            <strong>Seed Round Deck</strong>
+        <div class="mobile-top">
+          <div class="rail-brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" class="rail-logo">
+            <div class="rail-brand-copy">
+              <span>Fracto</span>
+              <strong>Seed Round Deck</strong>
+            </div>
           </div>
-        </div>
-        <div class="mobile-rail mobile-ui" id="mobileRail">
-          <div class="mobile-jump">
-            <label for="mobileSlideSelect">Jump to slide</label>
+          <div class="mobile-jump mobile-inline-jump">
+            <span class="mobile-jump-label">Jump to slide</span>
+            <label class="sr-only" for="mobileSlideSelect">Jump to slide</label>
             <div class="select-wrap">
               <select id="mobileSlideSelect" aria-label="Jump to slide"></select>
             </div>
           </div>
-          <div class="mobile-progress" aria-live="polite" aria-atomic="true">
-            <strong id="mobileSlideStatus">Slide 1 · Documents → Decisions</strong>
-            <div class="mobile-progress-bar" aria-hidden="true">
+        </div>
+        <div class="mobile-rail mobile-ui" id="mobileRail">
+          <div class="mobile-progress" aria-label="Slide progress">
+            <div class="mobile-progress-bar">
               <i id="mobileProgress"></i>
             </div>
           </div>
@@ -4161,7 +4190,6 @@
       const navList = document.getElementById('navList');
       const progress = document.getElementById('progress');
       const mobileSelect = document.getElementById('mobileSlideSelect');
-      const mobileStatus = document.getElementById('mobileSlideStatus');
       const mobileProgress = document.getElementById('mobileProgress');
       const mobileShell = document.getElementById('mobileShell');
       const mobileQuery = window.matchMedia('(max-width: 900px)');
@@ -4227,10 +4255,6 @@
         if (mobileProgress) mobileProgress.style.width = pct;
         if (mobileSelect && mobileSelect.value !== String(idx)) {
           mobileSelect.value = String(idx);
-        }
-        if (mobileStatus) {
-          const title = slides[idx].dataset.title || `Slide ${idx + 1}`;
-          mobileStatus.textContent = `Slide ${String(idx + 1).padStart(2,'0')} · ${title}`;
         }
         updateNav();
         buttons.forEach(btn => {
