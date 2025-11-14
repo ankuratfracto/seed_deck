@@ -669,14 +669,16 @@
       box-shadow: var(--card-shadow-sm);
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
     .logo-track {
       display: flex;
       gap: 40px;
       animation: scroll-logos 18s linear infinite;
       align-items: center;
+      width: max-content;
       min-width: 100%;
+      flex-shrink: 0;
     }
     .logo-track img {
       max-height: 40px;
@@ -684,10 +686,10 @@
       object-fit: contain;
       filter: grayscale(0.2);
     }
-    .logo-marquee.india .logo-track { animation-duration: 16s; }
+    .logo-marquee.india .logo-track { animation-duration: 28s; }
     .logo-marquee.gcc .logo-track {
       animation-duration: 20s;
-      animation-direction: reverse;
+      animation-delay: -10s;
     }
     @keyframes scroll-logos {
       0% { transform: translateX(0); }
@@ -1123,7 +1125,7 @@
     .yc-proof-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
+      gap: 8px;
     }
     .yc-proof-item {
       padding: 12px;
@@ -1273,17 +1275,177 @@
     }
     .pricing-tiers {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
+    }
+    .pricing-tiers.agent-pack-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
     .tier-card {
       border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 18px;
+      padding: clamp(16px, 2vw, 22px);
       background: var(--card-alt);
       display: grid;
-      gap: 8px;
+      gap: 12px;
       box-shadow: var(--card-shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .tier-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 1rem;
+      margin: 0;
+    }
+    .tier-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(1,104,77,0.12);
+      color: #01684d;
+      white-space: nowrap;
+    }
+    .tier-label-onetime {
+      background: rgba(245,200,76,0.25);
+      color: #a16207;
+    }
+    .tier-card .tier-price {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .tier-card .tier-price strong {
+      display: block;
+      font-size: 1.35rem;
+      color: var(--fg);
+      letter-spacing: -0.01em;
+    }
+    .tier-card.highlight-tier {
+      background:
+        radial-gradient(120% 120% at 0% 0%, rgba(1,104,77,0.15), transparent 60%),
+        radial-gradient(120% 120% at 100% 20%, rgba(52,211,153,0.18), transparent 60%),
+        var(--card-bg);
+      border-color: rgba(1,104,77,0.35);
+      box-shadow: 0 25px 60px rgba(1,104,77,0.18);
+    }
+    .tier-card.highlight-tier .tier-label {
+      background: rgba(255,255,255,0.25);
+      color: var(--fg);
+    }
+    .pricing-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: clamp(18px, 3vw, 32px);
+      align-items: stretch;
+    }
+    .pricing-overview {
+      display: grid;
+      gap: 16px;
+      background:
+        radial-gradient(120% 110% at 0% 0%, rgba(1,104,77,0.1), transparent 55%),
+        var(--card-bg);
+    }
+    .pricing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px;
+      border-radius: 999px;
+      background: rgba(1,104,77,0.12);
+      color: #01684d;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .pricing-pill.is-muted {
+      background: rgba(148,163,184,0.18);
+      color: var(--fg);
+    }
+    .pricing-points {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+    .pricing-points li {
+      display: flex;
+      gap: 8px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .pricing-points li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 0.45em;
+      flex-shrink: 0;
+    }
+    .pricing-points strong {
+      color: var(--fg);
+      font-size: 0.95rem;
+    }
+    .pricing-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .pricing-meta-block {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: var(--panel-soft);
+      display: grid;
+      gap: 4px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .pricing-meta-block strong {
+      font-size: 1rem;
+      color: var(--fg);
+    }
+    .pricing-summary {
+      display: grid;
+      gap: 14px;
+    }
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    .summary-stat {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: var(--panel-soft);
+      display: grid;
+      gap: 4px;
+      text-transform: none;
+    }
+    .summary-stat strong {
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+    }
+    .summary-stat span {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .pricing-summary .summary-copy {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    @media (max-width: 960px) {
+      .pricing-layout {
+        grid-template-columns: 1fr;
+      }
     }
     .sparkline {
       width: 120px;
@@ -2433,6 +2595,45 @@
       background: rgba(15,23,42,0.95);
       border-color: rgba(148,163,184,0.35);
     }
+    body[data-theme="dark"] .pricing-overview {
+      background:
+        radial-gradient(110% 110% at 0% 0%, rgba(45,212,191,0.22), transparent 55%),
+        radial-gradient(90% 120% at 100% 0%, rgba(59,130,246,0.15), transparent 55%),
+        var(--card-bg);
+    }
+    body[data-theme="dark"] .pricing-pill {
+      background: rgba(45,212,191,0.2);
+      color: #5eead4;
+    }
+    body[data-theme="dark"] .pricing-pill.is-muted {
+      background: rgba(148,163,184,0.25);
+      color: #e2e8f0;
+    }
+    body[data-theme="dark"] .tier-label {
+      background: rgba(45,212,191,0.2);
+      color: #5eead4;
+    }
+    body[data-theme="dark"] .tier-label-onetime {
+      background: rgba(250,204,21,0.25);
+      color: #fcd34d;
+    }
+    body[data-theme="dark"] .tier-card.highlight-tier {
+      border-color: rgba(45,212,191,0.35);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      background:
+        radial-gradient(120% 120% at 0% 0%, rgba(45,212,191,0.28), transparent 55%),
+        radial-gradient(120% 120% at 100% 0%, rgba(125,211,252,0.18), transparent 55%),
+        rgba(15,23,42,0.9);
+    }
+    body[data-theme="dark"] .tier-card.highlight-tier .tier-label {
+      background: rgba(15,23,42,0.65);
+      color: #5eead4;
+    }
+    body[data-theme="dark"] .pricing-meta-block,
+    body[data-theme="dark"] .summary-stat {
+      border-color: rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.65);
+    }
 
     .viz-placeholder {
       border: 1px dashed var(--border);
@@ -2471,9 +2672,18 @@
       justify-content: center;
       gap: 6px;
       white-space: nowrap;
+      color: #0f172a;
     }
     .nav-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
     .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    body[data-theme="dark"] .nav-btn:not(.primary) {
+      background: rgba(15,23,42,0.8);
+      border-color: rgba(148,163,184,0.4);
+      color: #f8fafc;
+    }
+    body[data-theme="dark"] .nav-btn:not(.primary):hover {
+      background: rgba(148,163,184,0.18);
+    }
     .progress {
       width: 100%;
       min-width: 140px;
@@ -2735,7 +2945,7 @@
         <!-- Slide 1 -->
         <section class="slide slide-01a active" data-title="Documents → Decisions">
           <header class="topbar">
-            <span>Documents → Decisions</span>
+            <span>COVER</span>
             <span>01 · Overview</span>
           </header>
           <div class="slide-body">
@@ -2824,7 +3034,7 @@
         <!-- Slide 3 -->
         <section class="slide slide-01a" data-title="Why Now">
           <header class="topbar">
-            <span>Why Now Is the Moment</span>
+            <span>Why Now</span>
             <span>03 · Why Now</span>
           </header>
           <div class="slide-body">
@@ -2881,27 +3091,28 @@
         </section>
 
         <!-- Slide 4A -->
-        <section class="slide slide-01a" data-title="Solution · YC Template" data-slide-number="04A">
+        <section class="slide slide-01a" data-title="Solution" data-slide-number="04">
           <header class="topbar">
-            <span>Solution · YC Template</span>
+            <span>Solution</span>
             <span>04 · Solution</span>
           </header>
 
           <div class="slide-body">
             <div class="slide-head">
               <h2>Solution — Closed-Loop, Agentic DocumentOps</h2>
-              <p>One queue, four stages, full telemetry — docs land, validators run, recon bots clear, and systems update inside 30 seconds.</p>
+              <p>One queue, four stages, full telemetry — docs go from inbox to system update in ≤30 seconds.</p>
             </div>
 
             <div class="yc-solution-grid">
               <div class="card-block yc-solution-card">
                 <span class="yc-label">Product</span>
                 <h3>Agentic DocumentOps OS</h3>
-                <p>One workspace that ingests every inbound doc, validates policies, reconciles, and writes back in 30 seconds.</p>
+                <!-- <p>One workspace that ingests every inbound doc, validates policies, reconciles, and writes back in 30 seconds.</p> -->
                 <ul class="list">
-                  <li>Single inbox across email, API, WhatsApp with residency controls.</li>
-                  <li>Validator studio ships BFSI/logistics guardrails to keep STP ≥ 90%.</li>
-                  <li>Write-back automations push LOS/ERP/TMS updates with immutable telemetry.</li>
+                  <li>One inbox for all documents (email, API, WhatsApp).</li>
+                  <li>AI reads documents and extracts clean, structured data.</li>
+                  <li>Policy rules check limits, compliance, and basic fraud flags.</li>
+                  <li>Bots update LOS/ERP/TMS and keep a full audit trail.</li>
                 </ul>
               </div>
 
@@ -2913,28 +3124,28 @@
                     <span class="yc-step-number">1</span>
                     <div>
                       <strong>Capture</strong>
-                      <p>Docs land in a pre-triaged queue with routing, residency, and SLA policies.</p>
+                      <p>All documents land in a single, prioritised queue.</p>
                     </div>
                   </li>
                   <li>
                     <span class="yc-step-number">2</span>
                     <div>
                       <strong>Validate</strong>
-                      <p>LLM validators + policy packs auto-check fields, compliance, and fraud markers.</p>
+                      <p>AI validates data and business rules.</p>
                     </div>
                   </li>
                   <li>
                     <span class="yc-step-number">3</span>
                     <div>
                       <strong>Reconcile</strong>
-                      <p>Recon bots auto-resolve 90%+ exceptions without leaving the workflow.</p>
+                      <p>Bots resolve issues, route edge cases to humans.</p>
                     </div>
                   </li>
                   <li>
                     <span class="yc-step-number">4</span>
                     <div>
                       <strong>Write-back</strong>
-                      <p>Systems update in-line, emitting replayable logs for audit + analytics.</p>
+                      <p>Core systems write back and every step is logged.</p>
                     </div>
                   </li>
                 </ol>
@@ -2947,22 +3158,22 @@
                   <div class="yc-proof-item">
                     <span>Customers live</span>
                     <strong>50+</strong>
-                    <p>Across lending, logistics, and GCC ops.</p>
+                    <!-- <p>Across lending, logistics, and GCC ops.</p> -->
                   </div>
                   <div class="yc-proof-item">
                     <span>Cycle time</span>
                     <strong>≤30s</strong>
-                    <p>Docs go from inbox to write-back.</p>
+                    <!-- <p>Docs go from inbox to write-back.</p> -->
                   </div>
                   <div class="yc-proof-item">
                     <span>STP</span>
                     <strong>90%+</strong>
-                    <p>Policy packs eliminate manual review.</p>
+                    <!-- <p>Policy packs eliminate manual review.</p> -->
                   </div>
                   <div class="yc-proof-item">
                     <span>Residency-ready</span>
                     <strong>India · GCC</strong>
-                    <p>Audit-native VPC deployments.</p>
+                    <!-- <p>Audit-native VPC deployments.</p> -->
                   </div>
                 </div>
                 <!-- <div class="doc-highlight">
@@ -2977,9 +3188,9 @@
         </section>
 
         <!-- Slide 5 -->
-        <section class="slide slide-01a" data-title="Traction · Now">
+        <section class="slide slide-01a" data-title="Traction · Adoption">
           <header class="topbar">
-            <span>Traction · Now</span>
+            <span>Traction · Adoption</span>
             <span>05 · Customer Traction</span>
           </header>
           <div class="slide-body">
@@ -3035,20 +3246,52 @@
                   <span class="logo-label">India references</span>
                   <div class="logo-marquee india" aria-label="India customer logos">
                     <div class="logo-track">
-                      <img src="clients/121Finance.png" alt="121 Finance">
-                      <img src="clients/NBHC.png" alt="NBHC">
+                      <img src="clients/cargomen.jpeg" alt="Cargomen">
+                      <img src="clients/onmove.jpeg" alt="Onmove">
+                      <img src="clients/ambak.png" alt="Ambak">
+                      <img src="clients/letstransport.png" alt="Lets Transport">
+                      <img src="clients/gyandhan.png.webp" alt="Gyandhan">
+                      <img src="clients/rxil.jpeg" alt="RXIL">
+                      <img src="clients/symbo.png" alt="Symbo">
+                      <img src="clients/pssc.png" alt="PSSC">
+                      <img src="clients/khfl.jpeg" alt="KHFL">
                       <img src="clients/ambit.png" alt="Ambit">
-                      <img src="clients/navata.png" alt="Navata">
-                      <img src="clients/ODeX.png" alt="ODeX">
+                      <img src="clients/equal.png" alt="Equal">
+                      <img src="clients/presolv.png" alt="Presolv">
+                      <img src="clients/freightfox.png" alt="Freightfox">
                       <img src="clients/petpooja.png" alt="Petpooja">
+                      <img src="clients/turno.png" alt="Turno">
+                      <img src="clients/navata.png" alt="Navata">
+                      <img src="clients/MCC.png" alt="MCC Original">
+                      <img src="clients/NBHC.png" alt="NBHC">
+                      <img src="clients/121Finance.png" alt="121 Finance">
                       <img src="clients/jaikisan.png" alt="Jai Kisan">
-                      <img src="clients/121Finance.png" alt="121 Finance duplicate" aria-hidden="true">
-                      <img src="clients/NBHC.png" alt="NBHC duplicate" aria-hidden="true">
+                      <img src="clients/accomation.png" alt="Accomation">
+                      <img src="clients/ODeX.png" alt="ODeX">
+                      <img src="clients/kuhoo.png" alt="Kuhoo">
+                      <img src="clients/cargomen.jpeg" alt="Cargomen duplicate" aria-hidden="true">
+                      <img src="clients/onmove.jpeg" alt="Onmove duplicate" aria-hidden="true">
+                      <img src="clients/ambak.png" alt="Ambak duplicate" aria-hidden="true">
+                      <img src="clients/letstransport.png" alt="Lets Transport duplicate" aria-hidden="true">
+                      <img src="clients/gyandhan.png.webp" alt="Gyandhan duplicate" aria-hidden="true">
+                      <img src="clients/rxil.jpeg" alt="RXIL duplicate" aria-hidden="true">
+                      <img src="clients/symbo.png" alt="Symbo duplicate" aria-hidden="true">
+                      <img src="clients/pssc.png" alt="PSSC duplicate" aria-hidden="true">
+                      <img src="clients/khfl.jpeg" alt="KHFL duplicate" aria-hidden="true">
                       <img src="clients/ambit.png" alt="Ambit duplicate" aria-hidden="true">
-                      <img src="clients/navata.png" alt="Navata duplicate" aria-hidden="true">
-                      <img src="clients/ODeX.png" alt="ODeX duplicate" aria-hidden="true">
+                      <img src="clients/equal.png" alt="Equal duplicate" aria-hidden="true">
+                      <img src="clients/presolv.png" alt="Presolv duplicate" aria-hidden="true">
+                      <img src="clients/freightfox.png" alt="Freightfox duplicate" aria-hidden="true">
                       <img src="clients/petpooja.png" alt="Petpooja duplicate" aria-hidden="true">
+                      <img src="clients/turno.png" alt="Turno duplicate" aria-hidden="true">
+                      <img src="clients/navata.png" alt="Navata duplicate" aria-hidden="true">
+                      <img src="clients/MCC.png" alt="MCC Original duplicate" aria-hidden="true">
+                      <img src="clients/NBHC.png" alt="NBHC duplicate" aria-hidden="true">
+                      <img src="clients/121Finance.png" alt="121 Finance duplicate" aria-hidden="true">
                       <img src="clients/jaikisan.png" alt="Jai Kisan duplicate" aria-hidden="true">
+                      <img src="clients/accomation.png" alt="Accomation duplicate" aria-hidden="true">
+                      <img src="clients/ODeX.png" alt="ODeX duplicate" aria-hidden="true">
+                      <img src="clients/kuhoo.png" alt="Kuhoo duplicate" aria-hidden="true">
                     </div>
                   </div>
                 </div>
@@ -3056,18 +3299,16 @@
                   <span class="logo-label">GCC references</span>
                   <div class="logo-marquee gcc" aria-label="GCC customer logos">
                     <div class="logo-track">
+                      <img src="clients/jisr.jpg" alt="Jisr">
+                      <img src="clients/comfi.png" alt="Comfi">
+                      <img src="clients/maritimesupportsolutions.jpeg" alt="Maritime Support Solutions">
+                      <img src="clients/propertyfinder.png" alt="Property Finder">
                       <img src="clients/trukker.png" alt="Trukker">
-                      <img src="clients/MCC.png" alt="MCC">
-                      <img src="clients/equal.png" alt="Equal">
-                      <img src="clients/presolv.png" alt="Presolv">
-                      <img src="clients/symbo.png" alt="Symbo">
-                      <img src="clients/turno.png" alt="Turno">
+                      <img src="clients/jisr.jpg" alt="Jisr duplicate" aria-hidden="true">
+                      <img src="clients/comfi.png" alt="Comfi duplicate" aria-hidden="true">
+                      <img src="clients/maritimesupportsolutions.jpeg" alt="Maritime Support Solutions duplicate" aria-hidden="true">
+                      <img src="clients/propertyfinder.png" alt="Property Finder duplicate" aria-hidden="true">
                       <img src="clients/trukker.png" alt="Trukker duplicate" aria-hidden="true">
-                      <img src="clients/MCC.png" alt="MCC duplicate" aria-hidden="true">
-                      <img src="clients/equal.png" alt="Equal duplicate" aria-hidden="true">
-                      <img src="clients/presolv.png" alt="Presolv duplicate" aria-hidden="true">
-                      <img src="clients/symbo.png" alt="Symbo duplicate" aria-hidden="true">
-                      <img src="clients/turno.png" alt="Turno duplicate" aria-hidden="true">
                     </div>
                   </div>
                 </div>
@@ -3094,12 +3335,12 @@
             <!-- NEW: METRICS BLOCK ABOVE THE TWO CHARTS -->
             <div class="traction-metric-grid usage-grid">
               <div class="traction-metric">
-                <span class="traction-label">MRR</span>
-                <strong>₹ 12 L</strong>
+                <span class="traction-label">QRR</span>
+                <strong>₹ 17 L</strong>
                 <p class="metric-subtext">~3× YoY growth from live customers.</p>
               </div>
               <div class="traction-metric">
-                <span class="traction-label">Pages / month</span>
+                <span class="traction-label">Pages / qtr</span>
                 <strong>400K+</strong>
                 <p class="metric-subtext">Across BFSI + logistics workflows.</p>
               </div>
@@ -3260,42 +3501,89 @@
         <section class="slide slide-01a" data-title="Pricing">
           <header class="topbar">
             <span>Pricing</span>
-            <span>08 · Pricing</span>
+            <span>08 · Business Model</span>
           </header>
+
           <div class="slide-body">
+            <!-- HEADLINE -->
             <div class="slide-head">
-              <h2>Simple, Scale-Ready Pricing</h2>
-              <p>Predictable platform fee + page usage + optional add-ons.</p>
+              <h2>Business Model & Pricing</h2>
+              <p>Subscription base with agent packs that flex by volume.</p>
+              <p class="slide-subhead">Platform + usage + simple add-ons.</p>
             </div>
-            <div class="split">
-              <div class="pricing-tiers">
-                <div class="tier-card">
-                  <h3>Starter</h3>
-                  <p>₹ 2 L/month platform + ₹ 10/page</p>
-                  <ul class="list">
-                    <li>Single pod · managed VPC</li>
-                    <li>Validator Studio included</li>
-                    <li>Founders-as-POC GTM</li>
-                  </ul>
+
+            <div class="pricing-layout">
+              <div class="pricing-overview card-block">
+                <span class="pricing-pill">Pack architecture</span>
+                <h3>Predictable base + usage</h3>
+                <p>Platform subscription plus packs that grow with pages and workflows.</p>
+                <ul class="pricing-points">
+                  <li>Base platform: orchestrator, APIs, audit trails, and 2 workflow agents.</li>
+                  <li>Setup: connectors + validator tuning to launch the first document flows.</li>
+                  <li>Agent packs: tiered per-page bundles (10k+ / month) that add capacity and agents.</li>
+                  <li>Add-ons: validator, knowledge, and VPC/on-prem packs for compliance.</li>
+                </ul>
+                <!-- <div class="pricing-meta">
+                  <div class="pricing-meta-block">
+                    <span>Designed for</span>
+                    <strong>BFSI · Logistics STP</strong>
+                  </div>
+                  <div class="pricing-meta-block">
+                    <span>Scale lever</span>
+                    <strong>Pages + workflows</strong>
+                  </div>
+                </div> -->
+              </div>
+
+              <!-- PRICING GRID -->
+              <div class="pricing-tiers agent-pack-grid">
+                <aside class="tier-card">
+                  <h3>Base platform <span class="tier-label">MRR</span></h3>
+                  <p class="tier-price"><strong>₹5k–₹25k / month</strong></p>
+                  <p>Core platform, APIs, audit trails, and 2 workflow agents.</p>
+                </aside>
+
+                <aside class="tier-card">
+                  <h3>Setup <span class="tier-label tier-label-onetime">One-time</span></h3>
+                  <p class="tier-price"><strong>₹15k–₹35k</strong></p>
+                  <p>Implementation for first flows: connectors, validators, go-live.</p>
+                </aside>
+
+                <aside class="tier-card highlight-tier">
+                  <h3>Usage <span class="tier-label">Agent packs</span></h3>
+                  <p class="tier-price"><strong>~₹2.50 / page avg</strong> (tiered)</p>
+                  <p>Tiered per-page agent packs (10k+ pages / month) with extra capacity.</p>
+                </aside>
+
+                <aside class="tier-card">
+                  <h3>Add-ons <span class="tier-label">Expansion</span></h3>
+                  <p class="tier-price"><strong>Custom packs</strong></p>
+                  <p>Validator, knowledge, and VPC/on-prem options for stricter programs.</p>
+                </aside>
+              </div>
+            </div>
+
+            <!-- EXAMPLE / ANCHOR STRIP -->
+            <div class="pricing-summary card-block">
+              <span class="pricing-pill is-muted">Typical NBFC / logistics client</span>
+              <div class="summary-stats">
+                <div class="summary-stat">
+                  <strong>₹X–Y L / month</strong>
+                  <span>Platform + usage spend</span>
                 </div>
-                <div class="tier-card">
-                  <h3>Scale</h3>
-                  <p>Custom platform + usage bands</p>
-                  <ul class="list">
-                    <li>Multi-pod + global residency</li>
-                    <li>Recon Studio + add-ons</li>
-                    <li>SLA-backed support</li>
-                  </ul>
+                <div class="summary-stat">
+                  <strong>70–80%</strong>
+                  <span>Gross margin profile</span>
                 </div>
               </div>
-              <div class="card-block">
-                <p><strong>Sample math:</strong> BFSI pod @ 35K pages/month → ₹ 5.5 L (platform + usage) delivering 90% STP.</p>
-                <p>Clients start small, scale across flows, and avoid heavy capex or multi-year SI programs. Same integration, larger footprint.</p>
-                <p>Add-ons: Validator library, VPC deployment kits, Recon-studio insights.</p>
-              </div>
+              <p class="summary-copy">
+                Most clients land at <strong>₹X–Y L / month</strong> with <strong>70–80% gross margins</strong>,
+                then grow through validator, knowledge, and VPC upgrades.
+              </p>
             </div>
           </div>
-          <div class="footer">Slide 08 · Pricing</div>
+
+          <div class="footer">Slide 08 · Business Model & Pricing</div>
         </section>
 
         <!-- Slide 9 -->
@@ -3429,9 +3717,9 @@
         </section>
 
         <!-- Slide 10 -->
-        <section class="slide slide-01a" data-title="Momentum Bridge">
+        <section class="slide slide-01a" data-title="Roadmap">
           <header class="topbar">
-            <span>12-Month Bridge</span>
+            <span>Roadmap</span>
             <span>10 · Momentum Bridge</span>
           </header>
           <div class="slide-body">
@@ -3509,9 +3797,9 @@
         </section>
 
         <!-- Slide 11 -->
-        <section class="slide slide-01a" data-title="The Ask">
+        <section class="slide slide-01a" data-title="Ask">
           <header class="topbar">
-            <span>The Ask</span>
+            <span>Ask</span>
             <span>11 · The Ask</span>
           </header>
           <div class="slide-body">
@@ -3715,27 +4003,28 @@
         if (barsEl) {
           barsEl.innerHTML = dataset
             .map(({ quarter, value, color }, index) => {
+              const displayQuarter = formatQuarterDisplay(quarter);
               const height = scaleMax ? Math.min(value / scaleMax, 1).toFixed(3) : 0;
               const prev = dataset[index - 1]?.value;
               const delta = typeof prev === 'number' && prev > 0 ? ((value - prev) / prev) * 100 : null;
               const deltaClass = delta === null ? 'baseline' : delta > 0 ? 'positive' : delta < 0 ? 'negative' : 'flat';
               const deltaLabelRaw = delta === null
-                ? (cfg.baselineLabel || 'Base qtr')
-                : `${delta > 0 ? '+' : ''}${Math.round(delta)}% QoQ`;
+                ? (cfg.baselineLabel || 'Base')
+                : `${delta > 0 ? '+' : ''}${Math.round(delta)}%`;
               const deltaLabelParts = deltaLabelRaw.split(' ');
               const deltaLabel = deltaLabelParts.length > 1
                 ? `${deltaLabelParts.shift()}<br>${deltaLabelParts.join(' ')}`
                 : deltaLabelRaw;
               const isPeak = peakValue && value === peakValue;
               return `
-                <button class="chart-bar${isPeak ? ' is-peak' : ''}" type="button" data-quarter="${quarter}" data-value="${formatFullValue(value)}">
+                <button class="chart-bar${isPeak ? ' is-peak' : ''}" type="button" data-quarter="${displayQuarter}" data-value="${formatFullValue(value)}">
                   <span class="value-label">${formatShortValue(value)}</span>
                   <div class="bar-visual" style="--bar-color:${color}; --bar-height:${height};">
                     <span class="bar-fill"></span>
                     ${isPeak && cfg.highlightLabel ? `<span class="bar-flag" aria-hidden="true">${cfg.highlightLabel}</span>` : ''}
                   </div>
                   <div class="chart-bar-footer">
-                    <span class="chart-quarter">${quarter}</span>
+                    <span class="chart-quarter">${displayQuarter}</span>
                     <span class="delta-chip ${deltaClass}">${deltaLabel}</span>
                   </div>
                 </button>
@@ -3816,6 +4105,14 @@
         const rounded = Math.round(value);
         const prefix = rounded > 0 ? '+' : '';
         return `${prefix}${rounded}%`;
+      }
+      function formatQuarterDisplay(label) {
+        if (!label) return '';
+        const normalized = String(label).trim();
+        const match = normalized.match(/^(\d{4})-Q([1-4])$/i);
+        if (!match) return normalized;
+        const [, year, quarter] = match;
+        return `Q${quarter}' ${year.slice(-2)}`;
       }
       function computeNiceCeiling(value) {
         if (!isFinite(value) || value <= 0) return 1;
