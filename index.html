@@ -208,6 +208,10 @@
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(1,104,77,0.15);
     }
+    .mobile-jump select.gesture-prompt {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(1,104,77,0.2);
+    }
     .mobile-top {
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
@@ -885,11 +889,6 @@
     }
     .stat-grid.hero-stats {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    @media (max-width: 640px) {
-      .stat-grid.hero-stats {
-        grid-template-columns: 1fr;
-      }
     }
     .stat-card {
       border: 1px solid var(--border);
@@ -4195,6 +4194,23 @@
       const mobileQuery = window.matchMedia('(max-width: 900px)');
       const body = document.body;
       const buttons = document.querySelectorAll('[data-nav]');
+      const deckRoot = document.querySelector('.deck');
+      const gestureState = {
+        pointerId: null,
+        startX: 0,
+        startY: 0,
+        lastX: 0,
+        lastY: 0,
+        startTime: 0,
+        longPressTimer: null,
+        longPressTriggered: false,
+      };
+      const SWIPE_MIN_DISTANCE = 60;
+      const SWIPE_TIME_MAX = 600;
+      const SWIPE_OFF_AXIS_TOLERANCE = 80;
+      const TAP_TOLERANCE = 10;
+      const LONG_PRESS_DELAY = 650;
+      const LONG_PRESS_MOVE_TOLERANCE = 14;
       let idx = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
 
       const updateMobileOffset = () => {
@@ -4323,6 +4339,165 @@
 
       const ambientEvents = window.PointerEvent ? ['pointerup'] : ['click'];
       ambientEvents.forEach(eventName => window.addEventListener(eventName, ambientNavHandler));
+      setupGestureNavigation();
+
+      function setupGestureNavigation(){
+        if (!deckRoot) return;
+        if (window.PointerEvent) {
+          deckRoot.addEventListener('pointerdown', handlePointerDown);
+          deckRoot.addEventListener('pointermove', handlePointerMove);
+          deckRoot.addEventListener('pointerup', handlePointerUp);
+          deckRoot.addEventListener('pointercancel', resetGesture);
+        } else {
+          deckRoot.addEventListener('touchstart', handleTouchStart, { passive: false });
+          deckRoot.addEventListener('touchmove', handleTouchMove, { passive: false });
+          deckRoot.addEventListener('touchend', handleTouchEnd, { passive: false });
+          deckRoot.addEventListener('touchcancel', resetGesture, { passive: false });
+        }
+      }
+
+      function handlePointerDown(e){
+        if (e.pointerType && e.pointerType !== 'touch') return;
+        if (gestureState.pointerId !== null) return;
+        if (isInteractiveTarget(e.target)) return;
+        beginGesture(e.pointerId, e.clientX, e.clientY);
+      }
+
+      function handlePointerMove(e){
+        if (e.pointerId !== gestureState.pointerId) return;
+        updateGesture(e.clientX, e.clientY);
+      }
+
+      function handlePointerUp(e){
+        if (e.pointerId !== gestureState.pointerId) return;
+        finishGesture(e.clientX, e.clientY, e);
+      }
+
+      function handleTouchStart(e){
+        if (gestureState.pointerId !== null) return;
+        if (isInteractiveTarget(e.target)) return;
+        if (e.touches.length > 1) return;
+        const touch = e.changedTouches[0];
+        if (!touch) return;
+        beginGesture(touch.identifier, touch.clientX, touch.clientY);
+      }
+
+      function handleTouchMove(e){
+        const touch = getTrackedTouch(e.changedTouches);
+        if (!touch) return;
+        updateGesture(touch.clientX, touch.clientY);
+      }
+
+      function handleTouchEnd(e){
+        const touch = getTrackedTouch(e.changedTouches);
+        if (!touch) {
+          resetGesture();
+          return;
+        }
+        finishGesture(touch.clientX, touch.clientY, e);
+      }
+
+      function getTrackedTouch(list){
+        if (gestureState.pointerId === null) return null;
+        for (let i = 0; i < list.length; i += 1) {
+          const touch = list[i];
+          if (touch.identifier === gestureState.pointerId) return touch;
+        }
+        return null;
+      }
+
+      function beginGesture(id, x, y){
+        gestureState.pointerId = id;
+        gestureState.startX = x;
+        gestureState.startY = y;
+        gestureState.lastX = x;
+        gestureState.lastY = y;
+        gestureState.startTime = performance.now();
+        gestureState.longPressTriggered = false;
+        if (gestureState.longPressTimer) {
+          clearTimeout(gestureState.longPressTimer);
+        }
+        gestureState.longPressTimer = window.setTimeout(triggerLongPress, LONG_PRESS_DELAY);
+      }
+
+      function updateGesture(x, y){
+        gestureState.lastX = x;
+        gestureState.lastY = y;
+        if (!gestureState.longPressTriggered) {
+          const deltaX = Math.abs(gestureState.startX - x);
+          const deltaY = Math.abs(gestureState.startY - y);
+          if (deltaX > LONG_PRESS_MOVE_TOLERANCE || deltaY > LONG_PRESS_MOVE_TOLERANCE) {
+            cancelLongPress();
+          }
+        }
+      }
+
+      function finishGesture(x, y, event){
+        updateGesture(x, y);
+        const longPressWasTriggered = gestureState.longPressTriggered;
+        const duration = performance.now() - gestureState.startTime;
+        const deltaX = gestureState.lastX - gestureState.startX;
+        const deltaY = gestureState.lastY - gestureState.startY;
+        cancelLongPress();
+        gestureState.pointerId = null;
+        gestureState.longPressTriggered = false;
+        if (longPressWasTriggered) {
+          consumeGesture(event);
+          return;
+        }
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        if (absX > SWIPE_MIN_DISTANCE && absX > absY && absY < SWIPE_OFF_AXIS_TOLERANCE && duration < SWIPE_TIME_MAX) {
+          if (deltaX < 0) show(idx + 1);
+          else show(idx - 1);
+          consumeGesture(event);
+          return;
+        }
+        if (absX < TAP_TOLERANCE && absY < TAP_TOLERANCE) {
+          handleTapNavigation(gestureState.lastX, event);
+          return;
+        }
+      }
+
+      function triggerLongPress(){
+        gestureState.longPressTriggered = true;
+        if (mobileSelect) {
+          mobileSelect.focus({ preventScroll: true });
+          mobileSelect.classList.add('gesture-prompt');
+          if (typeof mobileSelect.showPicker === 'function') {
+            mobileSelect.showPicker();
+          }
+          window.setTimeout(() => mobileSelect.classList.remove('gesture-prompt'), 1200);
+        } else if (navList) {
+          navList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+
+      function cancelLongPress(){
+        if (gestureState.longPressTimer) {
+          clearTimeout(gestureState.longPressTimer);
+          gestureState.longPressTimer = null;
+        }
+      }
+
+      function resetGesture(){
+        cancelLongPress();
+        gestureState.pointerId = null;
+        gestureState.longPressTriggered = false;
+      }
+
+      function handleTapNavigation(pointX, event){
+        const width = window.innerWidth || document.documentElement.clientWidth || 0;
+        if (!width) return;
+        if (pointX < width / 2) show(idx - 1);
+        else show(idx + 1);
+        consumeGesture(event);
+      }
+
+      function consumeGesture(event){
+        if (event?.cancelable) event.preventDefault();
+        event?.stopPropagation?.();
+      }
     })();
   </script>
 </body>
