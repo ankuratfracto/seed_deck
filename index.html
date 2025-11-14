@@ -228,6 +228,11 @@
       flex-direction: column;
       gap: 4px;
     }
+    @media (min-width: 901px) {
+      .mobile-inline-jump {
+        display: none;
+      }
+    }
     .mobile-inline-jump .mobile-jump-label {
       font-size: 11px;
       letter-spacing: 0.18em;
@@ -338,14 +343,63 @@
       position: relative;
       touch-action: pan-y pinch-zoom;
     }
+    body.is-mobile .deck {
+      overflow: hidden;
+    }
     .slide {
+      position: relative;
       display: none;
       background: none;
       border-radius: 20px;
       padding: 0;
       min-height: 60vh;
+      will-change: transform, opacity;
     }
-    .slide.active { display: grid; gap: 18px; }
+    .slide.active,
+    body.is-mobile .slide.is-transitioning {
+      display: grid;
+      gap: 18px;
+    }
+    body.is-mobile .slide.is-transitioning {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      pointer-events: none;
+    }
+    body.is-mobile .slide.slide-enter,
+    body.is-mobile .slide.slide-exit {
+      animation-duration: 340ms;
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    body.is-mobile .slide.slide-enter { z-index: 2; }
+    body.is-mobile .slide.slide-exit { z-index: 1; }
+    body.is-mobile .slide.slide-enter-right { animation-name: mobileSlideInFromRight; }
+    body.is-mobile .slide.slide-enter-left { animation-name: mobileSlideInFromLeft; }
+    body.is-mobile .slide.slide-exit-left { animation-name: mobileSlideOutToLeft; }
+    body.is-mobile .slide.slide-exit-right { animation-name: mobileSlideOutToRight; }
+    @keyframes mobileSlideInFromRight {
+      from { opacity: 0; transform: translateX(18%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes mobileSlideInFromLeft {
+      from { opacity: 0; transform: translateX(-18%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes mobileSlideOutToLeft {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-18%); }
+    }
+    @keyframes mobileSlideOutToRight {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(18%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body.is-mobile .slide.slide-enter,
+      body.is-mobile .slide.slide-exit {
+        animation: none !important;
+      }
+    }
     header.topbar {
       display: flex;
       justify-content: space-between;
