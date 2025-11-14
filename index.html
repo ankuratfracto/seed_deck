@@ -150,6 +150,98 @@
       color: var(--fg);
       background: var(--hover);
     }
+    :root {
+      --mobile-rail-gap: 12px;
+      --mobile-rail-height: 0px;
+    }
+    body.is-mobile {
+      --mobile-rail-height: 168px;
+    }
+    .mobile-rail {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      background: var(--panel);
+      box-shadow: var(--card-shadow-sm);
+    }
+    .mobile-jump {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .mobile-jump label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .mobile-jump select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 15px;
+      background: var(--panel-soft);
+      color: var(--fg);
+    }
+    .mobile-progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .mobile-progress-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--progress-bg);
+      overflow: hidden;
+    }
+    .mobile-progress-bar i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 160ms ease;
+    }
+    .mobile-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .mobile-actions .nav-btn {
+      flex: 1;
+    }
+    body.is-mobile .mobile-rail {
+      display: flex;
+      position: fixed;
+      top: var(--mobile-rail-gap);
+      left: calc(var(--mobile-rail-gap) * 1.2);
+      right: calc(var(--mobile-rail-gap) * 1.2);
+      z-index: 22;
+      background: var(--panel);
+    }
+    body.is-mobile .nav-rail {
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
+      gap: 12px;
+    }
+    body.is-mobile .nav-list,
+    body.is-mobile .rail-meta {
+      display: none;
+    }
+    body.is-mobile .theme-toggle {
+      align-self: flex-start;
+      margin-left: 8px;
+    }
+    body.is-mobile .deck-shell {
+      margin-top: calc(var(--mobile-rail-height) + var(--mobile-rail-gap));
+    }
     .deck-stage { display: flex; flex-direction: column; gap: 18px; }
     .deck { position: relative; }
     .slide {
@@ -2459,6 +2551,22 @@
           <strong>Seed Round Deck</strong>
         </div>
       </div>
+      <div class="mobile-rail" id="mobileRail">
+        <div class="mobile-jump">
+          <label for="mobileSlideSelect">Jump to slide</label>
+          <select id="mobileSlideSelect" aria-label="Jump to slide"></select>
+        </div>
+        <div class="mobile-progress" aria-live="polite" aria-atomic="true">
+          <span id="mobileSlideStatus">Slide 1 · Documents → Decisions</span>
+          <div class="mobile-progress-bar" aria-hidden="true">
+            <i id="mobileProgress"></i>
+          </div>
+        </div>
+        <div class="mobile-actions">
+          <button class="nav-btn" type="button" data-nav="prev">← Previous</button>
+          <button class="nav-btn primary" type="button" data-nav="next">Next →</button>
+        </div>
+      </div>
       <ol class="nav-list" id="navList"></ol>
       <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>Dark theme</button>
       <div class="rail-meta">← / → to navigate · Press F for fullscreen · P to print.</div>
@@ -3985,11 +4093,39 @@
       const slides = Array.from(document.querySelectorAll('.slide'));
       const navList = document.getElementById('navList');
       const progress = document.getElementById('progress');
+      const mobileSelect = document.getElementById('mobileSlideSelect');
+      const mobileStatus = document.getElementById('mobileSlideStatus');
+      const mobileProgress = document.getElementById('mobileProgress');
+      const mobileRail = document.getElementById('mobileRail');
+      const mobileQuery = window.matchMedia('(max-width: 900px)');
+      const body = document.body;
       const buttons = document.querySelectorAll('[data-nav]');
       let idx = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
 
+      const updateMobileOffset = () => {
+        if (!mobileRail) return;
+        const height = body?.classList.contains('is-mobile') ? mobileRail.offsetHeight : 0;
+        body?.style.setProperty('--mobile-rail-height', `${height}px`);
+      };
+
+      function setMobileMode(e){
+        const enable = typeof e.matches === 'boolean' ? e.matches : e;
+        body?.classList.toggle('is-mobile', !!enable);
+        updateMobileOffset();
+      }
+      setMobileMode(mobileQuery);
+      if (typeof mobileQuery.addEventListener === 'function') {
+        mobileQuery.addEventListener('change', setMobileMode);
+      } else if (typeof mobileQuery.addListener === 'function') {
+        mobileQuery.addListener(setMobileMode);
+      }
+      window.addEventListener('resize', () => {
+        requestAnimationFrame(updateMobileOffset);
+      });
+
       function buildNav(){
         navList.innerHTML = '';
+        if (mobileSelect) mobileSelect.innerHTML = '';
         slides.forEach((slide, i) => {
           const li = document.createElement('li');
           const btn = document.createElement('button');
@@ -3999,6 +4135,12 @@
           btn.innerHTML = `<span>${label}</span><span>${slide.dataset.title || 'Slide ' + (i + 1)}</span>`;
           li.appendChild(btn);
           navList.appendChild(li);
+          if (mobileSelect) {
+            const opt = document.createElement('option');
+            opt.value = String(i);
+            opt.textContent = `${label} · ${slide.dataset.title || 'Slide ' + (i + 1)}`;
+            mobileSelect.appendChild(opt);
+          }
         });
       }
 
@@ -4013,7 +4155,16 @@
         currentActive?.classList.remove('active');
         idx = i;
         slides[idx].classList.add('active');
-        if (progress) progress.style.width = `${((idx + 1)/slides.length)*100}%`;
+        const pct = `${((idx + 1)/slides.length)*100}%`;
+        if (progress) progress.style.width = pct;
+        if (mobileProgress) mobileProgress.style.width = pct;
+        if (mobileSelect && mobileSelect.value !== String(idx)) {
+          mobileSelect.value = String(idx);
+        }
+        if (mobileStatus) {
+          const title = slides[idx].dataset.title || `Slide ${idx + 1}`;
+          mobileStatus.textContent = `Slide ${String(idx + 1).padStart(2,'0')} · ${title}`;
+        }
         updateNav();
         buttons.forEach(btn => {
           if (btn.dataset.nav === 'prev') btn.disabled = idx === 0;
@@ -4025,6 +4176,12 @@
 
       buildNav();
       show(idx);
+      updateMobileOffset();
+
+      mobileSelect?.addEventListener('change', (e) => {
+        const next = parseInt(e.target.value, 10);
+        if (!Number.isNaN(next)) show(next);
+      });
 
       navList.addEventListener('click', (e) => {
         const target = e.target.closest('button[data-index]');
