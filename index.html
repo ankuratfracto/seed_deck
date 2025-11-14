@@ -162,6 +162,139 @@
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
+    .info-help {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .info-help[data-align="left"] .info-popover {
+      left: 0;
+      transform: translate(0, -6px);
+    }
+    .info-help[data-align="right"] .info-popover {
+      left: auto;
+      right: 0;
+      transform: translate(0, -6px);
+    }
+    .info-trigger {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+      padding: 0;
+    }
+    .info-trigger:hover {
+      background: var(--hover);
+    }
+    .info-trigger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .info-popover {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translate(-50%, -6px);
+      min-width: 220px;
+      max-width: min(280px, 72vw);
+      padding: 16px 16px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--card-shadow-lg);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: var(--fg);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 150ms ease, transform 150ms ease;
+      z-index: 50;
+    }
+    .info-popover::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: calc(50% - 6px);
+      width: 12px;
+      height: 12px;
+      background: inherit;
+      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      transform: rotate(45deg);
+      box-shadow: -2px -2px 6px rgba(15,23,42,0.06);
+    }
+    .info-help[data-align="left"] .info-popover::before {
+      left: 18px;
+    }
+    .info-help[data-align="right"] .info-popover::before {
+      left: auto;
+      right: 18px;
+    }
+    .info-popover.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+      pointer-events: auto;
+    }
+    .info-help[data-align="left"] .info-popover.visible,
+    .info-help[data-align="right"] .info-popover.visible {
+      transform: translate(0, 0);
+    }
+    .info-popover strong {
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .info-popover .info-text {
+      display: block;
+      margin-top: 4px;
+    }
+    .info-close {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 24px;
+      height: 24px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 120ms ease, color 120ms ease;
+    }
+    .info-close:hover {
+      background: var(--hover);
+      color: var(--fg);
+    }
+    body[data-theme="dark"] .info-trigger {
+      background: rgba(148,163,184,0.1);
+      border-color: rgba(148,163,184,0.3);
+      color: var(--accent);
+    }
+    body[data-theme="dark"] .info-popover {
+      background: var(--panel-soft);
+      border-color: rgba(148,163,184,0.3);
+      box-shadow: 0 16px 45px rgba(2,6,23,0.6);
+    }
+    body[data-theme="dark"] .info-popover::before {
+      border-color: rgba(148,163,184,0.3);
+      box-shadow: -2px -2px 6px rgba(2,6,23,0.5);
+    }
     .mobile-shell { display: flex; flex-direction: column; gap: 8px; }
     .mobile-rail { display: flex; flex-direction: column; gap: 10px; }
     .mobile-ui { display: none; flex-direction: column; gap: 12px; }
@@ -2954,7 +3087,21 @@
           <div class="slide-body">
             <div class="slide-head">
               <h1>Documents → Decisions in 30 Seconds</h1>
-              <p>Template-less IDP for BFSI & logistics — India/UAE-residency, closed-loop, agentic-by-design.</p>
+              <p>
+                Template-less IDP
+                <span class="info-help" data-align="left">
+                  <button class="info-trigger" type="button" data-info-target="info-idp">
+                    <span aria-hidden="true">i</span>
+                    <span class="sr-only">What is template-less IDP?</span>
+                  </button>
+                  <span class="info-popover" id="info-idp" role="dialog" aria-modal="false" aria-hidden="true">
+                    <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                    <strong>Template-less IDP</strong>
+                    <span class="info-text">IDP = Intelligent Document Processing. Template-less means our agents interpret unseen layouts using vision-language models, so ops teams avoid building brittle zonal templates.</span>
+                  </span>
+                </span>
+                for BFSI & logistics — India/UAE-residency, closed-loop, agentic-by-design.
+              </p>
               <!-- <p class="hero-proof">Trusted by 50+ BFSI and logistics companies · 1M+ pages processed</p> -->
               <!-- <div class="hero-actions">
                 <button class="cta-btn" type="button">Book the 30-sec demo</button>
@@ -2990,7 +3137,21 @@
                 <h3>Momentum Bridge Thesis</h3>
                 <ul class="list">
                   <li>Agentic DocumentOps replacing brittle template stacks.</li>
-                  <li>Residency-ready VPCs + SOC evidence unlock regulated spend.</li>
+                  <li>
+                    Residency-ready VPCs
+                    <span class="info-help" data-align="left">
+                      <button class="info-trigger" type="button" data-info-target="info-vpc">
+                        <span aria-hidden="true">i</span>
+                        <span class="sr-only">Explain VPC residency</span>
+                      </button>
+                      <span class="info-popover" id="info-vpc" role="dialog" aria-modal="false" aria-hidden="true">
+                        <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                        <strong>Residency-ready VPC</strong>
+                        <span class="info-text">Dedicated Virtual Private Clouds hosted inside India/UAE with segregated tenancy, encryption, and audit logging so BFSI/logistics buyers satisfy data-residency + SOC requirements.</span>
+                      </span>
+                    </span>
+                    + SOC evidence unlock regulated spend.
+                  </li>
                   <li>Write-back automations turn documents into actions.</li>
                 </ul>
               </div>
@@ -3331,7 +3492,20 @@
           </header>
           <div class="slide-body">
             <div class="slide-head">
-              <h2>Usage, STP, and revenue rise together</h2>
+              <h2>
+                Usage, STP
+                <span class="info-help">
+                  <button class="info-trigger" type="button" data-info-target="info-stp">
+                    <span aria-hidden="true">i</span>
+                    <span class="sr-only">Define STP</span>
+                  </button>
+                  <span class="info-popover" id="info-stp" role="dialog" aria-modal="false" aria-hidden="true">
+                    <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                    <strong>STP · Straight-through processing</strong>
+                    <span class="info-text">Measures the % of flows completed read → validate → write-back with no manual keying. Our regulated accounts target ≥90% STP so ops teams focus on true exceptions.</span>
+                  </span>
+                </span>, and revenue rise together
+              </h2>
               <p>Same validators → more pages → higher ARR.</p>
             </div>
 
@@ -3511,7 +3685,21 @@
             <!-- HEADLINE -->
             <div class="slide-head">
               <h2>Business Model & Pricing</h2>
-              <p>Subscription base with agent packs that flex by volume.</p>
+              <p>
+                Subscription base with agent packs
+                <span class="info-help" data-align="left">
+                  <button class="info-trigger" type="button" data-info-target="info-agent-pack">
+                    <span aria-hidden="true">i</span>
+                    <span class="sr-only">What is an agent pack?</span>
+                  </button>
+                  <span class="info-popover" id="info-agent-pack" role="dialog" aria-modal="false" aria-hidden="true">
+                    <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                    <strong>Agent packs</strong>
+                    <span class="info-text">Bundled blocks of workflow agents + validator capacity sold per page tier (e.g. 10k+/month). Clients add packs to unlock more throughput without renegotiating platform terms.</span>
+                  </span>
+                </span>
+                that flex by volume.
+              </p>
               <p class="slide-subhead">Platform + usage + simple add-ons.</p>
             </div>
 
@@ -3609,7 +3797,20 @@
 
                   <!-- Burn Multiple -->
                   <div class="metric-card primary">
-                    <span class="metric-label">Burn multiple (Q3)</span>
+                    <span class="metric-label">
+                      Burn multiple (Q3)
+                      <span class="info-help" data-align="right">
+                        <button class="info-trigger" type="button" data-info-target="info-burn">
+                          <span aria-hidden="true">i</span>
+                          <span class="sr-only">How is burn multiple calculated?</span>
+                        </button>
+                        <span class="info-popover" id="info-burn" role="dialog" aria-modal="false" aria-hidden="true">
+                          <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                          <strong>Burn multiple</strong>
+                          <span class="info-text">Net burn ÷ net new ARR. It shows how many rupees of cash burn are spent to add one rupee of recurring revenue. Sub-2× indicates efficient growth for early SaaS.</span>
+                        </span>
+                      </span>
+                    </span>
                     <div class="metric-value-row">
                       <span class="metric-value">1.91×</span>
                     </div>
@@ -3808,7 +4009,21 @@
           <div class="slide-body">
             <div class="slide-head">
               <h2>Raising ₹ 4 Cr Bridge (Convertible Note)</h2>
-              <p class="hero-proof">Use of funds → ₹ 5 Cr ARR · SOC-2 Type II · dual VPCs inside 12 months.</p>
+              <p class="hero-proof">
+                Use of funds → ₹ 5 Cr ARR · SOC-2 Type II
+                <span class="info-help">
+                  <button class="info-trigger" type="button" data-info-target="info-soc2">
+                    <span aria-hidden="true">i</span>
+                    <span class="sr-only">What is SOC-2 Type II?</span>
+                  </button>
+                  <span class="info-popover" id="info-soc2" role="dialog" aria-modal="false" aria-hidden="true">
+                    <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                    <strong>SOC-2 Type II</strong>
+                    <span class="info-text">Independent audit that observes our security, availability, and integrity controls over months—not just a point in time—to satisfy BFSI/vendor risk committees.</span>
+                  </span>
+                </span>
+                · dual VPCs inside 12 months.
+              </p>
               <div class="milestone-bar" data-milestone="arr" data-current="1.4" data-target="5">
                 <span>ARR today</span>
                 <div class="milestone-track" tabindex="0">
@@ -3913,6 +4128,70 @@
         toggle?.setAttribute('aria-pressed', theme === 'dark');
         if (toggle) toggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
         localStorage.setItem(STORAGE_KEY, theme);
+      }
+    })();
+  </script>
+  <script>
+    (function(){
+      const triggers = Array.from(document.querySelectorAll('[data-info-target]'));
+      let active = null;
+
+      triggers.forEach(trigger => {
+        const targetId = trigger.getAttribute('data-info-target');
+        const popover = document.getElementById(targetId);
+        if (!targetId || !popover) return;
+
+        trigger.setAttribute('aria-controls', targetId);
+        trigger.setAttribute('aria-expanded', 'false');
+        popover.setAttribute('aria-hidden', 'true');
+
+        trigger.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (active?.trigger === trigger) {
+            closePopover(true);
+            return;
+          }
+          openPopover(trigger, popover);
+        });
+
+        popover.addEventListener('click', (event) => {
+          event.stopPropagation();
+        });
+
+        const closeBtn = popover.querySelector('[data-info-close]');
+        closeBtn?.addEventListener('click', () => closePopover(true));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!active) return;
+        if (active.popover.contains(event.target) || active.trigger.contains(event.target)) return;
+        closePopover();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closePopover(true);
+        }
+      });
+
+      function openPopover(trigger, popover) {
+        closePopover();
+        active = { trigger, popover };
+        trigger.setAttribute('aria-expanded', 'true');
+        popover.classList.add('visible');
+        popover.setAttribute('aria-hidden', 'false');
+        const closeBtn = popover.querySelector('[data-info-close]');
+        closeBtn?.focus();
+      }
+
+      function closePopover(shouldFocus = false) {
+        if (!active) return;
+        const { trigger, popover } = active;
+        trigger.setAttribute('aria-expanded', 'false');
+        popover.classList.remove('visible');
+        popover.setAttribute('aria-hidden', 'true');
+        active = null;
+        if (shouldFocus) trigger.focus();
       }
     })();
   </script>
