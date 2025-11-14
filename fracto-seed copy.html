@@ -985,12 +985,28 @@
         else if(e.key === 'End') show(slides.length - 1);
       });
 
-      window.addEventListener('click', (e) => {
+      const interactiveSelector = 'button, a, input, textarea, select, label, [contenteditable="true"]';
+      function isInteractiveTarget(target) {
+        return target instanceof Element && target.closest(interactiveSelector);
+      }
+
+      function handleScreenNav(e) {
         const sel = window.getSelection();
         if (sel && sel.toString().length) return;
-        const tag = e.target.tagName.toLowerCase();
-        if (!['button','a','input','textarea','select','label'].includes(tag)) show(idx + 1);
-      });
+        if (e.type === 'pointerup' && 'button' in e && e.button !== 0) return;
+        if (isInteractiveTarget(e.target)) return;
+        const point = typeof e.clientX === 'number'
+          ? e.clientX
+          : (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].clientX : null);
+        if (typeof point !== 'number') return;
+        const midpoint = (window.innerWidth || document.documentElement.clientWidth || 0) / 2;
+        if (!midpoint) return;
+        if (point < midpoint) show(idx - 1);
+        else show(idx + 1);
+      }
+
+      const ambientEvents = window.PointerEvent ? ['pointerup'] : ['click'];
+      ambientEvents.forEach(eventName => window.addEventListener(eventName, handleScreenNav));
     })();
   </script>
 </body>
