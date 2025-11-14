@@ -216,6 +216,10 @@
       font-size: 14px;
       color: var(--muted);
     }
+    .mobile-progress strong {
+      font-weight: 600;
+      color: var(--fg);
+    }
     .mobile-progress-bar {
       flex: 1;
       height: 6px;
@@ -255,6 +259,26 @@
       display: flex;
       padding-top: 8px;
       border-top: 1px solid rgba(148,163,184,0.35);
+      gap: 14px;
+    }
+    body.is-mobile .mobile-progress {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 15px;
+    }
+    body.is-mobile .mobile-progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(1,104,77,0.15);
+    }
+    body.is-mobile .mobile-progress-bar i {
+      border-radius: 999px;
+    }
+    body.is-mobile .mobile-actions .nav-btn {
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
     body.is-mobile .nav-rail {
       padding: 0;
@@ -2591,7 +2615,7 @@
             <strong>Seed Round Deck</strong>
           </div>
         </div>
-        <div class="mobile-rail" id="mobileRail">
+        <div class="mobile-rail mobile-ui" id="mobileRail">
           <div class="mobile-jump">
             <label for="mobileSlideSelect">Jump to slide</label>
             <div class="select-wrap">
@@ -2599,7 +2623,7 @@
             </div>
           </div>
           <div class="mobile-progress" aria-live="polite" aria-atomic="true">
-            <span id="mobileSlideStatus">Slide 1 · Documents → Decisions</span>
+            <strong id="mobileSlideStatus">Slide 1 · Documents → Decisions</strong>
             <div class="mobile-progress-bar" aria-hidden="true">
               <i id="mobileProgress"></i>
             </div>
