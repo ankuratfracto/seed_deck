@@ -155,18 +155,14 @@
     .mobile-shell {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
     .mobile-rail {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 14px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px;
-      background: var(--panel);
-      box-shadow: var(--card-shadow-sm);
     }
+    .mobile-ui { display: none; flex-direction: column; gap: 14px; }
     .mobile-jump {
       display: flex;
       flex-direction: column;
@@ -247,11 +243,18 @@
       left: clamp(16px, 4vw, 48px);
       right: clamp(16px, 4vw, 48px);
       z-index: 22;
-      padding: 0;
+      padding: 18px;
       margin: 0;
+      border: 1px solid rgba(15,23,42,0.12);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(245,247,251,0.92));
+      box-shadow: 0 22px 65px rgba(15,23,42,0.18);
+      gap: 16px;
     }
-    body.is-mobile .mobile-rail {
+    body.is-mobile .mobile-ui {
       display: flex;
+      padding-top: 8px;
+      border-top: 1px solid rgba(148,163,184,0.35);
     }
     body.is-mobile .nav-rail {
       padding: 0;
@@ -269,12 +272,10 @@
       margin-left: 8px;
     }
     body.is-mobile .rail-brand {
-      align-items: center;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 12px;
-      background: var(--panel);
-      box-shadow: var(--card-shadow-sm);
+      border: none;
+      padding: 0;
+      background: none;
+      box-shadow: none;
     }
     body.is-mobile .deck-shell {
       position: relative;
