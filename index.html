@@ -1122,7 +1122,7 @@
     }
     .yc-proof-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 12px;
     }
     .yc-proof-item {
@@ -4265,13 +4265,7 @@
       const TAP_TOLERANCE = 10;
       const LONG_PRESS_DELAY = 650;
       const LONG_PRESS_MOVE_TOLERANCE = 14;
-      const reduceMotionQuery = typeof window.matchMedia === 'function'
-        ? window.matchMedia('(prefers-reduced-motion: reduce)')
-        : null;
-      const MOBILE_SLIDE_DURATION = 340;
-      let idx = 0;
-      let isSlideAnimating = false;
-      const initialIndex = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
+      let idx = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
 
       const updateMobileOffset = () => {
         if (!mobileShell) return;
@@ -4320,34 +4314,12 @@
         items.forEach((item, i) => item.classList.toggle('active', i === idx));
       }
 
-      function show(nextIndex, options = {}){
-        if (nextIndex < 0 || nextIndex >= slides.length) return;
-        const force = options.force === true;
-        const currentIndex = idx;
-        const isSameSlide = nextIndex === currentIndex;
-        if (isSameSlide && !force) {
-          syncNavigationState();
-          return;
-        }
-        const currentSlide = slides[currentIndex] || document.querySelector('.slide.active');
-        const direction = options.direction ?? Math.sign(nextIndex - currentIndex) || 0;
-        idx = nextIndex;
-        const targetSlide = slides[idx];
-        const shouldAnimate = !force && canAnimateMobile(direction, currentSlide, targetSlide);
-        if (shouldAnimate && isSlideAnimating) return;
-        if (shouldAnimate && currentSlide && targetSlide) {
-          isSlideAnimating = true;
-          runMobileSlideTransition(currentSlide, targetSlide, direction).then(() => {
-            isSlideAnimating = false;
-          });
-        } else {
-          currentSlide?.classList.remove('active');
-          targetSlide?.classList.add('active');
-        }
-        syncNavigationState();
-      }
-
-      function syncNavigationState(){
+      function show(i){
+        if (i < 0 || i >= slides.length) return;
+        const currentActive = document.querySelector('.slide.active');
+        currentActive?.classList.remove('active');
+        idx = i;
+        slides[idx].classList.add('active');
         const pct = `${((idx + 1)/slides.length)*100}%`;
         if (progress) progress.style.width = pct;
         if (mobileProgress) mobileProgress.style.width = pct;
@@ -4359,12 +4331,12 @@
           if (btn.dataset.nav === 'prev') btn.disabled = idx === 0;
           if (btn.dataset.nav === 'next') btn.disabled = idx === slides.length - 1;
         });
-        document.title = `${slides[idx]?.dataset.title || 'Slide'} — Fracto`;
+        document.title = `${slides[idx].dataset.title || 'Slide'} — Fracto`;
         location.replace('#' + idx);
       }
 
       buildNav();
-      show(initialIndex, { force: true, animate: false });
+      show(idx);
       updateMobileOffset();
 
       mobileSelect?.addEventListener('change', (e) => {
@@ -4422,66 +4394,6 @@
       const ambientEvents = window.PointerEvent ? ['pointerup'] : ['click'];
       ambientEvents.forEach(eventName => window.addEventListener(eventName, ambientNavHandler));
       setupGestureNavigation();
-
-      function canAnimateMobile(direction, current, next){
-        if (direction === 0) return false;
-        if (!body?.classList.contains('is-mobile')) return false;
-        if (!current || !next) return false;
-        if (reduceMotionQuery?.matches) return false;
-        return true;
-      }
-
-      function runMobileSlideTransition(current, next, direction){
-        return new Promise(resolve => {
-          const exitClass = direction > 0 ? 'slide-exit-left' : 'slide-exit-right';
-          const enterClass = direction > 0 ? 'slide-enter-right' : 'slide-enter-left';
-          if (!next) {
-            resolve();
-            return;
-          }
-          if (!current) {
-            next.classList.add('active');
-            resolve();
-            return;
-          }
-          const exitClasses = ['is-transitioning', 'slide-exit', exitClass];
-          const enterClasses = ['slide-enter', enterClass];
-          let finished = 0;
-          let fallbackTimer = null;
-          const cleanup = () => {
-            if (fallbackTimer !== null) {
-              clearTimeout(fallbackTimer);
-            }
-            current.classList.remove(...exitClasses);
-            next.classList.remove(...enterClasses);
-            resolve();
-          };
-          const markDone = () => {
-            finished += 1;
-            if (finished >= 2) cleanup();
-          };
-          const exitHandler = (event) => {
-            if (event.target !== current) return;
-            current.removeEventListener('animationend', exitHandler);
-            markDone();
-          };
-          const enterHandler = (event) => {
-            if (event.target !== next) return;
-            next.removeEventListener('animationend', enterHandler);
-            markDone();
-          };
-          current.addEventListener('animationend', exitHandler);
-          next.addEventListener('animationend', enterHandler);
-          current.classList.add(...exitClasses);
-          current.classList.remove('active');
-          next.classList.add('active', ...enterClasses);
-          fallbackTimer = window.setTimeout(() => {
-            current.removeEventListener('animationend', exitHandler);
-            next.removeEventListener('animationend', enterHandler);
-            cleanup();
-          }, MOBILE_SLIDE_DURATION + 80);
-        });
-      }
 
       function setupGestureNavigation(){
         if (!deckRoot) return;
