@@ -25,6 +25,8 @@
       --card-elevation: 0 2px 12px var(--card-shadow);
       --card-shadow-lg: var(--card-elevation);
       --card-shadow-sm: var(--card-elevation);
+      --mobile-rail-gap: clamp(12px, 3vw, 20px);
+      --mobile-rail-height: 0px;
     }
     body[data-theme="dark"] {
       color-scheme: dark;
@@ -157,6 +159,11 @@
     body.is-mobile {
       --mobile-rail-height: 168px;
     }
+    .mobile-shell {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
     .mobile-rail {
       display: none;
       flex-direction: column;
@@ -178,14 +185,40 @@
       letter-spacing: 0.12em;
       color: var(--muted);
     }
+    .mobile-jump .select-wrap {
+      position: relative;
+    }
+    .mobile-jump .select-wrap::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: translateY(-50%) rotate(45deg);
+      pointer-events: none;
+    }
     .mobile-jump select {
       width: 100%;
       border-radius: 12px;
       border: 1px solid var(--border);
-      padding: 10px 12px;
+      padding: 12px 40px 12px 14px;
       font-size: 15px;
-      background: var(--panel-soft);
+      background: var(--panel);
       color: var(--fg);
+      appearance: none;
+      box-shadow: var(--card-shadow-sm);
+      font-weight: 500;
+    }
+    .mobile-jump select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(1,104,77,0.15);
+    }
+    body[data-theme="dark"] .mobile-jump .select-wrap::after {
+      border-color: var(--fg);
     }
     .mobile-progress {
       display: flex;
@@ -215,14 +248,17 @@
     .mobile-actions .nav-btn {
       flex: 1;
     }
-    body.is-mobile .mobile-rail {
-      display: flex;
+    body.is-mobile .mobile-shell {
       position: fixed;
       top: var(--mobile-rail-gap);
-      left: calc(var(--mobile-rail-gap) * 1.2);
-      right: calc(var(--mobile-rail-gap) * 1.2);
+      left: clamp(16px, 4vw, 48px);
+      right: clamp(16px, 4vw, 48px);
       z-index: 22;
-      background: var(--panel);
+      padding: 0;
+      margin: 0;
+    }
+    body.is-mobile .mobile-rail {
+      display: flex;
     }
     body.is-mobile .nav-rail {
       padding: 0;
@@ -239,7 +275,16 @@
       align-self: flex-start;
       margin-left: 8px;
     }
+    body.is-mobile .rail-brand {
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 12px;
+      background: var(--panel);
+      box-shadow: var(--card-shadow-sm);
+    }
     body.is-mobile .deck-shell {
+      position: relative;
       margin-top: calc(var(--mobile-rail-height) + var(--mobile-rail-gap));
     }
     .deck-stage { display: flex; flex-direction: column; gap: 18px; }
@@ -2544,27 +2589,31 @@
 <body data-theme="light">
   <div class="deck-shell">
     <aside class="nav-rail" aria-label="Slide navigation">
-      <div class="rail-brand">
-        <img src="fracto_logo.svg" alt="Fracto logo" class="rail-logo">
-        <div class="rail-brand-copy">
-          <span>Fracto</span>
-          <strong>Seed Round Deck</strong>
-        </div>
-      </div>
-      <div class="mobile-rail" id="mobileRail">
-        <div class="mobile-jump">
-          <label for="mobileSlideSelect">Jump to slide</label>
-          <select id="mobileSlideSelect" aria-label="Jump to slide"></select>
-        </div>
-        <div class="mobile-progress" aria-live="polite" aria-atomic="true">
-          <span id="mobileSlideStatus">Slide 1 · Documents → Decisions</span>
-          <div class="mobile-progress-bar" aria-hidden="true">
-            <i id="mobileProgress"></i>
+      <div class="mobile-shell" id="mobileShell">
+        <div class="rail-brand">
+          <img src="fracto_logo.svg" alt="Fracto logo" class="rail-logo">
+          <div class="rail-brand-copy">
+            <span>Fracto</span>
+            <strong>Seed Round Deck</strong>
           </div>
         </div>
-        <div class="mobile-actions">
-          <button class="nav-btn" type="button" data-nav="prev">← Previous</button>
-          <button class="nav-btn primary" type="button" data-nav="next">Next →</button>
+        <div class="mobile-rail" id="mobileRail">
+          <div class="mobile-jump">
+            <label for="mobileSlideSelect">Jump to slide</label>
+            <div class="select-wrap">
+              <select id="mobileSlideSelect" aria-label="Jump to slide"></select>
+            </div>
+          </div>
+          <div class="mobile-progress" aria-live="polite" aria-atomic="true">
+            <span id="mobileSlideStatus">Slide 1 · Documents → Decisions</span>
+            <div class="mobile-progress-bar" aria-hidden="true">
+              <i id="mobileProgress"></i>
+            </div>
+          </div>
+          <div class="mobile-actions">
+            <button class="nav-btn" type="button" data-nav="prev">← Previous</button>
+            <button class="nav-btn primary" type="button" data-nav="next">Next →</button>
+          </div>
         </div>
       </div>
       <ol class="nav-list" id="navList"></ol>
@@ -4096,15 +4145,15 @@
       const mobileSelect = document.getElementById('mobileSlideSelect');
       const mobileStatus = document.getElementById('mobileSlideStatus');
       const mobileProgress = document.getElementById('mobileProgress');
-      const mobileRail = document.getElementById('mobileRail');
+      const mobileShell = document.getElementById('mobileShell');
       const mobileQuery = window.matchMedia('(max-width: 900px)');
       const body = document.body;
       const buttons = document.querySelectorAll('[data-nav]');
       let idx = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
 
       const updateMobileOffset = () => {
-        if (!mobileRail) return;
-        const height = body?.classList.contains('is-mobile') ? mobileRail.offsetHeight : 0;
+        if (!mobileShell) return;
+        const height = body?.classList.contains('is-mobile') ? mobileShell.offsetHeight : 0;
         body?.style.setProperty('--mobile-rail-height', `${height}px`);
       };
 
