@@ -1411,7 +1411,12 @@
       gap: 14px;
     }
     .pricing-tiers.agent-pack-grid {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 640px) {
+      .pricing-tiers.agent-pack-grid {
+        grid-template-columns: 1fr;
+      }
     }
     .tier-card {
       border: 1px solid var(--border);
@@ -1471,7 +1476,7 @@
     }
     .pricing-layout {
       display: grid;
-      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      grid-template-columns: minmax(0, 1.00fr) minmax(0, 1.00fr);
       gap: clamp(18px, 3vw, 32px);
       align-items: stretch;
     }
@@ -3704,6 +3709,33 @@
             </div>
 
             <div class="pricing-layout">
+              <!-- PRICING GRID -->
+              <div class="pricing-tiers agent-pack-grid">
+                <aside class="tier-card">
+                  <h3>Base platform <span class="tier-label">MRR</span></h3>
+                  <p class="tier-price"><strong>₹5k–₹25k / month</strong></p>
+                  <!-- <p>Core platform, APIs, audit trails, and 2 workflow agents.</p> -->
+                </aside>
+
+                <aside class="tier-card">
+                  <h3>Setup <span class="tier-label tier-label-onetime">One-time</span></h3>
+                  <p class="tier-price"><strong>₹15k–₹35k</strong></p>
+                  <!-- <p>Implementation for first flows: connectors, validators, go-live.</p> -->
+                </aside>
+
+                <aside class="tier-card highlight-tier">
+                  <h3>Usage <span class="tier-label">Agent packs</span></h3>
+                  <p class="tier-price"><strong>~₹2.50 / pg avg</strong> (tiered)</p>
+                  <!-- <p>Tiered per-page agent packs (10k+ pages / month) with extra capacity.</p> -->
+                </aside>
+
+                <aside class="tier-card">
+                  <h3>Add-ons <span class="tier-label">Expansion</span></h3>
+                  <p class="tier-price"><strong>Custom packs</strong></p>
+                  <!-- <p>Validator, knowledge, and VPC/on-prem options for stricter programs.</p> -->
+                </aside>
+              </div>
+
               <div class="pricing-overview card-block">
                 <span class="pricing-pill">Pack architecture</span>
                 <!-- <h3>Predictable base + usage</h3> -->
@@ -3724,33 +3756,6 @@
                     <strong>Pages + workflows</strong>
                   </div>
                 </div> -->
-              </div>
-
-              <!-- PRICING GRID -->
-              <div class="pricing-tiers agent-pack-grid">
-                <aside class="tier-card">
-                  <h3>Base platform <span class="tier-label">MRR</span></h3>
-                  <p class="tier-price"><strong>₹5k–₹25k / month</strong></p>
-                  <!-- <p>Core platform, APIs, audit trails, and 2 workflow agents.</p> -->
-                </aside>
-
-                <aside class="tier-card">
-                  <h3>Setup <span class="tier-label tier-label-onetime">One-time</span></h3>
-                  <p class="tier-price"><strong>₹15k–₹35k</strong></p>
-                  <!-- <p>Implementation for first flows: connectors, validators, go-live.</p> -->
-                </aside>
-
-                <aside class="tier-card highlight-tier">
-                  <h3>Usage <span class="tier-label">Agent packs</span></h3>
-                  <p class="tier-price"><strong>~₹2.50 / page avg</strong> (tiered)</p>
-                  <!-- <p>Tiered per-page agent packs (10k+ pages / month) with extra capacity.</p> -->
-                </aside>
-
-                <aside class="tier-card">
-                  <h3>Add-ons <span class="tier-label">Expansion</span></h3>
-                  <p class="tier-price"><strong>Custom packs</strong></p>
-                  <!-- <p>Validator, knowledge, and VPC/on-prem options for stricter programs.</p> -->
-                </aside>
               </div>
             </div>
 
