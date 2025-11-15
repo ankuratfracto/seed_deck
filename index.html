@@ -2963,7 +2963,7 @@
     section[data-title="Traction · Usage"] .card-block.chart-card {
       display: flex;
       flex-direction: column;
-      background: var(--panel);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 22px;
       padding: clamp(18px, 3vw, 28px);
@@ -2971,17 +2971,19 @@
     }
     body[data-theme="dark"] section[data-title="Traction · Adoption"] .card-block.chart-card,
     body[data-theme="dark"] section[data-title="Traction · Usage"] .card-block.chart-card {
-      background:
-        radial-gradient(150% 120% at 0% 0%, rgba(45,212,191,0.18), transparent 60%),
-        rgba(3,7,18,0.9);
-      border-color: rgba(45,212,191,0.25);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.55);
+      background: rgba(15,23,42,0.9);
+      border-color: rgba(148,163,184,0.32);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.65);
     }
     section[data-title="Traction · Adoption"] .card-block.chart-card .chart-panel,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-panel {
       display: flex;
       flex-direction: column;
       gap: 18px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      box-shadow: none;
     }
     section[data-title="Traction · Adoption"] .card-block.chart-card .chart-panel h3,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-panel h3 {
