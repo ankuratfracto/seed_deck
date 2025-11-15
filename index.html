@@ -921,7 +921,7 @@
     }
     .timeline-card { display: grid; gap: 18px; }
     .timeline-card.accent {
-      background: #fff;
+      background: var(--card-bg);
       border-radius: 18px;
       padding: 22px;
       border: 1px solid rgba(15,23,42,0.08);
@@ -1005,13 +1005,9 @@
       }
     }
     body[data-theme="dark"] .slide[data-title="Why Now"] .timeline-card.accent {
-      background:
-        radial-gradient(135% 125% at 15% 15%, rgba(59,130,246,0.22), transparent 55%),
-        radial-gradient(120% 130% at 85% 0%, rgba(192,132,252,0.2), transparent 60%),
-        radial-gradient(140% 150% at 50% 105%, rgba(16,185,129,0.22), transparent 70%),
-        #050b16;
+      background: var(--card-bg);
       border-color: rgba(148,163,184,0.32);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), var(--card-elevation);
+      box-shadow: var(--card-elevation);
     }
     body[data-theme="dark"] .slide[data-title="Why Now"] .timeline-graph::before {
       background: linear-gradient(180deg, rgba(91,141,239,0.45), rgba(52,211,153,0.5), rgba(192,132,252,0.55));
@@ -1031,12 +1027,9 @@
       color: #94a3b8;
     }
     body[data-theme="dark"] .slide[data-title="Why Now"] .expectation-card {
-      background:
-        radial-gradient(130% 120% at 20% 0%, rgba(59,130,246,0.16), transparent 55%),
-        radial-gradient(120% 130% at 80% 0%, rgba(34,197,94,0.12), transparent 60%),
-        var(--card-bg);
+      background: var(--card-bg);
       border-color: rgba(148,163,184,0.24);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), var(--card-elevation);
+      box-shadow: var(--card-elevation);
     }
     body[data-theme="dark"] .slide[data-title="Why Now"] .expectation-subline {
       color: #cbd5f5;
@@ -1462,18 +1455,6 @@
       color: var(--fg);
       letter-spacing: -0.01em;
     }
-    .tier-card.highlight-tier {
-      background:
-        radial-gradient(120% 120% at 0% 0%, rgba(1,104,77,0.15), transparent 60%),
-        radial-gradient(120% 120% at 100% 20%, rgba(52,211,153,0.18), transparent 60%),
-        var(--card-bg);
-      border-color: rgba(1,104,77,0.35);
-      box-shadow: 0 25px 60px rgba(1,104,77,0.18);
-    }
-    .tier-card.highlight-tier .tier-label {
-      background: rgba(255,255,255,0.25);
-      color: var(--fg);
-    }
     .pricing-layout {
       display: grid;
       grid-template-columns: minmax(0, 1.00fr) minmax(0, 1.00fr);
@@ -1483,9 +1464,7 @@
     .pricing-overview {
       display: grid;
       gap: 16px;
-      background:
-        radial-gradient(120% 110% at 0% 0%, rgba(1,104,77,0.1), transparent 55%),
-        var(--card-bg);
+      background: var(--card-alt);
     }
     .pricing-pill {
       display: inline-flex;
@@ -1943,8 +1922,8 @@
       stroke-width: 2;
     }
     .usage-grid .traction-metric {
-      background: linear-gradient(130deg, rgba(91,141,239,0.12), rgba(52,211,153,0.1));
-      border-color: rgba(91,141,239,0.2);
+      background: var(--card-alt);
+      border-color: var(--border);
     }
     .usage-note {
       margin: 0;
@@ -1969,9 +1948,9 @@
       box-shadow: var(--card-shadow-sm);
     }
     .metric-card.primary {
-      background: linear-gradient(140deg, rgba(1,104,77,0.12), rgba(1,104,77,0.22));
-      border-color: rgba(1,104,77,0.4);
-      box-shadow: var(--card-elevation);
+      background: var(--card-alt);
+      border-color: var(--border);
+      box-shadow: var(--card-shadow-sm);
     }
     .metric-label {
       font-size: 12px;
@@ -1981,10 +1960,7 @@
       color: var(--muted);
     }
     .metric-card.primary .metric-label {
-      color: rgba(15,23,42,0.7);
-    }
-    body[data-theme="dark"] .metric-card.primary .metric-label {
-      color: rgba(248,250,252,0.85);
+      color: var(--muted);
     }
     .metric-value {
       font-size: 28px;
@@ -2737,10 +2713,7 @@
       border-color: rgba(148,163,184,0.35);
     }
     body[data-theme="dark"] .pricing-overview {
-      background:
-        radial-gradient(110% 110% at 0% 0%, rgba(45,212,191,0.22), transparent 55%),
-        radial-gradient(90% 120% at 100% 0%, rgba(59,130,246,0.15), transparent 55%),
-        var(--card-bg);
+      background: var(--card-alt);
     }
     body[data-theme="dark"] .pricing-pill {
       background: rgba(45,212,191,0.2);
@@ -2757,18 +2730,6 @@
     body[data-theme="dark"] .tier-label-onetime {
       background: rgba(250,204,21,0.25);
       color: #fcd34d;
-    }
-    body[data-theme="dark"] .tier-card.highlight-tier {
-      border-color: rgba(45,212,191,0.35);
-      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-      background:
-        radial-gradient(120% 120% at 0% 0%, rgba(45,212,191,0.28), transparent 55%),
-        radial-gradient(120% 120% at 100% 0%, rgba(125,211,252,0.18), transparent 55%),
-        rgba(15,23,42,0.9);
-    }
-    body[data-theme="dark"] .tier-card.highlight-tier .tier-label {
-      background: rgba(15,23,42,0.65);
-      color: #5eead4;
     }
     body[data-theme="dark"] .pricing-meta-block,
     body[data-theme="dark"] .summary-stat {
@@ -2998,50 +2959,62 @@
       overflow: hidden;
     }
 
-    section[data-title="Traction · Now"] .card-block.chart-card .chart-wrapper {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 8px 4px 72px 0;
+    section[data-title="Traction · Adoption"] .card-block.chart-card,
+    section[data-title="Traction · Usage"] .card-block.chart-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: clamp(18px, 3vw, 28px);
+      box-shadow: var(--card-shadow-lg);
     }
-    section[data-title="Traction · Now"] .chart-panel[data-chart="companies"] .chart-bars {
-      gap: clamp(18px, 4vw, 56px);
+    body[data-theme="dark"] section[data-title="Traction · Adoption"] .card-block.chart-card,
+    body[data-theme="dark"] section[data-title="Traction · Usage"] .card-block.chart-card {
+      background:
+        radial-gradient(150% 120% at 0% 0%, rgba(45,212,191,0.18), transparent 60%),
+        rgba(3,7,18,0.9);
+      border-color: rgba(45,212,191,0.25);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.55);
     }
-    section[data-title="Traction · Now"] .chart-panel[data-chart="companies"] .bar-visual {
-      width: clamp(40px, 9vw, 72px);
+    section[data-title="Traction · Adoption"] .card-block.chart-card .chart-panel,
+    section[data-title="Traction · Usage"] .card-block.chart-card .chart-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
-    section[data-title="Traction · Now"] .chart-panel[data-chart="companies"] .chart-inner {
-      grid-template-columns: minmax(0, 20px) minmax(0, 1fr);
+    section[data-title="Traction · Adoption"] .card-block.chart-card .chart-panel h3,
+    section[data-title="Traction · Usage"] .card-block.chart-card .chart-panel h3 {
+      margin: 0;
+      font-size: 1.12rem;
     }
-    section[data-title="Traction · Now"] .chart-panel[data-chart="companies"] .chart-axis {
-      width: 20px;
-    }
-    section[data-title="Traction · Now"] .chart-panel[data-chart="companies"] .funnel-note {
-      margin-top: -40px;
-    }
-
+    section[data-title="Traction · Adoption"] .card-block.chart-card .chart-wrapper,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-wrapper {
       background: transparent;
       border: none;
       box-shadow: none;
       padding: 8px 4px 72px 0;
     }
+    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-bars,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-bars {
       gap: clamp(18px, 4vw, 56px);
     }
+    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .bar-visual,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .bar-visual {
       width: clamp(40px, 9vw, 72px);
     }
+    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-inner,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-inner {
       grid-template-columns: minmax(0, 40px) minmax(0, 1fr);
     }
+    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-axis,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-axis {
       width: 40px;
     }
+    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .funnel-note,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .funnel-note {
       margin-top: -40px;
     }
-
 
   </style>
 </head>
@@ -3723,7 +3696,7 @@
                   <!-- <p>Implementation for first flows: connectors, validators, go-live.</p> -->
                 </aside>
 
-                <aside class="tier-card highlight-tier">
+                <aside class="tier-card">
                   <h3>Usage <span class="tier-label">Agent packs</span></h3>
                   <p class="tier-price"><strong>~₹2.50 / pg avg</strong> (tiered)</p>
                   <!-- <p>Tiered per-page agent packs (10k+ pages / month) with extra capacity.</p> -->
