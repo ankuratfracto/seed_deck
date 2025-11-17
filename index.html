@@ -10,21 +10,21 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f5f7fb;
+      --bg: #eef2f9;
       --panel: #ffffff;
-      --panel-soft: #f8fafc;
-      --fg: #0f172a;
-      --muted: #475467;
+      --panel-soft: #f6f8fd;
+      --fg: #111827;
+      --muted: #3f4d63;
       --accent: #01684d;
-      --border: #d7dbe7;
-      --hover: #f0f2f9;
-      --progress-bg: #e4e7ec;
+      --border: #c7cfdf;
+      --hover: #edf1fb;
+      --progress-bg: #dfe6f3;
       --card-bg: #ffffff;
-      --card-alt: #f8fafc;
-      --card-shadow: rgba(15,23,42,0.05);
-      --card-elevation: 0 2px 12px var(--card-shadow);
-      --card-shadow-lg: var(--card-elevation);
-      --card-shadow-sm: var(--card-elevation);
+      --card-alt: #f7f9ff;
+      --card-shadow: rgba(15,23,42,0.08);
+      --card-elevation: 0 6px 18px var(--card-shadow);
+      --card-shadow-lg: 0 18px 36px rgba(15,23,42,0.12);
+      --card-shadow-sm: 0 2px 10px rgba(15,23,42,0.05);
       --mobile-rail-gap: clamp(12px, 3vw, 20px);
       --mobile-rail-height: 0px;
     }
@@ -901,7 +901,7 @@
     .funnel-metric { font-size: 20px; font-weight: 600; color: var(--fg); }
     .funnel-note {
       font-size: 14px;
-      color: var(--muted);
+      color: rgba(17,24,39,0.78);
       margin: 0;
       line-height: 1.4;
     }
@@ -1608,7 +1608,7 @@
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: rgba(15,23,42,0.7);
+      color: rgba(17,24,39,0.85);
       font-weight: 600;
     }
     body[data-theme="dark"] .traction-label {
@@ -2444,7 +2444,7 @@
       font-size: 11px;
       letter-spacing: 0.6px;
       text-transform: uppercase;
-      color: #64748b;
+      color: var(--muted);
     }
     .chart-stat-value {
       font-size: 20px;
@@ -2453,7 +2453,7 @@
     }
     .chart-meta-note {
       font-size: 12px;
-      color: #64748b;
+      color: rgba(63,77,99,0.95);
     }
     .chart-delta {
       font-size: 12px;
@@ -2466,12 +2466,15 @@
     .chart-delta.negative { background: rgba(239,68,68,0.16); color: #b91c1c; }
     .chart-delta.flat { background: rgba(148,163,184,0.26); color: #475467; }
     .chart-wrapper {
-      background: #fff;
+      background:
+        radial-gradient(140% 120% at 0% 0%, rgba(1,104,77,0.08), transparent 55%),
+        linear-gradient(180deg, rgba(15,23,42,0.02), rgba(255,255,255,0.0)),
+        var(--card-alt);
       border-radius: 20px;
       padding: 28px 24px 90px;
       color: var(--fg);
-      border: 1px solid rgba(148,163,184,0.35);
-      box-shadow: 0 16px 40px rgba(15,23,42,0.08);
+      border: 1px solid rgba(15,23,42,0.08);
+      box-shadow: 0 24px 45px rgba(15,23,42,0.1);
       position: relative;
       width: 100%;
       min-width: 0;
@@ -2490,7 +2493,7 @@
       justify-content: space-between;
       text-align: right;
       font-size: 12px;
-      color: #94a3b8;
+      color: rgba(31,41,55,0.65);
       min-height: auto;
       height: 100%;
       position: relative;
@@ -2505,7 +2508,7 @@
       top: 0;
       bottom: 0;
       width: 1px;
-      background: rgba(148,163,184,0.4);
+      background: rgba(71,84,103,0.18);
     }
     .chart-axis span {
       position: relative;
@@ -2517,7 +2520,7 @@
       right: -10px;
       top: 50%;
       width: 10px;
-      border-top: 1px dashed rgba(148,163,184,0.4);
+      border-top: 1px dashed rgba(71,84,103,0.25);
     }
     .chart-bars {
       display: flex;
@@ -2992,9 +2995,6 @@
     }
     section[data-title="Traction · Adoption"] .card-block.chart-card .chart-wrapper,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-wrapper {
-      background: transparent;
-      border: none;
-      box-shadow: none;
       padding: 8px 4px 72px 0;
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-bars,
@@ -4224,8 +4224,8 @@
           data: [
             { quarter: '2024-Q4', value: 10, color: '#5b8def' },
             { quarter: '2025-Q1', value: 8, color: '#f5c84c' },
-            { quarter: '2025-Q2', value: 10, color: '#34d399' },
-            { quarter: '2025-Q3', value: 21, color: '#c084fc' },
+            { quarter: '2025-Q2', value: 8, color: '#34d399' },
+            { quarter: '2025-Q3', value: 22, color: '#c084fc' },
           ],
           maxValue: 24,
           axis: [24, 18, 12, 6, 0],
