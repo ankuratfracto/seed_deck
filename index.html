@@ -3039,7 +3039,19 @@
 
   </style>
 </head>
-<body data-theme="light">
+<body>
+  <script>
+    (function() {
+      const STORAGE_KEY = 'fracto-theme';
+      const stored = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initial = stored || (prefersDark ? 'dark' : 'light');
+
+      document.body.dataset.theme = initial;
+      document.documentElement.style.colorScheme = initial === 'dark' ? 'dark' : 'light';
+      window.__FRACTO_INITIAL_THEME__ = initial;
+    })();
+  </script>
   <div class="deck-shell">
     <aside class="nav-rail" aria-label="Slide navigation">
       <div class="mobile-shell" id="mobileShell">
@@ -4123,7 +4135,7 @@
       const toggle = document.querySelector('[data-theme-toggle]');
       const stored = localStorage.getItem(STORAGE_KEY);
       const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const initial = stored || (prefersDark ? 'dark' : 'light');
+      const initial = window.__FRACTO_INITIAL_THEME__ || stored || (prefersDark ? 'dark' : 'light');
 
       applyTheme(initial);
 
@@ -4134,6 +4146,7 @@
 
       function applyTheme(theme) {
         document.body.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
         toggle?.setAttribute('aria-pressed', theme === 'dark');
         if (toggle) toggle.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
         localStorage.setItem(STORAGE_KEY, theme);
