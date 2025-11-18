@@ -3811,9 +3811,9 @@
                     <!-- CAC -->
                     <div class="metric-card">
                       <span class="metric-label">CAC payback</span>
-                      <span class="metric-value">~11 months</span>
+                      <span class="metric-value">~7.3 months</span>
                       <p class="metric-subtext">
-                        ₹21.90 L S&amp;M ÷ (₹2.395 L new MRR × 82% GM).
+                        ₹21.90 L S&amp;M ÷ (₹2.98 L new MRR × 82% GM).
                       </p>
                     </div>
 
@@ -4827,12 +4827,24 @@
         items.forEach((item, i) => item.classList.toggle('active', i === idx));
       }
 
+      function scrollToSlideStart(){
+        if (!body?.classList.contains('is-mobile')) return;
+        const target = deckRoot || document.querySelector('.deck-shell');
+        if (!target) return;
+        if (typeof target.scrollIntoView === 'function') {
+          target.scrollIntoView({ behavior: 'auto', block: 'start' });
+        } else {
+          window.scrollTo({ top: 0 });
+        }
+      }
+
       function show(i){
         if (i < 0 || i >= slides.length) return;
         const currentActive = document.querySelector('.slide.active');
         currentActive?.classList.remove('active');
         idx = i;
         slides[idx].classList.add('active');
+        scrollToSlideStart();
         const pct = `${((idx + 1)/slides.length)*100}%`;
         if (progress) progress.style.width = pct;
         if (mobileProgress) mobileProgress.style.width = pct;
