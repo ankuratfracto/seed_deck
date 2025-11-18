@@ -4914,15 +4914,40 @@
         else if(e.key === 'End') show(slides.length - 1);
       });
 
-      const interactiveSelector = 'button, a, input, textarea, select, label, [contenteditable="true"]';
+      const interactiveSelector = [
+        'button',
+        'a',
+        'input',
+        'textarea',
+        'select',
+        'label',
+        '[contenteditable="true"]',
+        '[role="button"]',
+        '[data-info-target]',
+        '.chart-bar',
+        '[data-chart]',
+        '.info-help',
+        'svg',
+        'path',
+        'rect',
+        'circle',
+        'polygon',
+        'polyline',
+        'line'
+      ].join(',');
       function isInteractiveTarget(target) {
-        return target instanceof Element && target.closest(interactiveSelector);
+        if (!(target instanceof Element)) return false;
+        if (target.closest(interactiveSelector)) return true;
+        return false;
       }
 
       function ambientNavHandler(e) {
         const sel = window.getSelection();
         if (sel && sel.toString().length) return;
-        if (isInteractiveTarget(e.target)) return;
+        const targetEl = e.target instanceof Element ? e.target : null;
+        if (!targetEl) return;
+        if (!targetEl.closest('.deck')) return;
+        if (isInteractiveTarget(targetEl)) return;
         if (e.type === 'pointerup' && 'button' in e && e.button !== 0) return;
         const point = typeof e.clientX === 'number'
           ? e.clientX
