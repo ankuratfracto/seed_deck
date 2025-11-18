@@ -4835,7 +4835,10 @@
         const target = slides[idx] || deckRoot || document.querySelector('.deck-shell') || document.body;
         const rect = target.getBoundingClientRect();
         const y = rect.top + window.scrollY;
-        const mobileOffset = body?.classList.contains('is-mobile') ? ((mobileShell?.offsetHeight || 0) + 12) : 0;
+        const mobileGap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mobile-rail-gap')) || 0;
+        const mobileOffset = body?.classList.contains('is-mobile')
+          ? ((mobileShell?.offsetHeight || 0) + mobileGap + 6)
+          : 0;
         window.scrollTo({ top: Math.max(0, y - mobileOffset), behavior: 'auto' });
       }
 
