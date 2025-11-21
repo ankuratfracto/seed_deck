@@ -482,6 +482,70 @@
     body.is-mobile .deck {
       overflow: hidden;
     }
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 8mm;
+      }
+      :root,
+      body,
+      body[data-theme="dark"] {
+        color-scheme: light;
+        --bg: #ffffff;
+        --panel: #ffffff;
+        --panel-soft: #f7f9ff;
+        --fg: #0f172a;
+        --muted: #475467;
+        --accent: #01684d;
+        --border: #d5deed;
+        --hover: #f2f6ff;
+        --card-bg: #ffffff;
+        --card-alt: #f8fafc;
+        --card-shadow: rgba(15,23,42,0.06);
+        --card-elevation: none;
+      }
+      * {
+        box-shadow: none !important;
+      }
+      body {
+        margin: 0;
+        padding: 12mm 10mm;
+        background: #ffffff;
+        color: var(--fg);
+      }
+      .deck-shell {
+        max-width: none;
+        width: 100%;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .nav-rail,
+      .mobile-shell {
+        display: none !important;
+      }
+      .deck {
+        display: grid;
+        gap: 18px;
+        overflow: visible;
+      }
+      .slide {
+        display: grid !important;
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px;
+        page-break-after: always;
+        break-after: page;
+        break-inside: avoid;
+      }
+      .slide .slide-body {
+        grid-template-columns: 1fr;
+      }
+      .slide:last-of-type {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
     .slide {
       position: relative;
       display: none;
