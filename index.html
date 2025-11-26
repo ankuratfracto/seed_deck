@@ -976,6 +976,9 @@
       margin: 0;
       line-height: 1.4;
     }
+    body[data-theme="dark"] .funnel-note {
+      color: rgba(226,232,240,0.9);
+    }
     .funnel-flow-label {
       text-align: center;
       font-size: 13px;
@@ -2569,6 +2572,8 @@
       height: 100%;
       position: relative;
       padding-right: 10px;
+      padding-top: 12px;
+      padding-bottom: 28px;
       font-weight: 600;
       width: 64px;
     }
@@ -2596,9 +2601,9 @@
     .chart-bars {
       display: flex;
       align-items: flex-end;
-      gap: clamp(10px, 1.8vw, 20px);
-      min-height: 220px;
-      padding: 0 4px 6px;
+      gap: clamp(6px, 1vw, 12px);
+      min-height: 230px;
+      padding: 12px 2px 28px;
       min-width: 0;
       justify-content: space-between;
     }
@@ -2624,22 +2629,22 @@
       outline-offset: 4px;
     }
     .chart-bar .value-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: #0f172a;
-      padding: 2px 8px;
+      padding: 2px 6px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.4);
       background: #f8fafc;
       position: absolute;
-      top: -28px;
+      top: -24px;
       left: 50%;
       transform: translateX(-50%);
     }
     .bar-visual {
       position: relative;
-      width: clamp(32px, 8vw, 52px);
-      height: 200px;
+      width: clamp(22px, 4vw, 32px);
+      height: 190px;
       border-radius: 18px;
       border: 1px solid rgba(148,163,184,0.35);
       background: linear-gradient(180deg, rgba(148,163,184,0.12), rgba(148,163,184,0.04));
@@ -2667,7 +2672,7 @@
       flex-direction: column;
       gap: 4px;
       align-items: center;
-      font-size: 12px;
+      font-size: 10px;
       position: absolute;
       left: 50%;
       bottom: -50px;
@@ -2676,13 +2681,14 @@
     .chart-quarter {
       font-weight: 600;
       color: #0f172a;
+      font-size: 11px;
     }
     .delta-chip {
-      font-size: 11px;
+      font-size: 9px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
       border-radius: 999px;
-      padding: 4px 8px;
+      padding: 3px 6px;
       font-weight: 600;
       background: rgba(148,163,184,0.2);
       color: #475467;
@@ -2696,6 +2702,73 @@
     .delta-chip.baseline { background: rgba(129,140,248,0.22); color: #3730a3; }
     .chart-bar.is-peak .bar-fill {
       box-shadow: 0 18px 32px rgba(91,141,239,0.35);
+    }
+    /* Line chart styles (revenue) */
+    .line-chart {
+      display: grid;
+      gap: 10px;
+      position: relative;
+      min-height: 230px;
+      padding: 0;
+    }
+    .line-chart-svg {
+      width: 100%;
+      height: 230px;
+      overflow: visible;
+    }
+    section[data-title="Traction · Usage"] .chart-panel[data-chart="revenue"] .chart-axis {
+      padding-top: 12px;
+      padding-bottom: 28px;
+    }
+    .line-grid line {
+      stroke: rgba(71,84,103,0.16);
+      stroke-dasharray: 4 4;
+    }
+    .line-path {
+      stroke: var(--line-color, #5b8def);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      filter: drop-shadow(0 4px 12px rgba(91,141,239,0.25));
+    }
+    .line-area {
+      fill: rgba(91,141,239,0.16);
+    }
+    .line-point {
+      fill: #fff;
+      stroke: var(--line-color, #5b8def);
+      stroke-width: 3;
+      r: 5;
+      filter: drop-shadow(0 6px 10px rgba(15,23,42,0.12));
+      cursor: pointer;
+      transition: transform 120ms ease, filter 120ms ease;
+    }
+    .line-point:hover,
+    .line-point:focus-visible {
+      transform: scale(1.08);
+      filter: drop-shadow(0 8px 18px rgba(15,23,42,0.2));
+    }
+    .line-point:focus-visible {
+      outline: 2px solid rgba(59,130,246,0.45);
+      outline-offset: 4px;
+    }
+    .line-point {
+      display: none;
+    }
+    .line-x-axis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+      gap: 6px;
+      font-size: 11px;
+      color: #475467;
+      padding: 0 12px 4px;
+      overflow-x: auto;
+      margin-top: 6px;
+    }
+    .line-x-axis span {
+      text-align: center;
+      white-space: nowrap;
     }
     .bar-flag {
       position: absolute;
@@ -2725,8 +2798,38 @@
       transform: translate(-50%, -12px);
       transition: opacity 120ms ease;
       white-space: nowrap;
+      z-index: 12;
     }
     .chart-tooltip.visible { opacity: 1; }
+    .line-hit-layer {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(var(--points, 1), minmax(0, 1fr));
+    }
+    .line-hit {
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .line-hit:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+      border-radius: 2px;
+    }
+    .line-cursor {
+      stroke: rgba(1,104,77,0.55);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 4;
+      opacity: 0;
+      transition: opacity 120ms ease;
+    }
+    .line-cursor.visible {
+      opacity: 1;
+    }
 
     body[data-theme="dark"] .chart-wrapper {
       background:
@@ -2750,6 +2853,15 @@
       background: rgba(15,23,42,0.9);
       border-color: rgba(59,130,246,0.4);
       color: #f1f5f9;
+    }
+    body[data-theme="dark"] .line-grid line {
+      stroke: rgba(255,255,255,0.16);
+    }
+    body[data-theme="dark"] .line-area {
+      fill: rgba(91,141,239,0.2);
+    }
+    body[data-theme="dark"] .line-point {
+      fill: #0b1220;
     }
     body[data-theme="dark"] .bar-visual {
       border: 1px solid rgba(59,130,246,0.25);
@@ -3030,7 +3142,7 @@
     }
 
     .card-block.chart-card {
-      overflow: hidden;
+      overflow: visible;
     }
 
     section[data-title="Traction · Adoption"] .card-block.chart-card,
@@ -3578,9 +3690,9 @@
             <!-- NEW: METRICS BLOCK ABOVE THE TWO CHARTS -->
             <div class="traction-metric-grid usage-grid">
               <div class="traction-metric">
-                <span class="traction-label">QRR</span>
-                <strong>₹ 13 L</strong>
-                <p class="metric-subtext">6.74L Revenue in OCT 2025.</p>
+                <span class="traction-label">ARR</span>
+                <strong>₹ 1 Cr</strong>
+                <p class="metric-subtext">8.27L Revenue in NOV 2025.</p>
               </div>
               <div class="traction-metric">
                 <span class="traction-label">Pages / qtr</span>
@@ -3624,7 +3736,7 @@
               <div class="card-block chart-card">
                 <div class="chart-stack">
                   <div class="chart-panel" data-chart="revenue">
-                    <h3>Quarterly revenue (₹)</h3>
+                    <h3>Monthly revenue (₹)</h3>
                     <div class="chart-meta" aria-live="polite"></div>
                     <div class="chart-wrapper">
                       <div class="chart-inner">
@@ -4275,6 +4387,7 @@
 
   <script>
     (function(){
+      const lineChartStates = [];
       const charts = [
         {
           selector: '[data-chart="pages"]',
@@ -4293,13 +4406,27 @@
         },
         {
           selector: '[data-chart="revenue"]',
+          type: 'line',
+          lineColor: '#34d399',
+          lineAreaColor: 'rgba(1,104,77,0.18)',
           data: [
-            { quarter: '2024-Q4', value: 202862, color: '#5b8def' },
-            { quarter: '2025-Q1', value: 333016, color: '#f5c84c' },
-            { quarter: '2025-Q2', value: 468355, color: '#34d399' },
-            { quarter: '2025-Q3', value: 1274066, color: '#c084fc' },
+            { quarter: 'Sep-24', value: 4720, color: '#5b8def' },
+            { quarter: 'Oct-24', value: 13000, color: '#f5c84c' },
+            { quarter: 'Nov-24', value: 136762, color: '#34d399' },
+            { quarter: 'Dec-24', value: 53100, color: '#c084fc' },
+            { quarter: 'Jan-25', value: 102212, color: '#5b8def' },
+            { quarter: 'Feb-25', value: 147676, color: '#f5c84c' },
+            { quarter: 'Mar-25', value: 83128, color: '#34d399' },
+            { quarter: 'Apr-25', value: 139862, color: '#c084fc' },
+            { quarter: 'May-25', value: 172387, color: '#5b8def' },
+            { quarter: 'Jun-25', value: 156106, color: '#f5c84c' },
+            { quarter: 'Jul-25', value: 404396, color: '#34d399' },
+            { quarter: 'Aug-25', value: 420344, color: '#c084fc' },
+            { quarter: 'Sep-25', value: 449326, color: '#5b8def' },
+            { quarter: 'Oct-25', value: 608571, color: '#f5c84c' },
+            { quarter: 'Nov-25', value: 827465, color: '#34d399' },
           ],
-          tooltipSuffix: ' in quarterly revenue (₹)',
+          tooltipSuffix: '',
           shortFormatter: (value) => `${formatShort(value)}`,
           fullFormatter: (value) => `${formatFull(value)}`,
           meta: false,
@@ -4340,6 +4467,10 @@
         const formatShortValue = cfg.shortFormatter || formatShort;
         const formatFullValue = cfg.fullFormatter || formatFull;
         const dataset = cfg.data || [];
+        if (cfg.type === 'line') {
+          buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue });
+          return;
+        }
         const values = dataset.map(point => point.value);
         const datasetMax = values.length ? Math.max(...values) : 0;
         const axisSteps = cfg.axisSteps ?? 4;
@@ -4410,6 +4541,235 @@
         });
       }
 
+      function buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue }) {
+        if (!barsEl) return;
+        const dataset = cfg.data || [];
+        const values = dataset.map(point => point.value);
+        const datasetMax = values.length ? Math.max(...values) : 0;
+        const axisSteps = cfg.axisSteps ?? 4;
+        let scaleMax = cfg.maxValue || datasetMax || 1;
+        let axisValues = cfg.axis;
+
+        if (!axisValues || !axisValues.length) {
+          scaleMax = computeNiceCeiling(scaleMax);
+          axisValues = buildAxisValues(scaleMax, axisSteps);
+        } else {
+          scaleMax = axisValues[0] || scaleMax;
+        }
+
+        if (axisEl && axisValues) {
+          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+        }
+
+        const lineColor = cfg.lineColor || '#5b8def';
+        const viewWidth = Math.max(640, dataset.length * 50);
+        const viewHeight = 230;
+        const padding = { top: 12, right: 18, bottom: 28, left: 12 };
+        const innerWidth = viewWidth - padding.left - padding.right;
+        const innerHeight = viewHeight - padding.top - padding.bottom;
+        const step = dataset.length > 1 ? innerWidth / (dataset.length - 1) : innerWidth / 2;
+
+        const points = dataset.map((entry, index) => {
+          const displayQuarter = formatQuarterDisplay(entry.quarter);
+          const x = padding.left + (dataset.length > 1 ? step * index : innerWidth / 2);
+          const ratio = scaleMax ? Math.min(entry.value / scaleMax, 1) : 0;
+          const y = padding.top + (1 - ratio) * innerHeight;
+          const prev = dataset[index - 1]?.value;
+          const momDelta = typeof prev === 'number' && prev > 0 ? ((entry.value - prev) / prev) * 100 : null;
+          const momLabel = momDelta == null ? 'base' : `${momDelta > 0 ? '+' : ''}${Math.round(momDelta)}% MoM`;
+          return { ...entry, displayQuarter, x, y, displayValue: formatFullValue(entry.value), momLabel };
+        });
+
+        const pathD = buildSmoothPath(points);
+        const areaD = points.length
+          ? `${pathD} L ${points[points.length - 1].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} L ${points[0].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} Z`
+          : '';
+        const gradientId = `lineGradient-${Math.random().toString(36).slice(2, 8)}`;
+        const areaGradientId = `lineGradientArea-${Math.random().toString(36).slice(2, 8)}`;
+        const gradientStops = points.map(pt => {
+          const offset = innerWidth ? ((pt.x - padding.left) / innerWidth) * 100 : 0;
+          const clamped = Math.min(Math.max(offset, 0), 100);
+          return `<stop offset="${clamped.toFixed(2)}%" stop-color="${lineColor}"></stop>`;
+        }).join('');
+        const areaStops = points.map(pt => {
+          const offset = innerWidth ? ((pt.x - padding.left) / innerWidth) * 100 : 0;
+          const clamped = Math.min(Math.max(offset, 0), 100);
+          return `<stop offset="${clamped.toFixed(2)}%" stop-color="${lineColor}" stop-opacity="0.24"></stop>`;
+        }).join('');
+
+        barsEl.classList.add('line-chart');
+        barsEl.innerHTML = `
+          <svg class="line-chart-svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="none" style="--line-color:${lineColor}">
+            <defs>
+              <linearGradient id="${gradientId}" x1="0%" y1="0%" x2="100%" y2="0%">
+                ${gradientStops || `<stop offset="0%" stop-color="${lineColor}"></stop><stop offset="100%" stop-color="${lineColor}"></stop>`}
+              </linearGradient>
+              <linearGradient id="${areaGradientId}" x1="0%" y1="0%" x2="100%" y2="0%">
+                ${areaStops || `<stop offset="0%" stop-color="${lineColor}" stop-opacity="0.22"></stop><stop offset="100%" stop-color="${lineColor}" stop-opacity="0"></stop>`}
+              </linearGradient>
+            </defs>
+            <g class="line-grid">
+              ${axisValues.map(value => {
+                const ratio = scaleMax ? value / scaleMax : 0;
+                const y = padding.top + (1 - ratio) * innerHeight;
+                return `<line x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
+              }).join('')}
+            </g>
+            ${areaD ? `<path class="line-area" d="${areaD}" style="fill:url(#${areaGradientId}); opacity:0.22;"></path>` : ''}
+            ${pathD ? `<path class="line-path" d="${pathD}" stroke="url(#${gradientId})"></path>` : ''}
+            <line class="line-cursor" x1="${points[0]?.x.toFixed(2) || 0}" x2="${points[0]?.x.toFixed(2) || 0}" y1="${padding.top}" y2="${viewHeight - padding.bottom}"></line>
+          </svg>
+        `;
+
+        // Keep axis padding aligned with chart paddings so labels match gridlines
+        if (axisEl) {
+          axisEl.style.paddingTop = `${padding.top}px`;
+          axisEl.style.paddingBottom = `${padding.bottom}px`;
+        }
+
+        // X-axis labels removed for a cleaner fit per request
+
+        if (metaEl && dataset.length) {
+          if (cfg.meta === false || cfg.meta == null) {
+            metaEl.remove();
+          } else {
+            renderChartMeta(metaEl, dataset, cfg, formatFullValue);
+          }
+        }
+
+        const overlay = document.createElement('div');
+        overlay.className = 'line-hit-layer';
+        overlay.style.setProperty('--points', points.length || 1);
+        overlay.innerHTML = points.map((pt, index) => `
+          <button class="line-hit" type="button" data-index="${index}" aria-label="${pt.displayQuarter}: ${pt.displayValue}${cfg.tooltipSuffix || ''}"></button>
+        `).join('');
+        barsEl.appendChild(overlay);
+
+        const state = {
+          points,
+          viewWidth,
+          viewHeight,
+          padding,
+          tooltip,
+          wrapper,
+          suffix: cfg.tooltipSuffix || '',
+          svg: barsEl.querySelector('.line-chart-svg'),
+          cursor: barsEl.querySelector('.line-cursor'),
+          activeIndex: null,
+        };
+        lineChartStates.push({ container: barsEl, state });
+        attachLineHover(barsEl, overlay, state);
+      }
+
+      function buildSmoothPath(points) {
+        if (!points.length) return '';
+        if (points.length === 1) return `M ${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)}`;
+        const d = [`M ${points[0].x.toFixed(2)} ${points[0].y.toFixed(2)}`];
+        for (let i = 0; i < points.length - 1; i++) {
+          const p0 = points[i - 1] || points[i];
+          const p1 = points[i];
+          const p2 = points[i + 1];
+          const p3 = points[i + 2] || p2;
+          const cp1x = p1.x + (p2.x - p0.x) / 6;
+          const cp1y = p1.y + (p2.y - p0.y) / 6;
+          const cp2x = p2.x - (p3.x - p1.x) / 6;
+          const cp2y = p2.y - (p3.y - p1.y) / 6;
+          d.push(`C ${cp1x.toFixed(2)} ${cp1y.toFixed(2)} ${cp2x.toFixed(2)} ${cp2y.toFixed(2)} ${p2.x.toFixed(2)} ${p2.y.toFixed(2)}`);
+        }
+        return d.join(' ');
+      }
+
+      function attachLineHover(container, overlay, state) {
+        const handleClientX = (clientX) => {
+          if (clientX == null) return;
+          const index = findNearestPointIndex(state, clientX, container);
+          if (index != null) showLineHover(state, index);
+        };
+
+        overlay?.addEventListener('mousemove', (e) => handleClientX(e.clientX));
+        overlay?.addEventListener('mouseenter', (e) => handleClientX(e.clientX));
+        overlay?.addEventListener('mouseleave', () => hideLineHover(state));
+        overlay?.addEventListener('touchstart', (e) => {
+          if (!e.touches?.length) return;
+          handleClientX(e.touches[0].clientX);
+        }, { passive: true });
+        overlay?.addEventListener('touchmove', (e) => {
+          if (!e.touches?.length) return;
+          handleClientX(e.touches[0].clientX);
+        }, { passive: true });
+        overlay?.addEventListener('touchend', () => hideLineHover(state));
+        overlay?.addEventListener('touchcancel', () => hideLineHover(state));
+
+        overlay?.querySelectorAll('.line-hit').forEach(btn => {
+          const index = parseInt(btn.dataset.index, 10);
+          if (Number.isNaN(index)) return;
+          btn.addEventListener('focus', () => showLineHover(state, index));
+          btn.addEventListener('click', () => showLineHover(state, index));
+          btn.addEventListener('blur', () => hideLineHover(state));
+        });
+
+        container.addEventListener('mouseleave', () => hideLineHover(state));
+      }
+
+      function findNearestPointIndex(state, clientX, container) {
+        const rect = container.getBoundingClientRect();
+        if (!rect.width) return null;
+        const viewX = ((clientX - rect.left) / rect.width) * state.viewWidth;
+        let nearest = null;
+        let minDist = Infinity;
+        state.points.forEach((pt, idx) => {
+          const dist = Math.abs(pt.x - viewX);
+          if (dist < minDist) {
+            minDist = dist;
+            nearest = idx;
+          }
+        });
+        return nearest;
+      }
+
+      function showLineHover(state, index) {
+        const point = state.points[index];
+        if (!point || !state.tooltip || !state.wrapper) return;
+        state.activeIndex = index;
+        const { tooltip, wrapper, svg, cursor, viewWidth, viewHeight, padding } = state;
+        const shortValue = formatCurrencyShort(point.value);
+        const changeLabel = point.momLabel || 'base';
+        tooltip.textContent = `${point.displayQuarter} · ${shortValue}${changeLabel ? ` (${changeLabel})` : ''}`;
+        const wrapRect = wrapper.getBoundingClientRect();
+        const svgRect = svg?.getBoundingClientRect();
+        if (!svgRect || !wrapRect.width || !wrapRect.height) return;
+        const scaleX = svgRect.width / viewWidth;
+        const scaleY = svgRect.height / viewHeight;
+        const rawLeft = (point.x * scaleX) + (svgRect.left - wrapRect.left);
+        const rawTop = (point.y * scaleY) + (svgRect.top - wrapRect.top);
+        tooltip.classList.add('visible');
+        const width = tooltip.offsetWidth || 0;
+        const height = tooltip.offsetHeight || 0;
+        tooltip.style.left = `${clamp(rawLeft - width / 2, 0, wrapRect.width - width)}px`;
+        tooltip.style.top = `${rawTop - height - 12}px`;
+
+        if (cursor) {
+          cursor.setAttribute('x1', point.x.toFixed(2));
+          cursor.setAttribute('x2', point.x.toFixed(2));
+          cursor.setAttribute('y1', padding.top.toFixed(2));
+          cursor.setAttribute('y2', (viewHeight - padding.bottom).toFixed(2));
+          cursor.classList.add('visible');
+        }
+      }
+
+      function hideLineHover(state) {
+        state.tooltip?.classList.remove('visible');
+        state.cursor?.classList.remove('visible');
+      }
+
+      window.addEventListener('resize', () => {
+        lineChartStates.forEach(({ state }) => {
+          if (state.activeIndex != null) {
+            showLineHover(state, state.activeIndex);
+          }
+        });
+      });
+
       function showTooltip(bar, tooltip, wrapper, suffix = '') {
         if (!tooltip || !wrapper) return;
         tooltip.textContent = `${bar.dataset.quarter}: ${bar.dataset.value}${suffix}`;
@@ -4464,6 +4824,16 @@
         const rounded = Math.round(value);
         const prefix = rounded > 0 ? '+' : '';
         return `${prefix}${rounded}%`;
+      }
+      function formatCurrencyShort(value) {
+        if (!isFinite(value)) return '₹0';
+        if (Math.abs(value) >= 1000000) {
+          return `₹${(value / 1000000).toFixed(2)}M`;
+        }
+        if (Math.abs(value) >= 1000) {
+          return `₹${(value / 1000).toFixed(2)}K`;
+        }
+        return `₹${Math.round(value)}`;
       }
       function formatQuarterDisplay(label) {
         if (!label) return '';
