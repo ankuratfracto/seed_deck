@@ -1155,10 +1155,6 @@
       gap: 6px;
       box-shadow: var(--card-shadow-sm);
     }
-    /* Cover slide snapshots: hide icons for a cleaner first impression */
-    .slide[data-title="Documents → Decisions"] .stat-card .stat-icon {
-      display: none;
-    }
     .team-card { gap: 8px; align-content: start; }
     .team-photo {
       width: 72px;
@@ -1188,7 +1184,7 @@
     .team-card a {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
     }
-    .team-card .list li { font-size: 13px; }
+    .team-card .list li { font-size: 1rem; }
     .stat-icon {
       width: 32px;
       height: 32px;
@@ -2835,81 +2831,6 @@
       z-index: 12;
     }
     .chart-tooltip.visible { opacity: 1; }
-    .chart-tooltip.multi {
-      white-space: normal;
-      max-width: 320px;
-    }
-    .line-tooltip-list {
-      list-style: none;
-      padding: 6px 0 0;
-      margin: 6px 0 0;
-      display: grid;
-      gap: 6px;
-    }
-    .line-tooltip-list li {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
-      gap: 8px;
-    }
-    .line-tooltip-list .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--dot-color, #5b8def);
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
-    }
-    .line-tooltip-list .series-label {
-      font-size: 12px;
-      color: #e5e7eb;
-    }
-    .line-tooltip-list .series-value {
-      font-weight: 700;
-      color: #fff;
-      font-size: 12px;
-    }
-    .chart-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 6px 0 12px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .chart-legend.compact {
-      gap: 6px;
-      margin: 6px 0 0;
-      font-size: 12px;
-      justify-content: flex-start;
-    }
-    .chart-legend .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.45);
-      background: rgba(148,163,184,0.12);
-    }
-    .chart-legend.compact .legend-item {
-      padding: 0;
-      border: none;
-      background: none;
-      border-radius: 0;
-      gap: 6px;
-    }
-    .chart-legend .legend-swatch {
-      width: 11px;
-      height: 11px;
-      border-radius: 999px;
-      background: var(--dot-color, #5b8def);
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.6);
-    }
-    .chart-legend.compact .legend-swatch {
-      width: 9px;
-      height: 9px;
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
-    }
     .line-hit-layer {
       position: absolute;
       inset: 0;
@@ -2957,11 +2878,6 @@
     }
     body[data-theme="dark"] .chart-axis span::after {
       border-top-color: rgba(255,255,255,0.12);
-    }
-    body[data-theme="dark"] .chart-legend .legend-item {
-      border-color: rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.06);
-      color: #cbd5f5;
     }
     body[data-theme="dark"] .chart-bar .value-label {
       background: rgba(15,23,42,0.9);
@@ -3260,7 +3176,6 @@
     }
 
     section[data-title="Traction · Adoption"] .card-block.chart-card,
-    section[data-title="Traction · Onboardings"] .card-block.chart-card,
     section[data-title="Traction · Usage"] .card-block.chart-card,
     section[data-title="Operational Efficiency"] .card-block.chart-card {
       display: flex;
@@ -3272,7 +3187,6 @@
       box-shadow: var(--card-shadow-lg);
     }
     body[data-theme="dark"] section[data-title="Traction · Adoption"] .card-block.chart-card,
-    body[data-theme="dark"] section[data-title="Traction · Onboardings"] .card-block.chart-card,
     body[data-theme="dark"] section[data-title="Traction · Usage"] .card-block.chart-card,
     body[data-theme="dark"] section[data-title="Operational Efficiency"] .card-block.chart-card {
       background: rgba(15,23,42,0.9);
@@ -3280,7 +3194,6 @@
       box-shadow: 0 24px 48px rgba(0,0,0,0.65);
     }
     section[data-title="Traction · Adoption"] .card-block.chart-card .chart-panel,
-    section[data-title="Traction · Onboardings"] .card-block.chart-card .chart-panel,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-panel,
     section[data-title="Operational Efficiency"] .card-block.chart-card .chart-panel {
       display: flex;
@@ -3292,14 +3205,12 @@
       box-shadow: none;
     }
     section[data-title="Traction · Adoption"] .card-block.chart-card .chart-panel h3,
-    section[data-title="Traction · Onboardings"] .card-block.chart-card .chart-panel h3,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-panel h3,
     section[data-title="Operational Efficiency"] .card-block.chart-card .chart-panel h3 {
       margin: 0;
       font-size: 1.12rem;
     }
     section[data-title="Traction · Adoption"] .card-block.chart-card .chart-wrapper,
-    section[data-title="Traction · Onboardings"] .card-block.chart-card .chart-wrapper,
     section[data-title="Traction · Usage"] .card-block.chart-card .chart-wrapper,
     section[data-title="Operational Efficiency"] .card-block.chart-card .chart-wrapper {
       background: none;
@@ -3308,31 +3219,26 @@
       padding: 8px 4px 72px 0;
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-bars,
-    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .chart-bars,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-bars,
     section[data-title="Operational Efficiency"] .chart-panel[data-chart] .chart-bars {
       gap: clamp(18px, 4vw, 56px);
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .bar-visual,
-    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .bar-visual,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .bar-visual,
     section[data-title="Operational Efficiency"] .chart-panel[data-chart] .bar-visual {
       width: clamp(40px, 9vw, 72px);
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-inner,
-    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .chart-inner,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-inner,
     section[data-title="Operational Efficiency"] .chart-panel[data-chart] .chart-inner {
       grid-template-columns: minmax(0, 40px) minmax(0, 1fr);
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-axis,
-    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .chart-axis,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-axis,
     section[data-title="Operational Efficiency"] .chart-panel[data-chart] .chart-axis {
       width: 40px;
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .funnel-note,
-    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .funnel-note,
     section[data-title="Traction · Usage"] .chart-panel[data-chart] .funnel-note,
     section[data-title="Operational Efficiency"] .chart-panel[data-chart] .funnel-note {
       margin-top: -40px;
@@ -3400,7 +3306,6 @@
             <div class="slide-head">
               <h1>Documents → Decisions in 30 Seconds</h1>
               <p>Fracto turns messy BFSI/logistics documents into system updates in under 30 seconds — no templates, fully compliant in India &amp; GCC.</p>
-              <!-- <p class="hero-proof">From ₹1.03 Cr → ₹5 Cr ARR in 12 months with agentic DocumentOps.</p> -->
               <p>
                 Agentic, template-less IDP
                 <span class="info-help" data-align="left">
@@ -3416,29 +3321,36 @@
                 </span>
                 that validates, reconciles, and writes back with India/UAE residency.
               </p>
+              <!-- <p class="hero-proof">Trusted by 50+ BFSI and logistics companies · 1M+ pages processed</p> -->
+              <!-- <div class="hero-actions">
+                <button class="cta-btn" type="button">Book the 30-sec demo</button>
+                <span>or write to ankur@fracto.tech</span>
+              </div> -->
             </div>
-            <div class="split split-2-1">
-              <div class="stat-grid hero-stats">
-              <div class="stat-card">
-                <div class="stat-icon">📄</div>
-                <strong>1M+</strong>
-                <span>Pages processed</span>
-              </div>
-              <div class="stat-card">
-                <div class="stat-icon">🏢</div>
-                <strong>50+</strong>
-                <span>Customers live</span>
-              </div>
-              <div class="stat-card">
-                <div class="stat-icon">₹</div>
-                <strong>₹1.03 Cr</strong>
-                <span>Current ARR (Nov ’25)</span>
-              </div>
-              <div class="stat-card">
-                <div class="stat-icon">🌍</div>
-                <strong>India · GCC</strong>
-                <span>Residency deployments</span>
-              </div>
+            <div class="split">
+              <div>
+                <div class="stat-grid hero-stats">
+                  <div class="stat-card">
+                    <div class="stat-icon">📄</div>
+                    <strong>1M+</strong>
+                    <span>Pages processed</span>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon">⚙️</div>
+                    <strong>50+</strong>
+                    <span>Clients</span>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon">💸</div>
+                    <strong>~82%</strong>
+                    <span>Software gross margin</span>
+                  </div>
+                  <div class="stat-card">
+                    <div class="stat-icon">🌍</div>
+                    <strong>India · GCC</strong>
+                    <span>Residency deployments</span>
+                  </div>
+                </div>
               </div>
               <div class="card-block">
                 <h3>Momentum Bridge Thesis</h3>
@@ -3461,11 +3373,10 @@
                   </li>
                   <li>Write-back automations turn documents into actions.</li>
                 </ul>
-                <p class="funnel-note">Bridge fuels ARR → ₹5 Cr, SOC-2 evidence, and dual residency with high STP.</p>
               </div>
             </div>
           </div>
-          <div class="footer">Raising a 12-month ₹4 Cr Momentum Bridge to ₹5 Cr ARR · SOC-2 · Agentic DocumentOps</div>
+          <div class="footer">Raising a 12-month Momentum Bridge to ₹ 5 Cr ARR · SOC-2 · 100% Agentic Accuracy</div>
         </section>
 
         <!-- Slide 2 -->
@@ -3477,17 +3388,15 @@
           <div class="slide-body">
             <div class="slide-head">
               <h2>Problem — Manual DocumentOps Tax Your Margins</h2>
-              <p class="hero-proof">Every 10k docs costs ~₹2.55L in hidden manual work.</p>
-              <p>Lenders and logistics teams still hand-key critical docs across inboxes, portals, and spreadsheets.</p>
+              <p>Regulated lenders and logistics teams still hand-key critical documents across inboxes, portals, and spreadsheets.</p>
               <div class="split">
                 <div class="card">
                   <h3>Why teams hurt</h3>
                   <ul class="list">
                     <li>Loan underwriting: 7–12 documents per case (bank statements, GST, ITRs, PoDs) keyed by hand before LOS sees anything.</li>
                     <li>Logistics PoDs and LR notes: 10–15 min / document across scanning, lookup, update in TMS/ERP.</li>
-                    <!-- <li>667 analyst hours/month at ₹300/hr before a decision hits LOS/ERP.</li> -->
+                    <li>667 analyst hours/month at ₹300/hr before a decision hits LOS/ERP.</li>
                     <li>4–8% leakage triggers SLA fines and re-audits.</li>
-                    <!-- <li>Credit Ops Head at NBFC: spends 20+ FTE just to keep LOS updated.</li> -->
                   </ul>
                 </div>
                 <div class="card">
@@ -3499,16 +3408,16 @@
                     <tr><td>SLA hits &amp; audits</td><td>₹15k / month</td></tr>
                     <tr><td><strong>Total drag</strong></td><td><strong>₹2.55L / month</strong></td></tr>
                   </table>
-                  <p class="problem-footnote">At 100k docs/month → ₹25L burn and SLA risk — per customer.</p>
+                  <p class="problem-footnote">At 100k docs / month, that’s ₹25L+ burn for an NBFC/logistics player — every month.</p>
                 </div>
               </div>
             </div>
           </div>
-          <div class="footer">Slide 02 · Problem</div>
+          <div class="footer">Fracto · Problem</div>
         </section>
 
         <!-- Slide 3 -->
-        <section class="slide slide-01a" data-title="Why Now" data-slide-number="03">
+        <section class="slide slide-01a" data-title="Why Now">
           <header class="topbar">
             <span>Why Now</span>
             <span>03 · Why Now</span>
@@ -3516,7 +3425,7 @@
           <div class="slide-body">
             <div class="slide-head">
               <h2>Why Now — Regulation, LLMs &amp; Buyer Shift</h2>
-              <p>VL models now parse messy BFSI/logistics docs; residency is mandated; buyers want outcomes, not tools.</p>
+              <p>Gen-LLMs are reliable · residency is mandated · buyers want outcomes, not tools.</p>
             </div>
             <div class="split split-2-1">
               <div class="card-block timeline-card accent">
@@ -3557,7 +3466,7 @@
                 <p class="expectation-subline">Agentic DocumentOps is becoming the default across India &amp; GCC.</p>
                 <ul class="expectation-list">
                   <li>India &amp; GCC demand local VPCs, immutable audit logs, and STP ≥ 90%.</li>
-                  <li>RFPs explicitly ask for STP ≥90%, residency, and SOC-style evidence — not just OCR APIs.</li>
+                  <li>Fracto is the first residency-ready, closed-loop IDP available in-region.</li>
                 </ul>
                 <p class="compression-note">Reliability, regulation (DPDP, RBI localization, SOC2 expectations), and buying cycles now overlap — this combination means global IDP tools can’t clear compliance, and in-house builds take 18–24 months.</p>
               </div>
@@ -3566,7 +3475,7 @@
           <div class="footer">Slide 03 · Why Now</div>
         </section>
 
-        <!-- Slide 4 -->
+        <!-- Slide 4A -->
         <section class="slide slide-01a" data-title="What We Do" data-slide-number="04">
           <header class="topbar">
             <span>What We Do</span>
@@ -3575,25 +3484,23 @@
 
           <div class="slide-body">
             <div class="slide-head">
-              <h2>What We Do — Agentic DocumentOps OS</h2>
-              <p>One queue, four stages, full telemetry — inbox to system update in ≤30 seconds.</p>
-              <p class="hero-proof">Residency-first, closed-loop IDP for BFSI/logistics with validators and write-back in the box.</p>
+              <h2>What We Do — Closed-Loop, Agentic DocumentOps OS</h2>
+              <p>One queue, four stages, full telemetry — docs go from inbox to system update in ≤30 seconds.</p>
             </div>
 
             <div class="yc-solution-grid">
-              <!-- PRODUCT: what they buy -->
               <div class="card-block yc-solution-card">
                 <span class="yc-label">Product</span>
                 <h3>Agentic DocumentOps OS</h3>
+                <!-- <p>One workspace that ingests every inbound doc, validates policies, reconciles, and writes back in 30 seconds.</p> -->
                 <ul class="list">
-                  <li><strong>Unified inbox</strong> for email, APIs, WhatsApp, uploads.</li>
-                  <li><strong>Vision-language extraction</strong> tuned for BFSI/logistics docs.</li>
-                  <li><strong>Policy + recon packs</strong> targeting ≥90% STP.</li>
-                  <li><strong>Native LOS/ERP/TMS write-back</strong> with full audit trails.</li>
+                  <li>One inbox for all documents (email, API, WhatsApp).</li>
+                  <li>AI reads documents and extracts clean, structured data.</li>
+                  <li>Policy rules check limits, compliance, and basic fraud flags.</li>
+                  <li>Bots update LOS/ERP/TMS and keep a full audit trail.</li>
                 </ul>
               </div>
 
-              <!-- HOW IT WORKS: the 4-step flow -->
               <div class="card-block yc-solution-card">
                 <span class="yc-label">How it works</span>
                 <h3>4-step closed loop</h3>
@@ -3602,52 +3509,115 @@
                     <span class="yc-step-number">1</span>
                     <div>
                       <strong>Capture</strong>
-                      <p>All channels into one queue; auto-classify and de-dupe.</p>
+                      <p>All channels, one queue — email/API/WhatsApp into a single prioritized queue.</p>
                     </div>
                   </li>
                   <li>
                     <span class="yc-step-number">2</span>
                     <div>
-                      <strong>Understand &amp; extract</strong>
-                      <p>Vision–language models read docs with per-field confidence.</p>
+                      <strong>Validate</strong>
+                      <p>Policy packs, STP target ≥90% on every doc before it moves.</p>
                     </div>
                   </li>
                   <li>
                     <span class="yc-step-number">3</span>
                     <div>
-                      <strong>Validate &amp; reconcile</strong>
-                      <p>Policy packs, checks vs LOS/ERP/TMS; only true exceptions surface.</p>
+                      <strong>Reconcile</strong>
+                      <p>Bots resolve most mismatches; humans only touch true exceptions.</p>
                     </div>
                   </li>
                   <li>
                     <span class="yc-step-number">4</span>
                     <div>
                       <strong>Write-back</strong>
-                      <p>Auto-update LOS/ERP/TMS with full audit log.</p>
+                      <p>LOS/ERP/TMS updated automatically with a full audit log.</p>
                     </div>
                   </li>
                 </ol>
-                <!-- <p class="funnel-note">The same loop runs across underwriting, PoDs, invoices, and KYB — with no templates.</p> -->
               </div>
 
-
+              <div class="card-block yc-solution-card">
+                <span class="yc-label">Proof</span>
+                <h3>Live signal &amp; moat</h3>
+                <div class="yc-proof-grid">
+                  <div class="yc-proof-item">
+                    <span>Customers live</span>
+                    <strong>50+</strong>
+                    <!-- <p>Across lending, logistics, and GCC ops.</p> -->
+                  </div>
+                  <div class="yc-proof-item">
+                    <span>Cycle time</span>
+                    <strong>≤30s</strong>
+                    <!-- <p>Docs go from inbox to write-back.</p> -->
+                  </div>
+                  <div class="yc-proof-item">
+                    <span>STP</span>
+                    <strong>90%+</strong>
+                    <!-- <p>Policy packs eliminate manual review.</p> -->
+                  </div>
+                  <div class="yc-proof-item">
+                    <span>Residency-ready</span>
+                    <strong>India · GCC</strong>
+                    <!-- <p>Audit-native VPC deployments.</p> -->
+                  </div>
+                </div>
+                <!-- <div class="doc-highlight">
+                  <strong>Why now</strong>
+                  Regulated buyers demand a YC-simple “show the loop” answer — we run it live already.
+                </div> -->
+              </div>
             </div>
           </div>
 
           <div class="footer">Slide 04 · What We Do</div>
         </section>
 
-
         <!-- Slide 5 -->
-        <section class="slide slide-01a" data-title="Traction · Adoption" data-slide-number="05">
+        <section class="slide slide-01a" data-title="Who We Serve" data-slide-number="05">
           <header class="topbar">
-            <span>Traction · Adoption</span>
-            <span>05 · Customer Traction</span>
+            <span>Who We Serve</span>
+            <span>05 · Markets</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
-              <h2>Traction — Customers & Deployments</h2>
-              <p>More logos live → more recurring pages → more ARR.</p>
+              <h2>Who We Serve — BFSI &amp; Logistics in India + GCC</h2>
+              <p>Regulated buyers with ticket sizes that value closed-loop, residency-ready DocumentOps.</p>
+            </div>
+            <div class="split split-2-1">
+              <div class="card-block">
+                <h3>Segments &amp; workflows</h3>
+                <ul class="list">
+                  <li>NBFCs, banks, trade finance: loan underwriting (bank statements, GST, ITRs), KYB, PoDs/CMRs.</li>
+                  <li>Logistics, freight/3PL: PoDs, LR notes, vendor invoices keyed into TMS/ERP.</li>
+                  <li>India + GCC deployments with local VPCs and audit trails.</li>
+                </ul>
+              </div>
+              <div class="card-block">
+                <h3>References</h3>
+                <div class="logo-grid">
+                  <img src="clients/ambit.png" alt="Ambit">
+                  <img src="clients/121Finance.png" alt="121 Finance">
+                  <img src="clients/letstransport.png" alt="Lets Transport">
+                  <img src="clients/navata.png" alt="Navata">
+                  <img src="clients/trukker.png" alt="Trukker">
+                  <img src="clients/jisr.jpg" alt="Jisr">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 05 · Who We Serve</div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide slide-01a" data-title="Traction · Adoption" data-slide-number="06">
+          <header class="topbar">
+            <span>Traction · Adoption</span>
+            <span>06 · Customer Traction</span>
+          </header>
+          <div class="slide-body">
+            <div class="slide-head">
+              <h2>Traction — Customers &amp; Deployments</h2>
+              <p>More customers going live, faster, with zero churn.</p>
             </div>
             <!-- <div class="traction-hero-card">
               <span class="traction-label">Headline metrics</span>
@@ -3664,7 +3634,7 @@
               <div class="card-block chart-card">
                 <div class="chart-stack">
                   <div class="chart-panel" data-chart="companies">
-                    <h3>Monthly onboardings</h3>
+                    <h3>Companies onboarded per quarter</h3>
                     <div class="chart-meta" aria-live="polite"></div>
                     <div class="chart-wrapper">
                       <div class="chart-inner">
@@ -3673,7 +3643,7 @@
                       </div>
                       <div class="chart-tooltip" role="status" aria-live="polite"></div>
                     </div>
-                    <p class="funnel-note">More logos live → more recurring pages → step-up in ARR.</p>
+                    <p class="funnel-note">Design partners → references → repeatable deployments.</p>
                   </div>
                 </div>
               </div>
@@ -3692,8 +3662,7 @@
                   <div class="traction-metric">
                     <span class="traction-label">Customers live</span>
                     <strong>50+</strong>
-                    <p class="metric-subtext">Split across BFSI + logistics logos below.</p>
-                    <!-- <strong>0 logo churn so far</strong> -->
+                    <p class="metric-subtext">Split across BFSI + logistics logos below; 0 logo churn so far.</p>
                   </div>
                   <div class="traction-metric">
                     <span class="traction-label">Account expansions</span>
@@ -3709,7 +3678,6 @@
                 <!-- <h3>Selected customers</h3> -->
                 <div class="logo-section">
                   <span class="logo-label">India references</span>
-                  <!-- <p class="funnel-note">India – NBFCs, banks, 3PLs, and logistics tech.</p> -->
                   <div class="logo-marquee india" aria-label="India customer logos">
                     <div class="logo-track">
                       <img src="clients/cargomen.jpeg" alt="Cargomen">
@@ -3763,7 +3731,6 @@
                 </div>
                 <div class="logo-section">
                   <span class="logo-label">GCC references</span>
-                  <!-- <p class="funnel-note">GCC – HR/payroll, logistics, and fintech.</p> -->
                   <div class="logo-marquee gcc" aria-label="GCC customer logos">
                     <div class="logo-track">
                       <img src="clients/jisr.jpg" alt="Jisr">
@@ -3784,20 +3751,20 @@
 
             </div>
           </div>
-          <div class="footer">Slide 05 · Traction — Customers</div>
+          <div class="footer">Slide 06 · Traction — Customers</div>
         </section>
 
         <!-- Slide 6 -->
-        <section class="slide slide-01a" data-title="Traction · Usage" data-slide-number="06">
+        <section class="slide slide-01a" data-title="Traction · Usage" data-slide-number="07">
           <header class="topbar">
             <span>Traction · Usage</span>
-            <span>06 · Usage &amp; Revenue</span>
+            <span>07 · Usage &amp; Revenue</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
               <h2>
-                Traction — Usage &amp; Revenue Growth
-                <!-- <span class="info-help">
+                Traction — Usage, STP
+                <span class="info-help">
                   <button class="info-trigger" type="button" data-info-target="info-stp">
                     <span aria-hidden="true">i</span>
                     <span class="sr-only">Define STP</span>
@@ -3807,7 +3774,7 @@
                     <strong>STP · Straight-through processing</strong>
                     <span class="info-text">Measures the % of flows completed read → validate → write-back with no manual keying. Our regulated accounts target ≥90% STP so ops teams focus on true exceptions.</span>
                   </span>
-                </span> &amp; Revenue Growth -->
+                </span> &amp; Revenue Growth
               </h2>
               <p>Same validators → more pages → higher ARR.</p>
             </div>
@@ -3821,16 +3788,16 @@
             </div> -->
 
             <!-- NEW: METRICS BLOCK ABOVE THE TWO CHARTS -->
-              <div class="traction-metric-grid usage-grid">
-                <!-- <div class="traction-metric">
-                  <span class="traction-label">ARR</span>
-                  <strong>₹ 1.03 Cr</strong>
-                  <p class="metric-subtext"><strong>Nov ’25 revenue:</strong> ₹8.57L</p>
-                </div>
-                <div class="traction-metric">
-                  <span class="traction-label">Pages / qtr</span>
-                  <strong>400K+</strong>
-                  <p class="metric-subtext">Across BFSI + logistics workflows.</p>
+            <div class="traction-metric-grid usage-grid">
+              <div class="traction-metric">
+                <span class="traction-label">ARR</span>
+                <strong>₹ 1.03 Cr</strong>
+                <p class="metric-subtext">8.57L revenue in Nov 2025.</p>
+              </div>
+              <div class="traction-metric">
+                <span class="traction-label">Pages / qtr</span>
+                <strong>400K+</strong>
+                <p class="metric-subtext">Across BFSI + logistics workflows.</p>
               </div>
               <div class="traction-metric">
                 <span class="traction-label">STP</span>
@@ -3841,7 +3808,7 @@
                 <span class="traction-label">Gross margin</span>
                 <strong>~82–90%</strong>
                 <p class="metric-subtext">Q3 GM at 87.2%.</p>
-              </div> -->
+              </div>
               <!-- <div class="traction-metric">
                 <span class="traction-label">Logo churn</span>
                 <strong>0</strong>
@@ -3865,8 +3832,7 @@
                       </div>
                       <div class="chart-tooltip" role="status" aria-live="polite"></div>
                     </div>
-                    <p class="funnel-note">+5× QoQ volume supporting the ARR scale-up.</p>
-                    <!-- <p class="funnel-note">Top cohorts: NBHC (warehouse receipts), Navata/Trukker (PoDs &amp; LRs), Kuhoo (lending docs).</p> -->
+                    <p class="funnel-note">+5× QoQ volume; target 2M/month by Q4.</p>
                   </div>
                 </div>
               </div>
@@ -3884,29 +3850,28 @@
                       </div>
                       <div class="chart-tooltip" role="status" aria-live="polite"></div>
                     </div>
-                    <p class="funnel-note">15× monthly revenue growth since Sep ’24; bridge assumes continuation of this curve.</p>
-                    <!-- <p class="funnel-note">Usage growth directly converts into recurring revenue. Highlights: Nov ’24 first meaningful BFSI revenue · Jul–Sep ’25 GCC pushes (Trukker/Navata) scale · Nov ’25 record month; bridge baseline.</p> -->
+                    <p class="funnel-note">Usage growth directly converts into recurring revenue. Highlights: Nov ’24 first meaningful BFSI revenue · Jul–Sep ’25 GCC pushes (Trukker/Navata) scale · Nov ’25 record month; bridge baseline.</p>
                   </div>
                 </div>
               </div>
 
             </div>
           </div>
-          <div class="footer">Slide 06 · Traction — Usage</div>
+          <div class="footer">Slide 07 · Traction — Usage</div>
         </section>
 
         <!-- Slide 7 -->
-        <section class="slide slide-01a" data-title="Why We Win" data-slide-number="07">
+        <section class="slide slide-01a" data-title="Why We Win" data-slide-number="08">
           <header class="topbar">
             <span>Why We Win</span>
-            <span>07 · Defensibility</span>
+            <span>08 · Defensibility</span>
           </header>
 
           <div class="slide-body">
 
             <div class="slide-head">
-              <h2>Moat — Residency-first, Closed Loop for BFSI &amp; Logistics</h2>
-              <p>Compliance-ready, residency-first closed loop with domain validators — not just another IDP toolkit.</p>
+              <h2>Moat — Why We Win This Market</h2>
+              <p>Region-first, compliance-ready, closed loop with domain validators — not just another IDP toolkit.</p>
             </div>
 
             <!-- <div class="card-block expectation-card">
@@ -3924,7 +3889,7 @@
               <p class="expectation-subline">Agentic DocumentOps is already the default requirement.</p>
               <ul class="expectation-list">
                 <li>India + GCC buyers insist on local VPCs, immutable audit logs, and STP ≥ 90%.</li>
-                <li>Fracto is one of the first residency-ready, closed-loop IDPs focused on India &amp; GCC.</li>
+                <li>Fracto is the first residency-ready, closed-loop IDP built for this region.</li>
               </ul>
               <p class="compression-note"><strong>Compression:</strong> reliability, regulation, and buying cycles have converged — teams need an audit-native, residency-ready IDP now, not in three years.</p>
             </div> -->
@@ -3941,9 +3906,9 @@
                   <tbody>
 
                     <tr>
-                      <td>Residency-ready India/UAE VPCs</td>
+                      <td>India/UAE VPC option</td>
                       <td class="is-fracto"><span class="chip chip-positive">Available</span></td>
-                      <td>Rare / non-standard</td>
+                      <td>✕ / limited</td>
                     </tr>
 
                     <tr>
@@ -3979,18 +3944,13 @@
                     <tr>
                       <td>Residency + compliance readiness</td>
                       <td class="is-fracto"><strong>India & GCC ready</strong></td>
-                      <td>Rare / non-standard</td>
+                      <td>Not available</td>
                     </tr>
 
                     <tr>
                       <td>Workflow breadth</td>
                       <td class="is-fracto">Lending, KYC/KYB, logistics, trade</td>
                       <td>Limited templates</td>
-                    </tr>
-                    <tr>
-                      <td>Evidence &amp; telemetry</td>
-                      <td class="is-fracto">Audit logs, per-field traces, SOC-ready exports</td>
-                      <td>Basic logs; not audit-native</td>
                     </tr>
 
                   </tbody>
@@ -3999,21 +3959,21 @@
 
           </div>
 
-          <div class="footer">Slide 07 · Advantage</div>
+          <div class="footer">Slide 08 · Advantage</div>
         </section>
 
+
         <!-- Slide 8 -->
-        <section class="slide slide-01a" data-title="Pricing &amp; Unit Economics" data-slide-number="08">
+        <section class="slide slide-01a" data-title="Pricing" data-slide-number="09">
           <header class="topbar">
-            <span>Pricing &amp; Unit Economics</span>
-            <span>08 · Business Model</span>
+            <span>Pricing</span>
+            <span>09 · Business Model</span>
           </header>
 
           <div class="slide-body">
             <!-- HEADLINE -->
             <div class="slide-head">
-              <h2>Pricing &amp; Unit Economics — Platform + Agent Packs</h2>
-              <p class="hero-proof">Base platform + setup + usage-based agent packs.</p>
+              <h2>Business Model — Platform + Agent Packs</h2>
               <p>
                 Subscription base with agent packs
                 <span class="info-help" data-align="left">
@@ -4086,29 +4046,26 @@
             <div class="pricing-summary card-block">
               <span class="pricing-pill is-muted">Worked example</span>
               <p class="summary-copy"><strong>Example NBFC (~60k pages/month):</strong> ₹1.6–2.2 L / month total spend at ~80% GM (base + setup amortised + tiered agent packs).</p>
-              <p class="summary-copy">Typical contract value: ₹20–25L / year for a mid-sized NBFC.</p>
-              <p class="summary-copy">CAC payback target: &lt;12 months via inside-sales GTM.</p>
             </div>
           </div>
 
-          <div class="footer">Slide 08 · Pricing &amp; Unit Economics</div>
+          <div class="footer">Slide 09 · Business Model & Pricing</div>
         </section>
 
         <!-- Slide 9 -->
-        <section class="slide slide-01a" data-title="Operational Efficiency" data-slide-number="09">
+        <section class="slide slide-01a" data-title="Operational Efficiency" data-slide-number="10">
           <header class="topbar">
             <span>Operational Efficiency</span>
-            <span>09 · Efficiency &amp; Leverage</span>
+            <span>10 · Efficiency &amp; Leverage</span>
           </header>
 
           <div class="slide-body">
             <div class="slide-head">
               <h2>Unit Economics — Gross Margin & Path to Break-even</h2>
-              <p class="hero-proof">0.53× burn at ~₹1 Cr ARR with line-of-sight to break-even on the path to ₹5 Cr ARR.</p>
-              <p>Loss curve trending down as efficiency drives toward break-even.</p>
+              <p>Loss curve trending down as operational efficiency accelerates toward break-even.</p>
             </div>
 
-            <!-- <div class="metric-duo">
+            <div class="metric-duo">
               <div class="metric-card primary">
                 <span class="metric-label">Burn multiple (Nov ’25)</span>
                 <div class="metric-value-row">
@@ -4125,21 +4082,21 @@
                   Blended Apr–Sep GM: 82.7%. High structural margin driven by automation and low variable cost per document.
                 </p>
               </div>
-            </div> -->
+            </div>
 
             <div class="split efficiency-grid">
               <!-- Operating Loss -->
               <div class="card-block chart-card">
                 <div class="chart-stack">
                   <div class="chart-panel" data-chart="operating-loss">
-                    <h3>Monthly P&L (₹)</h3>
+                    <h3>Operating loss (₹)</h3>
                     <div class="chart-meta" aria-live="polite"></div>
                     <div class="chart-wrapper">
                       <div class="chart-inner">
                         <div class="chart-axis" aria-hidden="true"></div>
                         <div class="chart-bars"></div>
                       </div>
-                      <div class="chart-tooltip multi" role="status" aria-live="polite"></div>
+                      <div class="chart-tooltip" role="status" aria-live="polite"></div>
                     </div>
                     <p class="funnel-note">
                       Consistent month-on-month reduction in operating loss (≈46% ↓ Apr→Nov),
@@ -4153,7 +4110,7 @@
               <div class="card-block chart-card">
                 <div class="chart-stack">
                   <div class="chart-panel" data-chart="rev-exp">
-                    <h3>Revenue-to-expense ratio</h3>
+                    <h3>Revenue / expense ratio</h3>
                     <div class="chart-meta" aria-live="polite"></div>
                     <div class="chart-wrapper">
                       <div class="chart-inner">
@@ -4163,7 +4120,7 @@
                       <div class="chart-tooltip" role="status" aria-live="polite"></div>
                     </div>
                     <p class="funnel-note">
-                      Efficiency improved from 0.08× → 0.48× (Apr→Nov), with a clear line of sight
+                      Revenue productivity improving steadily (8% → 48% Apr→Nov), with a clear line of sight
                       to 1.0× break-even efficiency as revenue scales on a largely fixed cost base.
                     </p>
                   </div>
@@ -4172,14 +4129,77 @@
             </div>
           </div>
 
-          <div class="footer">Slide 09 · Operational efficiency</div>
+          <div class="footer">Slide 10 · Operational efficiency</div>
         </section>
 
-        <!-- Slide 11 -->
-        <section class="slide slide-01a" data-title="Team" data-slide-number="11">
+        <!-- Slide 10 -->
+        <section class="slide slide-01a" data-title="Roadmap" data-slide-number="11">
+          <header class="topbar">
+            <span>Roadmap</span>
+            <span>11 · Momentum Bridge</span>
+          </header>
+          <div class="slide-body">
+            <div class="slide-head">
+              <h2>12-Month Plan — The Momentum Bridge</h2>
+              <p>12 months to prove ₹ 5 Cr ARR, SOC-2 Type II, and dual residency on our top workflows.</p>
+              <p class="hero-proof">₹4 Cr → 12 months of runway → 3 milestone buckets.</p>
+            </div>
+
+            <div class="split bridge-layout">
+              <div class="card-block bridge-card">
+                <div class="bridge-roadmap">
+                  <h3>12-month deliverables</h3>
+                  <ul class="bridge-summary-list">
+                    <li>
+                      <strong>Revenue engine <span class="delta-chip baseline">~40% of bridge: GTM &amp; pods</span></strong>
+                      <p>500+ enterprise customers live, higher usage bands, and burn multiple bending toward ≤1× on the path to ₹ 15 Cr ARR.</p>
+                    </li>
+                    <li>
+                      <strong>Product <span class="delta-chip baseline">~25%: Product &amp; validators</span></strong>
+                      <p>Three monetisable modules beyond core IDP live in production (reconciliation, document workspace, and Q&A/search) with a seeded workflow marketplace.</p>
+                    </li>
+                    <li>
+                      <strong>Compliance + residency <span class="delta-chip baseline">~15%: SOC2 &amp; evidence</span></strong>
+                      <p>SOC-2 Type I completed, Type II audit in flight, and standardised VPC blueprints for India and GCC with shared observability.</p>
+                    </li>
+                    <li>
+                      <strong>Operations <span class="delta-chip baseline">~20%: Infra &amp; SRE</span></strong>
+                      <p>Dedicated BFSI and logistics GTM pods, and a shared SRE + validator squad sustaining 100% agentic accuracy on the top 5 flows.</p>
+                    </li>
+                  </ul>
+                </div>
+                <!-- <p class="funnel-note">
+                  Bridge capital buys ARR, compliance evidence, and dual residency — no science projects.
+                </p> -->
+              </div>
+
+              <div class="card-block bridge-side">
+                <h3>Risks · Mitigation</h3>
+                <ul class="bridge-risk-list">
+                  <li>
+                    <strong>Enterprise procurement</strong>
+                    <span>Pre-approved MSAs and dual GTM pods to keep enterprise diligence cycles inside 6–8 weeks.</span>
+                  </li>
+                  <li>
+                    <strong>Audit runway</strong>
+                    <span>SOC advisors embedded; ~15% of the bridge reserved for controls and evidence capture.</span>
+                  </li>
+                  <li>
+                    <strong>Infra latency</strong>
+                    <span>Redundant India + GCC VPC kits with shared observability and SRE ownership.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 11 · Bridge plan</div>
+        </section>
+
+        <!-- Slide 12 -->
+        <section class="slide slide-01a" data-title="Team" data-slide-number="12">
           <header class="topbar">
             <span>Team</span>
-            <span>11 · Team</span>
+            <span>12 · Team</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
@@ -4201,7 +4221,6 @@
                   <ul class="list">
                     <li>Multi-time founder; deep lending + ops experience.</li>
                     <li>Owns product, pricing, and founder-led sales.</li>
-                    <li>Grew Ruptok/ABL ops across cities with Cr-scale lending AUM.</li>
                   </ul>
                 </div>
 
@@ -4215,7 +4234,6 @@
                   <ul class="list">
                     <li>Built/ran cloud products; full-stack + DevOps.</li>
                     <li>Leads OCR/LLM platform, validators, and VPC architecture.</li>
-                    <li>Previously founded and ran a cloud hosting business with paying customers.</li>
                   </ul>
                 </div>
 
@@ -4229,7 +4247,6 @@
                   <ul class="list">
                     <li>Drives new ARR and expansions end-to-end.</li>
                     <li>Turns frontline signal into repeatable GTM playbooks.</li>
-                    <li>Closed 20+ NBFC/logistics logos in the last 12 months.</li>
                   </ul>
                 </div>
 
@@ -4243,40 +4260,50 @@
                 <li>Closed-loop, high-STP workflows live today — not slideware.</li>
                 <li>Capital disciplined: sub-1× burn multiple path with high GM.</li>
               </ul>
-              <p class="funnel-note">Extended team: 6 engineers (OCR/LLM, infra, frontend), 3 ops specialists, 2 GTM. Advisors available on request.</p>
             </div>
           </div>
-          <div class="footer">Slide 11 · Team</div>
+          <div class="footer">Slide 12 · Team</div>
         </section>
 
-        <!-- Slide 12 -->
-        <section class="slide slide-01a" data-title="Bridge & Ask" data-slide-number="12">
+        <!-- Slide 13 -->
+        <section class="slide slide-01a" data-title="Ask">
           <header class="topbar">
-            <span>Bridge &amp; Ask</span>
-            <span>12 · Momentum Bridge</span>
+            <span>Ask</span>
+            <span>13 · The Raise</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
-              <h2>₹4 Cr Momentum Bridge — Plan &amp; Ask</h2>
-              <p class="hero-proof">
-                ₹4 Cr bridge to scale from ₹1.03 Cr → ~₹5 Cr ARR; finish SOC-2 I → II and standardise India/GCC VPC kits.
+              <h2>The Raise — ₹ 4 Cr Momentum Bridge (Convertible)</h2>
+            <p class="hero-proof">
+                12-month bridge to fund ARR growth, SOC-2 Type II, and dual VPC footprints.
+                <span class="info-help">
+                  <button class="info-trigger" type="button" data-info-target="info-soc2">
+                    <span aria-hidden="true">i</span>
+                    <span class="sr-only">What is SOC-2 Type II?</span>
+                  </button>
+                  <span class="info-popover" id="info-soc2" role="dialog" aria-modal="false" aria-hidden="true">
+                    <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
+                    <strong>SOC-2 Type II</strong>
+                    <span class="info-text">
+                      An independent audit over months (not a single day) that signs off our security and reliability controls for BFSI and vendor risk teams.
+                    </span>
+                  </span>
+                </span>
               </p>
-              <p>Instrument: standard seed convertible; targeting 3–5 partners.</p>
 
-              <div class="milestone-bar" data-milestone="arr" data-current="1.03" data-target="15">
-                <span>ARR today · ₹1.03 Cr</span>
+              <div class="milestone-bar" data-milestone="arr" data-current="0.68" data-target="15">
+                <span>ARR today</span>
                 <div class="milestone-track" tabindex="0">
-                  <div class="milestone-progress" style="--progress:7%;"></div>
+                  <div class="milestone-progress" style="--progress:4.54%;"></div>
                   <div class="milestone-tooltip" role="status" aria-live="polite"></div>
                 </div>
-                <span>Bridge milestone · ₹5 Cr ARR → path to ₹15 Cr</span>
+                <span>Target ₹ 15 Cr</span>
               </div>
             </div>
 
             <div class="split ask-grid">
-              <!-- LEFT: cheque + allocation -->
               <div class="card-block use-of-funds-card">
-                <h3>Use of funds (₹4 Cr)</h3>
+                <h3>Use of funds</h3>
                 <div class="use-chart" data-chart="use-of-funds">
                   <div class="use-bar" role="list" aria-label="Use of funds allocation"></div>
                   <div class="use-tooltip" role="status" aria-live="polite"></div>
@@ -4289,69 +4316,61 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- JS will populate; you can hard-code if you prefer -->
+                    <!-- Example static rows if you want to render without JS:
+                    <tr>
+                      <td>GTM</td>
+                      <td>BFSI/logistics pods, partners, and expansion into GCC accounts.</td>
+                    </tr>
+                    <tr>
+                      <td>Product</td>
+                      <td>Agentic validators, <strong>Recon Studio</strong> (reconciliation), <strong>DMS & Q&A</strong> add-ons, and a workflow marketplace.</td>
+                    </tr>
+                    <tr>
+                      <td>Compliance</td>
+                      <td>SOC-2 Type I → II, evidence automation, and vendor risk artefacts.</td>
+                    </tr>
+                    <tr>
+                      <td>Infra</td>
+                      <td>India + UAE/GCC VPC deployments with shared observability and SRE cover.</td>
+                    </tr>
+                    -->
                   </tbody>
                 </table>
-                <p class="funnel-note">
-                  GTM (40%) → 150+ customers · Product (35%) → Recon Studio, DMS/Q&amp;A, workflow marketplace ·
-                  Compliance (15%) → SOC-2 I → II and vendor risk artefacts · Infra (10%) → India + UAE/GCC VPC blueprints.
-                </p>
+                <p class="funnel-note">GTM (40%) → 150+ customers · Product (35%) → Recon Studio, DMS/Q&amp;A, workflow marketplace · Compliance (15%) → SOC-2 I → II · Infra (10%) → India + UAE/GCC VPC blueprints.</p>
+                <!-- <p class="funnel-note">
+                  Split across GTM, product, compliance, and infra to deliver the 12-month bridge plan.
+                </p> -->
               </div>
 
-              <!-- RIGHT: 12-month plan & outcomes -->
-              <div class="card-block bridge-card">
-                <h3>12-month plan &amp; outcomes</h3>
-                <div class="bridge-roadmap">
-                  <ul class="bridge-summary-list">
-                    <li>
-                      <strong>Revenue engine <span class="delta-chip baseline">ARR &amp; GTM pods</span></strong>
-                      <p>Grow from ₹1.03 Cr to ~₹5 Cr ARR, deepen into existing logos, and bend burn multiple toward ≤1×.</p>
-                    </li>
-                    <li>
-                      <strong>Product <span class="delta-chip baseline">Recon, workspace &amp; Q&amp;A</span></strong>
-                      <p>Ship three monetisable modules beyond core IDP — Recon Studio, document workspace, and Q&amp;A/search.</p>
-                    </li>
-                    <li>
-                      <strong>Compliance + residency <span class="delta-chip baseline">SOC-2 &amp; VPC kits</span></strong>
-                      <p>Complete SOC-2 Type I, run the Type II audit, and standardise India &amp; GCC VPC blueprints.</p>
-                    </li>
-                    <li>
-                      <strong>Operations <span class="delta-chip baseline">Pods &amp; SRE</span></strong>
-                      <p>Shared SRE + validator squad targeting near-100% agentic accuracy on the top 5 flows.</p>
-                    </li>
-                  </ul>
-                </div>
-
-                <!-- <h3>By December 2026</h3>
+              <div class="card-block">
+                <h3>Outcome by December 2026</h3>
                 <ul class="list">
-                  <li>₹ 15 Cr ARR run-rate, with ~₹5 Cr ARR proven during the bridge period.</li>
-                  <li>SOC-2 Type II completed and embedded into enterprise sales motions.</li>
-                  <li>Standardised India + GCC VPC footprints live with shared observability.</li>
+                  <li>₹ 15 Cr ARR run-rate.</li>
+                  <li>SOC-2 Type II completed.</li>
+                  <li>100% agentic accuracy on top-5 workflows.</li>
+                  <li>India + GCC VPC footprints live.</li>
                 </ul>
-
                 <div class="risk-card">
                   <strong>Not a science project</strong>
-                  <span>This bridge is for GTM, productisation, and compliance evidence — not long-horizon research.</span>
-                </div> -->
+                  <span>This bridge is not for long research; it is for ARR, compliance, and residency milestones.</span>
+                </div>
               </div>
             </div>
           </div>
-          <div class="footer">Slide 12 · Momentum Bridge &amp; Ask</div>
+          <div class="footer"><span>Slide 13 · The Ask</span></div>
         </section>
 
-
-
-        <!-- Slide 13 -->
-        <section class="slide slide-01a" data-title="Next Steps" data-slide-number="13">
+        <!-- Slide 14 -->
+        <section class="slide slide-01a" data-title="Next Steps">
           <header class="topbar">
-            <span>Next Steps</span>
-            <span>13 · Next Steps</span>
+            <span>The Raise &amp; How We Partner</span>
+            <span>14 · Next Steps</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
               <h2>The Raise &amp; How We Partner</h2>
               <p class="hero-proof">We’re looking for 3–5 partners to complete this ₹4 Cr bridge.</p>
-              <p>Inviting a small set of partners for a 12-month Momentum Bridge as we institutionalize agentic DocumentOps for BFSI and logistics.</p>
+              <p>We’re inviting a small set of partners to participate in a 12-month Momentum Bridge as we institutionalize agentic DocumentOps for BFSI and logistics.</p>
             </div>
             <div class="split">
               <div class="card-block">
@@ -4359,7 +4378,7 @@
                 <ul class="list">
                   <li><strong>30-minute working session (this week)</strong><br>Walk through Fracto’s go-to-market, compliance roadmap, and bridge milestones.</li>
                   <li><strong>Tailored deep dive</strong><br>Share your priority workflows and questions in advance so we can preload proof points, sample flows, and relevant case studies.</li>
-                  <li><strong>Diligence and closing path</strong><br>Align on a diligence plan and follow-up cadence targeting a 12-month Momentum Bridge close by <strong>December ’25</strong>.</li>
+                  <li><strong>Diligence and closing path</strong><br>Align on a diligence plan and follow-up cadence targeting a Momentum Bridge close by <strong>December ’25</strong>.</li>
                 </ul>
               </div>
               <div class="card-block">
@@ -4373,7 +4392,7 @@
               </div>
             </div>
           </div>
-          <div class="footer"><span>Slide 13 · Next Steps</span><span class="footer-badge">Agentic Document Ops Era</span></div>
+          <div class="footer"><span>Slide 14 · Close</span><span class="footer-badge">Agentic Document Ops Era</span></div>
         </section>
 
       </div>
@@ -4478,62 +4497,25 @@
     (function(){
       const lineChartStates = [];
       const charts = [
-        // Operating loss + revenue + expenses (multi-line)
+        // Operating loss (line)
         {
           selector: '[data-chart="operating-loss"]',
-          type: 'line-multi',
-          axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
-          series: [
-            {
-              key: 'operating-loss',
-              label: 'Operating loss',
-              color: '#1d4ed8',
-              formatter: formatCurrencyShort,
-              data: [
-                { quarter: 'Apr-25', value: 1708070 },
-                { quarter: 'May-25', value: 1916331 },
-                { quarter: 'Jun-25', value: 1289248 },
-                { quarter: 'Jul-25', value: 1429711 },
-                { quarter: 'Aug-25', value: 1481344 },
-                { quarter: 'Sep-25', value: 1373502 },
-                { quarter: 'Oct-25', value: 1331319 },
-                { quarter: 'Nov-25', value: 924073 },
-              ],
-            },
-            {
-              key: 'revenue',
-              label: 'Revenue',
-              color: '#34d399',
-              formatter: formatCurrencyShort,
-              data: [
-                { quarter: 'Apr-25', value: 139862 },
-                { quarter: 'May-25', value: 172387 },
-                { quarter: 'Jun-25', value: 156106 },
-                { quarter: 'Jul-25', value: 404396 },
-                { quarter: 'Aug-25', value: 420344 },
-                { quarter: 'Sep-25', value: 449326 },
-                { quarter: 'Oct-25', value: 608571 },
-                { quarter: 'Nov-25', value: 857000 },
-              ],
-            },
-            {
-              key: 'expenses',
-              label: 'Expenses',
-              color: '#f97316',
-              formatter: formatCurrencyShort,
-              data: [
-                { quarter: 'Apr-25', value: 1847932 },
-                { quarter: 'May-25', value: 2088718 },
-                { quarter: 'Jun-25', value: 1445354 },
-                { quarter: 'Jul-25', value: 1834107 },
-                { quarter: 'Aug-25', value: 1901688 },
-                { quarter: 'Sep-25', value: 1822828 },
-                { quarter: 'Oct-25', value: 1939890 },
-                { quarter: 'Nov-25', value: 1781038 },
-              ],
-            },
+          type: 'line',
+          lineColor: '#1d4ed8',
+          data: [
+            { quarter: 'Apr-25', value: 1708070 },
+            { quarter: 'May-25', value: 1916331 },
+            { quarter: 'Jun-25', value: 1289248 },
+            { quarter: 'Jul-25', value: 1429711 },
+            { quarter: 'Aug-25', value: 1481344 },
+            { quarter: 'Sep-25', value: 1373502 },
+            { quarter: 'Oct-25', value: 1331319 },
+            { quarter: 'Nov-25', value: 924073 },
           ],
+          axis: [2000000, 1700000, 1400000, 1100000, 900000],
           tooltipSuffix: '',
+          shortFormatter: (value) => formatCurrencyShort(value),
+          fullFormatter: (value) => `₹ ${formatFull(Math.round(value))}`,
           meta: false,
         },
 
@@ -4611,30 +4593,17 @@
           // highlightLabel: 'Record quarter',
         },
 
-        // Companies onboarded (line)
+        // Companies onboarded (bars)
         {
           selector: '[data-chart="companies"]',
-          type: 'line',
-          lineColor: '#34d399',
           data: [
-            { quarter: 'Sep 2024', value: 1 },
-            { quarter: 'Oct 2024', value: 1 },
-            { quarter: 'Nov 2024', value: 5 },
-            { quarter: 'Dec 2024', value: 3 },
-            { quarter: 'Jan 2025', value: 0 },
-            { quarter: 'Feb 2025', value: 5 },
-            { quarter: 'Mar 2025', value: 3 },
-            { quarter: 'Apr 2025', value: 1 },
-            { quarter: 'May 2025', value: 3 },
-            { quarter: 'Jun 2025', value: 4 },
-            { quarter: 'Jul 2025', value: 6 },
-            { quarter: 'Aug 2025', value: 6 },
-            { quarter: 'Sep 2025', value: 10 },
-            { quarter: 'Oct 2025', value: 4 },
-            { quarter: 'Nov 2025', value: 12 },
+            { quarter: '2024-Q4', value: 10, color: '#5b8def' },
+            { quarter: '2025-Q1', value: 8,  color: '#f5c84c' },
+            { quarter: '2025-Q2', value: 8,  color: '#34d399' },
+            { quarter: '2025-Q3', value: 22, color: '#c084fc' },
           ],
-          maxValue: 14,
-          axis: [14, 10, 6, 2, 0],
+          maxValue: 24,
+          axis: [24, 18, 12, 6, 0],
           tooltipSuffix: ' companies onboarded',
           shortFormatter: (value) => value.toString(),
           fullFormatter: (value) => new Intl.NumberFormat('en-US').format(value),
@@ -4658,10 +4627,6 @@
         const metaEl = root.querySelector('.chart-meta');
         const formatShortValue = cfg.shortFormatter || formatShort;
         const formatFullValue = cfg.fullFormatter || formatFull;
-        if (cfg.type === 'line-multi') {
-          buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl });
-          return;
-        }
         const dataset = cfg.data || [];
         if (cfg.type === 'line') {
           buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue });
@@ -4740,9 +4705,6 @@
       function buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue }) {
         if (!barsEl) return;
         const dataset = cfg.data || [];
-        const formatShortValue = cfg.shortFormatter || formatCurrencyShort;
-        const suffix = cfg.tooltipSuffix || '';
-        const showXAxis = cfg.showXAxis === true;
         const values = dataset.map(point => point.value);
         const datasetMax = values.length ? Math.max(...values) : 0;
         const axisSteps = cfg.axisSteps ?? 4;
@@ -4843,22 +4805,10 @@
         const overlay = document.createElement('div');
         overlay.className = 'line-hit-layer';
         overlay.style.setProperty('--points', points.length || 1);
-        overlay.style.height = `${viewHeight}px`;
-        overlay.style.top = '0';
-        overlay.style.bottom = 'auto';
-        overlay.style.left = '0';
-        overlay.style.right = '0';
         overlay.innerHTML = points.map((pt, index) => `
           <button class="line-hit" type="button" data-index="${index}" aria-label="${pt.displayQuarter}: ${pt.displayValue}${cfg.tooltipSuffix || ''}"></button>
         `).join('');
         barsEl.appendChild(overlay);
-
-        if (showXAxis) {
-          const xAxis = document.createElement('div');
-          xAxis.className = 'line-x-axis';
-          xAxis.innerHTML = points.map(pt => `<span>${pt.displayQuarter}</span>`).join('');
-          barsEl.appendChild(xAxis);
-        }
 
         const state = {
           points,
@@ -4867,151 +4817,13 @@
           padding,
           tooltip,
           wrapper,
-          suffix,
+          suffix: cfg.tooltipSuffix || '',
           svg: barsEl.querySelector('.line-chart-svg'),
           cursor: barsEl.querySelector('.line-cursor'),
           activeIndex: null,
-          formatShortValue,
         };
-        lineChartStates.push({ container: barsEl, state, render: (idx) => showLineHover(state, idx) });
+        lineChartStates.push({ container: barsEl, state });
         attachLineHover(barsEl, overlay, state);
-      }
-
-      function buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl }) {
-        if (!barsEl) return;
-        const seriesList = (cfg.series || [])
-          .map(series => ({
-            ...series,
-            label: series.label || series.key || 'Series',
-            color: series.color || cfg.lineColor || '#5b8def',
-            formatter: series.formatter || cfg.valueFormatter || formatCurrencyShort,
-            data: series.data || [],
-          }))
-          .filter(series => series.data.length);
-        if (!seriesList.length) return;
-
-        const labels = [];
-        seriesList.forEach(series => {
-          series.data.forEach(entry => {
-            const label = entry.quarter || entry.label;
-            if (label && !labels.includes(label)) labels.push(label);
-          });
-        });
-
-        const allValues = seriesList.flatMap(series => series.data.map(point => point.value)).filter(value => isFinite(value));
-        const datasetMax = allValues.length ? Math.max(...allValues) : 0;
-        const axisSteps = cfg.axisSteps ?? 4;
-        let scaleMax = cfg.maxValue || datasetMax || 1;
-        let axisValues = cfg.axis;
-        let scaleMin;
-
-        if (!axisValues || !axisValues.length) {
-          scaleMax = computeNiceCeiling(scaleMax);
-          axisValues = buildAxisValues(scaleMax, axisSteps);
-          scaleMin = cfg.axisMin ?? 0;
-        } else {
-          scaleMax = axisValues[0] || scaleMax;
-          scaleMin = cfg.axisMin ?? axisValues[axisValues.length - 1] ?? 0;
-        }
-        const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
-
-        if (axisEl && axisValues) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
-        }
-
-        const viewWidth = Math.max(700, labels.length * 65);
-        const viewHeight = 230;
-        const padding = { top: 12, right: 18, bottom: 28, left: 12 };
-        const innerWidth = viewWidth - padding.left - padding.right;
-        const innerHeight = viewHeight - padding.top - padding.bottom;
-        const step = labels.length > 1 ? innerWidth / (labels.length - 1) : innerWidth / 2;
-
-        const seriesPoints = seriesList.map(series => {
-          const valueMap = series.data.reduce((acc, entry) => {
-            const label = entry.quarter || entry.label;
-            if (label != null) acc[label] = entry.value;
-            return acc;
-          }, {});
-          const points = labels.map((label, index) => {
-            const value = valueMap[label];
-            const ratio = scaleMax ? clamp(((value ?? 0) - scaleMin) / range, 0, 1) : 0;
-            const x = padding.left + (labels.length > 1 ? step * index : innerWidth / 2);
-            const y = padding.top + (1 - ratio) * innerHeight;
-            return { label, value, x, y, formatter: series.formatter };
-          });
-          return { ...series, points };
-        });
-
-        const paths = seriesPoints.map(series => {
-          const pathD = buildSmoothPath(series.points);
-          if (!pathD) return '';
-          return `<path class="line-path" data-series="${series.key || series.label}" d="${pathD}" style="--line-color:${series.color}; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.18));"></path>`;
-        }).join('');
-
-        const firstX = seriesPoints[0]?.points[0]?.x ?? padding.left;
-
-        barsEl.classList.add('line-chart');
-        barsEl.innerHTML = `
-          <svg class="line-chart-svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="none">
-            <g class="line-grid">
-              ${axisValues.map(value => {
-                const ratio = scaleMax ? clamp((value - scaleMin) / range, 0, 1) : 0;
-                const y = padding.top + (1 - ratio) * innerHeight;
-                return `<line x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
-              }).join('')}
-            </g>
-            ${paths}
-            <line class="line-cursor" x1="${firstX.toFixed(2)}" x2="${firstX.toFixed(2)}" y1="${padding.top}" y2="${viewHeight - padding.bottom}"></line>
-          </svg>
-        `;
-
-        if (axisEl) {
-          axisEl.style.paddingTop = `${padding.top}px`;
-          axisEl.style.paddingBottom = `${padding.bottom}px`;
-        }
-
-        if (metaEl && cfg.meta === false) {
-          metaEl.remove();
-        }
-
-        const combinedPoints = labels.map((label, index) => {
-          const entries = seriesPoints.map(series => {
-            const point = series.points[index];
-            return {
-              label: series.label,
-              value: point?.value,
-              color: series.color,
-              formatter: series.formatter || formatCurrencyShort,
-              y: point?.y,
-            };
-          });
-          const yPositions = entries.map(entry => entry?.y).filter(value => isFinite(value));
-          const anchorY = yPositions.length ? Math.min(...yPositions) : padding.top + innerHeight;
-          const x = seriesPoints[0]?.points[index]?.x ?? (padding.left + (labels.length > 1 ? step * index : innerWidth / 2));
-          return { label, displayQuarter: formatQuarterDisplay(label), x, anchorY, entries };
-        });
-
-        const overlay = document.createElement('div');
-        overlay.className = 'line-hit-layer';
-        overlay.style.setProperty('--points', combinedPoints.length || 1);
-        overlay.innerHTML = combinedPoints.map((pt, index) => `
-          <button class="line-hit" type="button" data-index="${index}" aria-label="${pt.displayQuarter}"></button>
-        `).join('');
-        barsEl.appendChild(overlay);
-
-        const state = {
-          points: combinedPoints,
-          viewWidth,
-          viewHeight,
-          padding,
-          tooltip,
-          wrapper,
-          svg: barsEl.querySelector('.line-chart-svg'),
-          cursor: barsEl.querySelector('.line-cursor'),
-          activeIndex: null,
-        };
-        lineChartStates.push({ container: barsEl, state, render: (idx) => showMultiLineHover(state, idx) });
-        attachMultiLineHover(barsEl, overlay, state);
       }
 
       function buildSmoothPath(points) {
@@ -5064,38 +4876,6 @@
         container.addEventListener('mouseleave', () => hideLineHover(state));
       }
 
-      function attachMultiLineHover(container, overlay, state) {
-        const handleClientX = (clientX) => {
-          if (clientX == null) return;
-          const index = findNearestPointIndex(state, clientX, container);
-          if (index != null) showMultiLineHover(state, index);
-        };
-
-        overlay?.addEventListener('mousemove', (e) => handleClientX(e.clientX));
-        overlay?.addEventListener('mouseenter', (e) => handleClientX(e.clientX));
-        overlay?.addEventListener('mouseleave', () => hideLineHover(state));
-        overlay?.addEventListener('touchstart', (e) => {
-          if (!e.touches?.length) return;
-          handleClientX(e.touches[0].clientX);
-        }, { passive: true });
-        overlay?.addEventListener('touchmove', (e) => {
-          if (!e.touches?.length) return;
-          handleClientX(e.touches[0].clientX);
-        }, { passive: true });
-        overlay?.addEventListener('touchend', () => hideLineHover(state));
-        overlay?.addEventListener('touchcancel', () => hideLineHover(state));
-
-        overlay?.querySelectorAll('.line-hit').forEach(btn => {
-          const index = parseInt(btn.dataset.index, 10);
-          if (Number.isNaN(index)) return;
-          btn.addEventListener('focus', () => showMultiLineHover(state, index));
-          btn.addEventListener('click', () => showMultiLineHover(state, index));
-          btn.addEventListener('blur', () => hideLineHover(state));
-        });
-
-        container.addEventListener('mouseleave', () => hideLineHover(state));
-      }
-
       function findNearestPointIndex(state, clientX, container) {
         const rect = container.getBoundingClientRect();
         if (!rect.width) return null;
@@ -5117,10 +4897,9 @@
         if (!point || !state.tooltip || !state.wrapper) return;
         state.activeIndex = index;
         const { tooltip, wrapper, svg, cursor, viewWidth, viewHeight, padding } = state;
-        const shortFormatter = state.formatShortValue || formatCurrencyShort;
-        const valueLabel = `${shortFormatter(point.value)}${state.suffix || ''}`;
+        const shortValue = formatCurrencyShort(point.value);
         const changeLabel = point.momLabel || 'base';
-        tooltip.textContent = `${point.displayQuarter} · ${valueLabel}${changeLabel ? ` (${changeLabel})` : ''}`;
+        tooltip.textContent = `${point.displayQuarter} · ${shortValue}${changeLabel ? ` (${changeLabel})` : ''}`;
         const wrapRect = wrapper.getBoundingClientRect();
         const svgRect = svg?.getBoundingClientRect();
         if (!svgRect || !wrapRect.width || !wrapRect.height) return;
@@ -5143,55 +4922,15 @@
         }
       }
 
-      function showMultiLineHover(state, index) {
-        const point = state.points[index];
-        if (!point || !state.tooltip || !state.wrapper) return;
-        state.activeIndex = index;
-        const { tooltip, wrapper, svg, cursor, viewWidth, viewHeight, padding } = state;
-        const wrapRect = wrapper.getBoundingClientRect();
-        const svgRect = svg?.getBoundingClientRect();
-        if (!svgRect || !wrapRect.width || !wrapRect.height) return;
-        const scaleX = svgRect.width / viewWidth;
-        const scaleY = svgRect.height / viewHeight;
-        const anchorLeft = (point.x * scaleX) + (svgRect.left - wrapRect.left);
-        const anchorTop = (point.anchorY * scaleY) + (svgRect.top - wrapRect.top);
-        tooltip.innerHTML = `
-          <strong>${point.displayQuarter}</strong>
-          <ul class="line-tooltip-list">
-            ${point.entries.map(entry => `
-              <li>
-                <span class="legend-dot" style="--dot-color:${entry.color};"></span>
-                <span class="series-label">${entry.label}</span>
-                <span class="series-value">${entry.value != null ? entry.formatter(entry.value) : '—'}</span>
-              </li>
-            `).join('')}
-          </ul>
-        `;
-        tooltip.classList.add('visible', 'multi');
-        const width = tooltip.offsetWidth || 0;
-        const height = tooltip.offsetHeight || 0;
-        tooltip.style.left = `${clamp(anchorLeft - width / 2, 0, wrapRect.width - width)}px`;
-        tooltip.style.top = `${clamp(anchorTop - height - 12, 0, wrapRect.height - height)}px`;
-
-        if (cursor) {
-          cursor.setAttribute('x1', point.x.toFixed(2));
-          cursor.setAttribute('x2', point.x.toFixed(2));
-          cursor.setAttribute('y1', padding.top.toFixed(2));
-          cursor.setAttribute('y2', (viewHeight - padding.bottom).toFixed(2));
-          cursor.classList.add('visible');
-        }
-      }
-
       function hideLineHover(state) {
         state.tooltip?.classList.remove('visible');
-        state.tooltip?.classList.remove('multi');
         state.cursor?.classList.remove('visible');
       }
 
       window.addEventListener('resize', () => {
-        lineChartStates.forEach(({ state, render }) => {
-          if (state.activeIndex != null && typeof render === 'function') {
-            render(state.activeIndex);
+        lineChartStates.forEach(({ state }) => {
+          if (state.activeIndex != null) {
+            showLineHover(state, state.activeIndex);
           }
         });
       });
