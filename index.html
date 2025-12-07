@@ -1166,6 +1166,27 @@
       gap: 6px;
       box-shadow: var(--card-shadow-sm);
     }
+    .stat-card.compact-stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+    }
+    .stat-card.compact-stat strong,
+    .stat-card.compact-stat span {
+      display: inline;
+      margin: 0;
+    }
+    .stat-card.compact-stat strong {
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      margin-right: 6px;
+      color: var(--fg);
+    }
+    .stat-card.compact-stat .stat-label {
+      font-size: 14px;
+      color: var(--muted);
+    }
     /* Cover slide snapshots: hide icons for a cleaner first impression */
     .slide[data-title="Documents → Decisions"] .stat-card .stat-icon {
       display: none;
@@ -3578,10 +3599,85 @@
         </section>
 
         <!-- Slide 4 -->
-        <section class="slide slide-01a" data-title="What We Do" data-slide-number="04">
+        <section class="slide slide-01a" data-title="Market Opportunity" data-slide-number="04">
+          <header class="topbar">
+            <span>Market</span>
+            <span>04 · Market Opportunity</span>
+          </header>
+          <div class="slide-body">
+            <div class="slide-head">
+              <h2>Industry Size &amp; Growth — India, GCC, Global</h2>
+              <p class="hero-proof">Agentic DocumentOps rides a $15B+ document automation market compounding 18–30%.</p>
+              <p>Residency, regulation, and write-back demand are accelerating refresh cycles in India and the GCC.</p>
+            </div>
+            <div class="split split-2-1">
+              <div class="card-block">
+                <h3>Market size snapshot</h3>
+                <div class="stat-grid">
+                  <div class="stat-card compact-stat">
+                    <div class="stat-icon">🇮🇳</div>
+                    <div>
+                      <strong>$0.9B</strong>
+                      <span class="stat-label">India Intelligent Document Processing/DocOps spend (’25e)</span>
+                    </div>
+                  </div>
+                  <div class="stat-card compact-stat">
+                    <div class="stat-icon">🇦🇪</div>
+                    <div>
+                      <strong>$0.6B</strong>
+                      <span class="stat-label">GCC document automation (’25e)</span>
+                    </div>
+                  </div>
+                  <div class="stat-card compact-stat">
+                    <div class="stat-icon">🌍</div>
+                    <div>
+                      <strong>$15–17B</strong>
+                      <span class="stat-label">Global document automation TAM (’25e)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-block">
+                <h3>CAGR &amp; spend focus</h3>
+                <table class="mini-table">
+                  <thead>
+                    <tr>
+                      <th>Region</th>
+                      <th>’25 → ’28 CAGR</th>
+                      <th>Primary spenders</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>India</td>
+                      <td>25–30%</td>
+                      <td>NBFCs, banks, logistics PoD / LR</td>
+                    </tr>
+                    <tr>
+                      <td>GCC</td>
+                      <td>22–26%</td>
+                      <td>UAE / KSA payroll, logistics, trade</td>
+                    </tr>
+                    <tr>
+                      <td>Global</td>
+                      <td>18–20%</td>
+                      <td>Enterprise IDP refresh + write-back</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p class="problem-footnote">Estimates for document automation / IDP spend in regulated BFSI and logistics workflows.</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer">Slide 04 · Market Opportunity</div>
+        </section>
+
+
+        <!-- Slide 5 -->
+        <section class="slide slide-01a" data-title="What We Do" data-slide-number="05">
           <header class="topbar">
             <span>What We Do</span>
-            <span>04 · What We Do</span>
+            <span>05 · What We Do</span>
           </header>
 
           <div class="slide-body">
@@ -3645,15 +3741,15 @@
             </div>
           </div>
 
-          <div class="footer">Slide 04 · What We Do</div>
+          <div class="footer">Slide 05 · What We Do</div>
         </section>
 
 
-        <!-- Slide 5 -->
-        <section class="slide slide-01a" data-title="Traction · Adoption" data-slide-number="05">
+        <!-- Slide 6 -->
+        <section class="slide slide-01a" data-title="Traction · Adoption" data-slide-number="06">
           <header class="topbar">
             <span>Traction · Adoption</span>
-            <span>05 · Customer Traction</span>
+            <span>06 · Customer Traction</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
@@ -3795,14 +3891,14 @@
 
             </div>
           </div>
-          <div class="footer">Slide 05 · Traction — Customers</div>
+          <div class="footer">Slide 06 · Traction — Customers</div>
         </section>
 
-        <!-- Slide 6 -->
-        <section class="slide slide-01a" data-title="Traction · Usage" data-slide-number="06">
+        <!-- Slide 7 -->
+        <section class="slide slide-01a" data-title="Traction · Usage" data-slide-number="07">
           <header class="topbar">
             <span>Traction · Usage</span>
-            <span>06 · Usage &amp; Revenue</span>
+            <span>07 · Usage &amp; Revenue</span>
           </header>
           <div class="slide-body">
             <div class="slide-head">
@@ -3903,14 +3999,14 @@
 
             </div>
           </div>
-          <div class="footer">Slide 06 · Traction — Usage</div>
+          <div class="footer">Slide 07 · Traction — Usage</div>
         </section>
 
-        <!-- Slide 7 -->
-        <section class="slide slide-01a" data-title="Why We Win" data-slide-number="07">
+        <!-- Slide 8 -->
+        <section class="slide slide-01a" data-title="Why We Win" data-slide-number="08">
           <header class="topbar">
             <span>Why We Win</span>
-            <span>07 · Defensibility</span>
+            <span>08 · Defensibility</span>
           </header>
 
           <div class="slide-body">
@@ -4010,14 +4106,14 @@
 
           </div>
 
-          <div class="footer">Slide 07 · Advantage</div>
+          <div class="footer">Slide 08 · Advantage</div>
         </section>
 
-        <!-- Slide 8 -->
-        <section class="slide slide-01a" data-title="Pricing &amp; Unit Economics" data-slide-number="08">
+        <!-- Slide 9 -->
+        <section class="slide slide-01a" data-title="Pricing &amp; Unit Economics" data-slide-number="09">
           <header class="topbar">
             <span>Pricing &amp; Unit Economics</span>
-            <span>08 · Business Model</span>
+            <span>09 · Business Model</span>
           </header>
 
           <div class="slide-body">
@@ -4095,14 +4191,14 @@
             </div>
           </div>
 
-          <div class="footer">Slide 08 · Pricing &amp; Unit Economics</div>
+          <div class="footer">Slide 09 · Pricing &amp; Unit Economics</div>
         </section>
 
-        <!-- Slide 9 -->
-        <section class="slide slide-01a" data-title="Operational Efficiency" data-slide-number="09">
+        <!-- Slide 10 -->
+        <section class="slide slide-01a" data-title="Operational Efficiency" data-slide-number="10">
           <header class="topbar">
             <span>Operational Efficiency</span>
-            <span>09 · Efficiency &amp; Leverage</span>
+            <span>10 · Efficiency &amp; Leverage</span>
           </header>
 
           <div class="slide-body">
@@ -4176,7 +4272,7 @@
             </div>
           </div>
 
-          <div class="footer">Slide 09 · Operational efficiency</div>
+          <div class="footer">Slide 10 · Operational efficiency</div>
         </section>
 
         <!-- Slide 11 -->
