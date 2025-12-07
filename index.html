@@ -1125,6 +1125,17 @@
       align-items: center;
       margin-top: 6px;
     }
+    .contact-card {
+      display: grid;
+      gap: 10px;
+      text-align: left;
+      align-items: center;
+      align-content: center;
+      justify-items: start;
+    }
+    .contact-card .hero-actions {
+      justify-content: flex-start;
+    }
     .cta-btn {
       padding: 10px 18px;
       border-radius: 999px;
@@ -3399,8 +3410,6 @@
           <div class="slide-body">
             <div class="slide-head">
               <h1>Documents → Decisions in 30 Seconds</h1>
-              <p>Fracto turns messy BFSI/logistics documents into system updates in under 30 seconds — no templates, fully compliant in India &amp; GCC.</p>
-              <!-- <p class="hero-proof">From ₹1.03 Cr → ₹5 Cr ARR in 12 months with agentic DocumentOps.</p> -->
               <p>
                 Agentic, template-less IDP
                 <span class="info-help" data-align="left">
@@ -3416,6 +3425,8 @@
                 </span>
                 that validates, reconciles, and writes back with India/UAE residency.
               </p>
+              <p>Fracto turns messy BFSI/logistics documents into system updates in under 30 seconds — no templates, fully compliant in India &amp; GCC.</p>
+              <!-- <p class="hero-proof">From ₹1.03 Cr → ₹5 Cr ARR in 12 months with agentic DocumentOps.</p> -->
             </div>
             <div class="split split-2-1">
               <div class="stat-grid hero-stats">
@@ -3427,7 +3438,7 @@
               <div class="stat-card">
                 <div class="stat-icon">🏢</div>
                 <strong>50+</strong>
-                <span>Customers live</span>
+                <span>Customers</span>
               </div>
               <div class="stat-card">
                 <div class="stat-icon">₹</div>
@@ -3461,7 +3472,7 @@
                   </li>
                   <li>Write-back automations turn documents into actions.</li>
                 </ul>
-                <p class="funnel-note">Bridge fuels ARR → ₹5 Cr, SOC-2 evidence, and dual residency with high STP.</p>
+                <!-- <p class="funnel-note">Bridge fuels ARR → ₹5 Cr, SOC-2 evidence, and dual residency with high STP.</p> -->
               </div>
             </div>
           </div>
@@ -3544,7 +3555,7 @@
                         <div>
                           <span class="timeline-year">2024 – 2025</span>
                           <p class="timeline-label">Buyers demand outcomes</p>
-                          <p class="timeline-note">RFPs explicitly ask for closed-loop ≥90% STP solutions, SOC2-style evidence, and GCC-ready residency—not point tools or spreadsheets.</p>
+                          <p class="timeline-note">RFPs explicitly ask for closed-loop &gt;95% STP solutions, SOC2-style evidence, and GCC-ready residency—not point tools or spreadsheets.</p>
                         </div>
                       </div>
                     </div>
@@ -3556,8 +3567,8 @@
                 <h3>What buyers now expect</h3>
                 <p class="expectation-subline">Agentic DocumentOps is becoming the default across India &amp; GCC.</p>
                 <ul class="expectation-list">
-                  <li>India &amp; GCC demand local VPCs, immutable audit logs, and STP ≥ 90%.</li>
-                  <li>RFPs explicitly ask for STP ≥90%, residency, and SOC-style evidence — not just OCR APIs.</li>
+                  <li>India &amp; GCC demand local VPCs, immutable audit logs, and STP &gt;95%.</li>
+                  <li>RFPs explicitly ask for STP &gt;95%, residency, and SOC-style evidence — not just OCR APIs.</li>
                 </ul>
                 <p class="compression-note">Reliability, regulation (DPDP, RBI localization, SOC2 expectations), and buying cycles now overlap — this combination means global IDP tools can’t clear compliance, and in-house builds take 18–24 months.</p>
               </div>
@@ -3576,8 +3587,8 @@
           <div class="slide-body">
             <div class="slide-head">
               <h2>What We Do — Agentic DocumentOps OS</h2>
-              <p>One queue, four stages, full telemetry — inbox to system update in ≤30 seconds.</p>
               <p class="hero-proof">Residency-first, closed-loop IDP for BFSI/logistics with validators and write-back in the box.</p>
+              <p>One queue, four stages, full telemetry — inbox to system update in ≤30 seconds.</p>
             </div>
 
             <div class="yc-solution-grid">
@@ -3588,7 +3599,7 @@
                 <ul class="list">
                   <li><strong>Unified inbox</strong> for email, APIs, WhatsApp, uploads.</li>
                   <li><strong>Vision-language extraction</strong> tuned for BFSI/logistics docs.</li>
-                  <li><strong>Policy + recon packs</strong> targeting ≥90% STP.</li>
+                  <li><strong>Policy + recon packs</strong> targeting &gt;95% STP.</li>
                   <li><strong>Native LOS/ERP/TMS write-back</strong> with full audit trails.</li>
                 </ul>
               </div>
@@ -3646,7 +3657,7 @@
           </header>
           <div class="slide-body">
             <div class="slide-head">
-              <h2>Traction — Customers & Deployments</h2>
+              <h2>Traction — Customer Adoption</h2>
               <p>More logos live → more recurring pages → more ARR.</p>
             </div>
             <!-- <div class="traction-hero-card">
@@ -3690,7 +3701,7 @@
                 <!-- </div> -->
                 <div class="traction-metric-grid">
                   <div class="traction-metric">
-                    <span class="traction-label">Customers live</span>
+                    <span class="traction-label">Customers</span>
                     <strong>50+</strong>
                     <p class="metric-subtext">Split across BFSI + logistics logos below.</p>
                     <!-- <strong>0 logo churn so far</strong> -->
@@ -3805,7 +3816,7 @@
                   <span class="info-popover" id="info-stp" role="dialog" aria-modal="false" aria-hidden="true">
                     <button class="info-close" type="button" data-info-close aria-label="Close info">×</button>
                     <strong>STP · Straight-through processing</strong>
-                    <span class="info-text">Measures the % of flows completed read → validate → write-back with no manual keying. Our regulated accounts target ≥90% STP so ops teams focus on true exceptions.</span>
+                    <span class="info-text">Measures the % of flows completed read → validate → write-back with no manual keying. Our regulated accounts target &gt;95% STP so ops teams focus on true exceptions.</span>
                   </span>
                 </span> &amp; Revenue Growth -->
               </h2>
@@ -3835,7 +3846,7 @@
               <div class="traction-metric">
                 <span class="traction-label">STP</span>
                 <strong>~92%</strong>
-                <p class="metric-subtext">Top-2 workflows consistently above 90%.</p>
+                <p class="metric-subtext">Top-2 workflows consistently above 95%.</p>
               </div>
               <div class="traction-metric">
                 <span class="traction-label">Gross margin</span>
@@ -3918,12 +3929,12 @@
                 </button>
                 <div class="info-popover" id="seed-buyer-expect" role="dialog">
                   <strong>Where this comes from</strong>
-                  <p>Based on 30+ RFPs/QBRs across BFSI/logistics in India + GCC: shortlist requirements now explicitly call for local VPC hosting, SOC evidence, validators, and ≥90% STP targets.</p>
+                  <p>Based on 30+ RFPs/QBRs across BFSI/logistics in India + GCC: shortlist requirements now explicitly call for local VPC hosting, SOC evidence, validators, and &gt;95% STP targets.</p>
                 </div>
               </div>
               <p class="expectation-subline">Agentic DocumentOps is already the default requirement.</p>
               <ul class="expectation-list">
-                <li>India + GCC buyers insist on local VPCs, immutable audit logs, and STP ≥ 90%.</li>
+                <li>India + GCC buyers insist on local VPCs, immutable audit logs, and STP &gt;95%.</li>
                 <li>Fracto is one of the first residency-ready, closed-loop IDPs focused on India &amp; GCC.</li>
               </ul>
               <p class="compression-note"><strong>Compression:</strong> reliability, regulation, and buying cycles have converged — teams need an audit-native, residency-ready IDP now, not in three years.</p>
@@ -3966,15 +3977,15 @@
 
                     <tr>
                       <td>STP performance</td>
-                      <td class="is-fracto"><strong>≥ 90% target</strong></td>
+                      <td class="is-fracto"><strong>&gt;95% target</strong></td>
                       <td>50–70%</td>
                     </tr>
 
-                    <tr>
+                    <!-- <tr>
                       <td>Time-to-live</td>
                       <td class="is-fracto">≤ 2 weeks</td>
                       <td>4–12 weeks</td>
-                    </tr>
+                    </tr> -->
 
                     <tr>
                       <td>Residency + compliance readiness</td>
@@ -4065,7 +4076,7 @@
                 <!-- <h3>Predictable base + usage</h3> -->
                 <p>Platform subscription plus packs that grow with pages and workflows.</p>
                 <ul class="pricing-points">
-                  <li>Base platform: orchestrator, APIs, audit trails, and 2 workflow agents.</li>
+                  <li>Base platform: orchestrator, APIs with audit trails.</li>
                   <li>Setup: connectors + validator tuning to launch the first document flows.</li>
                   <li>Agent packs: tiered per-page bundles (10k+ / month) that add capacity and agents.</li>
                   <li>Add-ons: validator, knowledge, and VPC/on-prem packs for compliance.</li>
@@ -4096,7 +4107,7 @@
 
           <div class="slide-body">
             <div class="slide-head">
-              <h2>Unit Economics — Gross Margin & Path to Break-even</h2>
+              <h2>Operational Efficiency — Path to Break-even</h2>
               <p class="hero-proof">0.53× burn at ~₹1 Cr ARR with line-of-sight to break-even on the path to ₹5 Cr ARR.</p>
               <p>Loss curve trending down as efficiency drives toward break-even.</p>
             </div>
@@ -4189,12 +4200,12 @@
                   <img src="Ankur.jpeg" alt="Ankur Gupta" class="team-photo">
                   <strong>Ankur Gupta</strong>
                   <span class="team-title">Co-founder &amp; CEO</span>
-                  <a class="team-link" href="https://www.linkedin.com/in/ankurgpta" target="_blank" rel="noopener">LinkedIn</a>
+                  <a class="team-link" href="https://www.linkedin.com/in/ankurguptaonly/" target="_blank" rel="noopener">LinkedIn</a>
                   <span>Product &amp; GTM · ex-Ruptok / ABL Workspaces</span>
                   <ul class="list">
                     <li>Multi-time founder; deep lending + ops experience.</li>
                     <li>Owns product, pricing, and founder-led sales.</li>
-                    <li>Grew Ruptok/ABL ops across cities with Cr-scale lending AUM.</li>
+                    <li>Grew ABL to 16 centres and Ruptok across 14 cities with 400 Cr disbursements.</li>
                   </ul>
                 </div>
 
@@ -4216,13 +4227,13 @@
                 <div class="stat-card team-card">
                   <img src="Tanishq.jpeg" alt="Tanishq Khurana" class="team-photo">
                   <strong>Tanishq Khurana</strong>
-                  <span class="team-title">Head of Sales · Founder’s Office</span>
-                  <a class="team-link" href="https://www.linkedin.com/in/tanishqkhurana" target="_blank" rel="noopener">LinkedIn</a>
-                  <span>Sales &amp; success · NBFC/logistics focus</span>
+                  <span class="team-title">Head of Sales</span>
+                  <a class="team-link" href="https://www.linkedin.com/in/tanishq-khurana-a1a125178/" target="_blank" rel="noopener">LinkedIn</a>
+                  <span>Sales &amp; success · ex-Razorpay / Deloitte</span>
                   <ul class="list">
                     <li>Drives new ARR and expansions end-to-end.</li>
-                    <li>Turns frontline signal into repeatable GTM playbooks.</li>
-                    <li>Closed 20+ NBFC/logistics logos in the last 12 months.</li>
+                    <li>Owns pipeline discipline, pricing, and GTM playbooks.</li>
+                    <li>Closed 50+ NBFC/logistics logos in the last 12 months.</li>
                   </ul>
                 </div>
 
@@ -4345,13 +4356,11 @@
                   <li><strong>Diligence and closing path</strong><br>Align on a diligence plan and follow-up cadence targeting a 12-month Momentum Bridge close by <strong>December ’25</strong>.</li>
                 </ul>
               </div>
-              <div class="card-block">
+              <div class="card-block contact-card">
                 <h3>Contact</h3>
-                <p><strong>Ankur Gupta · CEO</strong><br>ceo@fracto.tech · +91 98994 88100</p>
-                <p><strong>Data room / memo</strong><br>Available on request.</p>
-                <p><strong>Calendly</strong><br>Link on request for partner slots.</p>
+                <p><strong>Ankur Gupta · CEO</strong><br><a href="mailto:ceo@fracto.tech">ceo@fracto.tech</a> · +91 98994 88100</p>
                 <div class="hero-actions">
-                  <span>https://fracto.tech</span>
+                  <a class="team-link" href="https://fracto.tech" target="_blank" rel="noopener">fracto.tech</a>
                 </div>
               </div>
             </div>
