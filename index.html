@@ -152,6 +152,36 @@
       color: var(--fg);
       background: var(--hover);
     }
+    .session-tools {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .session-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .mini-btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 10px;
+      background: var(--panel-soft);
+      color: var(--fg);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+    .mini-btn:hover { background: var(--hover); }
+    .session-note {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .session-note.small { font-size: 11px; }
     .sr-only {
       position: absolute;
       width: 1px;
@@ -1186,6 +1216,45 @@
     .stat-card.compact-stat .stat-label {
       font-size: 14px;
       color: var(--muted);
+    }
+    .session-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.38);
+      display: grid;
+      place-items: center;
+      z-index: 120;
+    }
+    .session-modal {
+      width: min(420px, 90vw);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--card-shadow-lg);
+      display: grid;
+      gap: 12px;
+    }
+    .session-modal h3 { margin: 0; font-size: 18px; }
+    .session-modal p { margin: 0; color: var(--muted); font-size: 14px; }
+    .session-modal label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+    .session-modal input {
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 14px;
+      background: var(--panel-soft);
+      color: var(--fg);
+    }
+    .session-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .session-modal .primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
     }
     /* Cover slide snapshots: hide icons for a cleaner first impression */
     .slide[data-title="Documents → Decisions"] .stat-card .stat-icon {
@@ -3419,6 +3488,13 @@
       <ol class="nav-list" id="navList"></ol>
       <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>Dark theme</button>
       <div class="rail-meta">← / → to navigate · Press F for fullscreen · P to print.</div>
+      <div class="session-tools">
+        <div class="session-actions">
+          <button class="mini-btn" type="button" data-session="edit">Set viewer</button>
+          <button class="mini-btn" type="button" data-session="export">Export log</button>
+        </div>
+        <p class="session-note small">Name/email stay local; export JSON to add to Git.</p>
+      </div>
     </aside>
     <div class="deck-stage">
       <div class="deck" id="deck">
@@ -4349,7 +4425,7 @@
             <div class="slide-head">
               <h2>₹4 Cr Momentum Bridge — Plan &amp; Ask</h2>
               <p class="hero-proof">
-                ₹4 Cr bridge to scale from ₹1.03 Cr → ~₹5 Cr ARR; finish SOC-2 I → II and standardise India/GCC VPC kits.
+                ₹4 Cr bridge to scale from ₹1.03 Cr → ~₹15 Cr ARR; finish SOC-2 I → II and standardise India/GCC VPC kits.
               </p>
               <p>Instrument: standard seed convertible; targeting 3–5 partners.</p>
 
@@ -4470,6 +4546,27 @@
         <div class="progress"><i id="progress"></i></div>
         <button class="nav-btn primary" type="button" data-nav="next">Next →</button>
       </div>
+    </div>
+  </div>
+
+  <div class="session-backdrop" id="sessionBackdrop" hidden>
+    <div class="session-modal" role="dialog" aria-modal="true" aria-labelledby="sessionTitle">
+      <h3 id="sessionTitle">Who’s viewing this deck?</h3>
+      <p>Your name/email stay in this browser; export JSON if you want to save to the repo.</p>
+      <form id="sessionForm">
+        <label>
+          Name
+          <input type="text" name="viewerName" autocomplete="name" required>
+        </label>
+        <label>
+          Email
+          <input type="email" name="viewerEmail" autocomplete="email" required>
+        </label>
+        <div class="session-modal-actions">
+          <button class="mini-btn" type="button" data-session="cancel">Skip</button>
+          <button class="mini-btn primary" type="submit">Save</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -5730,6 +5827,20 @@
       const body = document.body;
       const buttons = document.querySelectorAll('[data-nav]');
       const deckRoot = document.querySelector('.deck');
+      const VIEWER_KEY = 'fracto-viewer';
+      const VIEW_LOG_KEY = 'fracto-view-log';
+      const sessionBackdrop = document.getElementById('sessionBackdrop');
+      const sessionForm = document.getElementById('sessionForm');
+      const editBtn = document.querySelector('[data-session="edit"]');
+      const exportBtn = document.querySelector('[data-session="export"]');
+      const cancelBtn = document.querySelector('[data-session="cancel"]');
+      const sessionState = {
+        viewer: loadViewer(),
+        log: null,
+        activeIndex: null,
+        slideStartedAt: Date.now(),
+      };
+      sessionState.log = loadLog(sessionState.viewer);
       const gestureState = {
         pointerId: null,
         startX: 0,
@@ -5804,8 +5915,90 @@
         window.scrollTo({ top: Math.max(0, y - mobileOffset), behavior: 'auto' });
       }
 
+      function loadViewer(){
+        try {
+          return JSON.parse(localStorage.getItem(VIEWER_KEY) || 'null');
+        } catch (e) {
+          return null;
+        }
+      }
+      function loadLog(viewer){
+        try {
+          const existing = JSON.parse(localStorage.getItem(VIEW_LOG_KEY) || 'null');
+          if (existing?.events) {
+            return { ...existing, viewerName: viewer?.name || existing.viewerName, viewerEmail: viewer?.email || existing.viewerEmail };
+          }
+        } catch (e) {}
+        return {
+          viewerName: viewer?.name || '',
+          viewerEmail: viewer?.email || '',
+          startedAt: new Date().toISOString(),
+          events: [],
+        };
+      }
+      function persistLog(){
+        localStorage.setItem(VIEW_LOG_KEY, JSON.stringify(sessionState.log));
+      }
+      function trackSlideTime(nextIndex){
+        const now = Date.now();
+        if (sessionState.activeIndex === null) {
+          sessionState.activeIndex = nextIndex;
+          sessionState.slideStartedAt = now;
+          return;
+        }
+        const duration = now - sessionState.slideStartedAt;
+        const slide = slides[sessionState.activeIndex];
+        sessionState.log.events.push({
+          slideNumber: sessionState.activeIndex + 1,
+          title: slide?.dataset.title || '',
+          ms: duration,
+          recordedAt: new Date().toISOString(),
+        });
+        sessionState.activeIndex = nextIndex;
+        sessionState.slideStartedAt = now;
+        persistLog();
+      }
+      function finalizeSession(){
+        if (sessionState.activeIndex != null) {
+          trackSlideTime(sessionState.activeIndex);
+        }
+        persistLog();
+      }
+      function openSessionModal(){
+        sessionBackdrop?.removeAttribute('hidden');
+        sessionBackdrop?.querySelector('input[name="viewerName"]')?.focus();
+      }
+      function closeSessionModal(){
+        sessionBackdrop?.setAttribute('hidden','true');
+      }
+      function updateViewer(name, email){
+        sessionState.viewer = { name, email };
+        sessionState.log.viewerName = name;
+        sessionState.log.viewerEmail = email;
+        localStorage.setItem(VIEWER_KEY, JSON.stringify(sessionState.viewer));
+        persistLog();
+      }
+      function exportLog(){
+        const totalMs = sessionState.log.events.reduce((sum, e) => sum + (e.ms || 0), 0);
+        const payload = {
+          ...sessionState.log,
+          totalMs,
+          totalMinutes: Number((totalMs / 60000).toFixed(2)),
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `fracto-view-log-${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+
       function show(i){
         if (i < 0 || i >= slides.length) return;
+        trackSlideTime(i);
         const currentActive = document.querySelector('.slide.active');
         currentActive?.classList.remove('active');
         idx = i;
@@ -5848,6 +6041,23 @@
           if (btn.dataset.nav === 'prev') show(idx - 1);
         });
       });
+
+      sessionForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(sessionForm);
+        const name = (formData.get('viewerName') || '').toString().trim();
+        const email = (formData.get('viewerEmail') || '').toString().trim();
+        if (!name || !email) return;
+        updateViewer(name, email);
+        closeSessionModal();
+      });
+      cancelBtn?.addEventListener('click', () => closeSessionModal());
+      editBtn?.addEventListener('click', () => openSessionModal());
+      exportBtn?.addEventListener('click', () => exportLog());
+      window.addEventListener('beforeunload', finalizeSession);
+      if (!sessionState.viewer?.name || !sessionState.viewer?.email) {
+        openSessionModal();
+      }
 
       window.addEventListener('keydown', (e) => {
         if(['ArrowRight','PageDown',' '].includes(e.key)) show(idx + 1);
