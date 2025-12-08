@@ -153,10 +153,7 @@
       background: var(--hover);
     }
     .session-tools {
-      border-top: 1px solid var(--border);
-      padding-top: 12px;
-      display: grid;
-      gap: 8px;
+      display: none;
     }
     .session-actions {
       display: flex;
@@ -1218,10 +1215,10 @@
       color: var(--muted);
     }
     .session-backdrop {
+      display: none !important;
       position: fixed;
       inset: 0;
       background: rgba(15,23,42,0.38);
-      display: grid;
       place-items: center;
       z-index: 120;
     }
@@ -4435,7 +4432,7 @@
                   <div class="milestone-progress" style="--progress:7%;"></div>
                   <div class="milestone-tooltip" role="status" aria-live="polite"></div>
                 </div>
-                <span>Bridge milestone · ₹5 Cr ARR → path to ₹15 Cr</span>
+                <span>Bridge milestone · path to ₹15 Cr ARR</span>
               </div>
             </div>
 
@@ -4525,7 +4522,7 @@
                 <ul class="list">
                   <li><strong>30-minute working session (this week)</strong><br>Walk through Fracto’s go-to-market, compliance roadmap, and bridge milestones.</li>
                   <li><strong>Tailored deep dive</strong><br>Share your priority workflows and questions in advance so we can preload proof points, sample flows, and relevant case studies.</li>
-                  <li><strong>Diligence and closing path</strong><br>Align on a diligence plan and follow-up cadence targeting a 12-month Momentum Bridge close by <strong>December ’25</strong>.</li>
+                  <li><strong>Diligence and closing path</strong><br>Align on a diligence plan and follow-up cadence targeting a 12-month Momentum Bridge.</li>
                 </ul>
               </div>
               <div class="card-block contact-card">
@@ -4556,11 +4553,11 @@
       <form id="sessionForm">
         <label>
           Name
-          <input type="text" name="viewerName" autocomplete="name" required>
+          <input type="text" name="viewerName" autocomplete="name">
         </label>
         <label>
           Email
-          <input type="email" name="viewerEmail" autocomplete="email" required>
+          <input type="email" name="viewerEmail" autocomplete="email">
         </label>
         <div class="session-modal-actions">
           <button class="mini-btn" type="button" data-session="cancel">Skip</button>
@@ -5965,8 +5962,13 @@
         persistLog();
       }
       function openSessionModal(){
-        sessionBackdrop?.removeAttribute('hidden');
-        sessionBackdrop?.querySelector('input[name="viewerName"]')?.focus();
+        if (!sessionBackdrop || !sessionForm) return;
+        const nameInput = sessionForm.querySelector('input[name="viewerName"]');
+        const emailInput = sessionForm.querySelector('input[name="viewerEmail"]');
+        if (nameInput && sessionState.viewer?.name) nameInput.value = sessionState.viewer.name;
+        if (emailInput && sessionState.viewer?.email) emailInput.value = sessionState.viewer.email;
+        sessionBackdrop.removeAttribute('hidden');
+        nameInput?.focus();
       }
       function closeSessionModal(){
         sessionBackdrop?.setAttribute('hidden','true');
@@ -5998,7 +6000,9 @@
 
       function show(i){
         if (i < 0 || i >= slides.length) return;
-        trackSlideTime(i);
+        if (sessionState?.log) {
+          try { trackSlideTime(i); } catch (err) { /* ignore tracking errors */ }
+        }
         const currentActive = document.querySelector('.slide.active');
         currentActive?.classList.remove('active');
         idx = i;
@@ -6042,22 +6046,36 @@
         });
       });
 
+      document.addEventListener('click', (e) => {
+        const actionEl = e.target.closest('[data-session]');
+        const action = actionEl?.dataset.session;
+        if (!action) return;
+        if (action === 'edit') openSessionModal();
+        else if (action === 'export') exportLog();
+        else if (action === 'cancel') {
+          updateViewer('Guest', '');
+          closeSessionModal();
+        }
+      });
+
       sessionForm?.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(sessionForm);
-        const name = (formData.get('viewerName') || '').toString().trim();
+        const name = (formData.get('viewerName') || '').toString().trim() || 'Guest';
         const email = (formData.get('viewerEmail') || '').toString().trim();
-        if (!name || !email) return;
         updateViewer(name, email);
         closeSessionModal();
       });
-      cancelBtn?.addEventListener('click', () => closeSessionModal());
-      editBtn?.addEventListener('click', () => openSessionModal());
-      exportBtn?.addEventListener('click', () => exportLog());
-      window.addEventListener('beforeunload', finalizeSession);
-      if (!sessionState.viewer?.name || !sessionState.viewer?.email) {
-        openSessionModal();
-      }
+      sessionBackdrop?.addEventListener('click', (e) => {
+        if (e.target === sessionBackdrop) {
+          updateViewer('Guest', '');
+          closeSessionModal();
+        }
+      });
+
+      window.addEventListener('beforeunload', () => {
+        try { finalizeSession(); } catch (err) { /* ignore */ }
+      });
 
       window.addEventListener('keydown', (e) => {
         if(['ArrowRight','PageDown',' '].includes(e.key)) show(idx + 1);
