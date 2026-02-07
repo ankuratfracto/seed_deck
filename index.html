@@ -1469,6 +1469,65 @@
       gap: 18px;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
+    .whatwedo-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: stretch;
+    }
+    @media (max-width: 760px) {
+      .whatwedo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media print {
+      .whatwedo-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      }
+    }
+    .whatwedo-card {
+      display: grid;
+      gap: 12px;
+    }
+    .whatwedo-card h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .whatwedo-card ul.list li {
+      font-size: 15px;
+    }
+    .baseline-flow.whatwedo-flow {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 0;
+    }
+    @media (max-width: 760px) {
+      .baseline-flow.whatwedo-flow {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media print {
+      .baseline-flow.whatwedo-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+    .whatwedo-flow .flow-step {
+      padding: 10px 12px 10px 44px;
+      gap: 4px;
+    }
+    .whatwedo-flow .flow-num {
+      top: 10px;
+      left: 10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 9px;
+    }
+    .whatwedo-flow .flow-title {
+      font-size: 11px;
+    }
+    .whatwedo-flow .flow-sub {
+      font-size: 12.5px;
+    }
     .yc-solution-card {
       display: grid;
       gap: 12px;
@@ -4309,95 +4368,59 @@
 
           <div class="slide-body">
 	            <div class="slide-head">
-	              <h2>What We Do — Workflow Automation for Document-heavy Ops</h2>
-	              <p class="hero-proof">Two products: IDP (ocr.fracto.tech) + Workflows (flows.fracto.tech: builder + marketplace + ops console).</p>
-	              <p>Define the workflow once; every run is traceable, testable (dry-run), and residency-safe.</p>
-	              <p class="compression-note"><strong>Agentic workflows:</strong> multi-step automation that uses AI + tools, with guardrails: tasks/approvals, audit logs, replay, and controlled write-back.</p>
-	              <p class="compression-note"><strong>flows.fracto.tech</strong> is our agentic workflow runtime: it orchestrates extraction + validators + human approvals into auditable, replayable runs that safely write back to systems-of-record.</p>
+	              <h2>Workflow Automation for Document-heavy Ops</h2>
+	              <p class="hero-proof">Two products: IDP (ocr.fracto.tech) + Workflows runtime (flows.fracto.tech).</p>
+	              <p class="compression-note">Closed-loop execution: intake → extract/validate → tasks/approvals → controlled write-back (LOS/ERP/TMS), with audit + residency.</p>
 	            </div>
 
-	            <div class="yc-solution-grid run-shot-layout">
-	              <div class="card-block yc-solution-card">
-	                <span class="yc-label">Proof (two wedges)</span>
-	                <h3>Closed-loop execution with controls</h3>
-	                <div class="wedge-proof-grid" role="list" aria-label="Two wedge proof cards">
-	                  <div class="wedge-proof-card" role="listitem">
-	                    <strong>NBFC underwriting</strong>
-	                    <ul class="list">
-	                      <li><strong>Cycle time:</strong> —</li>
-	                      <li><strong>STP:</strong> —</li>
-	                      <li><strong>Write-back:</strong> LOS updates with audit trail</li>
-	                    </ul>
+	            <div class="whatwedo-grid">
+	              <div class="card-block whatwedo-card">
+	                <span class="yc-label">Product</span>
+	                <h3>IDP + Workflows</h3>
+	                <ul class="list">
+	                  <li>Extract + validate with policy checks (VLMs + rules).</li>
+	                  <li>Route exceptions into tasks + approvals (not spreadsheets).</li>
+	                  <li>Write-back to LOS/ERP/TMS with audit + idempotency.</li>
+	                </ul>
+	              </div>
+
+	              <div class="card-block whatwedo-card">
+	                <span class="yc-label">How it works</span>
+	                <h3>4-step loop</h3>
+	                <div class="baseline-flow whatwedo-flow" aria-label="4-step loop: intake, parse and normalize, extract and validate, execute with write-back">
+	                  <div class="flow-step">
+	                    <span class="flow-num" aria-hidden="true">1</span>
+	                    <div class="flow-title">Intake</div>
+	                    <div class="flow-sub">Email/webhook/API → one workflow run.</div>
 	                  </div>
-	                  <div class="wedge-proof-card" role="listitem">
-	                    <strong>Logistics billing / compliance</strong>
-	                    <ul class="list">
-	                      <li><strong>Billing speed:</strong> —</li>
-	                      <li><strong>Exception rate:</strong> —</li>
-	                      <li><strong>Write-back:</strong> ERP/TMS updates with idempotency + audit</li>
-	                    </ul>
+	                  <div class="flow-step">
+	                    <span class="flow-num" aria-hidden="true">2</span>
+	                    <div class="flow-title">Parse + normalize</div>
+	                    <div class="flow-sub">PDFs → clean text + fields.</div>
+	                  </div>
+	                  <div class="flow-step">
+	                    <span class="flow-num" aria-hidden="true">3</span>
+	                    <div class="flow-title">Extract + validate</div>
+	                    <div class="flow-sub">Checks + exception routing.</div>
+	                  </div>
+	                  <div class="flow-step">
+	                    <span class="flow-num" aria-hidden="true">4</span>
+	                    <div class="flow-title">Execute</div>
+	                    <div class="flow-sub">Approvals → controlled write-back.</div>
 	                  </div>
 	                </div>
 	              </div>
 
-              <div class="card-block run-shot-card">
-                <span class="yc-label">Annotated run</span>
-                <p class="run-shot-blurb">Intake → extracted fields → exception → approval → write-back + audit</p>
-
-	                <div class="run-shot" role="img" aria-label="Annotated screenshot of a workflow run: intake, extracted fields, exception task, approval, and write-back with audit trail.">
-	                  <div class="run-shot-top">
-	                    <div>
-	                      <div class="run-shot-title">Workflow: NBFC underwriting · Example run</div>
-	                      <div class="run-shot-sub">Completed · 28s end-to-end · India VPC · immutable audit</div>
-	                    </div>
-                    <div class="run-stepper" aria-hidden="true">
-                      <span class="run-step done">Intake</span>
-                      <span class="run-step done">Extract</span>
-                      <span class="run-step done">Task</span>
-                      <span class="run-step done">Approval</span>
-                      <span class="run-step done">Write-back</span>
-                    </div>
-                  </div>
-
-                  <div class="run-shot-screen">
-                    <div class="run-shot-grid">
-                      <div class="run-pane compact">
-                        <div class="run-tag"><span class="run-tag-num">1</span> Intake</div>
-                        <div class="run-kv"><span>Source</span><strong>Email</strong></div>
-                        <div class="run-kv"><span>Attachment</span><strong>Application.pdf</strong></div>
-                        <div class="run-kv"><span>Received</span><strong>10:12:04</strong></div>
-                        <div class="run-pill">Normalizer: PDF → text + images</div>
-                      </div>
-
-                      <div class="run-pane">
-                        <div class="run-tag"><span class="run-tag-num">2</span> Extracted fields</div>
-                        <div class="run-fields">
-                          <div class="run-field"><span>Applicant</span><strong>Rahul Sharma</strong></div>
-                          <div class="run-field"><span>Loan amount</span><strong>₹ 7,50,000</strong></div>
-                          <div class="run-field"><span>PAN</span><strong>ABCDE1234F</strong></div>
-                          <div class="run-field flagged"><span>Address match</span><strong>Mismatch</strong></div>
-                        </div>
-
-                        <div class="run-tag" style="margin-top: 2px;"><span class="run-tag-num">3</span> Exception task</div>
-                        <div class="run-flag">Route to task queue: “Address mismatch”</div>
-
-                        <div class="run-tag" style="margin-top: 2px;"><span class="run-tag-num">4</span> Approval</div>
-                        <div class="run-pill">Ops Lead approved after review (10:12:26)</div>
-
-                        <div class="run-tag" style="margin-top: 2px;"><span class="run-tag-num">5</span> Write-back + audit trail</div>
-                        <ul class="run-audit compact">
-                          <li><span>10:12:05</span><strong>Parsed + normalized</strong></li>
-                          <li><span>10:12:16</span><strong>Validator flagged mismatch</strong></li>
-                          <li><span>10:12:26</span><strong>Approval granted</strong></li>
-                          <li class="is-writeback"><span>10:12:28</span><strong>Write-back: LOS case updated</strong></li>
-                        </ul>
-                        <div class="run-kv"><span>Replayable run</span><strong>Enabled</strong></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+	              <div class="card-block whatwedo-card">
+	                <span class="yc-label">Outcomes</span>
+	                <h3>Ops impact in weeks</h3>
+	                <ul class="list">
+	                  <li>Faster turnaround from doc → system update.</li>
+	                  <li>Exceptions only, with full audit trail.</li>
+	                  <li>India/UAE VPC deployments ready.</li>
+	                </ul>
+	              </div>
+	            </div>
           </div>
 
           <div class="footer">Slide 05 · What We Do</div>
