@@ -4140,12 +4140,19 @@
     .slide.active .slide-body {
       animation: fadeInUp 0.6s ease both;
     }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+	    @keyframes fadeInUp {
+	      from { opacity: 0; transform: translateY(10px); }
+	      to { opacity: 1; transform: translateY(0); }
+	    }
 
-  </style>
+	    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars {
+	      padding-top: 20px;
+	    }
+	    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars.is-dense .bar-visual {
+	      width: clamp(28px, 5.8vw, 46px);
+	    }
+	
+	  </style>
 </head>
 <body>
   <div class="deck-shell">
@@ -4460,8 +4467,8 @@
               </div>
             </div> -->
 
-            <!-- NOTE: added equal-columns here -->
-            <div class="split traction-layout equal-columns">
+	            <!-- NOTE: added equal-columns here -->
+	            <div class="split traction-layout equal-columns">
 
               <div class="card-block chart-card">
                 <div class="chart-stack">
@@ -4643,7 +4650,7 @@
 	            </div>
 
             <!-- TWO CHARTS SIDE BY SIDE -->
-            <div class="split traction-layout equal-columns">
+	            <div class="split traction-layout">
 
               <!-- Chart 1: Pages -->
               <div class="card-block chart-card">
@@ -5254,20 +5261,24 @@
           refLine: { value: 1.0, label: '1.0× break-even' },
         },
 
-        // Pages (bars)
-        {
-          selector: '[data-chart="pages"]',
-          data: [
-            { quarter: '2024-Q4', value: 34244, color: '#111111' },
-            { quarter: '2025-Q1', value: 136795, color: '#333333' },
-            { quarter: '2025-Q2', value: 301915, color: '#555555' },
-            { quarter: '2025-Q3', value: 399396, color: '#777777' },
-            { quarter: '2025-Q4', value: 430932, color: '#999999' },
-          ],
-          tooltipSuffix: ' pages processed',
-          shortFormatter: formatShort,
-          fullFormatter: formatFull,
-          meta: false,
+	        // Pages (bars)
+	        {
+	          selector: '[data-chart="pages"]',
+	          data: [
+	            { quarter: '2024-Q3', value: 7370,  color: '#111111' },
+	            { quarter: '2024-Q4', value: 34244, color: '#333333' },
+	            { quarter: '2025-Q1', value: 136795, color: '#555555' },
+	            { quarter: '2025-Q2', value: 301915, color: '#777777' },
+	            { quarter: '2025-Q3', value: 399396, color: '#999999' },
+	            { quarter: '2025-Q4', value: 430932, color: '#BBBBBB' },
+	            { quarter: '2026-Q1', value: 546368, color: '#DDDDDD' },
+	          ],
+	          maxValue: 600000,
+	          axis: [600000, 450000, 300000, 150000, 0],
+	          tooltipSuffix: ' pages processed',
+	          shortFormatter: formatShort,
+	          fullFormatter: formatFull,
+	          meta: false,
           // baselineLabel: 'Launch cohort',
           // highlightLabel: 'Record quarter',
         },
@@ -5303,35 +5314,36 @@
           // highlightLabel: 'Record quarter',
         },
 
-        // Companies onboarded (line)
-        {
-          selector: '[data-chart="companies"]',
-          type: 'line',
-          lineColor: '#111111',
-          data: [
-            { quarter: 'Sep 2024', value: 1 },
-            { quarter: 'Oct 2024', value: 1 },
-            { quarter: 'Nov 2024', value: 5 },
-            { quarter: 'Dec 2024', value: 3 },
-            { quarter: 'Jan 2025', value: 0 },
-            { quarter: 'Feb 2025', value: 5 },
-            { quarter: 'Mar 2025', value: 3 },
-            { quarter: 'Apr 2025', value: 1 },
-            { quarter: 'May 2025', value: 3 },
-            { quarter: 'Jun 2025', value: 4 },
-            { quarter: 'Jul 2025', value: 6 },
-            { quarter: 'Aug 2025', value: 6 },
-            { quarter: 'Sep 2025', value: 10 },
-            { quarter: 'Oct 2025', value: 4 },
-            { quarter: 'Nov 2025', value: 12 },
-            { quarter: 'Dec 2025', value: 12 },
-          ],
-          maxValue: 14,
-          axis: [14, 10, 6, 2, 0],
-          tooltipSuffix: ' companies onboarded',
-          shortFormatter: (value) => value.toString(),
-          fullFormatter: (value) => new Intl.NumberFormat('en-US').format(value),
-          meta: false,
+	        // Companies onboarded (line)
+	        {
+	          selector: '[data-chart="companies"]',
+	          type: 'line',
+	          lineColor: '#111111',
+	          data: [
+	            { quarter: 'Sep 2024', value: 1 },
+	            { quarter: 'Oct 2024', value: 2 },
+	            { quarter: 'Nov 2024', value: 5 },
+	            { quarter: 'Dec 2024', value: 3 },
+	            { quarter: 'Feb 2025', value: 5 },
+	            { quarter: 'Mar 2025', value: 3 },
+	            { quarter: 'Apr 2025', value: 1 },
+	            { quarter: 'May 2025', value: 3 },
+	            { quarter: 'Jun 2025', value: 4 },
+	            { quarter: 'Jul 2025', value: 6 },
+	            { quarter: 'Aug 2025', value: 5 },
+	            { quarter: 'Sep 2025', value: 9 },
+	            { quarter: 'Oct 2025', value: 3 },
+	            { quarter: 'Nov 2025', value: 10 },
+	            { quarter: 'Dec 2025', value: 11 },
+	            { quarter: 'Jan 2026', value: 6 },
+	            { quarter: 'Feb 2026', value: 7 },
+	          ],
+	          maxValue: 12,
+	          axis: [12, 9, 6, 3, 0],
+	          tooltipSuffix: ' companies onboarded',
+	          shortFormatter: (value) => value.toString(),
+	          fullFormatter: (value) => new Intl.NumberFormat('en-US').format(value),
+	          meta: false,
           // baselineLabel: 'Design partner base',
           // highlightLabel: 'New peak',
         }
