@@ -5393,7 +5393,7 @@
 	          selector: '[data-chart="companies"]',
 	          type: 'line',
 	          lineColor: '#111111',
-	          legendItems: [{ label: 'Paying customers', color: '#111111', kind: 'line' }],
+	          legendItems: [{ label: 'Onboardings', color: '#111111', kind: 'line' }],
 	          data: [
 	            { quarter: 'Sep 2024', value: 1 },
 	            { quarter: 'Oct 2024', value: 2 },
@@ -5468,14 +5468,6 @@
         const metaEl = root.querySelector('.chart-meta');
         const formatShortValue = cfg.shortFormatter || formatShort;
         const formatFullValue = cfg.fullFormatter || formatFull;
-
-        if (metaEl) {
-          const wantsExtras = Boolean(cfg.caption || (cfg.legendItems && cfg.legendItems.length) || cfg.legend === true);
-          if (wantsExtras) {
-            renderChartExtras(metaEl, { caption: cfg.caption, legendItems: cfg.legendItems });
-          }
-        }
-
         if (cfg.type === 'line-multi') {
           buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl });
           return;
@@ -5544,8 +5536,13 @@
         }
 
         if (metaEl && dataset.length) {
+          const wantsExtras = Boolean(cfg.caption || (cfg.legendItems && cfg.legendItems.length) || cfg.legend === true);
           if (cfg.meta === false || cfg.meta == null) {
-            metaEl.remove();
+            if (wantsExtras) {
+              renderChartExtras(metaEl, { caption: cfg.caption, legendItems: cfg.legendItems });
+            } else {
+              metaEl.remove();
+            }
           } else {
             renderChartMeta(metaEl, dataset, cfg, formatFullValue);
           }
@@ -5646,8 +5643,16 @@
         // X-axis labels removed for a cleaner fit per request
 
         if (metaEl && dataset.length) {
+          const derivedLegendItems = cfg.legendItems
+            || (cfg.legend === true ? [{ label: cfg.legendLabel || 'Series', color: lineColor, kind: 'line' }] : []);
+          const wantsExtras = Boolean(cfg.caption || (derivedLegendItems && derivedLegendItems.length));
+
           if (cfg.meta === false || cfg.meta == null) {
-            metaEl.remove();
+            if (wantsExtras) {
+              renderChartExtras(metaEl, { caption: cfg.caption, legendItems: derivedLegendItems });
+            } else {
+              metaEl.remove();
+            }
           } else {
             renderChartMeta(metaEl, dataset, cfg, formatFullValue);
           }
@@ -5784,18 +5789,21 @@
         }
 
         if (metaEl) {
+          const derivedLegendItems = cfg.legendItems
+            || (cfg.legend === true
+              ? seriesList.map(series => ({ label: series.label, color: series.color, kind: 'line' }))
+              : []);
+          const wantsExtras = Boolean(cfg.caption || (derivedLegendItems && derivedLegendItems.length));
+
           if (cfg.meta === false || cfg.meta == null) {
-            metaEl.remove();
-          } else {
-            const wantsExtras = Boolean(cfg.caption || (cfg.legendItems && cfg.legendItems.length) || cfg.legend === true);
             if (wantsExtras) {
-              const derivedLegendItems = cfg.legendItems || (cfg.legend === true
-                ? seriesList.map(series => ({ label: series.label, color: series.color, kind: 'line' }))
-                : []);
               renderChartExtras(metaEl, { caption: cfg.caption, legendItems: derivedLegendItems });
             } else {
               metaEl.remove();
             }
+          } else {
+            // Keep legacy meta behavior if ever enabled for multi-line charts.
+            metaEl.remove();
           }
         }
 
