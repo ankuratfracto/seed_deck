@@ -5241,7 +5241,6 @@
         {
           selector: '[data-chart="operating-loss"]',
           type: 'line-multi',
-          hideAxis: true,
           axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
           series: [
             {
@@ -5301,7 +5300,6 @@
         {
           selector: '[data-chart="rev-exp"]',
           type: 'line',
-          hideAxis: true,
           lineColor: '#111111',
           data: [
             { quarter: 'Apr-25', value: 0.08 },
@@ -5337,7 +5335,6 @@
 	            { quarter: '2026-Q1', value: 546368, color: '#DDDDDD' },
 	          ],
 	          hideValues: true,
-	          hideAxis: true,
 	          maxValue: 600000,
 	          axis: [600000, 450000, 300000, 150000, 0],
 	          tooltipSuffix: ' pages processed',
@@ -5352,7 +5349,6 @@
         {
           selector: '[data-chart="revenue"]',
           type: 'line',
-          hideAxis: true,
           lineColor: '#111111',
           lineAreaColor: 'rgba(0,0,0,0.1)',
           data: [
@@ -5384,7 +5380,6 @@
 	        {
 	          selector: '[data-chart="companies"]',
 	          type: 'line',
-	          hideAxis: true,
 	          lineColor: '#111111',
 	          data: [
 	            { quarter: 'Sep 2024', value: 1 },
@@ -5484,9 +5479,8 @@
 
         const peakValue = datasetMax;
 
-        const hideAxis = cfg.hideAxis === true;
         if (axisEl) {
-          axisEl.innerHTML = hideAxis ? '' : axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
         }
 
         if (barsEl) {
@@ -5496,7 +5490,7 @@
           barsEl.innerHTML = dataset
             .map(({ quarter, value, color }, index) => {
               const displayQuarter = formatQuarterDisplay(quarter);
-              const quarterLabel = dense ? (index === 0 ? 'Start' : index === lastIndex ? 'Now' : displayQuarter) : displayQuarter;
+              const quarterLabel = displayQuarter;
               const height = scaleMax ? Math.min(value / scaleMax, 1).toFixed(3) : 0;
               const prev = dataset[index - 1]?.value;
               const delta = typeof prev === 'number' && prev > 0 ? ((value - prev) / prev) * 100 : null;
@@ -5567,8 +5561,8 @@
         }
         const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
 
-        if (axisEl) {
-          axisEl.innerHTML = cfg.hideAxis ? '' : axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+        if (axisEl && axisValues) {
+          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
         }
 
         const lineColor = cfg.lineColor || '#111111';
@@ -5711,8 +5705,8 @@
         }
         const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
 
-        if (axisEl) {
-          axisEl.innerHTML = cfg.hideAxis ? '' : axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+        if (axisEl && axisValues) {
+          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
         }
 
         const viewWidth = Math.max(700, labels.length * 65);
