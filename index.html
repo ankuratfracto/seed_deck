@@ -1157,19 +1157,92 @@
     body[data-theme="dark"] .slide[data-title="Why Now"] .compression-note {
       color: #e2e8f0;
     }
-    .hero-proof {
-      font-size: 14px;
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      margin-top: 6px;
+	    .hero-proof {
+	      font-size: 14px;
+	      color: var(--accent);
+	      font-weight: 600;
+	      letter-spacing: 0.5px;
+	      text-transform: uppercase;
+	    }
+	    .cover-subhead {
+	      margin: 6px 0 0;
+	      font-size: 18px;
+	      font-weight: 500;
+	      color: var(--fg);
+	      max-width: 60ch;
+	    }
+	    .chip-row {
+	      display: flex;
+	      flex-wrap: wrap;
+	      gap: 8px;
+	      margin-top: 10px;
+	    }
+	    .chip-lg {
+	      padding: 6px 10px;
+	      font-size: 12px;
+	      letter-spacing: 0.02em;
+	    }
+	    .chip-neutral {
+	      border-color: rgba(15,23,42,0.14);
+	      background: rgba(15,23,42,0.04);
+	      color: var(--fg);
+	    }
+	    body[data-theme="dark"] .chip-neutral {
+	      border-color: rgba(148,163,184,0.28);
+	      background: rgba(148,163,184,0.12);
+	      color: var(--fg);
+	    }
+	    .thesis-line {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	      gap: 12px;
+	      align-items: stretch;
+	      margin-top: 14px;
+	      min-width: 0;
+	    }
+	    .thesis-step {
+	      position: relative;
+	      border: 1px solid var(--border);
+	      border-radius: 16px;
+	      padding: 12px;
+	      background: var(--card-alt);
+	      box-shadow: var(--card-shadow-sm);
+	      display: grid;
+	      gap: 6px;
+	      min-height: 88px;
+	      align-content: start;
+	      min-width: 0;
+	    }
+	    .thesis-step strong {
+	      word-break: break-word;
+	    }
+	    .thesis-kicker {
+	      font-size: 11px;
+	      letter-spacing: 0.14em;
+	      text-transform: uppercase;
+	      color: var(--muted);
+	      font-weight: 600;
+	    }
+	    .thesis-sub {
+	      font-size: 13px;
+	      color: var(--muted);
+	    }
+	    @media (max-width: 900px) {
+	      .thesis-line {
+	        grid-template-columns: 1fr;
+	      }
+	    }
+	    .stp-definition {
+	      margin: 6px 2px 0;
+	      font-size: 12px;
+	      color: var(--muted);
+	    }
+	    .hero-actions {
+	      display: flex;
+	      flex-wrap: wrap;
+	      gap: 12px;
+	      align-items: center;
+	      margin-top: 6px;
     }
     .contact-card {
       display: grid;
@@ -3041,14 +3114,14 @@
     .chart-legend-item {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.35);
-      background: rgba(255,255,255,0.72);
-      color: var(--fg);
+      gap: 6px;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      color: var(--muted);
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       white-space: nowrap;
     }
     .chart-legend-swatch {
@@ -3119,7 +3192,7 @@
     .chart-wrapper {
       background: var(--panel);
       border-radius: 20px;
-      padding: 28px 24px 90px;
+      padding: 22px 22px 64px;
       color: var(--fg);
       border: 1px solid rgba(15,23,42,0.08);
       box-shadow: 0 24px 45px rgba(15,23,42,0.1);
@@ -3135,6 +3208,13 @@
       align-items: stretch;
       min-height: 230px;
     }
+    .chart-panel.axis-hidden .chart-inner {
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 0 !important;
+    }
+    .chart-panel.axis-hidden .chart-axis {
+      display: none !important;
+    }
     .chart-axis {
       display: flex;
       flex-direction: column;
@@ -3147,7 +3227,7 @@
       position: relative;
       padding-right: 10px;
       padding-top: 12px;
-      padding-bottom: 28px;
+      padding-bottom: 12px;
       font-weight: 600;
       width: 64px;
     }
@@ -3177,7 +3257,7 @@
       align-items: flex-end;
       gap: clamp(6px, 1vw, 12px);
       min-height: 230px;
-      padding: 12px 2px 28px;
+      padding: 12px 2px 10px;
       min-width: 0;
       justify-content: space-between;
     }
@@ -3202,19 +3282,22 @@
       outline: 2px solid rgba(59,130,246,0.45);
       outline-offset: 4px;
     }
-    .chart-bar .value-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: #0f172a;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.4);
-      background: #f8fafc;
-      position: absolute;
-      top: -24px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+	    .chart-bar .value-label {
+	      font-size: 10px;
+	      font-weight: 600;
+	      color: var(--muted);
+	      position: absolute;
+	      top: -18px;
+	      left: 50%;
+	      transform: translateX(-50%);
+	      white-space: nowrap;
+	    }
+	    .chart-bars.is-dense .chart-bar .value-label {
+	      top: -18px;
+	    }
+	    .chart-bars.is-dense .chart-bar:nth-child(even) .value-label {
+	      top: -34px;
+	    }
     .bar-visual {
       position: relative;
       width: clamp(22px, 4vw, 32px);
@@ -3249,31 +3332,52 @@
       font-size: 10px;
       position: absolute;
       left: 50%;
-      bottom: -50px;
+      bottom: -42px;
       transform: translateX(-50%);
     }
-    .chart-quarter {
-      font-weight: 600;
-      color: #0f172a;
-      font-size: 11px;
-    }
-    .delta-chip {
-      font-size: 9px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      border-radius: 999px;
-      padding: 3px 6px;
-      font-weight: 600;
-      background: rgba(148,163,184,0.2);
-      color: #475467;
-      white-space: nowrap;
-      text-align: center;
-      line-height: 1.2;
-    }
-    .delta-chip.positive { background: rgba(16,185,129,0.18); color: #047857; }
-    .delta-chip.negative { background: rgba(239,68,68,0.2); color: #b91c1c; }
-    .delta-chip.flat { background: rgba(148,163,184,0.24); color: #475467; }
-    .delta-chip.baseline { background: rgba(129,140,248,0.22); color: #3730a3; }
+	    .chart-bars.is-dense .chart-bar-footer {
+	      bottom: -26px;
+	      gap: 2px;
+	    }
+	    .chart-bars.is-dense .chart-quarter {
+	      font-size: 10px;
+	    }
+	    .chart-quarter {
+	      font-weight: 600;
+	      color: #0f172a;
+	      font-size: 11px;
+	    }
+	    .delta-chip {
+	      font-size: 9px;
+	      letter-spacing: 0.5px;
+	      text-transform: uppercase;
+	      border-radius: 999px;
+	      padding: 3px 6px;
+	      font-weight: 600;
+	      background: rgba(148,163,184,0.2);
+	      color: #475467;
+	      white-space: nowrap;
+	      text-align: center;
+	      line-height: 1.2;
+	    }
+	    .delta-chip.positive { background: rgba(16,185,129,0.18); color: #047857; }
+	    .delta-chip.negative { background: rgba(239,68,68,0.2); color: #b91c1c; }
+	    .delta-chip.flat { background: rgba(148,163,184,0.24); color: #475467; }
+	    .delta-chip.baseline { background: rgba(129,140,248,0.22); color: #3730a3; }
+	    .chart-bars.is-dense .delta-chip {
+	      background: transparent;
+	      padding: 0;
+	      border-radius: 0;
+	      letter-spacing: 0;
+	      text-transform: none;
+	      color: var(--muted);
+	      font-size: 9px;
+	      line-height: 1.1;
+	    }
+	    .chart-bars.is-dense .delta-chip.positive { color: #047857; }
+	    .chart-bars.is-dense .delta-chip.negative { color: #b91c1c; }
+	    .chart-bars.is-dense .delta-chip.flat { color: var(--muted); }
+	    .chart-bars.is-dense .delta-chip.baseline { color: var(--muted); }
     .chart-bar.is-peak .bar-fill {
       box-shadow: 0 18px 32px rgba(91,141,239,0.35);
     }
@@ -3501,9 +3605,7 @@
       color: #cbd5f5;
     }
     body[data-theme="dark"] .chart-bar .value-label {
-      background: rgba(15,23,42,0.9);
-      border-color: rgba(59,130,246,0.4);
-      color: #f1f5f9;
+      color: rgba(226,232,240,0.85);
     }
     body[data-theme="dark"] .line-grid line {
       stroke: rgba(255,255,255,0.16);
@@ -3542,9 +3644,9 @@
       color: rgba(203,213,225,0.85);
     }
     body[data-theme="dark"] .chart-legend-item {
-      background: rgba(15,23,42,0.65);
-      border-color: rgba(148,163,184,0.32);
-      color: rgba(226,232,240,0.92);
+      background: transparent;
+      border: none;
+      color: rgba(226,232,240,0.8);
     }
     body[data-theme="dark"] .line-ref {
       stroke: rgba(148,163,184,0.5);
@@ -3807,12 +3909,25 @@
       font-size: 12px;
       color: #6b7280;
     }
-    .stp-proof-grid {
-      margin-bottom: 12px;
-    }
-    .stp-proof-grid .traction-metric {
-      padding: 12px;
-    }
+	    .stp-proof-grid {
+	      margin-bottom: 12px;
+	    }
+	    .traction-metric-grid.stp-proof-grid {
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	    }
+	    @media (max-width: 1024px) {
+	      .traction-metric-grid.stp-proof-grid {
+	        grid-template-columns: repeat(2, minmax(0, 1fr));
+	      }
+	    }
+	    @media (max-width: 640px) {
+	      .traction-metric-grid.stp-proof-grid {
+	        grid-template-columns: 1fr;
+	      }
+	    }
+	    .stp-proof-grid .traction-metric {
+	      padding: 12px;
+	    }
     .stp-proof-grid .traction-label {
       font-size: 11px;
       letter-spacing: 0.14em;
@@ -3876,7 +3991,7 @@
       background: none;
       border: none;
       box-shadow: none;
-      padding: 8px 4px 72px 0;
+      padding: 8px 4px 28px 0;
     }
     section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-bars,
     section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .chart-bars,
@@ -4138,21 +4253,20 @@
       background: var(--ink);
     }
     .slide.active .slide-body {
-      animation: fadeInUp 0.6s ease both;
+      animation: none;
     }
-	    @keyframes fadeInUp {
-	      from { opacity: 0; transform: translateY(10px); }
-	      to { opacity: 1; transform: translateY(0); }
-	    }
 
-	    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars {
-	      padding-top: 20px;
-	    }
-	    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars.is-dense .bar-visual {
-	      width: clamp(28px, 5.8vw, 46px);
-	    }
-	
-	  </style>
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars {
+		      padding-top: 32px;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars.is-dense {
+		      gap: clamp(8px, 1.6vw, 18px);
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars.is-dense .bar-visual {
+		      width: clamp(28px, 5.8vw, 46px);
+		    }
+		
+		  </style>
 </head>
 <body>
   <div class="deck-shell">
@@ -4204,39 +4318,55 @@
             <span>COVER</span>
             <span>01 · Vision</span>
           </header>
-          <div class="slide-body">
-	            <div class="slide-head">
-	              <h1>Documents → Decisions in 30 Seconds</h1>
-	              <p>Fracto turns inbound documents into validated system updates (LOS/ERP/TMS) with audit trails—deployed in-region (India/UAE)—for regulated finance and logistics.</p>
-	              <p class="hero-proof">₹1.03 Cr ARR run-rate · 25 live customers · 1.4M+ pages processed (as of Dec 31, 2025)</p>
-	              <p>Live today: IDP at <strong>ocr.fracto.tech</strong> + Workflows (runs/tasks/approvals/audit) with India + GCC residency.</p>
-	            </div>
-            <div class="split split-2-1">
-              <div class="stat-grid hero-stats">
-	              <div class="stat-card">
+	          <div class="slide-body">
+		            <div class="slide-head">
+		              <h1>Documents → Decisions</h1>
+		              <p class="cover-subhead">IDP + agentic workflows that turn documents into audited system updates (write-back).</p>
+		              <p class="hero-proof">₹1.03 Cr ARR run-rate · 25 live paying customers · 1.4M+ pages processed (as of Dec 31, 2025)</p>
+		              <div class="chip-row" aria-label="Product attributes">
+		                <span class="chip chip-neutral chip-lg">India/UAE residency</span>
+		                <span class="chip chip-neutral chip-lg">Replayable runs</span>
+		                <span class="chip chip-neutral chip-lg">Tasks + approvals</span>
+		                <span class="chip chip-neutral chip-lg">Controlled write-back</span>
+		              </div>
+		            </div>
+	            <div class="split split-2-1">
+	              <div class="stat-grid hero-stats">
+		              <div class="stat-card">
 	                <strong>1.4M+</strong>
 	                <span>Pages processed</span>
 	              </div>
-              <div class="stat-card">
-                <strong>25</strong>
-                <span>Live customers</span>
-              </div>
 	              <div class="stat-card">
-	                <strong>₹1.03 Cr</strong>
-	                <span>ARR run-rate</span>
+	                <strong>25</strong>
+	                <span>Paying customers</span>
 	              </div>
-	              </div>
-	              <div class="card-block">
-	                <h3>Bridge Thesis</h3>
-	                <ul class="list">
-	                  <li>Proven IDP wedge (ocr.fracto.tech) → expand into end-to-end workflows.</li>
-	                  <li>Residency-first deployments with audit logs + replay.</li>
-	                  <li>Closed-loop execution: tasks/approvals → controlled write-back into LOS/ERP/TMS.</li>
-	                </ul>
-	                <!-- <p class="funnel-note">Bridge fuels ARR → ₹5 Cr, SOC-2 evidence, and dual residency with high STP.</p> -->
-	              </div>
-            </div>
-          </div>
+		              <div class="stat-card">
+		                <strong>₹1.03 Cr</strong>
+		                <span>ARR run-rate</span>
+		              </div>
+		              </div>
+		              <div class="card-block">
+		                <h3>Thesis</h3>
+		                <div class="thesis-line" aria-label="IDP wedge to agentic workflows to packs and validators">
+		                  <div class="thesis-step">
+		                    <span class="thesis-kicker">Wedge</span>
+		                    <strong>IDP</strong>
+		                    <span class="thesis-sub">ocr.fracto.tech</span>
+		                  </div>
+		                  <div class="thesis-step">
+		                    <span class="thesis-kicker">Expand</span>
+		                    <strong>Agentic workflows</strong>
+		                    <span class="thesis-sub">flows.fracto.tech</span>
+		                  </div>
+		                  <div class="thesis-step">
+		                    <span class="thesis-kicker">Scale</span>
+		                    <strong>Packs + validators</strong>
+		                    <span class="thesis-sub">Recurring usage</span>
+		                  </div>
+		                </div>
+		              </div>
+	            </div>
+	          </div>
           <div class="footer">Raising ₹4 Cr bridge to ₹5 Cr ARR · SOC-2 · India + GCC</div>
         </section>
 
@@ -4246,14 +4376,13 @@
             <span>Problem</span>
             <span>02 · Problem</span>
           </header>
-          <div class="slide-body">
-            <div class="slide-head">
-              <h2>Problem — Manual DocumentOps = Cost + Compliance Risk</h2>
-              <p class="hero-proof">For India BFSI + logistics ops teams: email/WhatsApp → spreadsheets → core systems.</p>
-              <p>NBFC underwriting and logistics billing still rely on manual copy-paste — creating delays, leakage, and audit gaps.</p>
-              <div class="split">
-                <div class="card">
-                  <h3>Baseline workflow today</h3>
+	          <div class="slide-body">
+	            <div class="slide-head">
+	              <h2>Problem — Manual DocumentOps = Cost + Compliance Risk</h2>
+	              <p class="hero-proof">Inbox → spreadsheets → threads → core systems.</p>
+	              <div class="split">
+	                <div class="card">
+	                  <h3>Baseline workflow today</h3>
                   <div class="baseline-flow" aria-label="Baseline workflow: inbox to spreadsheets to approvals to core systems">
                     <div class="flow-step">
                       <span class="flow-num" aria-hidden="true">1</span>
@@ -4278,18 +4407,18 @@
                   </div>
                   <p class="problem-footnote">Result: exceptions are not tracked end-to-end; audit evidence lives in folders + message threads.</p>
                 </div>
-	                <div class="card">
-	                  <h3>Operational impact</h3>
-	                  <ul class="list">
-	                    <li>Manual keying creates SLA delays + audit gaps.</li>
-	                    <li>Exceptions aren’t tracked end-to-end; evidence is fragmented across email/WhatsApp.</li>
-	                    <li>Cost scales linearly with volume.</li>
-	                  </ul>
-	                  <p class="problem-footnote">This is why “read-only OCR” is not enough—teams need closed-loop execution with controls.</p>
-	                </div>
-              </div>
-            </div>
-          </div>
+		                <div class="card">
+		                  <h3>Operational impact</h3>
+		                  <ul class="list">
+		                    <li>SLA delays (manual keying + rework).</li>
+		                    <li>Audit gaps (approvals in threads).</li>
+		                    <li>Cost scales linearly with volume.</li>
+		                  </ul>
+		                  <p class="problem-footnote">Read-only OCR isn’t enough — teams need controlled write-back with an audit trail.</p>
+		                </div>
+	              </div>
+	            </div>
+	          </div>
           <div class="footer">Slide 02 · Problem</div>
         </section>
 
@@ -4298,33 +4427,31 @@
           <header class="topbar">
             <span>Why Now</span>
             <span>03 · Why Now</span>
-          </header>
-          <div class="slide-body">
-            <div class="slide-head">
-              <h2>Why Now — Residency, Vendor Risk &amp; Reliable VLMs</h2>
-              <p>Regulation + procurement + model quality have converged — making closed-loop DocumentOps the default.</p>
-            </div>
-            <div class="split split-2-1">
-	              <div class="card-block timeline-card accent">
-	                <h3>3 triggers</h3>
+	          </header>
+	          <div class="slide-body">
+	            <div class="slide-head">
+	              <h2>Why Now — Residency, Vendor Risk &amp; Reliable VLMs</h2>
+	              <p class="hero-proof">Residency mandates · vendor risk · reliable VLMs.</p>
+	            </div>
+	            <div class="split split-2-1">
+		              <div class="card-block timeline-card accent">
+		                <h3>3 triggers</h3>
+		                <ul class="list">
+		                  <li><strong>Residency + cross-border:</strong> default expectation is in‑region processing (India/UAE).</li>
+		                  <li><strong>Vendor risk + audit rights:</strong> buyers require auditable runs, controls, and clean exit paths.</li>
+		                  <li><strong>Doc AI reliability:</strong> extraction quality is now “good enough” to run end-to-end workflows.</li>
+		                </ul>
+		              </div>
+	              <div class="card-block expectation-card">
+	                <h3>Buying criteria shifted</h3>
 	                <ul class="list">
-	                  <li><strong>Residency + cross-border:</strong> default expectation is in‑region processing (India/UAE).</li>
-	                  <li><strong>Vendor risk + audit rights:</strong> buyers require auditable runs, controls, and clean exit paths.</li>
-	                  <li><strong>Doc AI reliability:</strong> extraction quality is now “good enough” to run end-to-end workflows.</li>
+	                  <li>In-region deployments (India/UAE VPC) + strict data boundaries.</li>
+	                  <li>Immutable audit logs + replayable runs.</li>
+	                  <li>Tasks/approvals + controlled write-back into LOS/ERP/TMS.</li>
 	                </ul>
-	                <p class="problem-footnote">Refs: RBI Storage of Payment System Data (Apr 6, 2018); RBI IT Outsourcing Directions (Apr 10, 2023; effective Oct 1, 2023); UAE/Saudi PDPL; DocVQA/Donut/LayoutLMv3.</p>
+	                <p class="compression-note">Closed-loop + residency is now table stakes for BFSI &amp; logistics.</p>
 	              </div>
-              <div class="card-block expectation-card">
-                <h3>Buying criteria shifted</h3>
-                <ul class="list">
-                  <li>In-region deployments (India/UAE VPC) + strict data boundaries.</li>
-                  <li>Immutable audit logs + replayable runs for regulators and QA.</li>
-                  <li>Exception handling via tasks + approvals (no spreadsheets).</li>
-                  <li>Write-back into LOS/ERP/TMS with controls + idempotency.</li>
-                </ul>
-                <p class="compression-note">Closed-loop + residency is now table stakes for BFSI &amp; logistics.</p>
-              </div>
-            </div>
+	            </div>
           </div>
           <div class="footer">Slide 03 · Why Now</div>
         </section>
@@ -4364,19 +4491,19 @@
                   </div>
                 </div>
               </div>
-	              <div class="card-block">
-	                <h3>Growth focus</h3>
-	                <ul class="list">
-	                  <li>India: 25–30% CAGR (NBFCs, banks, logistics).</li>
-	                  <li>GCC: 22–26% CAGR (payroll, trade, logistics).</li>
-	                  <li>Global: 18–20% CAGR (enterprise IDP refresh).</li>
-	                </ul>
-	              </div>
-	            </div>
-	            <p class="compression-note">We start with NBFC underwriting + logistics billing/compliance; expansion is via more workflows + more throughput per customer.</p>
-	          </div>
-          <div class="footer">Slide 04 · Market Opportunity</div>
-        </section>
+		              <div class="card-block">
+		                <h3>Wedge → expand</h3>
+		                <div class="chip-row" aria-label="Go-to-market focus">
+		                  <span class="chip chip-neutral chip-lg">NBFC underwriting</span>
+		                  <span class="chip chip-neutral chip-lg">Logistics billing</span>
+		                  <span class="chip chip-neutral chip-lg">Compliance + audit</span>
+		                </div>
+		                <p class="compression-note">Expand via more workflows + throughput/customer.</p>
+		              </div>
+		            </div>
+		          </div>
+	          <div class="footer">Slide 04 · Market Opportunity</div>
+	        </section>
 
 
         <!-- Slide 5 -->
@@ -4386,23 +4513,24 @@
             <span>05 · What We Do</span>
           </header>
 
-          <div class="slide-body">
-	            <div class="slide-head">
-	              <h2>Workflow Automation for Document-heavy Ops</h2>
-	              <p class="hero-proof">Two products: IDP (ocr.fracto.tech) + Workflows runtime (flows.fracto.tech).</p>
-	              <p class="compression-note">Closed-loop execution: intake → extract / validate → tasks / approvals → controlled write-back (LOS / ERP / TMS), with audit + residency.</p>
-	            </div>
+	          <div class="slide-body">
+		            <div class="slide-head">
+		              <h2>IDP + Agentic Workflows (Closed-loop)</h2>
+		              <p class="hero-proof">IDP (ocr.fracto.tech) + workflows runtime (flows.fracto.tech).</p>
+		              <p class="compression-note">Intake → parse → validate → task/approve → controlled write-back (with audit + residency).</p>
+		            </div>
 
-	            <div class="whatwedo-grid">
-	              <div class="card-block whatwedo-card">
-	                <span class="yc-label">Product</span>
-	                <h3>IDP + Workflows</h3>
-	                <ul class="list">
-	                  <li>Extract + validate with policy checks (VLMs + rules).</li>
-	                  <li>Route exceptions into tasks + approvals (not spreadsheets).</li>
-	                  <li>Write-back to LOS / ERP / TMS with audit + idempotency.</li>
-	                </ul>
-	              </div>
+		            <div class="whatwedo-grid">
+		              <div class="card-block whatwedo-card">
+		                <span class="yc-label">Product</span>
+		                <h3>IDP + Workflows</h3>
+		                <div class="chip-row" aria-label="Core capabilities">
+		                  <span class="chip chip-neutral chip-lg">Extract + validate</span>
+		                  <span class="chip chip-neutral chip-lg">Policy validators</span>
+		                  <span class="chip chip-neutral chip-lg">Tasks + approvals</span>
+		                  <span class="chip chip-neutral chip-lg">Controlled write-back</span>
+		                </div>
+		              </div>
 
 	              <div class="card-block whatwedo-card">
 	                <span class="yc-label">How it works</span>
@@ -4431,17 +4559,17 @@
 	                </div>
 	              </div>
 
-	              <div class="card-block whatwedo-card">
-	                <span class="yc-label">Outcomes</span>
-	                <h3>Ops impact in weeks</h3>
-	                <ul class="list">
-	                  <li>Faster turnaround from doc → system update.</li>
-	                  <li>Exceptions only, with full audit trail.</li>
-	                  <li>India/UAE VPC deployments ready.</li>
-	                </ul>
-	              </div>
-	            </div>
-          </div>
+		              <div class="card-block whatwedo-card">
+		                <span class="yc-label">Outcomes</span>
+		                <h3>Ops impact in weeks</h3>
+		                <div class="chip-row" aria-label="Outcomes">
+		                  <span class="chip chip-neutral chip-lg">Doc → system updates</span>
+		                  <span class="chip chip-neutral chip-lg">Exceptions only + audit</span>
+		                  <span class="chip chip-neutral chip-lg">India/UAE VPC-ready</span>
+		                </div>
+		              </div>
+		            </div>
+	          </div>
 
           <div class="footer">Slide 05 · What We Do</div>
         </section>
@@ -4702,10 +4830,10 @@
 
           <div class="slide-body">
 
-            <div class="slide-head">
-              <h2>Moat — Residency-first, Closed Loop for BFSI &amp; Logistics</h2>
-              <p>Residency-first closed loop with domain validators.</p>
-            </div>
+	            <div class="slide-head">
+	              <h2>Moat — Residency-first, Closed Loop for BFSI &amp; Logistics</h2>
+	              <p class="hero-proof">Residency-first · audit-native runs · domain validators.</p>
+	            </div>
 
             <!-- <div class="card-block expectation-card">
               <div class="info-chip info-block">
@@ -4727,12 +4855,29 @@
               <p class="compression-note"><strong>Compression:</strong> reliability, regulation, and buying cycles have converged — teams need an audit-native, residency-ready IDP now, not in three years.</p>
             </div> -->
 
-            <div class="card-block">
-              <div class="traction-metric-grid usage-grid stp-proof-grid">
-                <div class="traction-metric">
-                  <span class="traction-label">STP definition</span>
-                  <div class="stp-proof-sub">Share of docs completed read → validate → write-back with no human-in-loop (any task/approval/edit = non‑STP).</div>
-                </div>
+	            <div class="card-block">
+	              <div class="stat-grid">
+	                <div class="stat-card compact-stat">
+	                  <div>
+	                    <strong>India/UAE VPC-ready</strong>
+	                    <span class="stat-label">Residency-first deployments</span>
+	                  </div>
+	                </div>
+	                <div class="stat-card compact-stat">
+	                  <div>
+	                    <strong>Controlled write-back</strong>
+	                    <span class="stat-label">Tasks/approvals → LOS/ERP/TMS</span>
+	                  </div>
+	                </div>
+	                <div class="stat-card compact-stat">
+	                  <div>
+	                    <strong>Domain validators</strong>
+	                    <span class="stat-label">BFSI/logistics policy checks</span>
+	                  </div>
+	                </div>
+	              </div>
+
+	              <div class="traction-metric-grid usage-grid stp-proof-grid">
 	                <div class="traction-metric">
 	                  <span class="traction-label">Median STP</span>
 	                  <strong data-stp-field="median">—</strong>
@@ -4748,69 +4893,9 @@
 	                  <strong data-stp-field="sample">—</strong>
 	                  <div class="stp-proof-sub">Workflows · customers</div>
 	                </div>
-              </div>
-
-              <table class="advantage-table">
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th class="is-fracto">Fracto</th>
-                      <th>Alternatives (incumbent IDP / RPA / in-house)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr>
-                      <td>Deployment</td>
-                      <td class="is-fracto"><span class="chip chip-positive">India/UAE VPC-ready</span></td>
-                      <td>Often cloud-only; on-prem/VPC as custom project</td>
-                    </tr>
-
-                    <tr>
-                      <td>Closed-loop execution</td>
-                      <td class="is-fracto"><span class="chip chip-positive">Read → validate → write-back</span></td>
-                      <td>Read-only; write-back via scripts/RPA; audit DIY</td>
-                    </tr>
-
-                    <tr>
-                      <td>Validators (domain rules)</td>
-                      <td class="is-fracto"><strong>BFSI / logistics validators</strong></td>
-                      <td>Templates + regex + custom code (brittle on drift)</td>
-                    </tr>
-
-	                    <tr>
-	                      <td>STP in production</td>
-	                      <td class="is-fracto">
-	                        <strong data-stp-table="headline">—</strong>
-	                        <div class="advantage-cell-note" data-stp-table="note">As defined above; distribution shown above.</div>
-	                      </td>
-	                      <td>60–85% unless heavily templated + manually maintained</td>
-	                    </tr>
-
-                    <tr>
-                      <td>Ops layer</td>
-                      <td class="is-fracto"><span class="chip chip-positive">Runs + tasks + approvals + audit</span></td>
-                      <td>Queues + tickets + email/WhatsApp; fragmented audit</td>
-                    </tr>
-
-                    <tr>
-                      <td>Testing + replay</td>
-                      <td class="is-fracto"><span class="chip chip-positive">Dry-run + replayable runs</span></td>
-                      <td>Manual UAT; hard to replay safely</td>
-                    </tr>
-
-                    <tr>
-                      <td>Tooling approach</td>
-                      <td class="is-fracto"><span class="chip chip-positive">Platform + marketplace</span></td>
-                      <td>Stitch tools: IDP + RPA + scripts + LLM prompts</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              <p class="advantage-footnote">
-                Examples: incumbent IDP (ABBYY, Kofax), RPA stacks (UiPath, Automation Anywhere), cloud doc AI APIs (AWS Textract, Azure AI Document Intelligence, Google Document AI), and in-house pipelines. STP definition aligns with vendor usage (ABBYY, Hyperscience, Automation Anywhere).
-              </p>
-            </div>
+	              </div>
+	              <p class="stp-definition">STP = share of docs completed read → validate → write-back with no manual steps.</p>
+	            </div>
 
           </div>
 
@@ -4824,14 +4909,13 @@
             <span>09 · Business Model</span>
           </header>
 
-          <div class="slide-body">
-            <!-- HEADLINE -->
-	            <div class="slide-head">
-	              <h2>Pricing &amp; Unit Economics — Platform + Usage Packs</h2>
-	              <p class="hero-proof">Base platform + setup + usage packs.</p>
-	              <p>Simple subscription + usage that scales with pages.</p>
-	              <p class="funnel-note">Example: 100k pages/month → ~₹2.5L usage + ₹25k base.</p>
-	            </div>
+	          <div class="slide-body">
+	            <!-- HEADLINE -->
+		            <div class="slide-head">
+		              <h2>Pricing &amp; Unit Economics — Platform + Agent Packs</h2>
+		              <p class="hero-proof">Base platform + setup + agent packs.</p>
+		              <p class="funnel-note">Example: 100k pages/month → ~₹2.5L usage + ₹25k base.</p>
+		            </div>
 
             <div class="pricing-layout">
               <!-- PRICING GRID -->
@@ -4848,11 +4932,11 @@
                   <!-- <p>Implementation for first flows: connectors, validators, go-live.</p> -->
                 </aside>
 
-	                <aside class="tier-card">
-	                  <h3>Usage <span class="tier-label">Usage packs</span></h3>
-	                  <p class="tier-price"><strong>~₹2.50 / pg avg</strong> (tiered)</p>
-	                  <!-- <p>Tiered per-page agent packs (10k+ pages / month) with extra capacity.</p> -->
-	                </aside>
+		                <aside class="tier-card">
+		                  <h3>Usage <span class="tier-label">Agent packs</span></h3>
+		                  <p class="tier-price"><strong>~₹2.50 / pg avg</strong> (tiered)</p>
+		                  <!-- <p>Tiered per-page agent packs (10k+ pages / month) with extra capacity.</p> -->
+		                </aside>
 
                 <aside class="tier-card">
                   <h3>Add-ons <span class="tier-label">Expansion</span></h3>
@@ -4861,19 +4945,19 @@
                 </aside>
               </div>
 
-              <div class="pricing-overview card-block">
-                <span class="pricing-pill">Pack architecture</span>
-                <!-- <h3>Predictable base + usage</h3> -->
-                <p>Platform subscription plus packs that grow with throughput.</p>
-                <ul class="pricing-points">
-                  <li>Base platform: orchestrator + APIs with audit trails.</li>
-                  <li>Setup: connectors + validator tuning.</li>
-                  <li>Usage packs: tiered per-page bundles.</li>
-                </ul>
-                <!-- <div class="pricing-meta">
-                  <div class="pricing-meta-block">
-                    <span>Designed for</span>
-                    <strong>BFSI · Logistics STP</strong>
+	              <div class="pricing-overview card-block">
+	                <span class="pricing-pill">Pack architecture</span>
+	                <!-- <h3>Predictable base + usage</h3> -->
+	                <p>Predictable base + usage; expansion via packs.</p>
+	                <div class="chip-row" aria-label="Pricing components">
+	                  <span class="chip chip-neutral chip-lg">Orchestrator + APIs</span>
+	                  <span class="chip chip-neutral chip-lg">Connectors + validators</span>
+	                  <span class="chip chip-neutral chip-lg">Tiered page bundles</span>
+	                </div>
+	                <!-- <div class="pricing-meta">
+	                  <div class="pricing-meta-block">
+	                    <span>Designed for</span>
+	                    <strong>BFSI · Logistics STP</strong>
                   </div>
                   <div class="pricing-meta-block">
                     <span>Scale lever</span>
@@ -4894,30 +4978,15 @@
             <span>10 · Efficiency &amp; Leverage</span>
           </header>
 
-          <div class="slide-body">
-            <div class="slide-head">
-              <h2>Operational Efficiency — Path to Break-even</h2>
-              <p class="hero-proof">0.53× burn at ~₹1 Cr ARR with line-of-sight to break-even.</p>
-            </div>
-
-	            <div class="metric-duo">
-	              <div class="metric-card primary">
-	                <span class="metric-label">Burn multiple (Nov ’25)</span>
-	                <div class="metric-value-row">
-	                  <span class="metric-value">0.53×</span>
-	                </div>
-	                <p class="metric-subtext">Net burn ₹9.24L ÷ New ARR ₹17.46L (normalized on rolling ARR).</p>
-	              </div>
-	              <div class="metric-card">
-	                <span class="metric-label">Gross margin (Apr–Sep ’25)</span>
-	                <span class="metric-value">82.7%</span>
-	                <p class="metric-subtext">High structural margin driven by automation and low variable cost per document.</p>
-	              </div>
+	          <div class="slide-body">
+	            <div class="slide-head">
+	              <h2>Operational Efficiency — Path to Break-even</h2>
+	              <p class="hero-proof">0.53× burn multiple (Nov ’25) · 82.7% gross margin (Apr–Sep ’25).</p>
 	            </div>
 
-            <div class="split efficiency-grid">
-              <!-- Operating Loss -->
-              <div class="card-block chart-card">
+	            <div class="split efficiency-grid">
+	              <!-- Operating Loss -->
+	              <div class="card-block chart-card">
                 <div class="chart-stack">
                   <div class="chart-panel" data-chart="operating-loss">
                     <h3>Monthly P&L (₹)</h3>
@@ -4961,12 +5030,11 @@
             <span>Team</span>
             <span>11 · Team</span>
           </header>
-          <div class="slide-body">
-	            <div class="slide-head">
-	              <h2>Team Building Agentic Workflows for DocumentOps</h2>
-	              <p>Product, ML/infra, GTM — shipping closed-loop IDP in India &amp; GCC.</p>
-	              <p class="compression-note">Shipped + sold in regulated ops across India/GCC; built infra for residency-ready deployments.</p>
-	            </div>
+	          <div class="slide-body">
+		            <div class="slide-head">
+		              <h2>Team Building Agentic Workflows for DocumentOps</h2>
+		              <p class="compression-note">Product, ML/infra, GTM — shipped closed-loop IDP in regulated ops across India/GCC.</p>
+		            </div>
 
             <div class="card-block">
               <h3>Founding Team</h3>
@@ -5173,8 +5241,7 @@
         {
           selector: '[data-chart="operating-loss"]',
           type: 'line-multi',
-          caption: "Apr–Nov ’25 (monthly)",
-          legend: true,
+          hideAxis: true,
           axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
           series: [
             {
@@ -5234,12 +5301,8 @@
         {
           selector: '[data-chart="rev-exp"]',
           type: 'line',
+          hideAxis: true,
           lineColor: '#111111',
-          caption: "Apr–Nov ’25 (monthly)",
-          legendItems: [
-            { label: 'Revenue / expense', color: '#111111', kind: 'line' },
-            { label: '1.0× break-even', color: 'rgba(17,24,39,0.45)', kind: 'line', dashed: true },
-          ],
           data: [
             { quarter: 'Apr-25', value: 0.08 },
             { quarter: 'May-25', value: 0.08 },
@@ -5273,6 +5336,8 @@
 	            { quarter: '2025-Q4', value: 430932, color: '#BBBBBB' },
 	            { quarter: '2026-Q1', value: 546368, color: '#DDDDDD' },
 	          ],
+	          hideValues: true,
+	          hideAxis: true,
 	          maxValue: 600000,
 	          axis: [600000, 450000, 300000, 150000, 0],
 	          tooltipSuffix: ' pages processed',
@@ -5287,6 +5352,7 @@
         {
           selector: '[data-chart="revenue"]',
           type: 'line',
+          hideAxis: true,
           lineColor: '#111111',
           lineAreaColor: 'rgba(0,0,0,0.1)',
           data: [
@@ -5318,6 +5384,7 @@
 	        {
 	          selector: '[data-chart="companies"]',
 	          type: 'line',
+	          hideAxis: true,
 	          lineColor: '#111111',
 	          data: [
 	            { quarter: 'Sep 2024', value: 1 },
@@ -5385,6 +5452,7 @@
       function buildChart(cfg){
         const root = document.querySelector(cfg.selector);
         if (!root) return;
+        root.classList.toggle('axis-hidden', cfg.hideAxis === true);
         const axisEl = root.querySelector('.chart-axis');
         const barsEl = root.querySelector('.chart-bars');
         const tooltip = root.querySelector('.chart-tooltip');
@@ -5416,38 +5484,42 @@
 
         const peakValue = datasetMax;
 
-        if (axisEl && axisValues) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+        const hideAxis = cfg.hideAxis === true;
+        if (axisEl) {
+          axisEl.innerHTML = hideAxis ? '' : axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
         }
 
         if (barsEl) {
-          barsEl.classList.toggle('is-dense', dataset.length > 4);
+          const dense = dataset.length > 4;
+          const lastIndex = dataset.length - 1;
+          barsEl.classList.toggle('is-dense', dense);
           barsEl.innerHTML = dataset
             .map(({ quarter, value, color }, index) => {
               const displayQuarter = formatQuarterDisplay(quarter);
+              const quarterLabel = dense ? (index === 0 ? 'Start' : index === lastIndex ? 'Now' : displayQuarter) : displayQuarter;
               const height = scaleMax ? Math.min(value / scaleMax, 1).toFixed(3) : 0;
               const prev = dataset[index - 1]?.value;
               const delta = typeof prev === 'number' && prev > 0 ? ((value - prev) / prev) * 100 : null;
+              const deltaShort = delta == null ? '' : `${delta > 0 ? '+' : ''}${Math.round(delta)}%`;
               const deltaClass = delta === null ? 'baseline' : delta > 0 ? 'positive' : delta < 0 ? 'negative' : 'flat';
-              const deltaLabelRaw = delta === null
-                ? (cfg.baselineLabel || 'Base')
-                : `${delta > 0 ? '+' : ''}${Math.round(delta)}%`;
-              const deltaLabelParts = deltaLabelRaw.split(' ');
-              const deltaLabel = deltaLabelParts.length > 1
-                ? `${deltaLabelParts.shift()}<br>${deltaLabelParts.join(' ')}`
-                : deltaLabelRaw;
+              const deltaLabel = delta === null ? (cfg.baselineLabel || 'Base') : deltaShort;
               const isPeak = peakValue && value === peakValue;
+              const isEndpoint = index === 0 || index === lastIndex;
+              const showValueLabel = cfg.hideValues ? false : (!dense || isEndpoint || isPeak);
+              const showQuarterLabel = !dense || isEndpoint;
+              const showDeltaChip = !dense && cfg.showDeltas !== false;
+              const footerParts = [];
+              if (showQuarterLabel) footerParts.push(`<span class="chart-quarter">${quarterLabel}</span>`);
+              if (showDeltaChip) footerParts.push(`<span class="delta-chip ${deltaClass}">${deltaLabel}</span>`);
+              const footerMarkup = footerParts.length ? `<div class="chart-bar-footer">${footerParts.join('')}</div>` : '';
               return `
-                <button class="chart-bar${isPeak ? ' is-peak' : ''}" type="button" data-quarter="${displayQuarter}" data-value="${formatFullValue(value)}">
-                  <span class="value-label">${formatShortValue(value)}</span>
+                <button class="chart-bar${isPeak ? ' is-peak' : ''}" type="button" data-quarter="${displayQuarter}" data-value="${formatFullValue(value)}" data-delta="${deltaShort}">
+                  ${showValueLabel ? `<span class="value-label">${formatShortValue(value)}</span>` : ''}
                   <div class="bar-visual" style="--bar-color:${color}; --bar-height:${height};">
                     <span class="bar-fill"></span>
                     ${isPeak && cfg.highlightLabel ? `<span class="bar-flag" aria-hidden="true">${cfg.highlightLabel}</span>` : ''}
                   </div>
-                  <div class="chart-bar-footer">
-                    <span class="chart-quarter">${displayQuarter}</span>
-                    <span class="delta-chip ${deltaClass}">${deltaLabel}</span>
-                  </div>
+                  ${footerMarkup}
                 </button>
               `;
             })
@@ -5463,8 +5535,8 @@
         }
 
         const bars = barsEl?.querySelectorAll('.chart-bar') || [];
-        bars.forEach((bar, index) => {
-          setTimeout(() => bar.classList.add('visible'), 150 + index * 120);
+        bars.forEach((bar) => {
+          bar.classList.add('visible');
           bar.addEventListener('mouseenter', () => showTooltip(bar, tooltip, wrapper, cfg.tooltipSuffix));
           bar.addEventListener('focus', () => showTooltip(bar, tooltip, wrapper, cfg.tooltipSuffix));
           bar.addEventListener('mouseleave', () => hideTooltip(tooltip));
@@ -5495,15 +5567,15 @@
         }
         const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
 
-        if (axisEl && axisValues) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+        if (axisEl) {
+          axisEl.innerHTML = cfg.hideAxis ? '' : axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
         }
 
         const lineColor = cfg.lineColor || '#111111';
         const areaColor = cfg.lineAreaColor || 'rgba(0,0,0,0.08)';
         const viewWidth = Math.max(640, dataset.length * 50);
         const viewHeight = 230;
-        const padding = { top: 12, right: 18, bottom: 28, left: 12 };
+        const padding = { top: 12, right: 18, bottom: 18, left: 12 };
         const innerWidth = viewWidth - padding.left - padding.right;
         const innerHeight = viewHeight - padding.top - padding.bottom;
         const step = dataset.length > 1 ? innerWidth / (dataset.length - 1) : innerWidth / 2;
@@ -5557,14 +5629,8 @@
         // X-axis labels removed for a cleaner fit per request
 
         if (metaEl && dataset.length) {
-          const wantsExtras = Boolean(cfg.caption || (cfg.legendItems && cfg.legendItems.length) || cfg.legend === true);
           if (cfg.meta === false || cfg.meta == null) {
-            if (wantsExtras) {
-              const derivedLegendItems = cfg.legendItems || (cfg.legend === true ? [{ label: cfg.legendLabel || 'Series', color: lineColor, kind: 'line' }] : []);
-              renderChartExtras(metaEl, { caption: cfg.caption, legendItems: derivedLegendItems });
-            } else {
-              metaEl.remove();
-            }
+            metaEl.remove();
           } else {
             renderChartMeta(metaEl, dataset, cfg, formatFullValue);
           }
@@ -5645,13 +5711,13 @@
         }
         const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
 
-        if (axisEl && axisValues) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
+        if (axisEl) {
+          axisEl.innerHTML = cfg.hideAxis ? '' : axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
         }
 
         const viewWidth = Math.max(700, labels.length * 65);
         const viewHeight = 230;
-        const padding = { top: 12, right: 18, bottom: 28, left: 12 };
+        const padding = { top: 12, right: 18, bottom: 18, left: 12 };
         const innerWidth = viewWidth - padding.left - padding.right;
         const innerHeight = viewHeight - padding.top - padding.bottom;
         const step = labels.length > 1 ? innerWidth / (labels.length - 1) : innerWidth / 2;
@@ -5701,8 +5767,10 @@
         }
 
         if (metaEl) {
-          const wantsExtras = Boolean(cfg.caption || (cfg.legendItems && cfg.legendItems.length) || cfg.legend === true);
           if (cfg.meta === false || cfg.meta == null) {
+            metaEl.remove();
+          } else {
+            const wantsExtras = Boolean(cfg.caption || (cfg.legendItems && cfg.legendItems.length) || cfg.legend === true);
             if (wantsExtras) {
               const derivedLegendItems = cfg.legendItems || (cfg.legend === true
                 ? seriesList.map(series => ({ label: series.label, color: series.color, kind: 'line' }))
@@ -5711,13 +5779,6 @@
             } else {
               metaEl.remove();
             }
-          } else if (wantsExtras) {
-            const derivedLegendItems = cfg.legendItems || (cfg.legend === true
-              ? seriesList.map(series => ({ label: series.label, color: series.color, kind: 'line' }))
-              : []);
-            renderChartExtras(metaEl, { caption: cfg.caption, legendItems: derivedLegendItems });
-          } else {
-            metaEl.remove();
           }
         }
 
@@ -5945,7 +6006,8 @@
 
       function showTooltip(bar, tooltip, wrapper, suffix = '') {
         if (!tooltip || !wrapper) return;
-        tooltip.textContent = `${bar.dataset.quarter}: ${bar.dataset.value}${suffix}`;
+        const delta = bar.dataset.delta;
+        tooltip.textContent = `${bar.dataset.quarter}: ${bar.dataset.value}${suffix}${delta ? ` (${delta})` : ''}`;
         const barRect = bar.getBoundingClientRect();
         const wrapRect = wrapper.getBoundingClientRect();
         tooltip.style.left = `${barRect.left + barRect.width / 2 - wrapRect.left}px`;
