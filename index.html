@@ -15,7 +15,7 @@
       --panel-soft: #f5f5f5;
       --fg: #171717;
       --muted: #5f5f5f;
-      --accent: #01684d;
+      --accent: #171717;
       --border: #e5e5e5;
       --hover: #f3f3f3;
       --progress-bg: #e5e5e5;
@@ -77,7 +77,7 @@
       }
     }
     .nav-rail {
-      background: linear-gradient(180deg, #ffffff 0%, #fcfcfa 100%);
+      background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 20px;
@@ -1258,12 +1258,6 @@
     .contact-card .hero-actions {
       justify-content: flex-start;
     }
-    .contact-card .cta-btn {
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
     .cta-btn {
       padding: 10px 18px;
       border-radius: 999px;
@@ -2242,10 +2236,6 @@
       font-size: 0.95rem;
       color: var(--muted);
     }
-    .summary-stat.is-accent {
-      border-color: rgba(1,104,77,0.28);
-      background: rgba(1,104,77,0.08);
-    }
     @media (max-width: 960px) {
       .pricing-layout {
         grid-template-columns: 1fr;
@@ -2389,10 +2379,6 @@
       max-height: 44px;
       object-fit: contain;
       filter: saturate(0.9);
-    }
-    .logo-grid.logo-grid-compact {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 14px;
     }
     .chart-stack {
       display: grid;
@@ -4481,12 +4467,12 @@
           </header>
           <div class="slide-body">
             <div class="slide-head">
-	              <h2>Market Opportunity — India, GCC, Global</h2>
-	              <p class="hero-proof">Large category, but the bridge plan is built around a narrow India/GCC beachhead first.</p>
-	            </div>
-	            <div class="split split-2-1">
-	              <div class="card-block">
-	                <h3>Market size snapshot</h3>
+              <h2>Market Opportunity — India, GCC, Global</h2>
+              <p class="hero-proof">India + GCC ~$1.5B spend (’25e) · Global $15–17B TAM</p>
+            </div>
+            <div class="split split-2-1">
+              <div class="card-block">
+                <h3>Market size snapshot</h3>
                 <div class="stat-grid">
                   <div class="stat-card compact-stat">
                     <div>
@@ -4507,28 +4493,18 @@
                     </div>
                   </div>
                 </div>
-	                <p class="problem-footnote">Top-down sizing frames category size; the near-term plan is driven by repeatable workflows already selling in India and GCC.</p>
-	              </div>
-			              <div class="card-block">
-			                <h3>Beachhead that already exists</h3>
-			                <div class="summary-stats">
-			                  <div class="summary-stat is-accent">
-			                    <strong>25</strong>
-			                    <span>Live paying customers across India + GCC</span>
-			                  </div>
-			                  <div class="summary-stat">
-			                    <strong>₹1.03 Cr</strong>
-			                    <span>ARR baseline to expand from</span>
-			                  </div>
-			                </div>
-			                <ul class="pricing-points">
-			                  <li><strong>Land:</strong> NBFC underwriting, logistics billing, and compliance workflows where manual review already has budget and ownership.</li>
-			                  <li><strong>Expand:</strong> More workflows, more pages, and more validators inside the same account.</li>
-			                  <li><strong>Why this wedge works:</strong> Residency, auditability, and write-back matter before broad horizontal automation.</li>
-			                </ul>
-			              </div>
-			            </div>
-			          </div>
+              </div>
+		              <div class="card-block">
+		                <h3>Wedge → expand</h3>
+		                <div class="chip-row" aria-label="Go-to-market focus">
+		                  <span class="chip chip-neutral chip-lg">NBFC underwriting</span>
+		                  <span class="chip chip-neutral chip-lg">Logistics billing</span>
+		                  <span class="chip chip-neutral chip-lg">Compliance + audit</span>
+		                </div>
+		                <p class="compression-note">Expand via more workflows + throughput/customer.</p>
+		              </div>
+		            </div>
+		          </div>
 	          <div class="footer">Slide 04 · Market Opportunity</div>
 	        </section>
 
@@ -4543,33 +4519,25 @@
 		          <div class="slide-body">
 			            <div class="slide-head">
 			              <h2>Agentic Workflows (Closed-loop) with Built-in IDP</h2>
-			              <p class="hero-proof">One production run: intake → extract → validate → task/approve → controlled write-back.</p>
-			              <p class="compression-note">The product is not read-only OCR. It executes operational work with approvals, exceptions, and system updates.</p>
+			              <p class="hero-proof">Workflows runtime (flows.fracto.tech) + built-in IDP engine (ocr.fracto.tech).</p>
+			              <p class="compression-note">Intake → parse → validate → task/approve → controlled write-back (with audit + residency).</p>
 			            </div>
 
 			            <div class="whatwedo-grid">
 			              <div class="card-block whatwedo-card">
 			                <span class="yc-label">Product</span>
-			                <h3>Where we land first</h3>
-			                <ul class="pillar-list">
-			                  <li>
-			                    <strong>Document-heavy workflows</strong>
-			                    <p>Underwriting files, billing packets, compliance documents, and operational exceptions.</p>
-			                  </li>
-			                  <li>
-			                    <strong>High-cost review steps</strong>
-			                    <p>Manual extraction, validation, exception handling, and approvals that currently live in inboxes and spreadsheets.</p>
-			                  </li>
-			                  <li>
-			                    <strong>Systems that need updating</strong>
-			                    <p>LOS, ERP, TMS, and internal tools where controlled write-back matters more than extraction alone.</p>
-			                  </li>
-			                </ul>
+			                <h3>Agentic workflows</h3>
+			                <div class="chip-row" aria-label="Core capabilities">
+			                  <span class="chip chip-neutral chip-lg">Built-in IDP</span>
+			                  <span class="chip chip-neutral chip-lg">Policy validators</span>
+			                  <span class="chip chip-neutral chip-lg">Tasks + approvals</span>
+			                  <span class="chip chip-neutral chip-lg">Controlled write-back</span>
+			                </div>
 			              </div>
 
 	              <div class="card-block whatwedo-card">
 	                <span class="yc-label">How it works</span>
-	                <h3>One production run</h3>
+	                <h3>4-step loop</h3>
 	                <div class="baseline-flow whatwedo-flow" aria-label="4-step loop: intake, parse and normalize, extract and validate, execute with write-back">
 	                  <div class="flow-step">
 	                    <span class="flow-num" aria-hidden="true">1</span>
@@ -4596,12 +4564,12 @@
 
 		              <div class="card-block whatwedo-card">
 		                <span class="yc-label">Outcomes</span>
-		                <h3>What buyers actually get</h3>
-		                <ul class="pricing-points">
-		                  <li><strong>Shorter turnaround:</strong> operators review exceptions, not every file.</li>
-		                  <li><strong>Auditability:</strong> every run, validation, approval, and write-back is replayable.</li>
-		                  <li><strong>Deployment fit:</strong> India/UAE VPC-ready for residency-sensitive programs.</li>
-		                </ul>
+		                <h3>Ops impact in weeks</h3>
+		                <div class="chip-row" aria-label="Outcomes">
+		                  <span class="chip chip-neutral chip-lg">Doc → system updates</span>
+		                  <span class="chip chip-neutral chip-lg">Exceptions only + audit</span>
+		                  <span class="chip chip-neutral chip-lg">India/UAE VPC-ready</span>
+		                </div>
 		              </div>
 		            </div>
 	          </div>
@@ -4679,37 +4647,76 @@
                   </div> -->
                 </div>
                 <!-- <h3>Selected customers</h3> -->
-                <div class="traction-proof">
-                  <div class="traction-proof-card">
-                    <strong>Repeatable entry points</strong>
-                    NBFC underwriting, logistics billing, and compliance-heavy workflows.
-                    <span>Same pattern each time: documents arrive unstructured, policy checks are manual, and core systems still need updates.</span>
-                  </div>
-                  <div class="traction-proof-card">
-                    <strong>References across both geographies</strong>
-                    India and GCC customer logos show the product is not tied to one narrow local niche.
-                    <span>Stronger proof for a bridge deck than a long scrolling logo carousel.</span>
-                  </div>
-                </div>
                 <div class="logo-section">
                   <span class="logo-label">India references</span>
-                  <div class="logo-grid logo-grid-compact" aria-label="India customer logos">
-                    <img src="clients/cargomen.jpeg" alt="Cargomen">
-                    <img src="clients/letstransport.png" alt="Lets Transport">
-                    <img src="clients/rxil.jpeg" alt="RXIL">
-                    <img src="clients/NBHC.png" alt="NBHC">
-                    <img src="clients/jaikisan.png" alt="Jai Kisan">
-                    <img src="clients/kuhoo.png" alt="Kuhoo">
+                  <!-- <p class="funnel-note">India – NBFCs, banks, 3PLs, and logistics tech.</p> -->
+                  <div class="logo-marquee india" aria-label="India customer logos">
+                    <div class="logo-track">
+                      <img src="clients/cargomen.jpeg" alt="Cargomen">
+                      <img src="clients/onmove.jpeg" alt="Onmove">
+                      <img src="clients/ambak.png" alt="Ambak">
+                      <img src="clients/letstransport.png" alt="Lets Transport">
+                      <img src="clients/gyandhan.png.webp" alt="Gyandhan">
+                      <img src="clients/rxil.jpeg" alt="RXIL">
+                      <img src="clients/symbo.png" alt="Symbo">
+                      <img src="clients/pssc.png" alt="PSSC">
+                      <img src="clients/khfl.jpeg" alt="KHFL">
+                      <img src="clients/ambit.png" alt="Ambit">
+                      <img src="clients/equal.png" alt="Equal">
+                      <img src="clients/presolv.png" alt="Presolv">
+                      <img src="clients/freightfox.png" alt="Freightfox">
+                      <img src="clients/petpooja.png" alt="Petpooja">
+                      <img src="clients/turno.png" alt="Turno">
+                      <img src="clients/navata.png" alt="Navata">
+                      <img src="clients/MCC.png" alt="MCC Original">
+                      <img src="clients/NBHC.png" alt="NBHC">
+                      <img src="clients/121Finance.png" alt="121 Finance">
+                      <img src="clients/jaikisan.png" alt="Jai Kisan">
+                      <img src="clients/accomation.png" alt="Accomation">
+                      <img src="clients/ODeX.png" alt="ODeX">
+                      <img src="clients/kuhoo.png" alt="Kuhoo">
+                      <img src="clients/cargomen.jpeg" alt="Cargomen duplicate" aria-hidden="true">
+                      <img src="clients/onmove.jpeg" alt="Onmove duplicate" aria-hidden="true">
+                      <img src="clients/ambak.png" alt="Ambak duplicate" aria-hidden="true">
+                      <img src="clients/letstransport.png" alt="Lets Transport duplicate" aria-hidden="true">
+                      <img src="clients/gyandhan.png.webp" alt="Gyandhan duplicate" aria-hidden="true">
+                      <img src="clients/rxil.jpeg" alt="RXIL duplicate" aria-hidden="true">
+                      <img src="clients/symbo.png" alt="Symbo duplicate" aria-hidden="true">
+                      <img src="clients/pssc.png" alt="PSSC duplicate" aria-hidden="true">
+                      <img src="clients/khfl.jpeg" alt="KHFL duplicate" aria-hidden="true">
+                      <img src="clients/ambit.png" alt="Ambit duplicate" aria-hidden="true">
+                      <img src="clients/equal.png" alt="Equal duplicate" aria-hidden="true">
+                      <img src="clients/presolv.png" alt="Presolv duplicate" aria-hidden="true">
+                      <img src="clients/freightfox.png" alt="Freightfox duplicate" aria-hidden="true">
+                      <img src="clients/petpooja.png" alt="Petpooja duplicate" aria-hidden="true">
+                      <img src="clients/turno.png" alt="Turno duplicate" aria-hidden="true">
+                      <img src="clients/navata.png" alt="Navata duplicate" aria-hidden="true">
+                      <img src="clients/MCC.png" alt="MCC Original duplicate" aria-hidden="true">
+                      <img src="clients/NBHC.png" alt="NBHC duplicate" aria-hidden="true">
+                      <img src="clients/121Finance.png" alt="121 Finance duplicate" aria-hidden="true">
+                      <img src="clients/jaikisan.png" alt="Jai Kisan duplicate" aria-hidden="true">
+                      <img src="clients/accomation.png" alt="Accomation duplicate" aria-hidden="true">
+                      <img src="clients/ODeX.png" alt="ODeX duplicate" aria-hidden="true">
+                      <img src="clients/kuhoo.png" alt="Kuhoo duplicate" aria-hidden="true">
+                    </div>
                   </div>
                 </div>
                 <div class="logo-section">
                   <span class="logo-label">GCC references</span>
-                  <div class="logo-grid logo-grid-compact" aria-label="GCC customer logos">
-                    <img src="clients/propertyfinder.png" alt="Property Finder">
-                    <img src="clients/trukker.png" alt="Trukker">
-                    <img src="clients/jisr.jpg" alt="Jisr">
-                    <img src="clients/comfi.png" alt="Comfi">
-                    <img src="clients/maritimesupportsolutions.jpeg" alt="Maritime Support Solutions">
+                  <!-- <p class="funnel-note">GCC – HR/payroll, logistics, and fintech.</p> -->
+                  <div class="logo-marquee gcc" aria-label="GCC customer logos">
+                    <div class="logo-track">
+                      <img src="clients/jisr.jpg" alt="Jisr">
+                      <img src="clients/comfi.png" alt="Comfi">
+                      <img src="clients/maritimesupportsolutions.jpeg" alt="Maritime Support Solutions">
+                      <img src="clients/propertyfinder.png" alt="Property Finder">
+                      <img src="clients/trukker.png" alt="Trukker">
+                      <img src="clients/jisr.jpg" alt="Jisr duplicate" aria-hidden="true">
+                      <img src="clients/comfi.png" alt="Comfi duplicate" aria-hidden="true">
+                      <img src="clients/maritimesupportsolutions.jpeg" alt="Maritime Support Solutions duplicate" aria-hidden="true">
+                      <img src="clients/propertyfinder.png" alt="Property Finder duplicate" aria-hidden="true">
+                      <img src="clients/trukker.png" alt="Trukker duplicate" aria-hidden="true">
+                    </div>
                   </div>
                 </div>
                 <!-- <p class="funnel-note">Dual sliders spotlight India + GCC logos; tap appendix for the full customer wall.</p> -->
@@ -4828,7 +4835,7 @@
 
 	            <div class="slide-head">
 	              <h2>Moat — Residency-first, Closed Loop for BFSI &amp; Logistics</h2>
-	              <p class="hero-proof">The differentiator is the whole operating system, not just extraction quality.</p>
+	              <p class="hero-proof">Residency-first · audit-native runs · domain validators.</p>
 	            </div>
 
             <!-- <div class="card-block expectation-card">
@@ -4851,72 +4858,47 @@
 	              <p class="compression-note"><strong>Compression:</strong> reliability, regulation, and buying cycles have converged — teams need an audit-native, residency-ready agentic workflow platform now (with IDP + write-back), not in three years.</p>
             </div> -->
 
-		            <div class="card-block">
-		              <div class="stat-grid">
-		                <div class="stat-card compact-stat">
-		                  <div>
-		                    <strong>India/UAE VPC-ready</strong>
-		                    <span class="stat-label">Residency-first deployments</span>
-		                  </div>
-		                </div>
-		                <div class="stat-card compact-stat">
-		                  <div>
-		                    <strong>Controlled write-back</strong>
-		                    <span class="stat-label">Tasks/approvals → LOS/ERP/TMS</span>
-		                  </div>
-		                </div>
-		                <div class="stat-card compact-stat">
-		                  <div>
-		                    <strong>Domain validators</strong>
-		                    <span class="stat-label">BFSI/logistics policy checks</span>
-		                  </div>
-		                </div>
-		              </div>
+	            <div class="card-block">
+	              <div class="stat-grid">
+	                <div class="stat-card compact-stat">
+	                  <div>
+	                    <strong>India/UAE VPC-ready</strong>
+	                    <span class="stat-label">Residency-first deployments</span>
+	                  </div>
+	                </div>
+	                <div class="stat-card compact-stat">
+	                  <div>
+	                    <strong>Controlled write-back</strong>
+	                    <span class="stat-label">Tasks/approvals → LOS/ERP/TMS</span>
+	                  </div>
+	                </div>
+	                <div class="stat-card compact-stat">
+	                  <div>
+	                    <strong>Domain validators</strong>
+	                    <span class="stat-label">BFSI/logistics policy checks</span>
+	                  </div>
+	                </div>
+	              </div>
 
-		              <table class="advantage-table">
-		                <thead>
-		                  <tr>
-		                    <th>What enterprise buyers ask for</th>
-		                    <th>OCR / model APIs</th>
-		                    <th>Point workflow tools</th>
-		                    <th class="is-fracto">Fracto</th>
-		                  </tr>
-		                </thead>
-		                <tbody>
-		                  <tr>
-		                    <td>In-region VPC deployment</td>
-		                    <td>Custom</td>
-		                    <td>Sometimes</td>
-		                    <td class="is-fracto"><span class="chip chip-positive">Built for India/UAE</span></td>
-		                  </tr>
-		                  <tr>
-		                    <td>Replayable audit trail</td>
-		                    <td>Logs only</td>
-		                    <td>Partial</td>
-		                    <td class="is-fracto"><span class="chip chip-positive">Run-level auditability</span></td>
-		                  </tr>
-		                  <tr>
-		                    <td>Tasks and approvals</td>
-		                    <td>No</td>
-		                    <td>Usually custom</td>
-		                    <td class="is-fracto"><span class="chip chip-positive">Built in</span></td>
-		                  </tr>
-		                  <tr>
-		                    <td>Controlled write-back to systems</td>
-		                    <td>No</td>
-		                    <td>Connector project</td>
-		                    <td class="is-fracto"><span class="chip chip-positive">Core workflow step</span></td>
-		                  </tr>
-		                  <tr>
-		                    <td>Domain validators for BFSI/logistics</td>
-		                    <td>Customer-built prompts</td>
-		                    <td>Rules bolt-on</td>
-		                    <td class="is-fracto"><span class="chip chip-positive">Packaged validators</span></td>
-		                  </tr>
-		                </tbody>
-		              </table>
-		              <p class="advantage-footnote">Positioning improvement: this slide now sells Fracto as the system of execution, not just a better extraction engine.</p>
-		            </div>
+	              <div class="traction-metric-grid usage-grid stp-proof-grid">
+	                <div class="traction-metric">
+	                  <span class="traction-label">Median STP</span>
+	                  <strong data-stp-field="median">—</strong>
+	                  <div class="stp-proof-sub" data-stp-field="window">—</div>
+	                </div>
+	                <div class="traction-metric">
+	                  <span class="traction-label">p25 / p75</span>
+	                  <strong data-stp-field="p25p75">—</strong>
+	                  <div class="stp-proof-sub">Production runs distribution</div>
+	                </div>
+	                <div class="traction-metric">
+	                  <span class="traction-label">Sample</span>
+	                  <strong data-stp-field="sample">—</strong>
+	                  <div class="stp-proof-sub">Workflows · customers</div>
+	                </div>
+	              </div>
+	              <p class="stp-definition">STP = share of docs completed read → validate → write-back with no manual steps.</p>
+	            </div>
 
           </div>
 
@@ -4934,8 +4916,8 @@
 	            <!-- HEADLINE -->
 		            <div class="slide-head">
 		              <h2>Pricing &amp; Unit Economics — Platform + Agent Packs</h2>
-		              <p class="hero-proof">Land on workflow value; expand through volume, validators, and additional workflows.</p>
-		              <p class="funnel-note">Illustrative program: 100k pages/month → ~₹2.5L usage + ₹25k base.</p>
+		              <p class="hero-proof">Base platform + setup + agent packs.</p>
+		              <p class="funnel-note">Example: 100k pages/month → ~₹2.5L usage + ₹25k base.</p>
 		            </div>
 
             <div class="pricing-layout">
@@ -4966,25 +4948,27 @@
                 </aside>
               </div>
 
-		              <div class="pricing-overview card-block">
-		                <span class="pricing-pill">Land-and-expand economics</span>
-		                <div class="summary-stats">
-		                  <div class="summary-stat is-accent">
-		                    <strong>Base + setup</strong>
-		                    <span>Fast initial deployment and clear budget owner</span>
-		                  </div>
-		                  <div class="summary-stat">
-		                    <strong>Usage + add-ons</strong>
-		                    <span>Throughput, validators, and workflow expansion drive growth</span>
-		                  </div>
-		                </div>
-		                <ul class="pricing-points">
-		                  <li><strong>Land:</strong> one workflow, one team, one integration path.</li>
-		                  <li><strong>Expand:</strong> more pages, more validators, and more write-back flows inside the same account.</li>
-		                  <li><strong>Why it compounds:</strong> once approvals and system updates sit inside Fracto, replacement risk drops.</li>
-		                </ul>
-	              </div>
-	            </div>
+	              <div class="pricing-overview card-block">
+	                <span class="pricing-pill">Pack architecture</span>
+	                <!-- <h3>Predictable base + usage</h3> -->
+	                <p>Predictable base + usage; expansion via packs.</p>
+	                <div class="chip-row" aria-label="Pricing components">
+	                  <span class="chip chip-neutral chip-lg">Orchestrator + APIs</span>
+	                  <span class="chip chip-neutral chip-lg">Connectors + validators</span>
+	                  <span class="chip chip-neutral chip-lg">Tiered page bundles</span>
+	                </div>
+	                <!-- <div class="pricing-meta">
+	                  <div class="pricing-meta-block">
+	                    <span>Designed for</span>
+	                    <strong>BFSI · Logistics STP</strong>
+                  </div>
+                  <div class="pricing-meta-block">
+                    <span>Scale lever</span>
+                    <strong>Pages + workflows</strong>
+                  </div>
+                </div> -->
+              </div>
+            </div>
           </div>
 
           <div class="footer">Slide 09 · Pricing &amp; Unit Economics</div>
@@ -5105,7 +5089,7 @@
 	                ₹4 Cr bridge to scale from ₹1.03 Cr → ~₹5 Cr ARR + SOC-2 + India/GCC VPC kits.
 	              </p>
 	              <p>Standard seed convertible · targeting 3–5 partners.</p>
-	              <p class="funnel-note">Target allocation window: next 6–8 weeks from first partner commit.</p>
+	              <p class="funnel-note">Target close: Q1 2026.</p>
 
               <div class="milestone-bar" data-milestone="arr" data-current="1.03" data-target="5">
                 <span>ARR today · ₹1.03 Cr</span>
@@ -5139,10 +5123,10 @@
               </div>
 
               <!-- RIGHT: 12-month plan & outcomes -->
-	              <div class="card-block bridge-card">
-	                <h3>12-month plan &amp; outcomes</h3>
-	                <div class="bridge-roadmap">
-	                  <ul class="bridge-summary-list">
+              <div class="card-block bridge-card">
+                <h3>12-month plan &amp; outcomes</h3>
+                <div class="bridge-roadmap">
+                  <ul class="bridge-summary-list">
                     <li>
                       <strong>Revenue engine <span class="delta-chip baseline">ARR &amp; GTM pods</span></strong>
                       <p>₹1.03 Cr → ~₹5 Cr ARR with expansion-led growth.</p>
@@ -5151,19 +5135,26 @@
 	                      <strong>Product <span class="delta-chip baseline">STP + expansions</span></strong>
 	                      <p>Increase STP and expansion per customer; reduce deployment time for new workflows.</p>
 	                    </li>
-	                    <li>
-	                      <strong>Compliance + residency <span class="delta-chip baseline">SOC-2 &amp; VPC kits</span></strong>
-	                      <p>SOC-2 Type II + repeatable India/GCC VPC kits.</p>
-	                    </li>
-	                  </ul>
-	                </div>
-	                <div class="risk-card">
-	                  <strong>What this bridge is for</strong>
-	                  <span>GTM scale, productization, and compliance evidence. The deck should read as execution financing, not open-ended R&amp;D.</span>
-	                </div>
+                    <li>
+                      <strong>Compliance + residency <span class="delta-chip baseline">SOC-2 &amp; VPC kits</span></strong>
+                      <p>SOC-2 Type II + repeatable India/GCC VPC kits.</p>
+                    </li>
+                  </ul>
+                </div>
 
-	              </div>
-	            </div>
+                <!-- <h3>By December 2026</h3>
+                <ul class="list">
+                  <li>₹ 15 Cr ARR run-rate, with ~₹5 Cr ARR proven during the bridge period.</li>
+                  <li>SOC-2 Type II completed and embedded into enterprise sales motions.</li>
+                  <li>Standardised India + GCC VPC footprints live with shared observability.</li>
+                </ul>
+
+                <div class="risk-card">
+                  <strong>Not a science project</strong>
+                  <span>This bridge is for GTM, productisation, and compliance evidence — not long-horizon research.</span>
+                </div> -->
+              </div>
+            </div>
           </div>
           <div class="footer">Slide 12 · Momentum Bridge &amp; Ask</div>
         </section>
@@ -5179,22 +5170,21 @@
           <div class="slide-body">
             <div class="slide-head">
               <h2>The Raise &amp; How We Partner</h2>
-              <p class="hero-proof">The fastest path is one working session on a live workflow, then a targeted diligence track.</p>
+              <p class="hero-proof">We’re looking for 3–5 partners to complete this ₹4 Cr bridge.</p>
             </div>
             <div class="split">
               <div class="card-block">
-                <h3>What the first diligence step looks like</h3>
+                <h3>How we propose to engage</h3>
 	                <ul class="list">
-	                  <li><strong>Working session on one live workflow</strong> to align on pain, controls, and deployment fit.</li>
-	                  <li><strong>Focused product deep dive</strong> on approvals, auditability, and write-back.</li>
-	                  <li><strong>Data room + diligence cadence</strong> immediately after first fit confirmation.</li>
-	                  <li><strong>Partner group formation</strong> across 3–5 bridge participants.</li>
+	                  <li><strong>30-minute working session (this week)</strong> to align on fit.</li>
+	                  <li><strong>Tailored deep dive</strong> on priority workflows.</li>
+	                  <li><strong>Diligence &amp; closing path</strong> with a clear cadence.</li>
+	                  <li><strong>Data room</strong> available after the first call.</li>
 	                </ul>
               </div>
               <div class="card-block contact-card">
                 <h3>Contact</h3>
                 <p><strong>Ankur Gupta · CEO</strong><br><a href="mailto:ceo@fracto.tech">ceo@fracto.tech</a> · +91 98994 88100</p>
-                <a class="cta-btn" href="mailto:ceo@fracto.tech?subject=Fracto%20Bridge%20Deck%20Follow-up">Start diligence</a>
                 <div class="hero-actions">
                   <a class="team-link" href="https://fracto.tech" target="_blank" rel="noopener">fracto.tech</a>
                   <a class="team-link" href="https://ocr.fracto.tech" target="_blank" rel="noopener">ocr.fracto.tech</a>
@@ -5238,7 +5228,17 @@
 
 	  <script>
 	    (function(){
-		      const lineChartStates = [];
+	      const lineChartStates = [];
+	      // TODO: Fill these with real production stats before sending the deck.
+	      // STP = % of documents completed end-to-end (read → validate → write-back) with no manual keying.
+		      const STP_PROOF = {
+		        window: 'Last 30 days (production)',
+		        median: '',
+		        p25: '',
+		        p75: '',
+		        workflows: '',
+		        customers: '',
+		      };
 	      const charts = [
         // Operating loss + revenue + expenses (multi-line)
         {
@@ -5428,7 +5428,8 @@
 	      buildUseOfFunds();
 	      buildArrMilestone();
 	      buildSavingsChart();
-		      function escapeHtml(value) {
+	      applyStpProof();
+	      function escapeHtml(value) {
 	        return String(value ?? '')
 	          .replace(/&/g, '&amp;')
 	          .replace(/</g, '&lt;')
@@ -6144,9 +6145,48 @@
         if (value >= 10) return `${Math.round(value)} FTE`;
         return `${value.toFixed(1).replace(/\.0$/, '')} FTE`;
       }
-	      function clamp(value, min, max) {
-	        if (!isFinite(value)) return min;
-	        return Math.min(Math.max(value, min), max);
+      function clamp(value, min, max) {
+        if (!isFinite(value)) return min;
+        return Math.min(Math.max(value, min), max);
+      }
+
+	      function applyStpProof() {
+	        const slide = document.querySelector('[data-slide-number="08"]');
+	        if (!slide) return;
+	        const get = (value) => (value == null || value === '' ? '—' : String(value));
+	        const windowLabel = get(STP_PROOF.window);
+	        const medianLabel = get(STP_PROOF.median);
+	        const p25Label = get(STP_PROOF.p25);
+	        const p75Label = get(STP_PROOF.p75);
+	        const workflowsLabel = get(STP_PROOF.workflows);
+	        const customersLabel = get(STP_PROOF.customers);
+	        const setText = (field, text) => {
+	          slide.querySelectorAll(`[data-stp-field="${field}"]`).forEach(el => { el.textContent = text; });
+	        };
+	        setText('window', windowLabel);
+	        setText('median', medianLabel);
+	        setText('p25p75', `${p25Label} / ${p75Label}`);
+	        setText('sample', `${workflowsLabel} workflows · ${customersLabel} customers`);
+
+	        const headlineEl = slide.querySelector('[data-stp-table="headline"]');
+	        const noteEl = slide.querySelector('[data-stp-table="note"]');
+	        const hasMedian = STP_PROOF.median != null && String(STP_PROOF.median).trim() !== '';
+	        const hasP25 = STP_PROOF.p25 != null && String(STP_PROOF.p25).trim() !== '';
+	        const hasP75 = STP_PROOF.p75 != null && String(STP_PROOF.p75).trim() !== '';
+	        if (headlineEl) {
+	          if (hasMedian && hasP25 && hasP75) {
+	            headlineEl.textContent = `Median ${medianLabel} (p25/p75 ${p25Label}/${p75Label})`;
+	          } else if (hasMedian) {
+	            headlineEl.textContent = `Median ${medianLabel}`;
+	          } else {
+	            headlineEl.textContent = '—';
+	          }
+	        }
+	        if (noteEl) {
+	          noteEl.textContent = windowLabel === '—'
+	            ? 'As defined above; distribution shown above.'
+	            : `Window: ${windowLabel} · As defined above.`;
+	        }
 	      }
 
       function buildUseOfFunds(){
