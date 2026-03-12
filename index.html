@@ -1277,7 +1277,17 @@
       gap: 12px;
     }
     .stat-grid.hero-stats {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 960px) {
+      .stat-grid.hero-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      .stat-grid.hero-stats {
+        grid-template-columns: 1fr;
+      }
     }
     .stat-card {
       border: 1px solid var(--border);
@@ -1308,6 +1318,78 @@
     .stat-card.compact-stat .stat-label {
       font-size: 14px;
       color: var(--muted);
+    }
+    .slide[data-title="Documents → Decisions"] .cover-lower {
+      display: grid;
+      gap: 12px;
+      align-items: start;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-line {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-step {
+      min-height: 122px;
+      padding: 18px 18px 14px;
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.96) 100%);
+      border-color: rgba(15,23,42,0.08);
+      box-shadow: 0 16px 28px rgba(15,23,42,0.06);
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-sub {
+      display: block;
+      max-width: none;
+      font-size: 11px;
+      line-height: 1.35;
+      letter-spacing: 0.12em;
+      color: #475467;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category {
+      display: grid;
+      gap: 12px;
+      padding: 14px 0 0;
+      border: none;
+      border-top: 1px solid rgba(148,163,184,0.28);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category h3 {
+      margin: 0;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #475467;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-line {
+      margin-top: 0;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-step {
+      gap: 6px;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-kicker {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-step strong {
+      font-size: clamp(18px, 1.8vw, 22px);
+      line-height: 1.12;
+    }
+    .slide[data-title="Documents → Decisions"] .cover-category .thesis-sub {
+      letter-spacing: 0;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    @media (max-width: 960px) {
+      .slide[data-title="Documents → Decisions"] .cover-category .thesis-line {
+        grid-template-columns: 1fr;
+      }
+      .slide[data-title="Documents → Decisions"] .cover-category .thesis-step {
+        min-height: 0;
+      }
     }
     .session-backdrop {
       display: none !important;
@@ -2313,6 +2395,9 @@
     .traction-metric-grid.usage-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+    .traction-metric-grid.usage-grid.usage-grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
     .traction-metric {
       border: 1px solid var(--border);
       border-radius: 14px;
@@ -2346,6 +2431,9 @@
     }
     @media (max-width: 1024px) {
       .traction-metric-grid.usage-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .traction-metric-grid.usage-grid.usage-grid-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -3144,6 +3232,10 @@
     .chart-legend-swatch.dashed {
       border-top-style: dashed;
     }
+    .chart-legend-swatch.dotted {
+      border-top-style: dotted;
+      border-top-width: 4px;
+    }
     .chart-stat {
       display: flex;
       flex-direction: column;
@@ -3412,6 +3504,12 @@
       stroke-linejoin: round;
       fill: none;
       filter: drop-shadow(0 6px 16px rgba(91,141,239,0.32));
+    }
+    .line-path.is-dashed {
+      stroke-dasharray: 10 8;
+    }
+    .line-path.is-dotted {
+      stroke-dasharray: 2 10;
     }
     .line-area {
       fill: rgba(91,141,239,0.22);
@@ -4325,31 +4423,17 @@
 			            <div class="slide-head">
 			              <h1>AI Workflows for Document-Heavy Operations</h1>
 			              <p class="cover-subhead">Fracto automates document intake, validation, approvals, and system updates for regulated teams.</p>
-			              <p class="hero-proof">₹1.02 Cr ARR run-rate · 25 live paying customers · 2M+ pages processed (as of March 12, 2026)</p>
+			              <p class="hero-proof">₹1.02 Cr ARR · 30+ active clients · 2M+ pages processed (as of March 12, 2026)</p>
 			              <div class="chip-row" aria-label="Product attributes">
-			                <span class="chip chip-neutral chip-lg">India/UAE residency</span>
-			                <span class="chip chip-neutral chip-lg">Replayable runs</span>
-			                <span class="chip chip-neutral chip-lg">Tasks + approvals</span>
-			                <span class="chip chip-neutral chip-lg">Controlled write-back</span>
-			              </div>
-			            </div>
-	            <div class="split split-2-1">
-	              <div class="stat-grid hero-stats">
-		              <div class="stat-card">
-		                <strong>2M+</strong>
-	                <span>Pages processed</span>
-	              </div>
-	              <div class="stat-card">
-	                <strong>25</strong>
-	                <span>Paying customers</span>
-	              </div>
-		              <div class="stat-card">
-			                <strong>₹1.02 Cr</strong>
-		                <span>ARR run-rate</span>
-		              </div>
-		              </div>
-			              <div class="card-block">
-				                <h3>Category</h3>
+				                <span class="chip chip-neutral chip-lg">India/UAE residency</span>
+				                <span class="chip chip-neutral chip-lg">Replayable runs</span>
+				                <span class="chip chip-neutral chip-lg">Tasks + approvals</span>
+				                <span class="chip chip-neutral chip-lg">Controlled write-back</span>
+				              </div>
+				            </div>
+	            <div class="cover-lower">
+			              <div class="card-block cover-category">
+			                <h3>Category</h3>
 				                <div class="thesis-line" aria-label="AI workflows for document-heavy operations with built-in document AI and expansion through more workflows and volume">
 				                  <div class="thesis-step">
 				                    <span class="thesis-kicker">Core</span>
@@ -4587,11 +4671,11 @@
           <div class="slide-body">
 	            <div class="slide-head">
 	              <h2>Traction — Customer Adoption</h2>
-	              <p class="hero-proof">25 live paying customers · ₹1.02 Cr ARR run-rate · 2M+ pages processed (as of March 12, 2026)</p>
+	              <p class="hero-proof">30+ active clients · ₹1.02 Cr ARR run-rate · 2M+ pages processed (as of March 12, 2026)</p>
 	            </div>
             <!-- <div class="traction-hero-card">
               <span class="traction-label">Headline metrics</span>
-              <span class="traction-value">25 live customers today</span>
+              <span class="traction-value">30+ active clients today</span>
               <div class="traction-foot">
                 <span>ARR ₹1.02 Cr as of Mar ’26; ₹8.51L revenue in Mar.</span>
                 <span>4 expansions in last 45 days.</span>
@@ -4629,8 +4713,8 @@
                 <!-- </div> -->
 	                <div class="traction-metric-grid">
 	                  <div class="traction-metric">
-	                    <span class="traction-label">Live paying customers</span>
-	                    <strong>25</strong>
+		                    <span class="traction-label">Active clients</span>
+		                    <strong>30+</strong>
 	                  </div>
 	                  <div class="traction-metric">
 	                    <span class="traction-label">ARR run-rate</span>
@@ -4760,7 +4844,7 @@
               </div>
             </div> -->
 
-	            <div class="traction-metric-grid usage-grid">
+	            <div class="traction-metric-grid usage-grid usage-grid-3">
 	              <div class="traction-metric">
 	                <span class="traction-label">ARR</span>
 		                <strong>₹1.02 Cr</strong>
@@ -5236,18 +5320,23 @@
 		      };
 	      const charts = [
         // Operating loss + revenue + expenses (multi-line)
-        {
-          selector: '[data-chart="operating-loss"]',
-          type: 'line-multi',
-          axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
-          legend: true,
-          series: [
-            {
-              key: 'operating-loss',
-              label: 'Operating loss',
-              color: '#111111',
-              formatter: formatCurrencyShort,
-              data: [
+	        {
+	          selector: '[data-chart="operating-loss"]',
+	          type: 'line-multi',
+	          axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
+	          legendItems: [
+	            { label: 'Operating loss', color: '#98a2b3', kind: 'line', dotted: true },
+	            { label: 'Revenue', color: '#111111', kind: 'line' },
+	            { label: 'Expenses', color: '#667085', kind: 'line' },
+	          ],
+	          series: [
+	            {
+	              key: 'operating-loss',
+	              label: 'Operating loss',
+	              color: '#98a2b3',
+	              dotted: true,
+	              formatter: formatCurrencyShort,
+	              data: [
                 { quarter: 'Apr-25', value: 1708070 },
                 { quarter: 'May-25', value: 1916331 },
 	                { quarter: 'Jun-25', value: 1289247 },
@@ -5262,12 +5351,12 @@
 	                { quarter: 'Mar-26', value: 669852 },
               ],
             },
-            {
-              key: 'revenue',
-              label: 'Revenue',
-              color: '#444444',
-              formatter: formatCurrencyShort,
-              data: [
+	            {
+	              key: 'revenue',
+	              label: 'Revenue',
+	              color: '#111111',
+	              formatter: formatCurrencyShort,
+	              data: [
                 { quarter: 'Apr-25', value: 139862 },
                 { quarter: 'May-25', value: 172387 },
                 { quarter: 'Jun-25', value: 156106 },
@@ -5282,12 +5371,12 @@
 	                { quarter: 'Mar-26', value: 850636 },
               ],
             },
-            {
-              key: 'expenses',
-              label: 'Expenses',
-              color: '#777777',
-              formatter: formatCurrencyShort,
-              data: [
+	            {
+	              key: 'expenses',
+	              label: 'Expenses',
+	              color: '#667085',
+	              formatter: formatCurrencyShort,
+	              data: [
                 { quarter: 'Apr-25', value: 1847932 },
                 { quarter: 'May-25', value: 2088718 },
 	                { quarter: 'Jun-25', value: 1445353 },
@@ -5459,9 +5548,10 @@
           ? `<div class="chart-legend">${items.map(item => {
               const label = escapeHtml(item.label || '');
               const kind = item.kind === 'box' ? 'box' : '';
-              const dashed = item.dashed ? 'dashed' : '';
-              const swatch = escapeHtml(item.color || '#111111');
-              return `<span class="chart-legend-item"><span class="chart-legend-swatch ${kind} ${dashed}" style="--swatch:${swatch};"></span>${label}</span>`;
+	              const dashed = item.dashed ? 'dashed' : '';
+	              const dotted = item.dotted ? 'dotted' : '';
+	              const swatch = escapeHtml(item.color || '#111111');
+	              return `<span class="chart-legend-item"><span class="chart-legend-swatch ${kind} ${dashed} ${dotted}" style="--swatch:${swatch};"></span>${label}</span>`;
             }).join('')}</div>`
           : '';
         const captionHtml = safeCaption ? `<span class="chart-caption">${safeCaption}</span>` : '';
@@ -5713,13 +5803,16 @@
       function buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl }) {
         if (!barsEl) return;
         const seriesList = (cfg.series || [])
-          .map(series => ({
-            ...series,
-            label: series.label || series.key || 'Series',
-            color: series.color || cfg.lineColor || '#111111',
-            formatter: series.formatter || cfg.valueFormatter || formatCurrencyShort,
-            data: series.data || [],
-          }))
+	          .map(series => ({
+	            ...series,
+	            label: series.label || series.key || 'Series',
+	            color: series.color || cfg.lineColor || '#111111',
+	            dotted: series.dotted === true,
+	            dashed: series.dashed === true,
+	            dasharray: series.dasharray || (series.dotted === true ? '2 10' : series.dashed === true ? '10 8' : ''),
+	            formatter: series.formatter || cfg.valueFormatter || formatCurrencyShort,
+	            data: series.data || [],
+	          }))
           .filter(series => series.data.length);
         if (!seriesList.length) return;
 
@@ -5775,11 +5868,13 @@
           return { ...series, points };
         });
 
-        const paths = seriesPoints.map(series => {
-          const pathD = buildSmoothPath(series.points);
-          if (!pathD) return '';
-          return `<path class="line-path" data-series="${series.key || series.label}" d="${pathD}" style="--line-color:${series.color};"></path>`;
-        }).join('');
+	        const paths = seriesPoints.map(series => {
+	          const pathD = buildSmoothPath(series.points);
+	          if (!pathD) return '';
+	          const pathClass = `line-path${series.dashed ? ' is-dashed' : ''}${series.dotted ? ' is-dotted' : ''}`;
+	          const dashMarkup = series.dasharray ? ` stroke-dasharray="${series.dasharray}"` : '';
+	          return `<path class="${pathClass}" data-series="${series.key || series.label}" d="${pathD}" style="--line-color:${series.color};" stroke="${series.color}"${dashMarkup}></path>`;
+	        }).join('');
 
         const firstX = seriesPoints[0]?.points[0]?.x ?? padding.left;
 
@@ -5804,10 +5899,10 @@
         }
 
         if (metaEl) {
-          const derivedLegendItems = cfg.legendItems
-            || (cfg.legend === true
-              ? seriesList.map(series => ({ label: series.label, color: series.color, kind: 'line' }))
-              : []);
+	          const derivedLegendItems = cfg.legendItems
+	            || (cfg.legend === true
+	              ? seriesList.map(series => ({ label: series.label, color: series.color, kind: 'line', dashed: series.dashed, dotted: series.dotted }))
+	              : []);
           const wantsExtras = Boolean(cfg.caption || (derivedLegendItems && derivedLegendItems.length));
 
           if (cfg.meta === false || cfg.meta == null) {
