@@ -53,6 +53,7 @@
     html {
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+      scroll-padding-top: calc(var(--mobile-rail-height) + var(--mobile-rail-gap));
     }
     body {
       margin: 0;
@@ -437,7 +438,8 @@
       flex: 1;
     }
     body.is-mobile .mobile-shell {
-      position: relative;
+      position: sticky;
+      top: calc(env(safe-area-inset-top, 0px) + 8px);
       z-index: 1;
       padding: 10px 12px;
       margin: 0 0 10px;
@@ -609,6 +611,7 @@
       padding: 0;
       min-height: 60vh;
       will-change: transform, opacity;
+      scroll-margin-top: calc(var(--mobile-rail-height) + var(--mobile-rail-gap));
     }
     .slide.active,
     body.is-mobile .slide.is-transitioning {
@@ -4331,6 +4334,131 @@
       border-color: var(--border);
       background: #fff;
     }
+    @media (max-width: 640px) {
+      body {
+        padding: 12px;
+      }
+      body.is-mobile .mobile-shell {
+        top: calc(env(safe-area-inset-top, 0px) + 6px);
+        padding: 10px;
+        gap: 8px;
+      }
+      .mobile-top {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      body.is-mobile .rail-brand {
+        gap: 10px;
+      }
+      body.is-mobile .rail-logo {
+        width: 52px;
+        height: 52px;
+      }
+      .slide {
+        min-height: 0;
+      }
+      .slide-01a .slide-body,
+      .card-block,
+      .card {
+        padding: 16px;
+        gap: 16px;
+      }
+      header.topbar {
+        flex-wrap: wrap;
+        gap: 6px 12px;
+      }
+      .chart-wrapper {
+        padding: 16px 14px 34px;
+        border-radius: 16px;
+      }
+      .chart-inner {
+        grid-template-columns: minmax(0, 48px) minmax(0, 1fr);
+        gap: 10px;
+        min-height: 200px;
+      }
+      .chart-axis {
+        width: 46px;
+        padding-right: 6px;
+        font-size: 10px;
+      }
+      .chart-axis span {
+        padding-right: 6px;
+      }
+      .chart-axis span::after {
+        right: -6px;
+        width: 6px;
+      }
+      .chart-bars {
+        min-height: 200px;
+        gap: 8px;
+        padding-top: 14px;
+      }
+      .bar-visual {
+        width: clamp(20px, 7vw, 28px);
+        height: 170px;
+      }
+      .chart-bar .value-label {
+        font-size: 9px;
+      }
+      .chart-bar-footer {
+        bottom: -38px;
+      }
+      .chart-bars.is-dense .chart-bar-footer {
+        bottom: -22px;
+      }
+      .yc-solution-grid.run-shot-layout,
+      .run-shot-grid {
+        grid-template-columns: 1fr;
+      }
+      .run-shot-card,
+      .run-pane,
+      .run-pane.compact,
+      .run-shot-screen {
+        padding: 14px;
+      }
+      .run-shot-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .run-stepper {
+        justify-content: flex-start;
+      }
+      .run-tag,
+      .run-field span {
+        white-space: normal;
+      }
+      .run-kv,
+      .run-field {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .run-kv strong,
+      .run-field strong {
+        max-width: none;
+        text-align: left;
+        white-space: normal;
+        word-break: break-word;
+      }
+      .logo-marquee {
+        padding: 14px 12px;
+      }
+      .logo-track {
+        width: 100%;
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px 18px;
+        animation: none;
+      }
+      .logo-track img {
+        max-width: 110px;
+        max-height: 32px;
+      }
+      .logo-track img[aria-hidden="true"] {
+        display: none;
+      }
+    }
     .advantage-table th,
     .mini-table th,
     table.simple th {
@@ -6642,9 +6770,12 @@
       const LONG_PRESS_MOVE_TOLERANCE = 14;
       let idx = Math.max(0, Math.min(slides.length - 1, parseInt(location.hash.replace('#','')) || 0));
 
+      const isMobileMode = () => body?.classList.contains('is-mobile');
+
       const updateMobileOffset = () => {
         if (!mobileShell) return;
-        body?.style.setProperty('--mobile-rail-height', '0px');
+        const height = isMobileMode() ? Math.ceil(mobileShell.getBoundingClientRect().height) : 0;
+        document.documentElement.style.setProperty('--mobile-rail-height', `${height}px`);
       };
 
       function setMobileMode(e){
@@ -6661,6 +6792,7 @@
       window.addEventListener('resize', () => {
         requestAnimationFrame(updateMobileOffset);
       });
+      window.addEventListener('load', updateMobileOffset);
 
       function buildNav(){
         navList.innerHTML = '';
@@ -6693,8 +6825,8 @@
         const rect = target.getBoundingClientRect();
         const y = rect.top + window.scrollY;
         const mobileGap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mobile-rail-gap')) || 0;
-        const railVisible = body?.classList.contains('is-mobile');
-        const mobileOffset = railVisible ? mobileGap : 0;
+        const railHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mobile-rail-height')) || 0;
+        const mobileOffset = isMobileMode() ? railHeight + mobileGap : 0;
         window.scrollTo({ top: Math.max(0, y - mobileOffset), behavior: 'auto' });
       }
 
@@ -6810,6 +6942,10 @@
       }
 
       buildNav();
+      document.querySelectorAll('.logo-track img, .team-photo').forEach((img) => {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+      });
       show(idx);
       updateMobileOffset();
 
@@ -6902,6 +7038,7 @@
       }
 
       function ambientNavHandler(e) {
+        if (isMobileMode()) return;
         const sel = window.getSelection();
         if (sel && sel.toString().length) return;
         const targetEl = e.target instanceof Element ? e.target : null;
@@ -7036,6 +7173,7 @@
           return;
         }
         if (absX < TAP_TOLERANCE && absY < TAP_TOLERANCE) {
+          if (isMobileMode()) return;
           handleTapNavigation(gestureState.lastX, event);
           return;
         }
