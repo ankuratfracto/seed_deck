@@ -5448,16 +5448,12 @@
 	          selector: '[data-chart="operating-loss"]',
 	          type: 'line-multi',
 	          axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
-	          legendItems: [
-	            { label: 'Operating loss', color: '#98a2b3', kind: 'line', dotted: true },
-	            { label: 'Revenue', color: '#111111', kind: 'line' },
-	            { label: 'Expenses', color: '#667085', kind: 'line' },
-	          ],
+	          legend: true,
 	          series: [
 	            {
 	              key: 'operating-loss',
 	              label: 'Operating loss',
-	              color: '#98a2b3',
+	              color: '#b42318',
 	              dotted: true,
 	              formatter: formatCurrencyShort,
 	              data: [
@@ -5478,7 +5474,7 @@
 	            {
 	              key: 'revenue',
 	              label: 'Revenue',
-	              color: '#111111',
+	              color: '#01684d',
 	              formatter: formatCurrencyShort,
 	              data: [
                 { quarter: 'Apr-25', value: 139862 },
@@ -5498,7 +5494,7 @@
 	            {
 	              key: 'expenses',
 	              label: 'Expenses',
-	              color: '#667085',
+	              color: '#344054',
 	              formatter: formatCurrencyShort,
 	              data: [
                 { quarter: 'Apr-25', value: 1847932 },
@@ -5525,10 +5521,8 @@
           selector: '[data-chart="rev-exp"]',
           type: 'line',
           lineColor: '#111111',
-          legendItems: [
-            { label: 'Revenue / expense', color: '#111111', kind: 'line' },
-            { label: 'Break-even', color: 'rgba(17,24,39,0.45)', kind: 'line', dashed: true },
-          ],
+          legend: true,
+          legendLabel: 'Revenue / expense',
           data: [
 	            { quarter: 'Apr-25', value: 0.0757 },
 	            { quarter: 'May-25', value: 0.0825 },
@@ -5551,7 +5545,7 @@
           },
           fullFormatter: (value) => `${(value ?? 0).toFixed(3)}`.replace(/0+$/, '').replace(/\.$/, ''),
           meta: false,
-          refLine: { value: 1.0, label: '1.0× break-even' },
+          refLine: { value: 1.0, label: 'Break-even (1.0×)', color: 'rgba(17,24,39,0.45)', dashed: true },
         },
 
 	        // Pages (bars)
@@ -5586,7 +5580,8 @@
           type: 'line',
           lineColor: '#111111',
           lineAreaColor: 'rgba(0,0,0,0.1)',
-          legendItems: [{ label: 'Revenue', color: '#111111', kind: 'line' }],
+          legend: true,
+          legendLabel: 'Revenue',
           maxValue: 1000000,
           axis: [1000000, 750000, 500000, 250000, 0],
           data: [
@@ -5623,7 +5618,8 @@
 	          selector: '[data-chart="companies"]',
 	          type: 'line',
 	          lineColor: '#111111',
-	          legendItems: [{ label: 'Onboardings', color: '#111111', kind: 'line' }],
+	          legend: true,
+	          legendLabel: 'Onboardings',
 	          data: [
 	            { quarter: 'Sep 2024', value: 1 },
 	            { quarter: 'Oct 2024', value: 2 },
@@ -5845,7 +5841,10 @@
           ? (() => {
               const ratio = scaleMax ? clamp((refLine.value - scaleMin) / range, 0, 1) : 0;
               const y = padding.top + (1 - ratio) * innerHeight;
-              return `<line class="line-ref" x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
+              const refStroke = refLine.color || 'rgba(17,24,39,0.45)';
+              const refDash = refLine.dasharray || (refLine.dotted === true ? '2 10' : refLine.dashed === false ? '' : '6 6');
+              const dashMarkup = refDash ? ` stroke-dasharray="${refDash}"` : '';
+              return `<line class="line-ref" x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}" stroke="${refStroke}"${dashMarkup}></line>`;
             })()
           : '';
         barsEl.classList.add('line-chart');
@@ -5875,7 +5874,18 @@
 
         if (metaEl && dataset.length) {
           const derivedLegendItems = cfg.legendItems
-            || (cfg.legend === true ? [{ label: cfg.legendLabel || 'Series', color: lineColor, kind: 'line' }] : []);
+            || (cfg.legend === true
+              ? [
+                  { label: cfg.legendLabel || 'Series', color: lineColor, kind: 'line' },
+                  ...(refLine ? [{
+                    label: refLine.label || 'Reference',
+                    color: refLine.color || 'rgba(17,24,39,0.45)',
+                    kind: 'line',
+                    dashed: refLine.dashed !== false && refLine.dotted !== true,
+                    dotted: refLine.dotted === true,
+                  }] : []),
+                ]
+              : []);
           const wantsExtras = Boolean(cfg.caption || (derivedLegendItems && derivedLegendItems.length));
 
           if (cfg.meta === false || cfg.meta == null) {
