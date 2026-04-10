@@ -136,6 +136,14 @@
       align-items: start;
     }
 
+    .two-col.balance-panels {
+      align-items: stretch;
+    }
+
+    .split-strong.balance-panels {
+      align-items: stretch;
+    }
+
     .split-strong {
       grid-template-columns: 1.1fr 0.9fr;
       align-items: stretch;
@@ -206,6 +214,17 @@
     .stack-lg {
       display: grid;
       gap: 16px;
+    }
+
+    .stack-lg.stack-spread {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .stack-lg.stack-spread .panel {
+      min-height: 0;
     }
 
     .bullet-list {
@@ -399,6 +418,26 @@
       max-width: 150px;
       max-height: 40px;
       object-fit: contain;
+    }
+
+    .logo-card.logo-card-onmove img {
+      max-width: 136px;
+      max-height: 44px;
+    }
+
+    .logo-card.logo-card-goamiles img {
+      max-width: 132px;
+      max-height: 50px;
+    }
+
+    .logo-card.logo-card-alt img {
+      max-width: 140px;
+      max-height: 42px;
+    }
+
+    .logo-card.logo-card-whistle img {
+      max-width: 148px;
+      max-height: 34px;
     }
 
     .name-card {
@@ -701,8 +740,8 @@
           <div>Why Mobility Ops Break Down</div>
         </div>
 
-        <div class="two-col">
-          <div class="stack-lg">
+        <div class="two-col balance-panels">
+          <div class="stack-lg stack-spread">
             <div class="eyebrow">The Operational Problem</div>
             <h2 class="section-title">Driver and vehicle onboarding is still document-heavy, slow, and error-prone.</h2>
             <p class="section-copy">
@@ -926,22 +965,20 @@
               <div class="logo-card">
                 <img src="clients/routematic.png" alt="Routematic" />
               </div>
-              <div class="logo-card">
+              <div class="logo-card logo-card-goamiles">
                 <img src="clients/goamiles.svg" alt="GoaMiles" />
               </div>
-              <div class="name-card">
-                <strong>Alt Mobility</strong>
-                <span>EV operations</span>
+              <div class="logo-card logo-card-alt">
+                <img src="clients/alt-mobility.svg" alt="Alt Mobility" />
               </div>
-              <div class="name-card">
-                <strong>WhistleDrive</strong>
-                <span>Employee transport</span>
+              <div class="logo-card logo-card-whistle">
+                <img src="clients/whistledrive.png" alt="WhistleDrive" />
               </div>
               <div class="logo-card">
                 <img src="clients/turno.png" alt="Turno" />
               </div>
-              <div class="logo-card">
-                <img src="clients/onmove.jpeg" alt="Onmove" />
+              <div class="logo-card logo-card-onmove">
+                <img src="clients/onmove-cropped.jpg" alt="Onmove" />
               </div>
             </div>
           </div>
@@ -1048,8 +1085,8 @@
           <div>Pilot Proposal</div>
         </div>
 
-        <div class="split-strong">
-          <div class="stack-lg">
+        <div class="split-strong balance-panels">
+          <div class="stack-lg stack-spread">
             <div class="eyebrow">Recommended Next Step</div>
             <h2 class="section-title">Start with a mobility onboarding pilot.</h2>
 

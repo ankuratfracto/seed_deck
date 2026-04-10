@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fracto for Education Loan Operations</title>
+  <title>Fracto for Road Transportation Operations</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
@@ -127,7 +127,7 @@
     }
 
     .hero {
-      grid-template-columns: 1.2fr 0.9fr;
+      grid-template-columns: 1.32fr 0.78fr;
       align-items: stretch;
     }
 
@@ -144,8 +144,27 @@
       align-items: stretch;
     }
 
+    .stack-lg.stack-spread {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .stack-lg.stack-spread .panel {
+      min-height: 0;
+    }
+
+    .stack-lg.problem-side {
+      display: grid;
+      gap: 18px;
+      align-content: center;
+      padding-top: 36px;
+      padding-bottom: 24px;
+    }
+
     .split-strong {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.08fr 0.92fr;
       align-items: stretch;
     }
 
@@ -173,7 +192,7 @@
       font-size: 34px;
       line-height: 1.08;
       letter-spacing: -0.04em;
-      max-width: 10.5em;
+      max-width: 13.6em;
     }
 
     .subtitle {
@@ -205,25 +224,9 @@
       background: var(--panel-soft);
     }
 
-    .stack {
-      display: grid;
-      gap: 12px;
-    }
-
     .stack-lg {
       display: grid;
       gap: 16px;
-    }
-
-    .stack-lg.stack-spread {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-    }
-
-    .stack-lg.stack-spread .panel {
-      min-height: 0;
     }
 
     .bullet-list {
@@ -397,14 +400,14 @@
     .logo-wall {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
       align-items: stretch;
     }
 
     .logo-card,
     .name-card {
-      min-height: 96px;
-      padding: 18px;
+      min-height: 92px;
+      padding: 16px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: rgba(255,255,255,0.92);
@@ -415,43 +418,39 @@
     }
 
     .logo-card img {
-      max-width: 150px;
-      max-height: 40px;
+      max-width: 140px;
+      max-height: 44px;
       object-fit: contain;
     }
 
-    .logo-card.logo-card-kuhoo img {
-      max-width: 142px;
-      max-height: 40px;
+    .logo-card.logo-card-navata img {
+      max-width: 128px;
+      max-height: 42px;
     }
 
-    .logo-card.logo-card-gyandhan img {
+    .logo-card.logo-card-lets img {
+      max-width: 130px;
+      max-height: 34px;
+    }
+
+    .logo-card.logo-card-onmove img {
+      max-width: 136px;
+      max-height: 44px;
+    }
+
+    .logo-card.logo-card-mvikas img {
+      max-width: 122px;
+      max-height: 34px;
+    }
+
+    .logo-card.logo-card-vishal img {
       max-width: 138px;
-      max-height: 62px;
-      transform: scale(1.2);
-      transform-origin: center;
+      max-height: 42px;
     }
 
-    .logo-card.logo-card-varthana img {
-      max-width: 100px;
-      max-height: 100px;
-    }
-
-    .name-card {
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .name-card strong {
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    .name-card span {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink-soft);
+    .logo-card.logo-card-trukker img {
+      max-width: 142px;
+      max-height: 34px;
     }
 
     .impact-grid {
@@ -553,7 +552,6 @@
     }
 
     .contact-panel .section-title,
-    .contact-panel .section-copy,
     .contact-panel .mini-note {
       color: #ffffff;
     }
@@ -590,11 +588,6 @@
       font-size: 12px;
       color: var(--ink-soft);
       line-height: 1.45;
-    }
-
-    .mini-note.inline-note {
-      margin-top: 2px;
-      padding-left: 2px;
     }
 
     .footer {
@@ -676,32 +669,32 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Education Loans Deck</div>
+          <div>Road Transportation Deck</div>
         </div>
 
         <div class="hero">
           <div class="stack-lg">
-            <div class="eyebrow">AI Infrastructure for Education Lending</div>
-            <h1 class="title">Automate document review for education-loan operations.</h1>
+            <div class="eyebrow">AI Infrastructure for Transport Document Ops</div>
+            <h1 class="title">Automate POD and transport document review for road logistics teams.</h1>
             <p class="subtitle">
-              Fracto classifies pages, routes them to the right parser, and returns structured outputs for underwriting teams.
+              Fracto classifies transport documents, extracts key fields, and checks whether signatures, stamps, and handwritten remarks are present.
             </p>
 
             <div class="panel">
               <ul class="bullet-list">
-                <li>Page-level classification</li>
-                <li>40+ document flows configured</li>
-                <li>Parser routing with validations</li>
-                <li>APIs for LOS and review queues</li>
+                <li>PODs, hire letters, trip sheets, and invoices</li>
+                <li>Signature and stamp presence checks</li>
+                <li>Handwritten remark detection</li>
+                <li>APIs for ops and proof workflows</li>
               </ul>
             </div>
 
             <div class="chip-row">
-              <div class="chip">Kuhoo Finance</div>
-              <div class="chip">Gyandhan</div>
-              <div class="chip">Varthana</div>
-              <div class="chip">Study abroad files</div>
-              <div class="chip">Domestic education lending</div>
+              <div class="chip">POD workflows</div>
+              <div class="chip">Trip sheet review</div>
+              <div class="chip">Hire letters</div>
+              <div class="chip">Remarks and exceptions</div>
+              <div class="chip">Transport ops desks</div>
             </div>
           </div>
 
@@ -710,35 +703,33 @@
               <div class="section-title">What this changes</div>
               <div class="metric-grid" style="margin-top: 14px;">
                 <div class="metric">
-                  <div class="value">41 flows</div>
-                  <div class="label">Configured in the current education-loan stack</div>
+                  <div class="value">POD ready</div>
+                <div class="label">Works on proof-of-delivery and transport movement documents</div>
                 </div>
                 <div class="metric">
-                  <div class="value">1 intake layer</div>
-                  <div class="label">Classification, parsing, validation, and routing</div>
-                </div>
-                <div class="metric">
-                  <div class="value">Page aware</div>
-                  <div class="label">Handles mixed packets page by page</div>
+                  <div class="value">Presence checks</div>
+                  <div class="label">Detect signature, stamp, and handwritten notes</div>
                 </div>
                 <div class="metric">
                   <div class="value">Ops ready</div>
-                  <div class="label">JSON, confidence flags, and review hooks</div>
+                  <div class="label">Structured outputs plus review signals</div>
+                </div>
+                <div class="metric">
+                  <div class="value">Faster proofing</div>
+                  <div class="label">Find incomplete documents before downstream disputes</div>
                 </div>
               </div>
             </div>
 
             <div class="band">
               <h3>Positioning</h3>
-              <p>
-                Replace manual packet sorting and fragmented OCR with one document layer for education-loan ops.
-              </p>
+              <p>Replace manual proof checking with one document layer for road transport operations.</p>
             </div>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>01</span>
         </div>
       </div>
@@ -751,66 +742,64 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Why Education Loan Ops Break Down</div>
+          <div>Why Transport Ops Break Down</div>
         </div>
 
         <div class="two-col balance-panels">
-          <div class="stack-lg stack-spread">
+          <div class="stack-lg">
             <div class="eyebrow">The Operational Problem</div>
-            <h2 class="section-title">Education-loan files are mixed packets, not clean single-doc uploads.</h2>
-            <p class="section-copy">
-              One case can combine KYC, academics, admissions, income, bank statements, and property papers.
-            </p>
+            <h2 class="section-title">Transport document review is still manual, repetitive, and easy to miss.</h2>
+            <p class="section-copy">PODs, hire letters, and trip sheets often need more than OCR. Teams also need proof that the right signoff is actually there.</p>
 
             <div class="card-grid">
               <article class="card">
-                <span class="tag">Intake</span>
-                <h3>Packets arrive as mixed bundles</h3>
-                <p>Scans and PDFs often contain many document types together.</p>
+                <span class="tag">POD</span>
+                <h3>Signoff checks are manual</h3>
+                <p>Teams still inspect whether a POD is signed, stamped, or annotated.</p>
               </article>
               <article class="card">
-                <span class="tag">Parsing</span>
-                <h3>Each page needs different logic</h3>
-                <p>Marksheets, passports, I-20s, and salary slips need different parsers.</p>
+                <span class="tag">Exceptions</span>
+                <h3>Handwritten notes get missed</h3>
+                <p>Delivery remarks and shortages often sit in handwritten sections.</p>
               </article>
               <article class="card">
-                <span class="tag">Risk</span>
-                <h3>Validation comes too late</h3>
-                <p>Mismatches are often found after manual cleanup.</p>
+                <span class="tag">Finance</span>
+                <h3>Trip sheets and hire docs need structure</h3>
+                <p>Core fields still get keyed manually for matching and review.</p>
               </article>
               <article class="card">
                 <span class="tag">Scale</span>
-                <h3>Review bandwidth gets wasted</h3>
-                <p>Teams spend time sorting pages instead of underwriting.</p>
+                <h3>Proof queues pile up fast</h3>
+                <p>Backlogs build when every document needs a human visual check.</p>
               </article>
             </div>
           </div>
 
-          <div class="stack-lg">
+          <div class="stack-lg problem-side">
             <div class="panel">
               <div class="section-title">Typical failure pattern</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Mixed packets land in intake</li>
-                <li>Generic OCR runs too early</li>
-                <li>Reviewers split pages manually</li>
-                <li>Sanction timelines slow down</li>
+                <li>PODs and trip sheets arrive in mixed quality</li>
+                <li>Teams check stamps and signatures by eye</li>
+                <li>Handwritten remarks are missed or delayed</li>
+                <li>Proof completion slows billing and follow-up</li>
               </ul>
             </div>
 
             <div class="panel soft">
-              <div class="section-title">What lenders need instead</div>
+              <div class="section-title">What operators need instead</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Page-level classification</li>
-                <li>Specialist parser routing</li>
-                <li>Validations before review</li>
-                <li>Exceptions only for low-confidence pages</li>
+                <li>Fast parsing plus visual presence checks</li>
+                <li>Flags for missing signoff or missing stamp</li>
+                <li>Handwritten remark detection for exceptions</li>
+                <li>Review only the uncertain cases</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>02</span>
         </div>
       </div>
@@ -823,63 +812,65 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Parser Coverage</div>
+          <div>Capabilities</div>
         </div>
 
         <div class="stack-lg">
           <div>
-            <div class="eyebrow">Current Coverage</div>
-            <h2 class="section-title" style="margin-top: 12px;">Specialized parsers already cover the core education-loan packet.</h2>
+            <div class="eyebrow">Core Modules</div>
+            <h2 class="section-title" style="margin-top: 12px;">Capabilities mapped to road-transport proof and ops workflows.</h2>
           </div>
 
           <div class="card-grid compact-three">
             <article class="card">
               <span class="tag">01</span>
-              <h3>Identity and KYC</h3>
-              <p>Aadhaar variants, PAN, passport front and back, and office ID.</p>
+              <h3>POD parser</h3>
+              <p>Extract core fields from proof-of-delivery documents.</p>
             </article>
             <article class="card">
               <span class="tag">02</span>
-              <h3>Academic records</h3>
-              <p>10th and 12th marksheets, UG degree, provisional, diploma, and masters records.</p>
+              <h3>Hire letter parser</h3>
+              <p>Structure transport hire documents for downstream ops.</p>
             </article>
             <article class="card">
               <span class="tag">03</span>
-              <h3>Admissions and test scores</h3>
-              <p>Admission letter, I-20, IELTS, TOEFL, GRE, PTE, and Duolingo.</p>
+              <h3>Trip sheet parser</h3>
+              <p>Extract route, trip, and movement details from trip sheets.</p>
             </article>
             <article class="card">
               <span class="tag">04</span>
-              <h3>Income and employment</h3>
-              <p>Salary slips, Form 16 and ITR, relieving letter, pension, and agri income docs.</p>
+              <h3>Signature detection</h3>
+              <p>Check whether a required signature is present.</p>
             </article>
             <article class="card">
               <span class="tag">05</span>
-              <h3>Banking, address, and collateral</h3>
-              <p>Bank statements, address proofs, title deed, GST, and UDYAM coverage.</p>
+              <h3>Stamp detection</h3>
+              <p>Flag whether the proof carries a visible stamp.</p>
             </article>
             <article class="card">
               <span class="tag">06</span>
-              <h3>Fallback and exceptions</h3>
-              <p>Classification parser plus fallback coverage for unknown or low-confidence pages.</p>
+              <h3>Invoice parser</h3>
+              <p>Pull invoice numbers, dates, and amount fields when needed downstream.</p>
             </article>
           </div>
 
           <div class="panel soft slim">
-            <div class="section-title">Inventory snapshot</div>
+            <div class="section-title">Example workflow bundle</div>
             <div class="chip-row tight" style="margin-top: 12px;">
-              <div class="chip">41 configured parser flows</div>
-              <div class="chip">Classification parser: GD-PgP</div>
-              <div class="chip">General parser fallback</div>
-              <div class="chip">Domestic and abroad files</div>
-              <div class="chip">KYC + academics + income</div>
-              <div class="chip">Collateral coverage</div>
+              <div class="chip">Upload</div>
+              <div class="chip">Classify</div>
+              <div class="chip">Extract</div>
+              <div class="chip">Check signature</div>
+              <div class="chip">Check stamp</div>
+              <div class="chip">Flag remarks</div>
+              <div class="chip">Review</div>
+              <div class="chip">Approve</div>
             </div>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>03</span>
         </div>
       </div>
@@ -892,35 +883,35 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Pipeline Fit</div>
+          <div>Workflow Fit</div>
         </div>
 
         <div class="stack-lg">
           <div>
-            <div class="eyebrow">Workflow Fit</div>
-            <h2 class="section-title" style="margin-top: 12px;">Fracto can sit inside the full intake and underwriting flow.</h2>
+            <div class="eyebrow">End-to-End Flow</div>
+            <h2 class="section-title" style="margin-top: 12px;">Fracto can sit inside the transport proof and billing workflow.</h2>
           </div>
 
           <div class="flow">
             <div class="timeline-step">
               <div class="step-no">01</div>
               <div class="step-title">Capture</div>
-              <div class="step-copy">Students or ops teams upload mixed packets.</div>
+              <div class="step-copy">Drivers, hubs, or ops teams upload PODs, hire letters, trip sheets, and invoices.</div>
             </div>
             <div class="timeline-step">
               <div class="step-no">02</div>
               <div class="step-title">Classify</div>
-              <div class="step-copy">Each page is identified before extraction begins.</div>
+              <div class="step-copy">Each document is identified before the right logic runs.</div>
             </div>
             <div class="timeline-step">
               <div class="step-no">03</div>
-              <div class="step-title">Route and Parse</div>
-              <div class="step-copy">Pages go to the right parser for that document type.</div>
+              <div class="step-title">Extract and Check</div>
+              <div class="step-copy">Fields are extracted and presence checks run for signatures, stamps, and remarks.</div>
             </div>
             <div class="timeline-step">
               <div class="step-no">04</div>
-              <div class="step-title">Validate and Decide</div>
-              <div class="step-copy">Validations and exception routing feed cleaner records downstream.</div>
+              <div class="step-title">Route</div>
+              <div class="step-copy">Clean documents move ahead, while incomplete proofs go to review queues.</div>
             </div>
           </div>
 
@@ -928,28 +919,28 @@
             <div class="panel">
               <div class="section-title">High-value insertion points</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Application intake</li>
-                <li>Underwriting desk prep</li>
-                <li>Co-borrower verification</li>
-                <li>Study abroad workflows</li>
-                <li>Reviewer queues</li>
+                <li>POD review desks</li>
+                <li>Billing proof checks</li>
+                <li>Hub ops and exception handling</li>
+                <li>Trip sheet and document matching</li>
+                <li>Customer dispute workflows</li>
               </ul>
             </div>
 
             <div class="panel soft">
-              <div class="section-title">Validation model</div>
+              <div class="section-title">Decision signals</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Confidence scoring</li>
-                <li>Coverage checks</li>
-                <li>Cross-page consistency</li>
-                <li>Fallback review for edge cases</li>
+                <li>Signature present or missing</li>
+                <li>Stamp present or missing</li>
+                <li>Handwritten remarks detected</li>
+                <li>Field confidence and exception flags</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>04</span>
         </div>
       </div>
@@ -965,23 +956,32 @@
           <div>Segment Fit</div>
         </div>
 
-        <div class="two-col">
-          <div class="stack-lg">
+        <div class="two-col balance-panels">
+          <div class="stack-lg stack-spread">
             <div>
               <div class="eyebrow">Reference Set</div>
-              <h2 class="section-title" style="margin-top: 12px;">Built for lenders handling student, co-borrower, and admissions-heavy files.</h2>
-              <p class="section-copy" style="margin-top: 10px;">Relevant for study-abroad, domestic, and collateral-backed workflows.</p>
+              <h2 class="section-title" style="margin-top: 12px;">Built for transport operators managing proof-heavy delivery workflows.</h2>
+              <p class="section-copy" style="margin-top: 10px;">Relevant for line-haul, branch ops, billing proof checks, and transport exception desks.</p>
             </div>
 
             <div class="logo-wall">
-              <div class="logo-card logo-card-kuhoo">
-                <img src="clients/kuhoo.png" alt="Kuhoo Finance" />
+              <div class="logo-card logo-card-navata">
+                <img src="clients/navata.png" alt="Navata SCS" />
               </div>
-              <div class="logo-card logo-card-gyandhan">
-                <img src="clients/gyandhan.png.webp" alt="Gyandhan" />
+              <div class="logo-card logo-card-onmove">
+                <img src="clients/onmove-cropped.jpg" alt="Onmove" />
               </div>
-              <div class="logo-card logo-card-varthana">
-                <img src="clients/varthana.png" alt="Varthana" />
+              <div class="logo-card logo-card-lets">
+                <img src="clients/letstransport.png" alt="LetsTransport" />
+              </div>
+              <div class="logo-card logo-card-mvikas">
+                <img src="clients/mvikas.png" alt="MVikas" />
+              </div>
+              <div class="logo-card logo-card-vishal">
+                <img src="clients/vishal-vtc.png" alt="Vishal VTC" />
+              </div>
+              <div class="logo-card logo-card-trukker">
+                <img src="clients/trukker.png" alt="Trukker" />
               </div>
             </div>
           </div>
@@ -990,27 +990,27 @@
             <div class="panel">
               <div class="section-title">Why this segment converts well</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Many document families per case</li>
-                <li>Study-abroad adds admissions complexity</li>
-                <li>Co-borrower and collateral checks add rework</li>
-                <li>Faster file readiness improves SLAs</li>
+                <li>Large POD and proof volumes with repetitive checks</li>
+                <li>Incomplete PODs directly affect billing cycles</li>
+                <li>Signatures, stamps, and notes matter operationally</li>
+                <li>Manual proof review does not scale well</li>
               </ul>
             </div>
 
             <div class="panel soft">
               <div class="section-title">Messaging that resonates</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Stop sorting pages by hand</li>
-                <li>Route every page automatically</li>
-                <li>Catch mismatches earlier</li>
-                <li>Unify intake and validations</li>
+                <li>Know if the POD is complete before billing starts</li>
+                <li>Detect missing signoff or missing stamp automatically</li>
+                <li>Spot handwritten remarks without manual scanning</li>
+                <li>Reduce proof-review effort across ops teams</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>05</span>
         </div>
       </div>
@@ -1023,28 +1023,28 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Underwriting Impact</div>
+          <div>Operator Impact</div>
         </div>
 
         <div class="stack-lg">
           <div>
             <div class="eyebrow">Business Outcomes</div>
-            <h2 class="section-title" style="margin-top: 12px;">The value case for education-loan underwriting and ops teams.</h2>
-            <p class="section-copy" style="margin-top: 10px; max-width: 72em;">The gain is cleaner files, earlier validations, and less manual review.</p>
+            <h2 class="section-title" style="margin-top: 12px;">The value case for transport operations and proof-review teams.</h2>
+            <p class="section-copy" style="margin-top: 10px; max-width: 72em;">The gain is faster proof readiness, cleaner exception handling, and less manual visual checking.</p>
           </div>
 
           <div class="impact-grid">
             <div class="impact-card">
-              <div class="big">Earlier readiness</div>
-              <div class="small">Files reach underwriting already classified and structured.</div>
+              <div class="big">Earlier proof readiness</div>
+              <div class="small">PODs can be flagged as complete or incomplete faster.</div>
             </div>
             <div class="impact-card">
-              <div class="big">Cleaner decisions</div>
-              <div class="small">Validations surface mismatches before manual review begins.</div>
+              <div class="big">Cleaner exceptions</div>
+              <div class="small">Missing signoff and remarks get surfaced earlier.</div>
             </div>
             <div class="impact-card">
               <div class="big">One workflow</div>
-              <div class="small">Classification, routing, parsing, and exceptions in one layer.</div>
+              <div class="small">Classification, extraction, and visual checks in one layer.</div>
             </div>
           </div>
 
@@ -1052,27 +1052,27 @@
             <div class="panel">
               <div class="section-title">Common workflow bottlenecks</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Mixed packets slow file readiness</li>
-                <li>Study-abroad files are harder to standardize</li>
-                <li>Different document types need different parsers</li>
-                <li>Late validations increase review effort</li>
+                <li>Proof-review queues move slowly</li>
+                <li>Missing signatures are found late</li>
+                <li>Stamp checks are still manual</li>
+                <li>Remarks get lost in scanned copies</li>
               </ul>
             </div>
 
             <div class="panel soft">
               <div class="section-title">What Fracto enables</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Faster packet classification and routing</li>
-                <li>Cleaner outputs into LOS and review queues</li>
-                <li>Manual review only for low-confidence pages</li>
-                <li>Coverage expansion as new document types appear</li>
+                <li>Faster proof triage and routing</li>
+                <li>Structured outputs into ops tools</li>
+                <li>Manual review only for uncertain cases</li>
+                <li>Better visibility into proof completeness</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>06</span>
         </div>
       </div>
@@ -1085,29 +1085,27 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Pilot Proposal</div>
+          <div>Demo Scope</div>
         </div>
 
         <div class="split-strong balance-panels">
           <div class="stack-lg stack-spread">
             <div class="eyebrow">Recommended Next Step</div>
-            <h2 class="section-title">Start with an education-loan pilot.</h2>
+            <h2 class="section-title">Start with a POD and transport document demo.</h2>
 
             <div class="panel">
-              <div class="section-title">Suggested pilot scope</div>
+              <div class="section-title">Suggested scope</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Input bundle: KYC, academics, admissions, income docs, and bank statements</li>
-                <li>Flow: classify, route, validate, and return structured outputs</li>
-                <li>Integration: LOS or reviewer queue</li>
-                <li>Success: coverage, accuracy, effort saved, and exception rate</li>
+                <li>Input bundle: PODs, hire letters, trip sheets, and invoices</li>
+                <li>Flow: classify, extract, detect signature, detect stamp, flag remarks</li>
+                <li>Integration: ops desk, reviewer queue, or billing proof flow</li>
+                <li>Success: proof completeness, exception rate, and review effort saved</li>
               </ul>
             </div>
 
             <div class="band">
               <h3>Outcome</h3>
-              <p>
-                A before-and-after view of file readiness, review effort, and parser coverage.
-              </p>
+              <p>A before-and-after view of proof review speed, completeness checks, and exception handling.</p>
             </div>
           </div>
 
@@ -1115,32 +1113,30 @@
             <div class="panel soft">
               <div class="section-title">What Fracto brings</div>
               <ul class="bullet-list" style="margin-top: 14px;">
-                <li>Configured parser inventory</li>
-                <li>Page-level classification and routing</li>
-                <li>Fallback handling for edge cases</li>
-                <li>Low-lift integration</li>
+                <li>Document parsers for transport workflows</li>
+                <li>Signature, stamp, and remark detection</li>
+                <li>Review routing for edge cases</li>
+                <li>Low-lift API integration</li>
               </ul>
             </div>
 
             <div class="panel">
               <div class="section-title">Ideal buyer personas</div>
               <div class="chip-row" style="margin-top: 14px;">
-                <div class="chip">Head of Underwriting Ops</div>
-                <div class="chip">Credit Operations</div>
-                <div class="chip">Risk and Policy</div>
-                <div class="chip">Product for LOS</div>
-                <div class="chip">Engineering for Document Flows</div>
+                <div class="chip">Operations Head</div>
+                <div class="chip">Billing Ops</div>
+                <div class="chip">Proof Review Desk</div>
+                <div class="chip">Transport Finance</div>
+                <div class="chip">Engineering</div>
               </div>
             </div>
 
-            <p class="mini-note inline-note">
-              Prepared for education lenders evaluating intake and underwriting automation.
-            </p>
+            <p class="mini-note">Prepared for transport operators evaluating proof and document automation.</p>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>07</span>
         </div>
       </div>
@@ -1159,25 +1155,23 @@
         <div class="cta-hero">
           <div class="stack-lg">
             <div class="eyebrow">Next Step</div>
-            <h2 class="title" style="max-width: 9.5em;">Ready to see the education-loan workflow in action?</h2>
-            <p class="subtitle" style="max-width: 30em;">
-              Book a demo to review classification, parser routing, validations, and reviewer workflows on real education-loan files.
-            </p>
+            <h2 class="title" style="max-width: 11.2em;">Ready to see transport proof review in action?</h2>
+            <p class="subtitle" style="max-width: 30em;">Book a demo to review POD parsing, hire letter and trip sheet handling, plus signature and stamp checks on real transport files.</p>
 
             <div class="panel">
               <div class="section-title">Best fit for</div>
               <div class="chip-row" style="margin-top: 14px;">
-                <div class="chip">Study abroad lenders</div>
-                <div class="chip">NBFC underwriting</div>
-                <div class="chip">Domestic education finance</div>
-                <div class="chip">Co-borrower workflows</div>
-                <div class="chip">Collateral-backed cases</div>
+                <div class="chip">Transport operators</div>
+                <div class="chip">3PL and line-haul ops</div>
+                <div class="chip">Billing proof teams</div>
+                <div class="chip">POD review desks</div>
+                <div class="chip">Exception handling teams</div>
               </div>
             </div>
 
             <div class="band">
               <h3>Demo Focus</h3>
-              <p>Show capabilities first. Then scope the right pilot.</p>
+              <p>Show capabilities first. Then scope the right workflow.</p>
             </div>
           </div>
 
@@ -1202,12 +1196,12 @@
               </div>
             </div>
 
-            <p class="mini-note">Use this deck for education lenders with mixed packets and underwriting-heavy document flows.</p>
+            <p class="mini-note">Use this deck for transport operators with POD-heavy, trip-sheet-heavy, or proof-review-heavy document flows.</p>
           </div>
         </div>
 
         <div class="footer">
-          <span>Fracto for Education Loans</span>
+          <span>Fracto for Road Transportation</span>
           <span>08</span>
         </div>
       </div>
