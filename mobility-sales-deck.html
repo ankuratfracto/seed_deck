@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fracto for Mobility and Taxi Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14213d;
+      --ink-soft: #324463;
+      --paper: #fffdf8;
+      --panel: #ffffff;
+      --panel-soft: #f5f7fb;
+      --line: #d7deea;
+      --accent: #0e8f7d;
+      --accent-dark: #0b6d60;
+      --accent-soft: #daf6f0;
+      --signal: #f2a33b;
+      --signal-soft: #fff1db;
+      --berry: #bf5b76;
+      --shadow: 0 26px 70px rgba(20, 33, 61, 0.14);
+      --page-w: 297mm;
+      --page-h: 210mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(14, 143, 125, 0.15), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(242, 163, 59, 0.13), transparent 20%),
+        #eef2f8;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+
+    body {
+      padding: 18px;
+    }
+
+    .deck {
+      display: grid;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .slide {
+      width: var(--page-w);
+      height: var(--page-h);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(14, 143, 125, 0.12), transparent 22%),
+        radial-gradient(circle at 10% 82%, rgba(191, 91, 118, 0.08), transparent 18%);
+      pointer-events: none;
+    }
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      padding: 16mm 16mm 14mm;
+      display: grid;
+      gap: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      padding: 4px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(20, 33, 61, 0.08);
+      object-fit: contain;
+    }
+
+    .hero,
+    .two-col,
+    .split-strong {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero {
+      grid-template-columns: 1.2fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .two-col {
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: start;
+    }
+
+    .split-strong {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      max-width: 10.5em;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 40em;
+    }
+
+    .panel,
+    .metric,
+    .card,
+    .pill-card,
+    .impact-card,
+    .timeline-step {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+    }
+
+    .panel {
+      padding: 18px 20px;
+    }
+
+    .panel.slim {
+      padding: 14px 16px;
+    }
+
+    .panel.soft {
+      background: var(--panel-soft);
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-lg {
+      display: grid;
+      gap: 16px;
+    }
+
+    .bullet-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+    }
+
+    .metric .value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+
+    .metric .label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card-grid.compact-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .card-grid.compact-three .card {
+      padding: 14px;
+      gap: 8px;
+    }
+
+    .card-grid.compact-three .card h3 {
+      font-size: 16px;
+    }
+
+    .card-grid.compact-three .card p {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .card .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--signal-soft);
+      color: #9b630f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .timeline-step {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-step::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(14, 143, 125, 0.5), rgba(14, 143, 125, 0));
+    }
+
+    .timeline-step:last-child::after {
+      display: none;
+    }
+
+    .step-no {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .step-copy {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .logo-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .logo-card,
+    .name-card {
+      min-height: 88px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .logo-card img {
+      max-width: 150px;
+      max-height: 40px;
+      object-fit: contain;
+    }
+
+    .name-card {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .name-card strong {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .name-card span {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .impact-card {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .impact-card .big {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .impact-card .small {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip-row.tight {
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .chip-row.tight .chip {
+      padding: 7px 10px;
+      font-size: 11px;
+    }
+
+    .cta-box {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+    }
+
+    .band {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--ink), #1f325c);
+      color: #ffffff;
+    }
+
+    .band h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .band p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .cta-hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-panel {
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #132448, #0f7d72);
+      color: #ffffff;
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-panel .section-title,
+    .contact-panel .section-copy,
+    .contact-panel .mini-note {
+      color: #ffffff;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-item .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .contact-item .value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    .mini-note {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+
+      html, body {
+        background: #ffffff;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .deck {
+        gap: 0;
+      }
+
+      .slide {
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+    @media screen and (max-width: 1100px) {
+      body {
+        padding: 12px;
+      }
+
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+      }
+
+      .hero,
+      .two-col,
+      .split-strong,
+      .cta-hero,
+      .cta-box,
+      .flow,
+      .logo-wall,
+      .impact-grid,
+      .card-grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-step::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Mobility and Taxi Ops Deck</div>
+        </div>
+
+        <div class="hero">
+          <div class="stack-lg">
+            <div class="eyebrow">AI Infrastructure for KYC and Fleet Ops</div>
+            <h1 class="title">Automate onboarding, document checks, and verification for mobility operators.</h1>
+            <p class="subtitle">
+              Fracto turns driver and vehicle documents into fast, structured decisions for onboarding and compliance teams.
+            </p>
+
+            <div class="panel">
+              <ul class="bullet-list">
+                <li>Aadhaar parsing with masking</li>
+                <li>PAN, DL, and RC extraction</li>
+                <li>Parivahan validation checks</li>
+                <li>APIs for apps, ops desks, and reviewer queues</li>
+              </ul>
+            </div>
+
+            <div class="chip-row">
+              <div class="chip">Built for operators like Routematic</div>
+              <div class="chip">GoaMiles</div>
+              <div class="chip">Alt Mobility</div>
+              <div class="chip">WhistleDrive</div>
+              <div class="chip">Fleet marketplaces and EV operators</div>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel soft">
+              <div class="section-title">What this changes</div>
+              <div class="metric-grid" style="margin-top: 14px;">
+                <div class="metric">
+                  <div class="value">&lt; 60 sec</div>
+                  <div class="label">Typical extraction turnaround</div>
+                </div>
+                <div class="metric">
+                  <div class="value">1 API layer</div>
+                  <div class="label">OCR, parsing, masking, and validation</div>
+                </div>
+                <div class="metric">
+                  <div class="value">Ops ready</div>
+                  <div class="label">JSON, audit trails, and confidence flags</div>
+                </div>
+                <div class="metric">
+                  <div class="value">Scale safe</div>
+                  <div class="label">Handles noisy field uploads and retries</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="band">
+              <h3>Positioning</h3>
+              <p>
+                Replace manual review and stitched-together tools with one verification layer for mobility workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>01</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Why Mobility Ops Break Down</div>
+        </div>
+
+        <div class="two-col">
+          <div class="stack-lg">
+            <div class="eyebrow">The Operational Problem</div>
+            <h2 class="section-title">Driver and vehicle onboarding is still document-heavy, slow, and error-prone.</h2>
+            <p class="section-copy">
+              Mobility operators move fast, but onboarding still gets stuck in manual review and poor-quality uploads.
+            </p>
+
+            <div class="card-grid">
+              <article class="card">
+                <span class="tag">Driver KYC</span>
+                <h3>Identity capture fails in the field</h3>
+                <p>Blurred Aadhaar and PAN uploads slow approvals.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Vehicle Ops</span>
+                <h3>DL and RC data is retyped manually</h3>
+                <p>Retyping creates errors and delays.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Risk</span>
+                <h3>Fraud checks arrive too late</h3>
+                <p>Weak validation pushes bad records downstream.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Scale</span>
+                <h3>Volume spikes crush reviewer bandwidth</h3>
+                <p>Launches and hiring pushes create instant backlogs.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel">
+              <div class="section-title">Typical failure pattern</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Mixed-quality Aadhaar, PAN, DL, and RC uploads</li>
+                <li>Raw OCR without normalization or validation</li>
+                <li>Manual reviewer cleanup across multiple tabs</li>
+                <li>Slow approvals and lower conversion</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">What mobility teams need instead</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>One layer for extraction, masking, and validation</li>
+                <li>Manual review only on low-confidence cases</li>
+                <li>Fast integration into apps and admin tools</li>
+                <li>Clear auditability for compliance teams</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>02</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Use Cases</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">Core Modules</div>
+            <h2 class="section-title" style="margin-top: 12px;">Use cases mapped to mobility onboarding and compliance.</h2>
+          </div>
+
+          <div class="card-grid compact-three">
+            <article class="card">
+                <span class="tag">01</span>
+                <h3>Aadhaar parser with masking</h3>
+                <p>Extract key fields and mask sensitive data.</p>
+              </article>
+              <article class="card">
+                <span class="tag">02</span>
+                <h3>PAN card parser</h3>
+                <p>Normalize PAN fields for onboarding flows.</p>
+              </article>
+              <article class="card">
+                <span class="tag">03</span>
+                <h3>DL and RC parser</h3>
+                <p>Pull registration and license fields from noisy uploads.</p>
+              </article>
+              <article class="card">
+                <span class="tag">04</span>
+                <h3>Parivahan API integrations</h3>
+                <p>Validate extracted records against source systems.</p>
+              </article>
+              <article class="card">
+                <span class="tag">05</span>
+                <h3>Exception routing</h3>
+                <p>Route only low-confidence cases to reviewers.</p>
+              </article>
+              <article class="card">
+                <span class="tag">06</span>
+                <h3>Ops-ready payloads</h3>
+                <p>Return JSON, confidence, and review status to ops tools.</p>
+              </article>
+            </div>
+
+          <div class="panel soft slim">
+              <div class="section-title">Example workflow bundle</div>
+              <div class="chip-row tight" style="margin-top: 12px;">
+                <div class="chip">Upload</div>
+                <div class="chip">Classify</div>
+                <div class="chip">Extract</div>
+                <div class="chip">Mask</div>
+                <div class="chip">Validate</div>
+                <div class="chip">Score</div>
+                <div class="chip">Review</div>
+                <div class="chip">Approve</div>
+              </div>
+            </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>03</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Where It Fits</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">End-to-End Operations Flow</div>
+            <h2 class="section-title" style="margin-top: 12px;">Fracto can sit inside the full mobility onboarding stack.</h2>
+          </div>
+
+          <div class="flow">
+            <div class="timeline-step">
+              <div class="step-no">01</div>
+              <div class="step-title">Capture</div>
+              <div class="step-copy">Drivers or ops teams upload Aadhaar, PAN, DL, and RC.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">02</div>
+              <div class="step-title">Parse</div>
+              <div class="step-copy">Fracto classifies, extracts, masks, and structures the record.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">03</div>
+              <div class="step-title">Validate</div>
+              <div class="step-copy">Parivahan and rules checks validate the record.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">04</div>
+              <div class="step-title">Decide</div>
+              <div class="step-copy">Ops systems receive approve, review, or reject decisions.</div>
+            </div>
+          </div>
+
+          <div class="split-strong">
+            <div class="panel">
+              <div class="section-title">High-value insertion points</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Driver onboarding</li>
+                <li>Vehicle onboarding</li>
+                <li>Compliance refresh workflows</li>
+                <li>Partner onboarding</li>
+                <li>Central review queues</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Integration model</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>REST APIs into product flows</li>
+                <li>Webhook callbacks for async states</li>
+                <li>Dashboard access for ops teams</li>
+                <li>Custom mapping into internal tools</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Segment Fit</div>
+        </div>
+
+        <div class="two-col">
+          <div class="stack-lg">
+            <div>
+              <div class="eyebrow">Mobility Reference Set</div>
+              <h2 class="section-title" style="margin-top: 12px;">Built for operators with driver, vehicle, and compliance complexity.</h2>
+              <p class="section-copy" style="margin-top: 10px;">Relevant for employee transport, taxi networks, EV fleets, and managed operators.</p>
+            </div>
+
+            <div class="logo-wall">
+              <div class="logo-card">
+                <img src="clients/routematic.png" alt="Routematic" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/goamiles.svg" alt="GoaMiles" />
+              </div>
+              <div class="name-card">
+                <strong>Alt Mobility</strong>
+                <span>EV operations</span>
+              </div>
+              <div class="name-card">
+                <strong>WhistleDrive</strong>
+                <span>Employee transport</span>
+              </div>
+              <div class="logo-card">
+                <img src="clients/turno.png" alt="Turno" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/onmove.jpeg" alt="Onmove" />
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel">
+              <div class="section-title">Why this segment converts well</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>High document volume</li>
+                <li>Strong need for masking and traceability</li>
+                <li>Frequent vehicle and driver validation</li>
+                <li>Clear ROI from faster activation</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Messaging that resonates</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Activate drivers and vehicles faster</li>
+                <li>Reduce fraud and rework</li>
+                <li>Unify document flows under one API</li>
+                <li>Mask sensitive identity data</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>05</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Operator Impact</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">Business Outcomes</div>
+            <h2 class="section-title" style="margin-top: 12px;">The value case for mobility operations teams.</h2>
+            <p class="section-copy" style="margin-top: 10px; max-width: 72em;">Illustrative impact for a typical onboarding workflow.</p>
+          </div>
+
+          <div class="impact-grid">
+            <div class="impact-card">
+              <div class="big">70 to 90%</div>
+              <div class="small">Less manual data entry.</div>
+            </div>
+            <div class="impact-card">
+              <div class="big">2 to 5x</div>
+              <div class="small">Faster onboarding turnaround.</div>
+            </div>
+            <div class="impact-card">
+              <div class="big">1 stack</div>
+              <div class="small">One layer for parsing and validation.</div>
+            </div>
+          </div>
+
+          <div class="cta-box">
+            <div class="panel">
+              <div class="section-title">Use this deck when the buyer says:</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>"We still review documents manually."</li>
+                <li>"Our onboarding SLA slips at volume."</li>
+                <li>"We need masked Aadhaar workflows."</li>
+                <li>"DL and RC checks are fragmented."</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Core offer</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Fast pilot on Aadhaar, DL, and RC</li>
+                <li>API deployment into existing tools</li>
+                <li>Exception handling for low-confidence cases</li>
+                <li>Expand after pilot proof</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>06</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Pilot Proposal</div>
+        </div>
+
+        <div class="split-strong">
+          <div class="stack-lg">
+            <div class="eyebrow">Recommended Next Step</div>
+            <h2 class="section-title">Start with a mobility onboarding pilot.</h2>
+
+            <div class="panel">
+              <div class="section-title">Suggested 2-week pilot scope</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Input bundle: Aadhaar, PAN, DL, RC</li>
+                <li>Flow: parse, mask, validate, return JSON</li>
+                <li>Integration: app flow or batch queue</li>
+                <li>Success: turnaround, effort saved, exception rate, accuracy</li>
+              </ul>
+            </div>
+
+            <div class="band">
+              <h3>Outcome</h3>
+              <p>
+                A clear before-and-after view of speed, accuracy, and reviewer effort.
+              </p>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel soft">
+              <div class="section-title">What Fracto brings</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Aadhaar, PAN, DL, and RC parsers</li>
+                <li>Masked identity handling</li>
+                <li>Parivahan validation</li>
+                <li>Low-lift integration</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <div class="section-title">Ideal buyer personas</div>
+              <div class="chip-row" style="margin-top: 14px;">
+                <div class="chip">Head of Operations</div>
+                <div class="chip">Fleet Onboarding Lead</div>
+                <div class="chip">Risk and Compliance</div>
+                <div class="chip">Product for Driver Ops</div>
+                <div class="chip">Platform Engineering</div>
+              </div>
+            </div>
+
+            <p class="mini-note">
+              Prepared for mobility operators evaluating onboarding and compliance automation.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>07</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Closing CTA</div>
+        </div>
+
+        <div class="cta-hero">
+          <div class="stack-lg">
+            <div class="eyebrow">Next Step</div>
+            <h2 class="title" style="max-width: 9.5em;">Ready to automate mobility onboarding?</h2>
+            <p class="subtitle" style="max-width: 30em;">
+              Start with Aadhaar, DL, RC, and PAN flows, then expand into full driver and vehicle verification.
+            </p>
+
+            <div class="panel">
+              <div class="section-title">Best fit for</div>
+              <div class="chip-row" style="margin-top: 14px;">
+                <div class="chip">Taxi operators</div>
+                <div class="chip">Employee transport</div>
+                <div class="chip">EV fleets</div>
+                <div class="chip">Managed fleet platforms</div>
+                <div class="chip">Compliance teams</div>
+              </div>
+            </div>
+
+            <div class="band">
+              <h3>Offer</h3>
+              <p>Fast pilot. Clear ROI. Low integration overhead.</p>
+            </div>
+          </div>
+
+          <div class="contact-panel">
+            <div>
+              <div class="eyebrow" style="background: rgba(255,255,255,0.16); color: #ffffff;">Talk to Fracto</div>
+              <h2 class="section-title" style="margin-top: 14px;">Book a pilot or sales conversation.</h2>
+            </div>
+
+            <div class="contact-grid">
+              <div class="contact-item">
+                <div class="label">Email</div>
+                <div class="value">sales@fracto.tech</div>
+              </div>
+              <div class="contact-item">
+                <div class="label">Phone</div>
+                <div class="value">+91 84483 33277</div>
+              </div>
+              <div class="contact-item">
+                <div class="label">Website</div>
+                <div class="value">fracto.tech</div>
+              </div>
+            </div>
+
+            <p class="mini-note">Use this deck for mobility, taxi, and fleet accounts with high onboarding or compliance volume.</p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for Mobility</span>
+          <span>08</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
