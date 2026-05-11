@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fracto for Quick Commerce and E-commerce Operations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14213d;
+      --ink-soft: #324463;
+      --paper: #fffdf8;
+      --panel: #ffffff;
+      --panel-soft: #f5f7fb;
+      --line: #d7deea;
+      --accent: #0e8f7d;
+      --accent-dark: #0b6d60;
+      --accent-soft: #daf6f0;
+      --signal: #f2a33b;
+      --signal-soft: #fff1db;
+      --berry: #bf5b76;
+      --shadow: 0 26px 70px rgba(20, 33, 61, 0.14);
+      --page-w: 297mm;
+      --page-h: 210mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(14, 143, 125, 0.15), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(242, 163, 59, 0.13), transparent 20%),
+        #eef2f8;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+
+    body {
+      padding: 18px;
+    }
+
+    .deck {
+      display: grid;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .slide {
+      width: var(--page-w);
+      height: var(--page-h);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(14, 143, 125, 0.12), transparent 22%),
+        radial-gradient(circle at 10% 82%, rgba(191, 91, 118, 0.08), transparent 18%);
+      pointer-events: none;
+    }
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      padding: 16mm 16mm 14mm;
+      display: grid;
+      gap: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      padding: 4px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(20, 33, 61, 0.08);
+      object-fit: contain;
+    }
+
+    .hero,
+    .two-col,
+    .split-strong {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero {
+      grid-template-columns: 1.2fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .two-col {
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: start;
+    }
+
+    .two-col.balance-panels {
+      align-items: stretch;
+    }
+
+    .split-strong.balance-panels {
+      align-items: stretch;
+    }
+
+    .split-strong {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    h1, h2, h3, h4, p {
+      margin: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      max-width: 10.5em;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 40em;
+    }
+
+    .panel,
+    .metric,
+    .card,
+    .pill-card,
+    .impact-card,
+    .timeline-step {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+    }
+
+    .panel {
+      padding: 18px 20px;
+    }
+
+    .panel.slim {
+      padding: 14px 16px;
+    }
+
+    .panel.soft {
+      background: var(--panel-soft);
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-lg {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stack-lg.stack-spread {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .stack-lg.stack-spread .panel {
+      min-height: 0;
+    }
+
+    .bullet-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+    }
+
+    .metric .value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+
+    .metric .label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card-grid.compact-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .card-grid.compact-three .card {
+      padding: 14px;
+      gap: 8px;
+    }
+
+    .card-grid.compact-three .card h3 {
+      font-size: 16px;
+    }
+
+    .card-grid.compact-three .card p {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .card .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--signal-soft);
+      color: #9b630f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .timeline-step {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-step::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(14, 143, 125, 0.5), rgba(14, 143, 125, 0));
+    }
+
+    .timeline-step:last-child::after {
+      display: none;
+    }
+
+    .step-no {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .step-copy {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .logo-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .logo-card,
+    .name-card {
+      min-height: 88px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .logo-card img {
+      max-width: 150px;
+      max-height: 40px;
+      object-fit: contain;
+    }
+
+    .logo-card.logo-card-onmove img {
+      max-width: 136px;
+      max-height: 44px;
+    }
+
+    .logo-card.logo-card-goamiles img {
+      max-width: 132px;
+      max-height: 50px;
+    }
+
+    .logo-card.logo-card-alt img {
+      max-width: 140px;
+      max-height: 42px;
+    }
+
+    .logo-card.logo-card-whistle img {
+      max-width: 148px;
+      max-height: 34px;
+    }
+
+    .logo-card.logo-card-parcelx img {
+      max-width: 136px;
+      max-height: 38px;
+    }
+
+    .logo-card.logo-card-qwqer img {
+      max-width: 132px;
+      max-height: 38px;
+    }
+
+    .logo-card.logo-card-qwqer {
+      background: #15273b;
+      border-color: rgba(21, 39, 59, 0.7);
+    }
+
+    .name-card {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .name-card strong {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .name-card span {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .impact-card {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .impact-card .big {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .impact-card .small {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip-row.tight {
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .chip-row.tight .chip {
+      padding: 7px 10px;
+      font-size: 11px;
+    }
+
+    .cta-box {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+    }
+
+    .band {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--ink), #1f325c);
+      color: #ffffff;
+    }
+
+    .band h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .band p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .cta-hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-panel {
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #132448, #0f7d72);
+      color: #ffffff;
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-panel .section-title,
+    .contact-panel .section-copy,
+    .contact-panel .mini-note {
+      color: #ffffff;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-item .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .contact-item .value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    .mini-note {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+
+      html, body {
+        background: #ffffff;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .deck {
+        gap: 0;
+      }
+
+      .slide {
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+    @media screen and (max-width: 1100px) {
+      body {
+        padding: 12px;
+      }
+
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+      }
+
+      .hero,
+      .two-col,
+      .split-strong,
+      .cta-hero,
+      .cta-box,
+      .flow,
+      .logo-wall,
+      .impact-grid,
+      .card-grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-step::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Quick Commerce and E-commerce Ops Deck</div>
+        </div>
+
+        <div class="hero">
+          <div class="stack-lg">
+            <div class="eyebrow">AI Infrastructure for Rider, Parcel, and E-commerce Ops</div>
+            <h1 class="title">Automate rider onboarding with DL, PAN, parcel proof, and e-commerce document checks.</h1>
+            <p class="subtitle">
+              Fracto turns KYC uploads, delivery images, shipment documents, and compliance files into structured decisions for quick-commerce and e-commerce operators.
+            </p>
+
+            <div class="panel">
+              <ul class="bullet-list">
+                <li>Rider onboarding for DL, PAN, Aadhaar, and identity documents</li>
+                <li>Parcel delivery image verification for rider app uploads</li>
+                <li>POD, invoice, AWB, and manifest extraction</li>
+                <li>LUT, AD Code, IEC, invoice, and export-document checks</li>
+              </ul>
+            </div>
+
+            <div class="chip-row">
+              <div class="chip">Built for operators like Qwqer</div>
+              <div class="chip">ParcelX</div>
+              <div class="chip">Quick commerce</div>
+              <div class="chip">E-commerce logistics</div>
+              <div class="chip">Courier and export workflows</div>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel soft">
+              <div class="section-title">What this changes</div>
+              <div class="metric-grid" style="margin-top: 14px;">
+                <div class="metric">
+                  <div class="value">Live proof</div>
+                  <div class="label">Valid package image or exception decision from field uploads</div>
+                </div>
+                <div class="metric">
+                  <div class="value">1 API layer</div>
+                  <div class="label">Vision checks, OCR, extraction, validation, and routing</div>
+                </div>
+                <div class="metric">
+                  <div class="value">Ops ready</div>
+                  <div class="label">JSON, confidence flags, audit trails, and review status</div>
+                </div>
+                <div class="metric">
+                  <div class="value">Export ready</div>
+                  <div class="label">Checks LUT, AD Code, IEC, invoices, and shipping files</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="band">
+              <h3>Positioning</h3>
+              <p>
+                Replace manual image/document review with one verification layer for quick-commerce, e-commerce, and parcel workflows.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>01</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Why E-commerce Ops Break Down</div>
+        </div>
+
+        <div class="two-col balance-panels">
+          <div class="stack-lg stack-spread">
+            <div class="eyebrow">The Operational Problem</div>
+            <h2 class="section-title">Parcel operations still depend on manual visual checks and document-heavy exception handling.</h2>
+            <p class="section-copy">
+              Quick-commerce and e-commerce teams move fast, but proof verification, billing, and export compliance still get stuck in queues.
+            </p>
+
+            <div class="card-grid">
+              <article class="card">
+                <span class="tag">Delivery Proof</span>
+                <h3>Rider image uploads are inconsistent</h3>
+                <p>Teams need to know if the photo is a real package proof, not a random or unusable image.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Returns</span>
+                <h3>Damaged and wrong-item claims are hard to verify</h3>
+                <p>Photos, labels, package state, and remarks need consistent checks before refund or escalation.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Billing</span>
+                <h3>Invoices and shipment documents are re-keyed</h3>
+                <p>Manual extraction slows reconciliation, seller payouts, and customer billing.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Compliance</span>
+                <h3>Export files need repeated checks</h3>
+                <p>LUT, AD Code, IEC, invoices, and supporting documents need validation before dispatch or clearance.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel">
+              <div class="section-title">Typical failure pattern</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Riders upload blurry, cropped, duplicate, or irrelevant package photos</li>
+                <li>Ops teams manually open images to confirm package validity</li>
+                <li>Invoice, AWB, POD, and manifest data is copied across tools</li>
+                <li>Export-document gaps are found late in the shipment workflow</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">What e-commerce teams need instead</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Automated valid/invalid image decisions in the delivery flow</li>
+                <li>Document extraction for invoices, PODs, manifests, and AWBs</li>
+                <li>Rules and validation for LUT, AD Code, IEC, and invoice bundles</li>
+                <li>Manual review only for low-confidence or policy-sensitive cases</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>02</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Use Cases</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">Core Modules</div>
+            <h2 class="section-title" style="margin-top: 12px;">Use cases mapped to quick-commerce and e-commerce operations.</h2>
+          </div>
+
+          <div class="card-grid compact-three">
+            <article class="card">
+                <span class="tag">01</span>
+                <h3>Parcel delivery image verification</h3>
+                <p>For Qwqer-style rider uploads: decide whether the image is a valid package proof.</p>
+              </article>
+              <article class="card">
+                <span class="tag">02</span>
+                <h3>POD and AWB extraction</h3>
+                <p>Read delivery proof, airway bill, order ID, consignee, date, and shipment references.</p>
+              </article>
+              <article class="card">
+                <span class="tag">03</span>
+                <h3>Invoice and billing checks</h3>
+                <p>Extract invoice number, GSTIN, amount, date, seller, and buyer fields for reconciliation.</p>
+              </article>
+              <article class="card">
+                <span class="tag">04</span>
+                <h3>Export-document verification</h3>
+                <p>For ParcelX-style flows: check LUT, AD Code, IEC, invoice, and required shipment files.</p>
+              </article>
+              <article class="card">
+                <span class="tag">05</span>
+                <h3>Return and claim evidence checks</h3>
+                <p>Classify damaged, missing, wrong-item, label, seal, and packaging evidence photos.</p>
+              </article>
+              <article class="card">
+                <span class="tag">06</span>
+                <h3>Ops-ready payloads</h3>
+                <p>Return valid, invalid, review, extracted fields, confidence, and audit status to ops tools.</p>
+              </article>
+            </div>
+
+          <div class="panel soft slim">
+              <div class="section-title">Example workflow bundle</div>
+              <div class="chip-row tight" style="margin-top: 12px;">
+                <div class="chip">Upload</div>
+                <div class="chip">Classify</div>
+                <div class="chip">Detect package</div>
+                <div class="chip">Extract fields</div>
+                <div class="chip">Validate rules</div>
+                <div class="chip">Score</div>
+                <div class="chip">Review</div>
+                <div class="chip">Approve</div>
+              </div>
+            </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>03</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Where It Fits</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">End-to-End Operations Flow</div>
+            <h2 class="section-title" style="margin-top: 12px;">Fracto can sit inside the full parcel operations and e-commerce compliance stack.</h2>
+          </div>
+
+          <div class="flow">
+            <div class="timeline-step">
+              <div class="step-no">01</div>
+              <div class="step-title">Capture</div>
+              <div class="step-copy">Riders, sellers, hubs, or ops teams upload images and documents.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">02</div>
+              <div class="step-title">Inspect</div>
+              <div class="step-copy">Fracto classifies the file, detects package/proof validity, and extracts fields.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">03</div>
+              <div class="step-title">Validate</div>
+              <div class="step-copy">Rules check delivery proof, invoice, LUT, AD Code, IEC, and shipment requirements.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">04</div>
+              <div class="step-title">Decide</div>
+              <div class="step-copy">Ops systems receive valid, invalid, approve, review, or reject decisions.</div>
+            </div>
+          </div>
+
+          <div class="split-strong">
+            <div class="panel">
+              <div class="section-title">High-value insertion points</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Delivery completion photo validation</li>
+                <li>Dark-store dispatch and handover proof</li>
+                <li>Return pickup and claim evidence review</li>
+                <li>Seller invoice and shipment reconciliation</li>
+                <li>Export compliance document checks</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Integration model</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>REST APIs into rider apps, seller portals, and ops tools</li>
+                <li>Webhook callbacks for async verification states</li>
+                <li>Dashboard access for hub, claims, and compliance teams</li>
+                <li>Custom mapping into WMS, OMS, TMS, and billing systems</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Segment Fit</div>
+        </div>
+
+        <div class="two-col">
+          <div class="stack-lg">
+            <div>
+              <div class="eyebrow">E-commerce Reference Set</div>
+              <h2 class="section-title" style="margin-top: 12px;">Built for operators with parcel, delivery, billing, and compliance complexity.</h2>
+              <p class="section-copy" style="margin-top: 10px;">Relevant for quick commerce, e-commerce logistics, courier networks, seller operations, and export shipping workflows.</p>
+            </div>
+
+            <div class="logo-wall">
+              <div class="logo-card logo-card-qwqer">
+                <img src="clients/qwqer.png" alt="Qwqer" />
+              </div>
+              <div class="logo-card logo-card-parcelx">
+                <img src="clients/parcelx.png" alt="ParcelX" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/jeebly.svg" alt="Jeebly" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/letstransport.png" alt="LetsTransport" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/navata.png" alt="Navata" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/ODeX.png" alt="ODeX" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/routematic.png" alt="Routematic" />
+              </div>
+              <div class="logo-card logo-card-goamiles">
+                <img src="clients/goamiles.svg" alt="GoaMiles" />
+              </div>
+              <div class="logo-card logo-card-whistle">
+                <img src="clients/whistledrive.png" alt="WhistleDrive" />
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel">
+              <div class="section-title">Why this segment converts well</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>High daily volume of delivery proofs, claims, invoices, and shipment files</li>
+                <li>Clear need for fast valid/invalid decisions inside operational flows</li>
+                <li>Frequent exception handling across riders, sellers, hubs, and customers</li>
+                <li>Strong ROI from reducing manual review before billing or refunds</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Messaging that resonates</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Verify delivery proof images at rider-upload speed</li>
+                <li>Reduce fake, irrelevant, duplicate, or unusable package photos</li>
+                <li>Unify image checks and document parsing under one API</li>
+                <li>Keep export and billing workflows traceable</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>05</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>E-commerce Ops Impact</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">Business Outcomes</div>
+            <h2 class="section-title" style="margin-top: 12px;">The value case for quick-commerce and e-commerce operations teams.</h2>
+            <p class="section-copy" style="margin-top: 10px; max-width: 72em;">Illustrative impact for parcel proof, document extraction, and export-compliance workflows.</p>
+          </div>
+
+          <div class="impact-grid">
+            <div class="impact-card">
+              <div class="big">70 to 90%</div>
+              <div class="small">Less manual proof and document review.</div>
+            </div>
+            <div class="impact-card">
+              <div class="big">Instant triage</div>
+              <div class="small">Valid, invalid, or review status at upload time.</div>
+            </div>
+            <div class="impact-card">
+              <div class="big">1 stack</div>
+              <div class="small">One layer for images, PODs, invoices, and export files.</div>
+            </div>
+          </div>
+
+          <div class="cta-box">
+            <div class="panel">
+              <div class="section-title">Use this deck when the buyer says:</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>"Our riders upload delivery photos, but ops still checks them manually."</li>
+                <li>"We need to reject random or invalid package images automatically."</li>
+                <li>"Invoices, AWBs, and PODs still require manual data entry."</li>
+                <li>"LUT, AD Code, IEC, and export documents are checked too late."</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Core offer</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Fast pilot on parcel image verification plus priority documents</li>
+                <li>API deployment into rider apps, seller portals, or ops tools</li>
+                <li>Exception handling for low-confidence and policy-sensitive cases</li>
+                <li>Expand into billing, claims, and export compliance workflows</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>06</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Pilot Proposal</div>
+        </div>
+
+        <div class="split-strong balance-panels">
+          <div class="stack-lg stack-spread">
+            <div class="eyebrow">Recommended Next Step</div>
+            <h2 class="section-title">Start with an e-commerce operations pilot.</h2>
+
+            <div class="panel">
+              <div class="section-title">Suggested 2-week pilot scope</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Input bundle: package delivery images, POD/AWB, invoice, and export documents</li>
+                <li>Qwqer-style flow: rider uploads package image, Fracto returns valid, invalid, or review</li>
+                <li>ParcelX-style flow: extract and check LUT, AD Code, IEC, invoice, and supporting files</li>
+                <li>Success: automation rate, false rejects, reviewer effort saved, turnaround, and audit completeness</li>
+              </ul>
+            </div>
+
+            <div class="band">
+              <h3>Outcome</h3>
+              <p>
+                A clear before-and-after view of proof quality, document accuracy, compliance readiness, and reviewer effort.
+              </p>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel soft">
+              <div class="section-title">What Fracto brings</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Package image validity models</li>
+                <li>POD, AWB, manifest, and invoice extraction</li>
+                <li>LUT, AD Code, IEC, and export-document rules</li>
+                <li>Low-lift API, webhook, and dashboard integration</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <div class="section-title">Ideal buyer personas</div>
+              <div class="chip-row" style="margin-top: 14px;">
+                <div class="chip">Head of Operations</div>
+                <div class="chip">Last-mile Ops Lead</div>
+                <div class="chip">Claims and Returns</div>
+                <div class="chip">Export Compliance</div>
+                <div class="chip">Platform Engineering</div>
+              </div>
+            </div>
+
+            <p class="mini-note">
+              Prepared for quick-commerce, e-commerce, courier, and parcel teams evaluating proof and document automation.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>07</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Closing CTA</div>
+        </div>
+
+        <div class="cta-hero">
+          <div class="stack-lg">
+            <div class="eyebrow">Next Step</div>
+            <h2 class="title" style="max-width: 9.5em;">Ready to automate parcel proof and e-commerce document workflows?</h2>
+            <p class="subtitle" style="max-width: 30em;">
+              Start with delivery image verification, invoices, POD/AWB extraction, and export-document checks, then expand across claims, billing, and compliance.
+            </p>
+
+            <div class="panel">
+              <div class="section-title">Best fit for</div>
+              <div class="chip-row" style="margin-top: 14px;">
+                <div class="chip">Quick commerce</div>
+                <div class="chip">E-commerce logistics</div>
+                <div class="chip">Courier networks</div>
+                <div class="chip">Seller operations</div>
+                <div class="chip">Export compliance teams</div>
+              </div>
+            </div>
+
+            <div class="band">
+              <h3>Offer</h3>
+              <p>Fast pilot. Clear valid/invalid decisions. Low integration overhead.</p>
+            </div>
+          </div>
+
+          <div class="contact-panel">
+            <div>
+              <div class="eyebrow" style="background: rgba(255,255,255,0.16); color: #ffffff;">Talk to Fracto</div>
+              <h2 class="section-title" style="margin-top: 14px;">Book a pilot or sales conversation.</h2>
+            </div>
+
+            <div class="contact-grid">
+              <div class="contact-item">
+                <div class="label">Email</div>
+                <div class="value">sales@fracto.tech</div>
+              </div>
+              <div class="contact-item">
+                <div class="label">Phone</div>
+                <div class="value">+91 84483 33277</div>
+              </div>
+              <div class="contact-item">
+                <div class="label">Website</div>
+                <div class="value">fracto.tech</div>
+              </div>
+            </div>
+
+            <p class="mini-note">Use this deck for quick-commerce, e-commerce, parcel, courier, and export-shipping accounts with high proof or document volume.</p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto for E-commerce Ops</span>
+          <span>08</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

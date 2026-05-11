@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fracto Business Overview Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14213d;
+      --ink-soft: #324463;
+      --paper: #fffdf8;
+      --panel: #ffffff;
+      --panel-soft: #f5f7fb;
+      --line: #d7deea;
+      --accent: #0e8f7d;
+      --accent-dark: #0b6d60;
+      --accent-soft: #daf6f0;
+      --signal: #f2a33b;
+      --signal-soft: #fff1db;
+      --berry: #bf5b76;
+      --shadow: 0 26px 70px rgba(20, 33, 61, 0.14);
+      --page-w: 297mm;
+      --page-h: 210mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(14, 143, 125, 0.15), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(242, 163, 59, 0.13), transparent 20%),
+        #eef2f8;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+
+    body {
+      padding: 18px;
+    }
+
+    .deck {
+      display: grid;
+      gap: 24px;
+      justify-content: center;
+    }
+
+    .slide {
+      width: var(--page-w);
+      height: var(--page-h);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,252,255,0.98)),
+        var(--paper);
+      box-shadow: var(--shadow);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .slide:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 85% 12%, rgba(14, 143, 125, 0.12), transparent 22%),
+        radial-gradient(circle at 10% 82%, rgba(191, 91, 118, 0.08), transparent 18%);
+      pointer-events: none;
+    }
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      padding: 16mm 16mm 14mm;
+      display: grid;
+      gap: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+
+    .brand img {
+      width: 34px;
+      height: 34px;
+      padding: 4px;
+      border-radius: 10px;
+      background: #ffffff;
+      border: 1px solid rgba(20, 33, 61, 0.08);
+      object-fit: contain;
+    }
+
+    .hero,
+    .two-col,
+    .split-strong {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero {
+      grid-template-columns: 1.2fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .two-col {
+      grid-template-columns: 1.02fr 0.98fr;
+      align-items: start;
+    }
+
+    .two-col.balance-panels,
+    .split-strong.balance-panels {
+      align-items: stretch;
+    }
+
+    .split-strong {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      max-width: 10.5em;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 40em;
+    }
+
+    .panel,
+    .metric,
+    .card,
+    .impact-card,
+    .timeline-step,
+    .logo-card,
+    .name-card {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+    }
+
+    .panel {
+      padding: 18px 20px;
+    }
+
+    .panel.slim {
+      padding: 14px 16px;
+    }
+
+    .panel.soft {
+      background: var(--panel-soft);
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-lg {
+      display: grid;
+      gap: 16px;
+    }
+
+    .stack-lg.stack-spread {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .bullet-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      padding: 16px;
+    }
+
+    .metric .value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 26px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: 8px;
+    }
+
+    .metric .label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-soft);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card-grid.compact-three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .card-grid.compact-three .card {
+      padding: 14px;
+      gap: 8px;
+    }
+
+    .card-grid.compact-three .card h3 {
+      font-size: 16px;
+    }
+
+    .card-grid.compact-three .card p {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .card .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--signal-soft);
+      color: #9b630f;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .timeline-step {
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline-step::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(14, 143, 125, 0.5), rgba(14, 143, 125, 0));
+    }
+
+    .timeline-step:last-child::after {
+      display: none;
+    }
+
+    .step-no {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .step-copy {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-soft);
+    }
+
+    .logo-wall {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .logo-card,
+    .name-card {
+      min-height: 88px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .logo-card img {
+      max-width: 150px;
+      max-height: 42px;
+      object-fit: contain;
+    }
+
+    .logo-card.logo-card-wide img {
+      max-width: 162px;
+    }
+
+    .name-card {
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .name-card strong {
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .name-card span {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .impact-card {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .impact-card .big {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .impact-card .small {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip-row.tight {
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .chip-row.tight .chip {
+      padding: 7px 10px;
+      font-size: 11px;
+    }
+
+    .cta-box {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+    }
+
+    .band {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--ink), #1f325c);
+      color: #ffffff;
+    }
+
+    .band h3 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .band p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .cta-hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-panel {
+      padding: 22px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #132448, #0f7d72);
+      color: #ffffff;
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-panel .section-title,
+    .contact-panel .section-copy,
+    .contact-panel .mini-note {
+      color: #ffffff;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: grid;
+      gap: 6px;
+    }
+
+    .contact-item .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .contact-item .value {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+      line-height: 1.15;
+      word-break: break-word;
+    }
+
+    .mini-note {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.45;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    @media print {
+      @page {
+        size: A4 landscape;
+        margin: 0;
+      }
+
+      html,
+      body {
+        background: #ffffff;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .deck {
+        gap: 0;
+      }
+
+      .slide {
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+    @media screen and (max-width: 1100px) {
+      body {
+        padding: 12px;
+      }
+
+      .slide {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+      }
+
+      .hero,
+      .two-col,
+      .split-strong,
+      .cta-hero,
+      .cta-box,
+      .flow,
+      .logo-wall,
+      .impact-grid,
+      .card-grid,
+      .metric-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-step::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Business Overview Deck</div>
+        </div>
+
+        <div class="hero">
+          <div class="stack-lg">
+            <div class="eyebrow">AI Workflow Infrastructure</div>
+            <h1 class="title">Turn document-heavy operations into structured decisions.</h1>
+            <p class="subtitle">
+              Fracto handles document intake, extraction, validation, approvals, and system updates for regulated operations teams.
+            </p>
+
+            <div class="panel">
+              <ul class="bullet-list">
+                <li>Document AI built into end-to-end workflow automation</li>
+                <li>APIs, dashboards, reviewer queues, and audit trails</li>
+                <li>Designed for BFSI, logistics, mobility, and compliance-heavy operations</li>
+                <li>Deployment support for India and Gulf operating requirements</li>
+              </ul>
+            </div>
+
+            <div class="chip-row">
+              <div class="chip">Lending operations</div>
+              <div class="chip">Logistics billing</div>
+              <div class="chip">Mobility operations</div>
+              <div class="chip">Compliance checks</div>
+              <div class="chip">Enterprise workflows</div>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel soft">
+              <div class="section-title">Company snapshot</div>
+              <div class="metric-grid" style="margin-top: 14px;">
+                <div class="metric">
+                  <div class="value">35+</div>
+                  <div class="label">Active clients across India and the Gulf</div>
+                </div>
+                <div class="metric">
+                  <div class="value">2M+</div>
+                  <div class="label">Pages processed across live document workflows</div>
+                </div>
+                <div class="metric">
+                  <div class="value">1 layer</div>
+                  <div class="label">Intake, parsing, validation, review, and write-back</div>
+                </div>
+                <div class="metric">
+                  <div class="value">SOC 2</div>
+                  <div class="label">Security posture for enterprise evaluation</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="band">
+              <h3>Positioning</h3>
+              <p>
+                Fracto is the execution layer between incoming documents and the business systems that need clean decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>01</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Why Teams Need Fracto</div>
+        </div>
+
+        <div class="two-col balance-panels">
+          <div class="stack-lg stack-spread">
+            <div class="eyebrow">The Operational Problem</div>
+            <h2 class="section-title">Critical workflows still move through inboxes, spreadsheets, and approval threads.</h2>
+            <p class="section-copy">
+              OCR alone creates extracted text. Operations teams need validated data, exception handling, approvals, and controlled updates into their systems.
+            </p>
+
+            <div class="card-grid">
+              <article class="card">
+                <span class="tag">Intake</span>
+                <h3>Documents arrive from everywhere</h3>
+                <p>Email, portals, WhatsApp, APIs, and batch uploads create scattered intake.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Review</span>
+                <h3>Teams re-key and chase approvals</h3>
+                <p>Manual checks slow SLAs and create avoidable rework.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Risk</span>
+                <h3>Audit evidence is fragmented</h3>
+                <p>Approvals and exceptions live in folders, chats, and email trails.</p>
+              </article>
+              <article class="card">
+                <span class="tag">Scale</span>
+                <h3>Cost grows with every new file</h3>
+                <p>Volume spikes require more reviewers instead of better automation.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel">
+              <div class="section-title">Typical failure pattern</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Documents land in many channels</li>
+                <li>Fields are typed into spreadsheets or core systems</li>
+                <li>Exceptions are handled in email or chat</li>
+                <li>Audit trail is rebuilt later during reviews</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">What buyers need instead</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>One accountable workflow run per case</li>
+                <li>Structured extraction with confidence and validations</li>
+                <li>Reviewer queues only for low-confidence exceptions</li>
+                <li>APIs and webhooks into existing business systems</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>02</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Platform Capabilities</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">What Fracto Provides</div>
+            <h2 class="section-title" style="margin-top: 12px;">A workflow platform with document AI built in.</h2>
+          </div>
+
+          <div class="card-grid compact-three">
+            <article class="card">
+              <span class="tag">01</span>
+              <h3>Intake orchestration</h3>
+              <p>Accept files through email, portal, webhook, API, or batch upload.</p>
+            </article>
+            <article class="card">
+              <span class="tag">02</span>
+              <h3>Classification and parsing</h3>
+              <p>Identify document type, extract fields, and normalize outputs.</p>
+            </article>
+            <article class="card">
+              <span class="tag">03</span>
+              <h3>Policy validation</h3>
+              <p>Run rule checks, completeness checks, and cross-field validations.</p>
+            </article>
+            <article class="card">
+              <span class="tag">04</span>
+              <h3>Exception workflow</h3>
+              <p>Send uncertain cases to reviewer queues with context and evidence.</p>
+            </article>
+            <article class="card">
+              <span class="tag">05</span>
+              <h3>Approvals and audit</h3>
+              <p>Track decisions, timestamps, comments, and handoffs in one trail.</p>
+            </article>
+            <article class="card">
+              <span class="tag">06</span>
+              <h3>System write-back</h3>
+              <p>Return structured data and decisions into LOS, ERP, TMS, or internal systems.</p>
+            </article>
+          </div>
+
+          <div class="panel soft slim">
+            <div class="section-title">Common workflow bundle</div>
+            <div class="chip-row tight" style="margin-top: 12px;">
+              <div class="chip">Capture</div>
+              <div class="chip">Classify</div>
+              <div class="chip">Extract</div>
+              <div class="chip">Validate</div>
+              <div class="chip">Score</div>
+              <div class="chip">Review</div>
+              <div class="chip">Approve</div>
+              <div class="chip">Write back</div>
+              <div class="chip">Audit</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>03</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>How It Fits</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">Operating Model</div>
+            <h2 class="section-title" style="margin-top: 12px;">Fracto sits inside existing business workflows without forcing a system rip-and-replace.</h2>
+          </div>
+
+          <div class="flow">
+            <div class="timeline-step">
+              <div class="step-no">01</div>
+              <div class="step-title">Receive</div>
+              <div class="step-copy">Documents enter through a product app, customer portal, mailbox, API, or batch source.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">02</div>
+              <div class="step-title">Process</div>
+              <div class="step-copy">Fracto extracts, validates, and flags exceptions with structured outputs.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">03</div>
+              <div class="step-title">Review</div>
+              <div class="step-copy">Only unresolved cases move to reviewers with evidence and comments.</div>
+            </div>
+            <div class="timeline-step">
+              <div class="step-no">04</div>
+              <div class="step-title">Return</div>
+              <div class="step-copy">Decisions, fields, and audit status flow back to the system of record.</div>
+            </div>
+          </div>
+
+          <div class="split-strong">
+            <div class="panel">
+              <div class="section-title">Integration options</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>REST APIs for synchronous workflows</li>
+                <li>Webhook callbacks for async document jobs</li>
+                <li>Dashboard and reviewer queues for operations teams</li>
+                <li>Custom field mapping into customer or internal systems</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Deployment expectations</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Workflow discovery and sample document review</li>
+                <li>Parser and rule configuration for the first use case</li>
+                <li>Security, access, and audit requirements aligned upfront</li>
+                <li>Production rollout after measurable workflow proof</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>04</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Reference Set</div>
+        </div>
+
+        <div class="two-col">
+          <div class="stack-lg">
+            <div>
+              <div class="eyebrow">Where Fracto Is Relevant</div>
+              <h2 class="section-title" style="margin-top: 12px;">Used across document-heavy operating teams in lending, logistics, mobility, and compliance.</h2>
+              <p class="section-copy" style="margin-top: 10px;">
+                The common pattern is high-volume document intake where speed, accuracy, and traceability matter.
+              </p>
+            </div>
+
+            <div class="logo-wall">
+              <div class="logo-card logo-card-wide">
+                <img src="clients/gyandhan.png.webp" alt="Gyandhan" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/kuhoo.png" alt="Kuhoo" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/routematic.png" alt="Routematic" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/navata.png" alt="Navata" />
+              </div>
+              <div class="logo-card logo-card-wide">
+                <img src="clients/letstransport.png" alt="LetsTransport" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/trukker.png" alt="Trukker" />
+              </div>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel">
+              <div class="section-title">Good-fit workflows</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Customer, vendor, or driver intake with KYC documents</li>
+                <li>Loan file intake and underwriting preparation</li>
+                <li>Logistics invoice, POD, and billing document checks</li>
+                <li>Vendor, fleet, or driver compliance refresh workflows</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">Business value</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Reduce manual review across high-volume document workflows</li>
+                <li>Improve turnaround time without adding reviewer headcount</li>
+                <li>Create a repeatable workflow layer across teams and business units</li>
+                <li>Expand from first document flow into broader operations automation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>05</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Business Model</div>
+        </div>
+
+        <div class="stack-lg">
+          <div>
+            <div class="eyebrow">How Fracto Creates Value</div>
+            <h2 class="section-title" style="margin-top: 12px;">Start with one concrete workflow, then expand into adjacent document operations.</h2>
+            <p class="section-copy" style="margin-top: 10px; max-width: 72em;">
+              The best deployments begin with a narrow use case, clear documents, and a measurable handoff into the customer system.
+            </p>
+          </div>
+
+          <div class="impact-grid">
+            <div class="impact-card">
+              <div class="big">Automate</div>
+              <div class="small">Replace manual document handling with structured extraction, rules, and review states.</div>
+            </div>
+            <div class="impact-card">
+              <div class="big">Integrate</div>
+              <div class="small">Connect workflow outputs into existing products, dashboards, and systems of record.</div>
+            </div>
+            <div class="impact-card">
+              <div class="big">Expand</div>
+              <div class="small">Grow from the first document flow into more workflows, higher volume, and deeper automation.</div>
+            </div>
+          </div>
+
+          <div class="cta-box">
+            <div class="panel">
+              <div class="section-title">Best-fit buyers and teams</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Operations teams in lending, logistics, mobility, and compliance</li>
+                <li>Product teams building document-heavy customer or vendor journeys</li>
+                <li>Shared service teams handling repetitive document review</li>
+                <li>Enterprise teams seeking a repeatable automation layer across business units</li>
+              </ul>
+            </div>
+
+            <div class="panel soft">
+              <div class="section-title">What makes the first workflow work</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Known document types and business rules</li>
+                <li>Sample files with expected output formats</li>
+                <li>Defined review and exception owner</li>
+                <li>Clear success metric: time saved, accuracy, SLA, or exception rate</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>06</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Rollout Plan</div>
+        </div>
+
+        <div class="split-strong balance-panels">
+          <div class="stack-lg stack-spread">
+            <div class="eyebrow">Recommended First Step</div>
+            <h2 class="section-title">Run a focused workflow pilot before broader rollout.</h2>
+
+            <div class="panel">
+              <div class="section-title">Suggested 2-week pilot scope</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Pick one use case and 2 to 4 document types</li>
+                <li>Share sample documents, field schema, and validation rules</li>
+                <li>Configure extraction, review states, and output payloads</li>
+                <li>Connect through API, webhook, dashboard, or batch flow</li>
+                <li>Review accuracy, exception rate, turnaround time, and rollout path</li>
+              </ul>
+            </div>
+
+            <div class="band">
+              <h3>Outcome</h3>
+              <p>
+                A working workflow, measurable pilot results, and a clear expansion plan for production rollout.
+              </p>
+            </div>
+          </div>
+
+          <div class="stack-lg">
+            <div class="panel soft">
+              <div class="section-title">What Fracto brings</div>
+              <ul class="bullet-list" style="margin-top: 14px;">
+                <li>Workflow discovery and solution design</li>
+                <li>Document AI, validation rules, and reviewer queue setup</li>
+                <li>API and webhook support for integration</li>
+                <li>Operational reporting and audit trail for go-live</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <div class="section-title">What we align on together</div>
+              <div class="chip-row" style="margin-top: 14px;">
+                <div class="chip">Use case</div>
+                <div class="chip">Sample files</div>
+                <div class="chip">Field schema</div>
+                <div class="chip">Validation rules</div>
+                <div class="chip">Integration path</div>
+                <div class="chip">Success metrics</div>
+                <div class="chip">Rollout plan</div>
+              </div>
+            </div>
+
+            <p class="mini-note">
+              Prepared for teams evaluating Fracto as a document workflow automation layer for customer-facing or internal operations.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>07</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="brand">
+            <img src="fracto_logo.svg" alt="Fracto logo" />
+            <span>Fracto</span>
+          </div>
+          <div>Next Step</div>
+        </div>
+
+        <div class="cta-hero">
+          <div class="stack-lg">
+            <div class="eyebrow">Business Conversation</div>
+            <h2 class="title" style="max-width: 9.5em;">Ready to review the first workflow?</h2>
+            <p class="subtitle" style="max-width: 30em;">
+              Start with one document-heavy workflow, prove the operating value, and expand into repeatable automation.
+            </p>
+
+            <div class="panel">
+              <div class="section-title">Best fit for</div>
+              <div class="chip-row" style="margin-top: 14px;">
+                <div class="chip">Workflow platforms</div>
+                <div class="chip">BFSI and logistics teams</div>
+                <div class="chip">Mobility and compliance teams</div>
+                <div class="chip">Operations teams</div>
+                <div class="chip">Operations transformation teams</div>
+              </div>
+            </div>
+
+            <div class="band">
+              <h3>Next discussion focus</h3>
+              <p>Review the first workflow, sample documents, integration needs, and success metrics.</p>
+            </div>
+          </div>
+
+          <div class="contact-panel">
+            <div>
+              <div class="eyebrow" style="background: rgba(255,255,255,0.16); color: #ffffff;">Talk to Fracto</div>
+              <h2 class="section-title" style="margin-top: 14px;">Set up a business overview call.</h2>
+            </div>
+
+            <div class="contact-grid">
+              <div class="contact-item">
+                <div class="label">Email</div>
+                <div class="value">ceo@fracto.tech</div>
+              </div>
+              <div class="contact-item">
+                <div class="label">Phone</div>
+                <div class="value">+91 98994 88100</div>
+              </div>
+              <div class="contact-item">
+                <div class="label">Website</div>
+                <div class="value">fracto.tech</div>
+              </div>
+            </div>
+
+            <p class="mini-note">Use this deck as a company and product overview for business discussions and first-workflow scoping.</p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span>Fracto Business Overview</span>
+          <span>08</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
