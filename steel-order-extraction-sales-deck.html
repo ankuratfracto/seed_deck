@@ -151,18 +151,27 @@
     }
 
     .hero-fill .stack-lg:last-child .panel.soft {
+      flex: 1;
       display: grid;
       align-content: center;
     }
 
+    .hero-fill .stack-lg:first-child .panel {
+      flex: 1;
+      display: grid;
+      align-content: center;
+      min-height: 0;
+    }
+
     .problem-fill > .stack-lg {
       height: 100%;
-      grid-template-rows: auto auto minmax(0, 1fr);
-      align-content: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .problem-fill .flow {
-      align-self: start;
+      align-self: stretch;
     }
 
     .problem-fill .timeline-step {
@@ -176,9 +185,9 @@
     }
 
     .problem-fill .split-strong .panel {
-      min-height: 100%;
+      min-height: 0;
       display: grid;
-      align-content: center;
+      align-content: start;
     }
 
     .two-col {
@@ -773,6 +782,47 @@
       .slide {
         box-shadow: none;
         border-radius: 0;
+      }
+
+      .slide::before {
+        display: none;
+      }
+
+      .panel,
+      .metric,
+      .card,
+      .impact-card,
+      .timeline-step,
+      .proof-frame,
+      .order-image,
+      .signal-item,
+      .name-card,
+      .field-row,
+      .chip {
+        background: #ffffff !important;
+        box-shadow: none !important;
+      }
+
+      .panel.soft,
+      .field-row.header {
+        background: #f5f7fb !important;
+      }
+
+      .band,
+      .contact-panel {
+        background: #0f7d72 !important;
+        box-shadow: none !important;
+      }
+
+      .json-box {
+        background: #14213d !important;
+        box-shadow: none !important;
+      }
+
+      .contact-item,
+      .contact-panel .chip {
+        background: #2d777d !important;
+        box-shadow: none !important;
       }
     }
 
