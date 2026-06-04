@@ -781,6 +781,72 @@
       color: var(--ink-soft);
     }
 
+    .pricing-table-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .pricing-table-wrap.single {
+      grid-template-columns: 1fr;
+    }
+
+    .pricing-table {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ffffff;
+      display: grid;
+    }
+
+    .pricing-row {
+      display: grid;
+      grid-template-columns: 1.02fr 0.88fr 1.28fr;
+      gap: 10px;
+      align-items: start;
+      padding: 6px 12px;
+      border-bottom: 1px solid rgba(215, 222, 234, 0.78);
+      color: var(--ink-soft);
+      font-size: 10.6px;
+      line-height: 1.25;
+      min-height: 43px;
+    }
+
+    .pricing-row:last-child {
+      border-bottom: 0;
+    }
+
+    .pricing-row.header {
+      min-height: 0;
+      padding: 10px 16px;
+      background: var(--panel-soft);
+      color: var(--ink);
+      font-size: 9.8px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .pricing-row strong {
+      color: var(--ink);
+      font-size: 11.6px;
+      line-height: 1.18;
+    }
+
+    .pricing-row .price {
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--accent-dark);
+      font-size: 15px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .pricing-row .scope {
+      color: var(--ink-soft);
+    }
+
     .mini-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -980,7 +1046,7 @@
           <div class="stack-lg">
             <div class="eyebrow">Sales Enablement</div>
             <h1 class="title">Where Fracto wins, and what to pitch first.</h1>
-            <p class="subtitle">Use this guide to qualify accounts, choose the right workflow, and keep discovery calls simple.</p>
+            <p class="subtitle">Qualify accounts, choose the right workflow, and keep discovery calls simple.</p>
 
             <div class="panel">
               <div class="section-title">The one-line Fracto pitch</div>
@@ -1049,13 +1115,13 @@
 
     <div class="stack-lg">
       <div>
-        <div class="eyebrow">Guide Map</div>
-        <h2 class="section-title" style="margin-top: 12px; max-width: 18em;">Read this in chapters, not as random sales notes.</h2>
-        <p class="section-copy" style="margin-top: 8px; max-width: 54em;">The deck now moves from simple intern language to product understanding, ICP qualification, sales motion, workflow examples, and then commercial annexures.</p>
+        <div class="eyebrow">Sales Flow</div>
+        <h2 class="section-title" style="margin-top: 12px; max-width: 18em;">Move from pitch to qualified opportunity.</h2>
+        <p class="section-copy" style="margin-top: 8px; max-width: 54em;">Start with the simple pitch, qualify the ICP, run a workflow-led sales motion, show relevant examples, and use commercials only after the pain is clear.</p>
       </div>
 
       <div class="mini-grid">
-        <div class="mini-card"><div class="k">Chapter 1</div><strong>Start here</strong><p>Simple pitch, exact call lines, and plain-English glossary for interns.</p></div>
+        <div class="mini-card"><div class="k">Chapter 1</div><strong>Start here</strong><p>Simple pitch, exact call lines, and plain-English glossary for first conversations.</p></div>
         <div class="mini-card"><div class="k">Chapter 2</div><strong>Product basics</strong><p>What Fracto does, what it is not, and which workflows to pitch first.</p></div>
         <div class="mini-card"><div class="k">Chapter 3</div><strong>ICP and buyers</strong><p>Personas, account tiers, qualification signals, volumes, verticals, and bad-fit patterns.</p></div>
         <div class="mini-card"><div class="k">Chapter 4</div><strong>Sales motion</strong><p>Outbound, first call, discovery, demo, pilot, ROI, and competitive positioning.</p></div>
@@ -1063,7 +1129,7 @@
         <div class="mini-card"><div class="k">Chapter 6</div><strong>Commercials</strong><p>Proof assets, security language, pricing guardrails, pricing pages, and FAQs.</p></div>
       </div>
 
-      <div class="note-card">Training flow: interns should learn Chapter 1 first, managers should use Chapters 2-4 for coaching, and FAQs/pricing should be used after a real workflow is qualified.</div>
+      <div class="note-card">Use this sequence on deals: explain simply, qualify the workflow, book the right demo, prove value in a paid pilot, then discuss pricing and rollout.</div>
     </div>
 
     <div class="footer">
@@ -1082,7 +1148,7 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Intern Quick Start</div>
+          <div>Sales Quick Start</div>
         </div>
 
         <div class="stack-lg">
@@ -1150,7 +1216,7 @@
         <div class="stack-lg">
           <div>
             <div class="eyebrow">Chapter 1 - Call Script</div>
-            <h2 class="section-title" style="margin-top: 12px;">Interns can use these lines word-for-word.</h2>
+            <h2 class="section-title" style="margin-top: 12px;">Use these lines word-for-word on first calls.</h2>
           </div>
 
           <div class="faq-grid">
@@ -1165,7 +1231,7 @@
             <div class="faq-card"><div class="q">Close</div><div class="a">"Would this week or early next week work for a workflow demo with your ops owner?"</div></div>
           </div>
 
-          <div class="note-card">Best intern behavior: listen for repeated manual work, write down the exact workflow, then book the right people for the demo.</div>
+          <div class="note-card">Best call behavior: listen for repeated manual work, write down the exact workflow, then book the right people for the demo.</div>
         </div>
 
         <div class="footer">
@@ -1183,7 +1249,7 @@
             <img src="fracto_logo.svg" alt="Fracto logo" />
             <span>Fracto</span>
           </div>
-          <div>Sales Intern Glossary</div>
+          <div>Plain-English Glossary</div>
         </div>
 
         <div class="stack-lg">
@@ -1204,7 +1270,7 @@
             <div class="faq-card"><div class="q">Integration</div><div class="a">Connecting Fracto output to tools like email, Google Sheets, ERP, CRM, or internal software.</div></div>
           </div>
 
-          <div class="note-card">Intern rule: if the lead is non-technical, say "send result to your system" instead of "API/webhook integration."</div>
+          <div class="note-card">Simple-language rule: if the lead is non-technical, say "send result to your system" instead of "API/webhook integration."</div>
         </div>
 
         <div class="footer">
@@ -2515,85 +2581,33 @@
         <div class="stack-lg">
           <div>
             <div class="eyebrow">Chapter 6 - Document Pricing</div>
-            <h2 class="section-title" style="margin-top: 12px;">Suggested per-page prices by document type and workflow.</h2>
+            <h2 class="section-title" style="margin-top: 12px;">Suggested prices by document type and workflow.</h2>
             <p class="section-copy" style="margin-top: 8px;">Use these as sales guidance. Final pricing should map to subscription credits, volume, SLA, custom rules, integrations, and verification API usage.</p>
           </div>
 
-          <div class="pricing-grid">
-            <div class="price-card">
-              <div class="type">Invoice extraction</div>
-              <div class="price">Rs 3 / page</div>
-              <div class="desc">Header fields only: vendor, GST, invoice number, date, totals, tax, due date.</div>
+          <div class="pricing-table-wrap">
+            <div class="pricing-table">
+              <div class="pricing-row header"><div>Document / Workflow</div><div>Price</div><div>Scope</div></div>
+              <div class="pricing-row"><div><strong>Invoice extraction</strong></div><div class="price">₹3 / page</div><div class="scope">Header fields, tax, totals, dates, vendor details.</div></div>
+              <div class="pricing-row"><div><strong>Invoice line items</strong></div><div class="price">₹6 / page</div><div class="scope">Header + item rows, quantity, rate, tax, validation.</div></div>
+              <div class="pricing-row"><div><strong>KYC documents</strong></div><div class="price">₹3 / page</div><div class="scope">ID docs, masking, and basic field checks.</div></div>
+              <div class="pricing-row"><div><strong>POD / proof docs</strong></div><div class="price">₹3 / page</div><div class="scope">POD fields, stamp/signature checks, review flags.</div></div>
+              <div class="pricing-row"><div><strong>Loan packet classify</strong></div><div class="price">₹0.90 / page</div><div class="scope">Classification, splitting, checklist and missing-page flags.</div></div>
+              <div class="pricing-row"><div><strong>Document classification</strong></div><div class="price">₹0.90 / page</div><div class="scope">Classify mixed pages into the right document type.</div></div>
+              <div class="pricing-row"><div><strong>Loan doc extraction</strong></div><div class="price">₹3 / page</div><div class="scope">KYC, academic, income, and bank document fields.</div></div>
+              <div class="pricing-row"><div><strong>Shipment docs</strong></div><div class="price">₹9 / page</div><div class="scope">AWB, invoice, e-way bill, export docs, completeness.</div></div>
             </div>
-            <div class="price-card">
-              <div class="type">Invoice line items</div>
-              <div class="price">Rs 6 / page</div>
-              <div class="desc">Header + item rows, quantity, rate, tax, amount, and line-level validation.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">KYC documents</div>
-              <div class="price">Rs 3 / page</div>
-              <div class="desc">Aadhaar, PAN, DL, RC, voter ID, passports, masking, and basic field checks.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">POD / proof docs</div>
-              <div class="price">Rs 3 / page</div>
-              <div class="desc">POD fields, signature/stamp/remarks checks, proof completeness, review flags.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Loan packet classify</div>
-              <div class="price">Rs 2 / page</div>
-              <div class="desc">Page classification, document splitting, checklist mapping, and missing-page flags.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Document classification</div>
-              <div class="price">Rs 2 / page</div>
-              <div class="desc">Classify mixed pages or attachments into invoice, KYC, POD, bank, claim, or other doc types.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Loan doc extraction</div>
-              <div class="price">Rs 3 / page</div>
-              <div class="desc">KYC, academics, admissions, income docs, bank statements, and field extraction.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Shipment docs</div>
-              <div class="price">Rs 3 / page</div>
-              <div class="desc">AWB, invoice, packing list, e-way bill, export docs, and bundle completeness.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Export compliance</div>
-              <div class="price">Rs 4 / page</div>
-              <div class="desc">IEC, LUT, AD Code, invoice, AWB, export checklist, and exception routing.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">WhatsApp orders</div>
-              <div class="price">Rs 5 / page</div>
-              <div class="desc">Order image/text extraction into clean rows: item, size, quantity, weight.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Master matching</div>
-              <div class="price">Rs 2 / page</div>
-              <div class="desc">SKU, vendor, customer, product, alias, or policy-master match for extracted rows.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Photo verification</div>
-              <div class="price">Rs 1 / page</div>
-              <div class="desc">Damage, return, parcel, label, delivery, installation, or service-proof checks.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">GRN / PO matching</div>
-              <div class="price">Rs 5 / page</div>
-              <div class="desc">GRN, PO, invoice, packing list comparison with item/quantity/rate mismatch flags.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Claims / evidence docs</div>
-              <div class="price">Rs 3 / page</div>
-              <div class="desc">Claim forms, bills, policy docs, evidence classification, and missing-document checks.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Bank statements</div>
-              <div class="price">Rs 4 / page</div>
-              <div class="desc">Statement extraction, transaction rows, account details, and summary fields.</div>
+
+            <div class="pricing-table">
+              <div class="pricing-row header"><div>Document / Workflow</div><div>Price</div><div>Scope</div></div>
+              <div class="pricing-row"><div><strong>Export compliance</strong></div><div class="price">₹4 / page</div><div class="scope">IEC, LUT, AD Code, export checklist, exceptions.</div></div>
+              <div class="pricing-row"><div><strong>WhatsApp orders</strong></div><div class="price">₹5 / page</div><div class="scope">Order rows: item, size, quantity, weight.</div></div>
+              <div class="pricing-row"><div><strong>Master matching</strong></div><div class="price">₹7 / page</div><div class="scope">SKU, vendor, customer, alias, or policy matching.</div></div>
+              <div class="pricing-row"><div><strong>Photo verification</strong></div><div class="price">₹1 / page</div><div class="scope">Damage, return, label, delivery, service-proof checks.</div></div>
+              <div class="pricing-row"><div><strong>GRN / PO matching</strong></div><div class="price">₹5 / page</div><div class="scope">GRN, PO, invoice comparison with mismatch flags.</div></div>
+              <div class="pricing-row"><div><strong>Claims / evidence docs</strong></div><div class="price">₹5 / page</div><div class="scope">Claim forms, bills, policy docs, missing-doc checks.</div></div>
+              <div class="pricing-row"><div><strong>Bank statement extraction</strong></div><div class="price">₹15 / statement</div><div class="scope">Readable PDF extraction into account and transaction fields.</div></div>
+              <div class="pricing-row"><div><strong>Bank statement analysis</strong></div><div class="price">₹2 / page</div><div class="scope">Summaries, checks, and derived insights after extraction.</div></div>
             </div>
           </div>
 
@@ -2625,66 +2639,22 @@
             <p class="section-copy" style="margin-top: 8px;">These are separate from per-page document credits. Use per successful verification as the default unit unless scoped differently.</p>
           </div>
 
-          <div class="pricing-grid">
-            <div class="price-card">
-              <div class="type">Aadhaar verification</div>
-              <div class="price">Rs 3 / verification</div>
-              <div class="desc">Aadhaar number/name check or approved verification flow, depending on customer setup.</div>
+          <div class="pricing-table-wrap">
+            <div class="pricing-table">
+              <div class="pricing-row header"><div>Verification API</div><div>Selling Price</div><div>Use when buyer needs</div></div>
+              <div class="pricing-row"><div><strong>RC</strong></div><div class="price">₹4.50 / verification</div><div class="scope">Vehicle registration verification and available vehicle-owner details.</div></div>
+              <div class="pricing-row"><div><strong>DL</strong></div><div class="price">₹4.50 / verification</div><div class="scope">Driving licence verification and available holder details.</div></div>
+              <div class="pricing-row"><div><strong>Aadhaar OKYC</strong></div><div class="price">₹4 / verification</div><div class="scope">Aadhaar offline KYC or approved Aadhaar verification flow.</div></div>
+              <div class="pricing-row"><div><strong>PAN</strong></div><div class="price">₹3.50 / verification</div><div class="scope">PAN validity and available name/entity details through approved API flow.</div></div>
+              <div class="pricing-row"><div><strong>GST verification</strong></div><div class="price">₹3.50 / verification</div><div class="scope">GSTIN status, legal name, trade name, and available taxpayer details.</div></div>
             </div>
-            <div class="price-card">
-              <div class="type">PAN verification</div>
-              <div class="price">Rs 2 / verification</div>
-              <div class="desc">PAN validity, name match, DOB/entity details where available through approved API flow.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">GST verification</div>
-              <div class="price">Rs 2 / verification</div>
-              <div class="desc">GSTIN status, legal name, trade name, address, taxpayer type, and active/inactive check.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">DL verification</div>
-              <div class="price">Rs 5 / verification</div>
-              <div class="desc">Driving licence validity, holder details, class, expiry, and mismatch flags.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">RC verification</div>
-              <div class="price">Rs 5 / verification</div>
-              <div class="desc">Vehicle registration details, owner match, fuel/type, fitness/insurance fields where available.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Bank account check</div>
-              <div class="price">Rs 3 / verification</div>
-              <div class="desc">Account validity and name match through penny-drop or approved bank verification route.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Udyam / MSME</div>
-              <div class="price">Rs 4 / verification</div>
-              <div class="desc">Udyam registration status, enterprise details, and vendor onboarding checks.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Voter ID / passport</div>
-              <div class="price">Rs 4 / verification</div>
-              <div class="desc">Identity-document verification where supported by the selected provider and customer consent.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Face / selfie match</div>
-              <div class="price">Rs 5 / verification</div>
-              <div class="desc">Selfie-to-document face match or liveness-style check, depending on provider capability.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">E-way bill / e-invoice</div>
-              <div class="price">Rs 3 / verification</div>
-              <div class="desc">E-way bill, IRN, invoice reference, shipment, or GST compliance check where supported.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Blacklist / sanctions</div>
-              <div class="price">Rs 2 / verification</div>
-              <div class="desc">Customer, vendor, driver, or entity screening against configured lists or customer masters.</div>
-            </div>
-            <div class="price-card">
-              <div class="type">Bundle verification</div>
-              <div class="price">Custom</div>
-              <div class="desc">Use custom bundle pricing when multiple APIs are called for one onboarding or shipment workflow.</div>
+
+            <div class="pricing-table">
+              <div class="pricing-row header"><div>Verification API</div><div>Selling Price</div><div>Use when buyer needs</div></div>
+              <div class="pricing-row"><div><strong>Passport</strong></div><div class="price">₹4.50 / verification</div><div class="scope">Passport verification where supported by provider and customer consent flow.</div></div>
+              <div class="pricing-row"><div><strong>Voter ID</strong></div><div class="price">₹4.50 / verification</div><div class="scope">Voter ID verification where supported by provider and customer consent flow.</div></div>
+              <div class="pricing-row"><div><strong>Bank verification - penny-less</strong></div><div class="price">₹3.50 / verification</div><div class="scope">Bank account verification without penny-drop, depending on provider capability.</div></div>
+              <div class="pricing-row"><div><strong>Bank verification - penny-drop</strong></div><div class="price">₹4.50 / verification</div><div class="scope">Bank account verification through penny-drop route.</div></div>
             </div>
           </div>
 
