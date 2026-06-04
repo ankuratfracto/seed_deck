@@ -4844,10 +4844,11 @@
 			                    <span class="traction-label">Active clients</span>
 			                    <strong>35+</strong>
 		                  </div>
-		                  <div class="traction-metric">
-		                    <span class="traction-label">ARR run-rate</span>
-		                    <strong>₹0.87 Cr</strong>
-		                  </div>
+			                  <div class="traction-metric">
+			                    <span class="traction-label">ARR run-rate</span>
+			                    <strong>₹0.87 Cr</strong>
+			                    <p class="metric-subtext">Sep expected: ₹1.79 Cr from client confirmations.</p>
+			                  </div>
 		                  <div class="traction-metric">
 		                    <span class="traction-label">Pages processed</span>
 			                    <strong>2M+</strong>
@@ -5196,7 +5197,7 @@
 	          <div class="slide-body">
 	            <div class="slide-head">
 	              <h2>Operational Efficiency — Path to Break-even</h2>
-		              <p class="hero-proof">May ’26: ₹7.22L revenue · ₹10.29L expenses · -₹3.07L operating profit.</p>
+		              <p class="hero-proof">May actual: ₹7.22L revenue · ₹10.29L expenses · -₹3.07L operating profit.<br>Sep expected from client confirmations: ₹14.91L revenue · ₹11.99L expenses · +₹2.92L operating profit.</p>
 	            </div>
 
 	            <div class="split efficiency-grid">
@@ -5289,7 +5290,7 @@
             <div class="slide-head">
 	              <h2>₹2.5 Cr Momentum Bridge — Plan and Ask</h2>
 	              <p class="hero-proof">
-		                ₹2.5 Cr bridge to grow from ₹0.87 Cr to about ₹10 Cr in annual recurring revenue, while completing SOC 2 and standard hosted deployments for India and the Gulf.
+			                ₹2.5 Cr bridge to grow from ₹0.87 Cr actual run-rate, with ₹1.79 Cr expected by Sep ’26 from client confirmations, to about ₹10 Cr in annual recurring revenue while completing SOC 2 and standard hosted deployments for India and the Gulf.
 	              </p>
 		              <p>Standard seed convertible note, targeting 3-5 investors.</p>
 	              <p class="funnel-note">Target close: Q1 2026.</p>
@@ -5332,7 +5333,7 @@
                   <ul class="bridge-summary-list">
                     <li>
 	                      <strong>Revenue engine <span class="delta-chip baseline">Recurring revenue growth + go-to-market team</span></strong>
-		                      <p>Grow from ₹0.87 Cr to about ₹10 Cr in annual recurring revenue through customer expansion and new sales.</p>
+		                      <p>Grow from ₹0.87 Cr actual run-rate, with ₹1.79 Cr expected by Sep ’26 from client confirmations, to about ₹10 Cr in annual recurring revenue through customer expansion and new sales.</p>
                     </li>
 	                    <li>
 		                      <strong>Product <span class="delta-chip baseline">Higher automation + more workflows per customer</span></strong>
@@ -5447,37 +5448,42 @@
 	        {
 	          selector: '[data-chart="operating-loss"]',
 	          type: 'line-multi',
-	          axis: [2200000, 1800000, 1400000, 1000000, 600000, 200000, 0],
-	          legend: true,
+	          axis: [2200000, 1400000, 600000, 0, -600000, -1400000, -2200000],
+	          legendItems: [
+	            { label: 'Actual revenue', color: '#01684d', kind: 'line' },
+	            { label: 'Actual expenses', color: '#344054', kind: 'line' },
+	            { label: 'Actual operating profit/loss', color: '#b42318', kind: 'line' },
+	            { label: 'Expected from client confirmations', color: '#667085', kind: 'line', dashed: true },
+	          ],
+	          caption: 'Actuals through May ’26; Jun–Sep ’26 expected from client confirmations.',
 	          series: [
 	            {
-	              key: 'operating-loss',
-	              label: 'Operating loss',
+	              key: 'operating-profit-actual',
+	              label: 'Operating profit/loss',
 	              color: '#b42318',
-	              dotted: true,
 	              formatter: formatCurrencyShort,
 	              data: [
-                { quarter: 'Apr-25', value: 1708070 },
-                { quarter: 'May-25', value: 1916331 },
-	                { quarter: 'Jun-25', value: 1289247 },
-                { quarter: 'Jul-25', value: 1429711 },
-                { quarter: 'Aug-25', value: 1481344 },
-	                { quarter: 'Sep-25', value: 1373492 },
-	                { quarter: 'Oct-25', value: 1623589 },
-	                { quarter: 'Nov-25', value: 1238306 },
-		                { quarter: 'Dec-25', value: 1164442 },
-		                { quarter: 'Jan-26', value: 1090983 },
-		                { quarter: 'Feb-26', value: 1055262 },
-		                { quarter: 'Mar-26', value: 651014 },
-		                { quarter: 'Apr-26', value: 364536 },
-		                { quarter: 'May-26', value: 307087 },
-              ],
-            },
-	            {
-	              key: 'revenue',
-	              label: 'Revenue',
-	              color: '#01684d',
-	              formatter: formatCurrencyShort,
+	                { quarter: 'Apr-25', value: -1708070 },
+	                { quarter: 'May-25', value: -1916331 },
+		                { quarter: 'Jun-25', value: -1289249 },
+	                { quarter: 'Jul-25', value: -1429711 },
+	                { quarter: 'Aug-25', value: -1481344 },
+		                { quarter: 'Sep-25', value: -1373492 },
+		                { quarter: 'Oct-25', value: -1623589 },
+		                { quarter: 'Nov-25', value: -1214568 },
+		                { quarter: 'Dec-25', value: -1144329 },
+		                { quarter: 'Jan-26', value: -1055965 },
+		                { quarter: 'Feb-26', value: -1083200 },
+		                { quarter: 'Mar-26', value: -650013 },
+		                { quarter: 'Apr-26', value: -366927 },
+		                { quarter: 'May-26', value: -307087 },
+	              ],
+	            },
+		            {
+		              key: 'revenue-actual',
+		              label: 'Revenue',
+		              color: '#01684d',
+		              formatter: formatCurrencyShort,
 	              data: [
                 { quarter: 'Apr-25', value: 139862 },
                 { quarter: 'May-25', value: 172387 },
@@ -5485,39 +5491,78 @@
                 { quarter: 'Jul-25', value: 404396 },
                 { quarter: 'Aug-25', value: 420344 },
                 { quarter: 'Sep-25', value: 449326 },
-	                { quarter: 'Oct-25', value: 493353 },
-	                { quarter: 'Nov-25', value: 600810 },
-	                { quarter: 'Dec-25', value: 552009 },
+		                { quarter: 'Oct-25', value: 493353 },
+		                { quarter: 'Nov-25', value: 600810 },
+		                { quarter: 'Dec-25', value: 552009 },
 		                { quarter: 'Jan-26', value: 645578 },
 		                { quarter: 'Feb-26', value: 611696 },
 		                { quarter: 'Mar-26', value: 892406 },
 		                { quarter: 'Apr-26', value: 688655 },
 		                { quarter: 'May-26', value: 722098 },
-              ],
-            },
-	            {
-	              key: 'expenses',
-	              label: 'Expenses',
-	              color: '#344054',
-	              formatter: formatCurrencyShort,
+	              ],
+	            },
+		            {
+		              key: 'expenses-actual',
+		              label: 'Expenses',
+		              color: '#344054',
+		              formatter: formatCurrencyShort,
 	              data: [
                 { quarter: 'Apr-25', value: 1847932 },
                 { quarter: 'May-25', value: 2088718 },
-	                { quarter: 'Jun-25', value: 1445353 },
-                { quarter: 'Jul-25', value: 1834107 },
-	                { quarter: 'Aug-25', value: 1901688 },
-	                { quarter: 'Sep-25', value: 1822818 },
-	                { quarter: 'Oct-25', value: 2116942 },
-	                { quarter: 'Nov-25', value: 1839116 },
-		                { quarter: 'Dec-25', value: 1716451 },
-		                { quarter: 'Jan-26', value: 1736561 },
-		                { quarter: 'Feb-26', value: 1666958 },
-		                { quarter: 'Mar-26', value: 1543420 },
-		                { quarter: 'Apr-26', value: 1053191 },
+		                { quarter: 'Jun-25', value: 1445355 },
+	                { quarter: 'Jul-25', value: 1834107 },
+		                { quarter: 'Aug-25', value: 1901688 },
+		                { quarter: 'Sep-25', value: 1822818 },
+		                { quarter: 'Oct-25', value: 2116942 },
+		                { quarter: 'Nov-25', value: 1815378 },
+		                { quarter: 'Dec-25', value: 1696338 },
+		                { quarter: 'Jan-26', value: 1701543 },
+		                { quarter: 'Feb-26', value: 1694896 },
+		                { quarter: 'Mar-26', value: 1542419 },
+		                { quarter: 'Apr-26', value: 1055582 },
 		                { quarter: 'May-26', value: 1029185 },
-              ],
-            },
-          ],
+	              ],
+	            },
+	            {
+	              key: 'operating-profit-expected',
+	              label: 'Expected operating profit/loss',
+	              color: '#b42318',
+	              dashed: true,
+	              formatter: formatCurrencyShort,
+	              data: [
+	                { quarter: 'Jun-26', value: -194788 },
+	                { quarter: 'Jul-26', value: -155888 },
+	                { quarter: 'Aug-26', value: -80029 },
+	                { quarter: 'Sep-26', value: 291571 },
+	              ],
+	            },
+	            {
+	              key: 'revenue-expected',
+	              label: 'Expected revenue',
+	              color: '#01684d',
+	              dashed: true,
+	              formatter: formatCurrencyShort,
+	              data: [
+	                { quarter: 'Jun-26', value: 898472 },
+	                { quarter: 'Jul-26', value: 963372 },
+	                { quarter: 'Aug-26', value: 995232 },
+	                { quarter: 'Sep-26', value: 1490832 },
+	              ],
+	            },
+	            {
+	              key: 'expenses-expected',
+	              label: 'Expected expenses',
+	              color: '#344054',
+	              dashed: true,
+	              formatter: formatCurrencyShort,
+	              data: [
+	                { quarter: 'Jun-26', value: 1093260 },
+	                { quarter: 'Jul-26', value: 1119260 },
+	                { quarter: 'Aug-26', value: 1075261 },
+	                { quarter: 'Sep-26', value: 1199261 },
+	              ],
+	            },
+	          ],
           tooltipSuffix: '',
           meta: false,
         },
@@ -5537,16 +5582,26 @@
 	            { quarter: 'Aug-25', value: 0.2210 },
 	            { quarter: 'Sep-25', value: 0.2465 },
 	            { quarter: 'Oct-25', value: 0.2330 },
-	            { quarter: 'Nov-25', value: 0.3267 },
-		            { quarter: 'Dec-25', value: 0.3216 },
-		            { quarter: 'Jan-26', value: 0.3718 },
-		            { quarter: 'Feb-26', value: 0.3670 },
-		            { quarter: 'Mar-26', value: 0.5782 },
-		            { quarter: 'Apr-26', value: 0.6539 },
+		            { quarter: 'Nov-25', value: 0.3310 },
+		            { quarter: 'Dec-25', value: 0.3254 },
+		            { quarter: 'Jan-26', value: 0.3794 },
+		            { quarter: 'Feb-26', value: 0.3609 },
+		            { quarter: 'Mar-26', value: 0.5786 },
+		            { quarter: 'Apr-26', value: 0.6524 },
 		            { quarter: 'May-26', value: 0.7016 },
-          ],
-          axis: [1.0, 0.8, 0.6, 0.4, 0.2, 0],
-          tooltipSuffix: '×',
+		            { quarter: 'Jun-26', value: 0.8218, expected: true },
+		            { quarter: 'Jul-26', value: 0.8607, expected: true },
+		            { quarter: 'Aug-26', value: 0.9256, expected: true },
+		            { quarter: 'Sep-26', value: 1.2431, expected: true },
+	          ],
+	          axis: [1.25, 1.0, 0.75, 0.5, 0.25, 0],
+	          tooltipSuffix: '×',
+	          caption: 'Actuals through May ’26; dashed segment is expected from client confirmations.',
+	          legendItems: [
+	            { label: 'Actual ratio', color: '#111111', kind: 'line' },
+	            { label: 'Expected from client confirmations', color: '#111111', kind: 'line', dashed: true },
+	            { label: 'Break-even (1.0×)', color: 'rgba(17,24,39,0.45)', kind: 'line', dashed: true },
+	          ],
           shortFormatter: (value) => {
             const formatted = (value ?? 0).toFixed(2).replace(/\.00$/, '').replace(/\.0$/, '');
             return `${formatted}×`;
@@ -5588,10 +5643,15 @@
           type: 'line',
           lineColor: '#111111',
           lineAreaColor: 'rgba(0,0,0,0.1)',
-          legend: true,
-          legendLabel: 'Revenue',
-          maxValue: 1000000,
-          axis: [1000000, 750000, 500000, 250000, 0],
+	          legend: true,
+	          legendLabel: 'Revenue',
+	          maxValue: 1800000,
+	          axis: [1800000, 1350000, 900000, 450000, 0],
+	          caption: 'Actuals through May ’26; dashed segment is expected from client confirmations.',
+	          legendItems: [
+	            { label: 'Actual revenue', color: '#111111', kind: 'line' },
+	            { label: 'Expected from client confirmations', color: '#111111', kind: 'line', dashed: true },
+	          ],
           data: [
             { quarter: 'Sep-24', value: 4720,   color: '#111111' },
             { quarter: 'Oct-24', value: 13000,  color: '#111111' },
@@ -5602,7 +5662,7 @@
             { quarter: 'Mar-25', value: 83128,  color: '#111111' },
             { quarter: 'Apr-25', value: 139862, color: '#111111' },
             { quarter: 'May-25', value: 172387, color: '#111111' },
-            { quarter: 'Jun-25', value: 156106, color: '#111111' },
+	            { quarter: 'Jun-25', value: 156106, color: '#111111' },
             { quarter: 'Jul-25', value: 404396, color: '#111111' },
             { quarter: 'Aug-25', value: 420344, color: '#111111' },
             { quarter: 'Sep-25', value: 449326, color: '#111111' },
@@ -5614,6 +5674,10 @@
 		            { quarter: 'Mar-26', value: 892406, color: '#111111' },
 		            { quarter: 'Apr-26', value: 688655, color: '#111111' },
 		            { quarter: 'May-26', value: 722098, color: '#111111' },
+		            { quarter: 'Jun-26', value: 898472, color: '#111111', expected: true },
+		            { quarter: 'Jul-26', value: 963372, color: '#111111', expected: true },
+		            { quarter: 'Aug-26', value: 995232, color: '#111111', expected: true },
+		            { quarter: 'Sep-26', value: 1490832, color: '#111111', expected: true },
           ],
           tooltipSuffix: '',
           shortFormatter: (value) => `${formatShort(value)}`,
@@ -5831,21 +5895,26 @@
         const innerHeight = viewHeight - padding.top - padding.bottom;
         const step = dataset.length > 1 ? innerWidth / (dataset.length - 1) : innerWidth / 2;
 
-        const points = dataset.map((entry, index) => {
-          const displayQuarter = formatQuarterDisplay(entry.quarter);
-          const x = padding.left + (dataset.length > 1 ? step * index : innerWidth / 2);
-          const ratio = scaleMax ? clamp((entry.value - scaleMin) / range, 0, 1) : 0;
-          const y = padding.top + (1 - ratio) * innerHeight;
-          const prev = dataset[index - 1]?.value;
-          const momDelta = typeof prev === 'number' && prev > 0 ? ((entry.value - prev) / prev) * 100 : null;
-          const momLabel = momDelta == null ? 'base' : `${momDelta > 0 ? '+' : ''}${Math.round(momDelta)}% MoM`;
-          return { ...entry, displayQuarter, x, y, displayValue: formatFullValue(entry.value), momLabel };
-        });
+	        const points = dataset.map((entry, index) => {
+	          const displayQuarter = formatQuarterDisplay(entry.quarter);
+	          const x = padding.left + (dataset.length > 1 ? step * index : innerWidth / 2);
+	          const ratio = scaleMax ? clamp((entry.value - scaleMin) / range, 0, 1) : 0;
+	          const y = padding.top + (1 - ratio) * innerHeight;
+	          const prev = dataset[index - 1]?.value;
+	          const momDelta = typeof prev === 'number' && prev > 0 ? ((entry.value - prev) / prev) * 100 : null;
+	          const momLabel = momDelta == null ? 'base' : `${momDelta > 0 ? '+' : ''}${Math.round(momDelta)}% MoM`;
+	          return { ...entry, expected: entry.expected === true, displayQuarter, x, y, displayValue: formatFullValue(entry.value), momLabel };
+	        });
 
-        const pathD = buildSmoothPath(points);
-        const areaD = points.length
-          ? `${pathD} L ${points[points.length - 1].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} L ${points[0].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} Z`
-          : '';
+	        const forecastStartIndex = points.findIndex(point => point.expected === true);
+	        const hasForecast = forecastStartIndex > 0;
+	        const actualPoints = hasForecast ? points.slice(0, forecastStartIndex) : points;
+	        const forecastPoints = hasForecast ? points.slice(forecastStartIndex - 1) : [];
+	        const actualPathD = buildSmoothPath(actualPoints);
+	        const forecastPathD = buildSmoothPath(forecastPoints);
+	        const areaD = actualPoints.length && actualPathD
+	          ? `${actualPathD} L ${actualPoints[actualPoints.length - 1].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} L ${actualPoints[0].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} Z`
+	          : '';
         const refLine = cfg.refLine && isFinite(cfg.refLine.value) ? cfg.refLine : null;
         const refLineMarkup = refLine
           ? (() => {
@@ -5868,8 +5937,9 @@
               }).join('')}
             </g>
             ${refLineMarkup}
-            ${areaD ? `<path class="line-area" d="${areaD}" style="fill:${areaColor};"></path>` : ''}
-            ${pathD ? `<path class="line-path" d="${pathD}" stroke="${lineColor}"></path>` : ''}
+	            ${areaD ? `<path class="line-area" d="${areaD}" style="fill:${areaColor};"></path>` : ''}
+	            ${actualPathD ? `<path class="line-path" d="${actualPathD}" stroke="${lineColor}"></path>` : ''}
+	            ${forecastPathD ? `<path class="line-path is-dashed" d="${forecastPathD}" stroke="${lineColor}"></path>` : ''}
             <line class="line-cursor" x1="${points[0]?.x.toFixed(2) || 0}" x2="${points[0]?.x.toFixed(2) || 0}" y1="${padding.top}" y2="${viewHeight - padding.bottom}"></line>
           </svg>
         `;
@@ -5918,7 +5988,7 @@
         overlay.style.left = '0';
         overlay.style.right = '0';
         overlay.innerHTML = points.map((pt, index) => `
-          <button class="line-hit" type="button" data-index="${index}" aria-label="${pt.displayQuarter}: ${pt.displayValue}${cfg.tooltipSuffix || ''}"></button>
+	          <button class="line-hit" type="button" data-index="${index}" aria-label="${pt.displayQuarter}${pt.expected ? ' expected' : ''}: ${pt.displayValue}${cfg.tooltipSuffix || ''}"></button>
         `).join('');
         barsEl.appendChild(overlay);
 
@@ -6005,17 +6075,18 @@
             return acc;
           }, {});
           const points = labels.map((label, index) => {
-            const value = valueMap[label];
-            const ratio = scaleMax ? clamp(((value ?? 0) - scaleMin) / range, 0, 1) : 0;
-            const x = padding.left + (labels.length > 1 ? step * index : innerWidth / 2);
-            const y = padding.top + (1 - ratio) * innerHeight;
-            return { label, value, x, y, formatter: series.formatter };
-          });
+	            const value = valueMap[label];
+	            const hasValue = isFinite(value);
+	            const ratio = hasValue && scaleMax ? clamp((value - scaleMin) / range, 0, 1) : 0;
+	            const x = padding.left + (labels.length > 1 ? step * index : innerWidth / 2);
+	            const y = hasValue ? padding.top + (1 - ratio) * innerHeight : null;
+	            return { label, value, x, y, formatter: series.formatter };
+	          });
           return { ...series, points };
         });
 
 	        const paths = seriesPoints.map(series => {
-	          const pathD = buildSmoothPath(series.points);
+		          const pathD = buildSmoothPath(series.points.filter(point => isFinite(point.value) && isFinite(point.y)));
 	          if (!pathD) return '';
 	          const pathClass = `line-path${series.dashed ? ' is-dashed' : ''}${series.dotted ? ' is-dotted' : ''}`;
 	          const dashMarkup = series.dasharray ? ` stroke-dasharray="${series.dasharray}"` : '';
@@ -6209,7 +6280,8 @@
         const shortFormatter = state.formatShortValue || formatCurrencyShort;
         const valueLabel = `${shortFormatter(point.value)}${state.suffix || ''}`;
         const changeLabel = point.momLabel || 'base';
-        tooltip.textContent = `${point.displayQuarter} · ${valueLabel}${changeLabel ? ` (${changeLabel})` : ''}`;
+	        const statusLabel = point.expected ? ' · expected' : '';
+	        tooltip.textContent = `${point.displayQuarter}${statusLabel} · ${valueLabel}${changeLabel ? ` (${changeLabel})` : ''}`;
         const wrapRect = wrapper.getBoundingClientRect();
         const svgRect = svg?.getBoundingClientRect();
         if (!svgRect || !wrapRect.width || !wrapRect.height) return;
@@ -6322,11 +6394,13 @@
         `;
       }
 
-      function formatAxis(value) {
-        if (value >= 1000000) return `${(value / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
-        if (value >= 1000) return `${Math.round(value / 1000)}K`;
-        return String(value);
-      }
+	      function formatAxis(value) {
+	        const sign = value < 0 ? '-' : '';
+	        const absolute = Math.abs(value);
+	        if (absolute >= 1000000) return `${sign}${(absolute / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
+	        if (absolute >= 1000) return `${sign}${Math.round(absolute / 1000)}K`;
+	        return `${sign}${absolute}`;
+	      }
       function formatShort(value) {
         if (value >= 1000000) return `${(value / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
         if (value >= 1000) return `${Math.round(value / 1000)}K`;
