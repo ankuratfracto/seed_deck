@@ -3480,6 +3480,20 @@
     .chart-bar.is-peak .bar-fill {
       box-shadow: 0 18px 32px rgba(91,141,239,0.35);
     }
+    .chart-bar.is-partial .bar-visual {
+      background:
+        repeating-linear-gradient(
+          135deg,
+          rgba(148,163,184,0.14) 0,
+          rgba(148,163,184,0.14) 6px,
+          rgba(255,255,255,0.92) 6px,
+          rgba(255,255,255,0.92) 12px
+        );
+      border-style: dashed;
+    }
+    .chart-bar.is-partial .bar-fill {
+      background: rgba(17,24,39,0.86);
+    }
     /* Line chart styles (revenue) */
     .line-chart {
       display: grid;
@@ -4405,6 +4419,9 @@
 	      gap: 12px;
 	      margin-top: 12px;
 	    }
+	    .case-study-grid.is-single {
+	      grid-template-columns: 1fr;
+	    }
 	    .case-study-card {
 	      border: 1px solid var(--border);
 	      border-radius: 12px;
@@ -4946,14 +4963,49 @@
       animation: none;
     }
 
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] {
+		      gap: 12px;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-meta {
+		      gap: 7px;
+		      align-items: flex-start;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-caption {
+		      flex-basis: 100%;
+		      max-width: 100%;
+		      font-size: 11px;
+		      line-height: 1.35;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-legend {
+		      gap: 8px;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-legend-item {
+		      font-size: 11px;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-wrapper {
+		      padding-top: 14px;
+		    }
 		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars {
-		      padding-top: 32px;
+		      padding-top: 24px;
 		    }
 		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars.is-dense {
-		      gap: clamp(8px, 1.6vw, 18px);
+		      gap: clamp(14px, 2.6vw, 26px);
 		    }
 		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bars.is-dense .bar-visual {
-		      width: clamp(28px, 5.8vw, 46px);
+		      width: clamp(24px, 4vw, 32px);
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bar-footer {
+		      bottom: -34px;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-quarter {
+		      font-size: 9px;
+		      line-height: 1.1;
+		      white-space: nowrap;
+		    }
+		    section[data-slide-number="07"] .chart-panel[data-chart="pages"] .chart-bar .value-label {
+		      top: -22px;
+		      font-size: 9px;
+		      color: var(--fg);
 		    }
 		
 		  </style>
@@ -5123,26 +5175,26 @@
 	          </header>
 	          <div class="slide-body">
 	            <div class="slide-head">
-			              <h2>Why Now — Buyers Need Local Hosting, Audit Trails, and Reliable Document Automation</h2>
-				              <p class="hero-proof">Security and compliance checks now happen before pilots, so buyers choose tools they can actually deploy.</p>
+			              <h2>Why Now — Compliance Has Moved Before the Pilot</h2>
+				              <p class="hero-proof">Buyers now shortlist tools they can deploy securely, not just test quickly.</p>
 	            </div>
 	            <div class="split split-2-1">
 		              <div class="card-block timeline-card accent">
 		                <h3>3 triggers</h3>
 		                <ul class="list">
-			                  <li><strong>Local data handling:</strong> many buyers now expect in-region processing in India or the UAE.</li>
-			                  <li><strong>Safer vendor setup:</strong> buyers want audit trails, clear controls, and a clean way to exit if needed.</li>
-				                  <li><strong>Better document automation:</strong> extraction quality is now good enough to run full workflows, not just pilots.</li>
+			                  <li><strong>Local data handling:</strong> India/UAE processing is moving from preference to requirement.</li>
+			                  <li><strong>Audit-ready setup:</strong> buyers want controls, trails, and exit clarity upfront.</li>
+				                  <li><strong>Workflow-grade AI:</strong> extraction is good enough for approvals and write-back.</li>
 		                </ul>
 		              </div>
 		              <div class="card-block expectation-card">
 		                <h3>What changed in buying behavior</h3>
 		                <ul class="list">
-			                  <li>Point OCR pilots are being replaced by budgets for full workflow automation.</li>
-			                  <li>Security, audit rights, and exit terms are reviewed before a pilot starts.</li>
-			                  <li>Buyers prefer tools that plug into existing systems instead of creating another manual layer.</li>
+			                  <li>Budgets are shifting from OCR pilots to workflow automation.</li>
+			                  <li>Security and audit terms are reviewed before pilots.</li>
+			                  <li>Buyers prefer tools that plug into existing systems.</li>
 		                </ul>
-				                <p class="compression-note">This is no longer a simple OCR buying decision; it is a core workflow software decision for regulated teams.</p>
+				                <p class="compression-note">The buying decision has moved from OCR accuracy to deployable workflow software.</p>
 		              </div>
 	            </div>
           </div>
@@ -5294,7 +5346,7 @@
           <div class="slide-body">
 	            <div class="slide-head">
 	              <h2>Traction — Customer Adoption</h2>
-			              <p class="hero-proof">Customer references across India and the GCC in lending, logistics, and other compliance-heavy operations; diligence should separate live, expanding, and pilot accounts.</p>
+			              <p class="hero-proof">References across India and the GCC in lending, logistics, and compliance-heavy operations.</p>
 	            </div>
             <!-- <div class="traction-hero-card">
               <span class="traction-label">Headline metrics</span>
@@ -5337,18 +5389,18 @@
 		                <div class="traction-metric-grid usage-grid usage-grid-3">
 			                  <div class="traction-metric">
 				                    <span class="traction-label">Active clients</span>
-				                    <strong>35+</strong>
-				                    <p class="metric-subtext">Segment by live, expansion, and pilot during diligence.</p>
+				                    <strong>50+</strong>
+				                    <p class="metric-subtext">Live, expanding, and pilot accounts.</p>
 			                  </div>
 			                  <div class="traction-metric">
 			                    <span class="traction-label">ARR run-rate</span>
-			                    <strong>₹0.87 Cr</strong>
-			                    <p class="metric-subtext">Sep expected: ₹1.79 Cr from client confirmations.</p>
+			                    <strong>₹1.03 Cr</strong>
+			                    <p class="metric-subtext">Sep expected: ₹1.79 Cr.</p>
 			                  </div>
 			                  <div class="traction-metric">
 			                    <span class="traction-label">Pages processed</span>
-				                    <strong>2M+</strong>
-				                    <p class="metric-subtext">Usage proof across recurring document workflows.</p>
+				                    <strong>3M+</strong>
+				                    <p class="metric-subtext">Crossed in early June.</p>
 			                  </div>
 		                  <!-- <div class="traction-metric">
 		                    <span class="traction-label">Go-live speed</span>
@@ -5545,7 +5597,7 @@
 
 		            <div class="slide-head">
 		              <h2>Moat — Local, Embedded, and Compounding</h2>
-		              <p class="hero-proof">Residency-first deployments + system-of-record integrations + workflow intelligence create a compounding advantage in BFSI and logistics.</p>
+		              <p class="hero-proof">Local deployment, system write-back, and workflow learning compound across live accounts.</p>
 		            </div>
 
             <!-- <div class="card-block expectation-card">
@@ -5573,38 +5625,32 @@
 		                <div class="stat-card compact-stat">
 		                  <div>
 		                    <strong>Deployment moat</strong>
-		                    <span class="stat-label">India/UAE VPC-ready for residency, security, and audit-sensitive buyers</span>
+		                    <span class="stat-label">India/UAE VPC-ready for residency and audit-sensitive buyers</span>
 		                  </div>
 		                </div>
 		                <div class="stat-card compact-stat">
 		                  <div>
 		                    <strong>Workflow moat</strong>
-		                    <span class="stat-label">Embedded in approvals, exceptions, and controlled write-back into LOS/ERP/TMS</span>
+		                    <span class="stat-label">Approvals, exceptions, and controlled write-back into LOS/ERP/TMS</span>
 		                  </div>
 		                </div>
 		                <div class="stat-card compact-stat">
 		                  <div>
 		                    <strong>Learning moat</strong>
-		                    <span class="stat-label">Customer-specific validators and exception logic compound with every live workflow</span>
+		                    <span class="stat-label">Validators and exception logic compound with every workflow</span>
 		                  </div>
 		                </div>
 		              </div>
 
-			              <div class="case-study-grid" aria-label="Representative workflow proof patterns">
+			              <div class="case-study-grid is-single" aria-label="Representative workflow proof pattern">
 			                <div class="case-study-card">
 			                  <h4>Logistics document-to-billing flow</h4>
 			                  <div class="case-row"><strong>Input</strong><span>PoDs, LRs, delivery proofs, invoice attachments.</span></div>
 			                  <div class="case-row"><strong>Workflow</strong><span>Read → validate against shipment data → approval queue → TMS/ERP update.</span></div>
-			                  <div class="case-row"><strong>Expansion</strong><span>Starts with billing support, then expands to claims, reconciliation, and audit packs.</span></div>
-			                </div>
-			                <div class="case-study-card">
-			                  <h4>Lending document-to-underwriting flow</h4>
-			                  <div class="case-row"><strong>Input</strong><span>KYC, income, academic, bank, and borrower support documents.</span></div>
-			                  <div class="case-row"><strong>Workflow</strong><span>Classify → extract → policy checks → exception review → LOS-ready output.</span></div>
-			                  <div class="case-row"><strong>Expansion</strong><span>Starts with one document pack, then adds more checks and downstream write-back.</span></div>
+			                  <div class="case-row"><strong>Expansion</strong><span>Billing support → claims, reconciliation, and audit packs.</span></div>
 			                </div>
 			              </div>
-			              <p class="stp-definition">Competitors can match extraction; they struggle to match local deployment, audit-native execution, and workflow intelligence accumulated across live regulated operations.</p>
+			              <p class="stp-definition">Extraction can be copied; local deployment, audit-native execution, and workflow history are harder to replicate.</p>
 		            </div>
 
           </div>
@@ -5705,16 +5751,16 @@
             <span>10 · Efficiency &amp; Leverage</span>
           </header>
 
-	          <div class="slide-body">
+		          <div class="slide-body">
 		            <div class="slide-head">
 		              <h2>Operational Efficiency — Path to Break-even</h2>
-			              <p class="hero-proof">May actual: ₹7.22L revenue · ₹10.29L expenses · -₹3.07L operating profit.<br>Sep expected from client confirmations: ₹14.91L revenue · ₹11.99L expenses · +₹2.92L operating profit.</p>
+			              <p class="hero-proof">June confirmed: ₹8.57L billing / ₹1.03 Cr ARR run-rate. Sep expected: ₹14.91L revenue and +₹2.92L operating profit.</p>
 		            </div>
 		            <div class="finance-kpi-row" aria-label="Finance highlights">
 		              <div class="finance-kpi">
-		                <span>May actual revenue</span>
-		                <strong>₹7.22L</strong>
-		                <small>ARR run-rate: ₹0.87 Cr</small>
+		                <span>June confirmed billing</span>
+		                <strong>₹8.57L</strong>
+		                <small>ARR run-rate: ₹1.03 Cr; expected ₹8.98L</small>
 		              </div>
 		              <div class="finance-kpi">
 		                <span>Sep expected revenue</span>
@@ -5769,7 +5815,7 @@
 	                        </tr>
 	                      </thead>
 	                      <tbody>
-	                        <tr><td>Jun ’26</td><td>₹8.98L</td><td>₹10.93L</td><td class="profit-negative">-₹1.95L</td></tr>
+	                        <tr><td>Jun ’26 confirmed</td><td>₹8.57L <small>(₹8.98L exp.)</small></td><td>₹10.93L</td><td class="profit-negative">-₹2.36L</td></tr>
 	                        <tr><td>Jul ’26</td><td>₹9.63L</td><td>₹11.19L</td><td class="profit-negative">-₹1.56L</td></tr>
 	                        <tr><td>Aug ’26</td><td>₹9.95L</td><td>₹10.75L</td><td class="profit-negative">-₹0.80L</td></tr>
 	                        <tr><td>Sep ’26</td><td>₹14.91L</td><td>₹11.99L</td><td class="profit-positive">+₹2.92L</td></tr>
@@ -5831,16 +5877,13 @@
             <span>12 · Momentum Bridge</span>
           </header>
           <div class="slide-body">
-            <div class="slide-head">
+	            <div class="slide-head">
 	              <h2>₹2.5 Cr Momentum Bridge — Plan and Ask</h2>
-	              <p class="hero-proof">
-			                ₹2.5 Cr bridge to grow from ₹0.87 Cr actual run-rate, with ₹1.79 Cr expected by Sep ’26 from client confirmations, to about ₹10 Cr in annual recurring revenue while completing SOC 2 and standard hosted deployments for India and the Gulf.
-	              </p>
-		              <p>Standard seed convertible note, targeting 3-5 investors.</p>
-	              <p class="funnel-note">Target close: Q1 2026.</p>
+	              <p class="hero-proof">₹2.5 Cr bridge to move from ₹1.03 Cr ARR run-rate to a ₹10 Cr ARR motion.</p>
+		              <p>Standard seed convertible note · 3-5 investors · target close Q1 2026.</p>
 
-	              <div class="milestone-bar" data-milestone="arr" data-current="0.87" data-target="10">
-		                <span>ARR today · ₹0.87 Cr</span>
+	              <div class="milestone-bar" data-milestone="arr" data-current="1.03" data-target="10">
+		                <span>ARR today · ₹1.03 Cr</span>
                 <div class="milestone-track" tabindex="0">
                   <div class="milestone-progress" style="--progress:8.7%;"></div>
                   <div class="milestone-tooltip" role="status" aria-live="polite"></div>
@@ -5875,37 +5918,26 @@
 	                <h3>12-month plan &amp; outcomes</h3>
 	                <div class="arr-bridge-strip" aria-label="ARR bridge">
 	                  <div class="arr-bridge-item">
-	                    <span>Actual today</span>
-	                    <strong>₹0.87 Cr ARR</strong>
-	                    <small>May ’26 revenue run-rate.</small>
+	                    <span>Current run-rate</span>
+	                    <strong>₹1.03 Cr ARR</strong>
+	                    <small>Jun ’26 confirmed billing.</small>
 	                  </div>
 	                  <div class="arr-bridge-item">
 	                    <span>Confirmed path</span>
 	                    <strong>₹1.79 Cr ARR</strong>
-	                    <small>Sep ’26 expected from client confirmations.</small>
+	                    <small>Sep ’26 expected.</small>
 	                  </div>
 	                  <div class="arr-bridge-item">
 	                    <span>Bridge target</span>
 	                    <strong>₹10 Cr ARR</strong>
-	                    <small>Expansion + new logo GTM motion.</small>
+	                    <small>Expansion + new logos.</small>
 	                  </div>
 	                </div>
-	                <div class="bridge-roadmap">
-                  <ul class="bridge-summary-list">
-                    <li>
-	                      <strong>Revenue engine <span class="delta-chip baseline">Recurring revenue growth + go-to-market team</span></strong>
-		                      <p>Convert the confirmed Sep ’26 path into a ₹10 Cr ARR motion through customer expansion and new logo sales.</p>
-                    </li>
-	                    <li>
-		                      <strong>Product <span class="delta-chip baseline">Higher automation + more workflows per customer</span></strong>
-		                      <p>Increase straight-through automation, expand usage per customer, and reduce deployment time for new workflows.</p>
-	                    </li>
-                    <li>
-	                      <strong>Compliance + local deployment <span class="delta-chip baseline">SOC 2 + hosted deployment kits</span></strong>
-	                      <p>Complete SOC 2 Type II and standardise repeatable hosted deployments for India and the Gulf.</p>
-                    </li>
-                  </ul>
-                </div>
+	                <div class="chip-row" aria-label="Bridge execution priorities">
+	                  <span class="chip chip-neutral chip-lg">GTM team</span>
+	                  <span class="chip chip-neutral chip-lg">More workflows/customer</span>
+	                  <span class="chip chip-neutral chip-lg">SOC 2 + hosted kits</span>
+	                </div>
 
                 <!-- <h3>By December 2026</h3>
                 <ul class="list">
@@ -6015,9 +6047,9 @@
 	          legendItems: [
 	            { label: 'Actual revenue', color: '#01684d', kind: 'line' },
 	            { label: 'Actual expenses', color: '#344054', kind: 'line' },
-	            { label: 'Expected from client confirmations', color: '#667085', kind: 'line', dashed: true },
+	            { label: 'Expected path', color: '#667085', kind: 'line', dashed: true },
 	          ],
-	          caption: 'Actuals through May ’26; Jun–Sep ’26 expected from client confirmations.',
+	          caption: 'Solid line includes Jun confirmed billing of ₹8.57L; dashed path shows Jun expected ₹8.98L and Jul–Sep expected from client confirmations.',
 	          series: [
 		            {
 		              key: 'revenue-actual',
@@ -6039,6 +6071,7 @@
 		                { quarter: 'Mar-26', value: 892406 },
 		                { quarter: 'Apr-26', value: 688655 },
 		                { quarter: 'May-26', value: 722098 },
+		                { quarter: 'Jun-26', value: 857000 },
 	              ],
 	            },
 	            {
@@ -6048,7 +6081,6 @@
 	              dashed: true,
 	              formatter: formatCurrencyShort,
 	              data: [
-	                { quarter: 'May-26', value: 722098 },
 	                { quarter: 'Jun-26', value: 898472 },
 	                { quarter: 'Jul-26', value: 963372 },
 	                { quarter: 'Aug-26', value: 995232 },
@@ -6102,7 +6134,7 @@
 	          type: 'profit-bars',
 	          axis: [600000, 0, -600000, -1200000, -1800000],
 	          axisFormatter: formatCurrencyAxisLakhs,
-	          caption: 'Recent actuals through May ’26; Jun–Sep ’26 expected from client confirmations.',
+	          caption: 'Jun ’26 uses confirmed billing; expected revenue was ₹8.98L. Jul–Sep expected from client confirmations.',
 	          legendItems: [
 	            { label: 'Loss', color: '#b42318', kind: 'box' },
 	            { label: 'Profit', color: '#01684d', kind: 'box' },
@@ -6116,7 +6148,7 @@
 	            { quarter: 'Mar-26', value: -650013 },
 	            { quarter: 'Apr-26', value: -366927 },
 	            { quarter: 'May-26', value: -307087 },
-	            { quarter: 'Jun-26', value: -194788, expected: true },
+	            { quarter: 'Jun-26', value: -236260, expected: true },
 	            { quarter: 'Jul-26', value: -155888, expected: true },
 	            { quarter: 'Aug-26', value: -80029, expected: true },
 	            { quarter: 'Sep-26', value: 291571, expected: true, highlight: true },
@@ -6153,7 +6185,7 @@
 	          ],
 	          axis: [1.25, 1.0, 0.75, 0.5, 0.25, 0],
 	          tooltipSuffix: '×',
-	          caption: 'Actuals through May ’26; dashed segment is expected from client confirmations.',
+	          caption: 'Actual revenue through Jun ’26; Jun expected was ₹8.98L. Dashed segment is Jul–Sep expected from client confirmations.',
 	          legendItems: [
 	            { label: 'Actual ratio', color: '#111111', kind: 'line' },
 	            { label: 'Expected from client confirmations', color: '#111111', kind: 'line', dashed: true },
@@ -6171,18 +6203,23 @@
 	        // Pages (bars)
 	        {
 	          selector: '[data-chart="pages"]',
-	          legendItems: [{ label: 'Pages', color: '#111111', kind: 'box' }],
+	          legendItems: [
+	            { label: 'Completed quarter', color: '#111111', kind: 'box' },
+	            { label: 'Q2 ’26 Apr-May', color: '#667085', kind: 'box' },
+	          ],
+	          caption: 'Apr-May ’26: 758,510 pages over 2 months. ~2.99M through May; crossed 3M+ in early June.',
 	          data: [
-	            { quarter: '2024-Q3', value: 7370,  color: '#111111' },
+	            { quarter: '2024-Q3', value: 7370,  color: '#111111', displayLabel: "Q3'24", showFooter: true },
 	            { quarter: '2024-Q4', value: 34244, color: '#333333' },
 	            { quarter: '2025-Q1', value: 136795, color: '#555555' },
 	            { quarter: '2025-Q2', value: 301915, color: '#777777' },
 	            { quarter: '2025-Q3', value: 399396, color: '#999999' },
-		            { quarter: '2025-Q4', value: 430932, color: '#BBBBBB' },
-		            { quarter: '2026-Q1', value: 925045, color: '#DDDDDD' },
+		            { quarter: '2025-Q4', value: 430932, color: '#BBBBBB', displayLabel: "Q4'25", showFooter: true },
+		            { quarter: '2026-Q1', value: 925045, color: '#DDDDDD', displayLabel: "Q1'26", showFooter: true, showValue: true, valueLabel: '925K' },
+		            { quarter: 'Q2 ’26 Apr-May', value: 758510, color: '#111111', partial: true, note: 'Apr-May only', displayLabel: "Apr-May '26", showFooter: false, showValue: true, valueLabel: '758.5K' },
 		          ],
 		          hideValues: true,
-		          showQuarters: false,
+		          showQuarters: true,
 		          showDeltas: false,
 		          maxValue: 1000000,
 		          axis: [1000000, 750000, 500000, 250000, 0],
@@ -6205,19 +6242,12 @@
 		          maxValue: 1800000,
 		          axis: [1800000, 1350000, 900000, 450000, 0],
 		          axisFormatter: formatCurrencyAxisLakhs,
-	          caption: 'Actuals through May ’26; dashed segment is expected from client confirmations.',
+	          caption: 'Actual revenue through Jun ’26; Jun expected was ₹8.98L. Dashed segment is Jul–Sep expected from client confirmations.',
 	          legendItems: [
 	            { label: 'Actual revenue', color: '#111111', kind: 'line' },
 	            { label: 'Expected from client confirmations', color: '#111111', kind: 'line', dashed: true },
 	          ],
           data: [
-            { quarter: 'Sep-24', value: 4720,   color: '#111111' },
-            { quarter: 'Oct-24', value: 13000,  color: '#111111' },
-            { quarter: 'Nov-24', value: 136762, color: '#111111' },
-            { quarter: 'Dec-24', value: 53100,  color: '#111111' },
-            { quarter: 'Jan-25', value: 102212, color: '#111111' },
-            { quarter: 'Feb-25', value: 147676, color: '#111111' },
-            { quarter: 'Mar-25', value: 83128,  color: '#111111' },
             { quarter: 'Apr-25', value: 139862, color: '#111111' },
             { quarter: 'May-25', value: 172387, color: '#111111' },
 	            { quarter: 'Jun-25', value: 156106, color: '#111111' },
@@ -6232,7 +6262,7 @@
 		            { quarter: 'Mar-26', value: 892406, color: '#111111' },
 		            { quarter: 'Apr-26', value: 688655, color: '#111111' },
 		            { quarter: 'May-26', value: 722098, color: '#111111' },
-		            { quarter: 'Jun-26', value: 898472, color: '#111111', expected: true },
+		            { quarter: 'Jun-26', value: 857000, color: '#111111' },
 		            { quarter: 'Jul-26', value: 963372, color: '#111111', expected: true },
 		            { quarter: 'Aug-26', value: 995232, color: '#111111', expected: true },
 		            { quarter: 'Sep-26', value: 1490832, color: '#111111', expected: true },
@@ -6365,8 +6395,8 @@
           const lastIndex = dataset.length - 1;
           barsEl.classList.toggle('is-dense', dense);
           barsEl.innerHTML = dataset
-            .map(({ quarter, value, color }, index) => {
-              const displayQuarter = formatQuarterDisplay(quarter);
+            .map(({ quarter, value, color, partial, note, displayLabel, valueLabel, showFooter, showValue }, index) => {
+              const displayQuarter = displayLabel || formatQuarterDisplay(quarter);
               const quarterLabel = displayQuarter;
               const height = scaleMax ? Math.min(value / scaleMax, 1).toFixed(3) : 0;
               const prev = dataset[index - 1]?.value;
@@ -6378,16 +6408,16 @@
               const isEndpoint = index === 0 || index === lastIndex;
               const allowQuarterLabels = cfg.showQuarters !== false;
               const allowDeltaChips = cfg.showDeltas !== false;
-              const showValueLabel = cfg.hideValues ? false : (!dense || isEndpoint || isPeak);
-              const showQuarterLabel = allowQuarterLabels && (!dense || isEndpoint);
+              const showValueLabel = showValue === true || (cfg.hideValues ? false : (!dense || isEndpoint || isPeak));
+              const showQuarterLabel = showFooter === false ? false : (showFooter === true || (allowQuarterLabels && (!dense || isEndpoint)));
               const showDeltaChip = allowDeltaChips && !dense;
               const footerParts = [];
               if (showQuarterLabel) footerParts.push(`<span class="chart-quarter">${quarterLabel}</span>`);
               if (showDeltaChip) footerParts.push(`<span class="delta-chip ${deltaClass}">${deltaLabel}</span>`);
               const footerMarkup = footerParts.length ? `<div class="chart-bar-footer">${footerParts.join('')}</div>` : '';
               return `
-                <button class="chart-bar${isPeak ? ' is-peak' : ''}" type="button" data-quarter="${displayQuarter}" data-value="${formatFullValue(value)}" data-delta="${deltaShort}">
-                  ${showValueLabel ? `<span class="value-label">${formatShortValue(value)}</span>` : ''}
+                <button class="chart-bar${isPeak ? ' is-peak' : ''}${partial ? ' is-partial' : ''}" type="button" data-quarter="${displayQuarter}" data-value="${formatFullValue(value)}" data-delta="${deltaShort}"${note ? ` data-note="${note}"` : ''}>
+                  ${showValueLabel ? `<span class="value-label">${valueLabel || formatShortValue(value)}</span>` : ''}
                   <div class="bar-visual" style="--bar-color:${color}; --bar-height:${height};">
                     <span class="bar-fill"></span>
                     ${isPeak && cfg.highlightLabel ? `<span class="bar-flag" aria-hidden="true">${cfg.highlightLabel}</span>` : ''}
@@ -7052,7 +7082,8 @@
       function showTooltip(bar, tooltip, wrapper, suffix = '') {
         if (!tooltip || !wrapper) return;
         const delta = bar.dataset.delta;
-        tooltip.textContent = `${bar.dataset.quarter}: ${bar.dataset.value}${suffix}${delta ? ` (${delta})` : ''}`;
+        const note = bar.dataset.note ? ` · ${bar.dataset.note}` : '';
+        tooltip.textContent = `${bar.dataset.quarter}: ${bar.dataset.value}${suffix}${delta ? ` (${delta})` : ''}${note}`;
         const barRect = bar.getBoundingClientRect();
         const wrapRect = wrapper.getBoundingClientRect();
         tooltip.style.left = `${barRect.left + barRect.width / 2 - wrapRect.left}px`;
