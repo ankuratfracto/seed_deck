@@ -3338,10 +3338,11 @@
       width: 1px;
       background: rgba(71,84,103,0.18);
     }
-    .chart-axis span {
-      position: relative;
-      padding-right: 10px;
-    }
+	    .chart-axis span {
+	      position: relative;
+	      padding-right: 10px;
+	      white-space: nowrap;
+	    }
     .chart-axis span::after {
       content: "";
       position: absolute;
@@ -3514,9 +3515,160 @@
     .line-path.is-dotted {
       stroke-dasharray: 2 10;
     }
-    .line-area {
-      fill: rgba(91,141,239,0.22);
-    }
+	    .line-area {
+	      fill: rgba(91,141,239,0.22);
+	    }
+	    .forecast-zone {
+	      fill: rgba(148,163,184,0.14);
+	    }
+	    .forecast-zone-label {
+	      fill: rgba(71,84,103,0.82);
+	      font-size: 11px;
+	      font-weight: 700;
+	      letter-spacing: 0.3px;
+	      text-transform: uppercase;
+	    }
+	    .profit-bars {
+	      display: grid;
+	      gap: 10px;
+	      position: relative;
+	      min-height: 220px;
+	      padding: 0;
+	    }
+	    .profit-bars-svg {
+	      width: 100%;
+	      height: 220px;
+	      overflow: visible;
+	    }
+	    .profit-zero {
+	      stroke: rgba(17,24,39,0.55);
+	      stroke-width: 2;
+	    }
+	    .profit-bar {
+	      rx: 4;
+	      filter: drop-shadow(0 6px 10px rgba(15,23,42,0.12));
+	    }
+	    .profit-bar.is-positive { fill: #01684d; }
+	    .profit-bar.is-negative { fill: #b42318; }
+	    .profit-bar.is-expected {
+	      opacity: 0.88;
+	      stroke: rgba(17,24,39,0.35);
+	      stroke-width: 1.4;
+	      stroke-dasharray: 5 4;
+	    }
+	    .profit-value-label {
+	      fill: #475467;
+	      font-size: 10px;
+	      font-weight: 700;
+	      text-anchor: middle;
+	    }
+	    .finance-kpi-row {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	      gap: 10px;
+	      margin: 14px 0 12px;
+	    }
+	    .finance-kpi {
+	      border: 1px solid var(--border);
+	      background: var(--card-alt);
+	      border-radius: 10px;
+	      padding: 10px 12px;
+	      display: grid;
+	      gap: 4px;
+	      min-height: 58px;
+	    }
+	    .finance-kpi span {
+	      color: var(--muted);
+	      font-size: 11px;
+	      font-weight: 700;
+	      letter-spacing: 0.5px;
+	      text-transform: uppercase;
+	    }
+	    .finance-kpi strong {
+	      color: var(--fg);
+	      font-size: 20px;
+	      line-height: 1.1;
+	    }
+	    .finance-kpi small {
+	      color: var(--muted);
+	      font-size: 11px;
+	      line-height: 1.25;
+	    }
+	    .finance-forecast-table {
+	      width: 100%;
+	      border-collapse: collapse;
+	      margin-top: 10px;
+	      font-size: 11px;
+	      color: var(--muted);
+	    }
+	    .finance-forecast-table th,
+	    .finance-forecast-table td {
+	      border-top: 1px solid rgba(148,163,184,0.28);
+	      padding: 5px 4px;
+	      text-align: right;
+	      white-space: nowrap;
+	    }
+	    .finance-forecast-table th:first-child,
+	    .finance-forecast-table td:first-child {
+	      text-align: left;
+	    }
+	    .finance-forecast-table th {
+	      color: #475467;
+	      font-size: 10px;
+	      letter-spacing: 0.4px;
+	      text-transform: uppercase;
+	    }
+	    .finance-forecast-table .profit-positive {
+	      color: #01684d;
+	      font-weight: 700;
+	    }
+	    .finance-forecast-table .profit-negative {
+	      color: #b42318;
+	      font-weight: 700;
+	    }
+	    section[data-slide-number="10"] .finance-kpi-row {
+	      margin: 10px 0 10px;
+	    }
+	    section[data-slide-number="10"] .finance-kpi {
+	      min-height: 52px;
+	      padding: 8px 12px;
+	    }
+	    section[data-slide-number="10"] .finance-kpi strong {
+	      font-size: 18px;
+	    }
+	    section[data-slide-number="10"] .chart-wrapper {
+	      padding: 14px 18px 14px;
+	    }
+	    section[data-slide-number="10"] .chart-inner,
+	    section[data-slide-number="10"] .chart-bars,
+	    section[data-slide-number="10"] .line-chart,
+	    section[data-slide-number="10"] .profit-bars {
+	      min-height: 150px;
+	    }
+	    section[data-slide-number="10"] .line-chart-svg,
+	    section[data-slide-number="10"] .profit-bars-svg {
+	      height: 150px;
+	    }
+	    section[data-slide-number="10"] .chart-meta {
+	      gap: 8px;
+	    }
+	    section[data-slide-number="10"] .chart-caption {
+	      font-size: 11px;
+	    }
+	    section[data-slide-number="10"] .chart-legend {
+	      gap: 8px;
+	    }
+	    section[data-slide-number="10"] .chart-legend-item {
+	      font-size: 11px;
+	    }
+	    section[data-slide-number="10"] .finance-forecast-table {
+	      margin-top: 6px;
+	      font-size: 10px;
+	    }
+	    section[data-slide-number="10"] .finance-forecast-table th,
+	    section[data-slide-number="10"] .finance-forecast-table td {
+	      padding: 3px 4px;
+	    }
     .line-point {
       fill: #fff;
       stroke: var(--line-color, #5b8def);
@@ -4088,18 +4240,92 @@
       margin: 0;
       font-size: 1.12rem;
     }
-    section[data-title="Traction · Adoption"] .card-block.chart-card .chart-wrapper,
-    section[data-title="Traction · Onboardings"] .card-block.chart-card .chart-wrapper,
-    section[data-title="Traction · Usage"] .card-block.chart-card .chart-wrapper,
-    section[data-title="Operational Efficiency"] .card-block.chart-card .chart-wrapper {
-      background: none;
-      border: none;
-      box-shadow: none;
-      padding: 8px 4px 14px 0;
-    }
-    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-bars,
-    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .chart-bars,
-    section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-bars,
+	    section[data-title="Traction · Adoption"] .card-block.chart-card .chart-wrapper,
+	    section[data-title="Traction · Onboardings"] .card-block.chart-card .chart-wrapper,
+	    section[data-title="Traction · Usage"] .card-block.chart-card .chart-wrapper,
+	    section[data-title="Operational Efficiency"] .card-block.chart-card .chart-wrapper {
+	      background: none;
+	      border: none;
+	      box-shadow: none;
+	      padding: 8px 4px 14px 0;
+	    }
+	    section[data-slide-number="10"].slide-01a .slide-body {
+	      padding: 22px 24px 18px;
+	      gap: 12px;
+	    }
+	    section[data-slide-number="10"] .slide-head {
+	      gap: 8px;
+	    }
+	    section[data-slide-number="10"] .slide-head h2 {
+	      font-size: 40px;
+	    }
+	    section[data-slide-number="10"] .hero-proof {
+	      font-size: 14px;
+	      line-height: 1.35;
+	    }
+	    section[data-slide-number="10"] .finance-kpi-row {
+	      margin: 6px 0 6px;
+	      gap: 8px;
+	    }
+	    section[data-slide-number="10"] .finance-kpi {
+	      min-height: 44px;
+	      padding: 7px 10px;
+	    }
+	    section[data-slide-number="10"] .finance-kpi strong {
+	      font-size: 17px;
+	    }
+	    section[data-slide-number="10"] .finance-kpi span,
+	    section[data-slide-number="10"] .finance-kpi small {
+	      font-size: 10px;
+	    }
+	    section[data-slide-number="10"] .efficiency-grid {
+	      gap: 12px;
+	    }
+	    section[data-slide-number="10"] .card-block.chart-card {
+	      padding: 16px 18px 12px;
+	    }
+	    section[data-slide-number="10"] .card-block.chart-card .chart-panel {
+	      gap: 9px;
+	    }
+	    section[data-slide-number="10"] .card-block.chart-card .chart-panel h3 {
+	      font-size: 1rem;
+	    }
+	    section[data-slide-number="10"] .card-block.chart-card .chart-wrapper {
+	      padding: 2px 2px 4px 0;
+	    }
+	    section[data-slide-number="10"] .chart-inner,
+	    section[data-slide-number="10"] .chart-bars,
+	    section[data-slide-number="10"] .line-chart,
+	    section[data-slide-number="10"] .profit-bars {
+	      min-height: 126px;
+	    }
+	    section[data-slide-number="10"] .line-chart-svg,
+	    section[data-slide-number="10"] .profit-bars-svg {
+	      height: 126px;
+	    }
+	    section[data-slide-number="10"] .chart-meta {
+	      gap: 6px;
+	    }
+	    section[data-slide-number="10"] .chart-caption {
+	      font-size: 10px;
+	    }
+	    section[data-slide-number="10"] .chart-legend {
+	      gap: 6px;
+	    }
+	    section[data-slide-number="10"] .chart-legend-item {
+	      font-size: 10px;
+	    }
+	    section[data-slide-number="10"] .finance-forecast-table {
+	      margin-top: 4px;
+	      font-size: 9px;
+	    }
+	    section[data-slide-number="10"] .finance-forecast-table th,
+	    section[data-slide-number="10"] .finance-forecast-table td {
+	      padding: 2px 3px;
+	    }
+	    section[data-title="Traction · Adoption"] .chart-panel[data-chart] .chart-bars,
+	    section[data-title="Traction · Onboardings"] .chart-panel[data-chart] .chart-bars,
+	    section[data-title="Traction · Usage"] .chart-panel[data-chart] .chart-bars,
     section[data-title="Operational Efficiency"] .chart-panel[data-chart] .chart-bars {
       gap: clamp(18px, 4vw, 56px);
     }
@@ -5195,45 +5421,78 @@
           </header>
 
 	          <div class="slide-body">
-	            <div class="slide-head">
-	              <h2>Operational Efficiency — Path to Break-even</h2>
-		              <p class="hero-proof">May actual: ₹7.22L revenue · ₹10.29L expenses · -₹3.07L operating profit.<br>Sep expected from client confirmations: ₹14.91L revenue · ₹11.99L expenses · +₹2.92L operating profit.</p>
-	            </div>
+		            <div class="slide-head">
+		              <h2>Operational Efficiency — Path to Break-even</h2>
+			              <p class="hero-proof">May actual: ₹7.22L revenue · ₹10.29L expenses · -₹3.07L operating profit.<br>Sep expected from client confirmations: ₹14.91L revenue · ₹11.99L expenses · +₹2.92L operating profit.</p>
+		            </div>
+		            <div class="finance-kpi-row" aria-label="Finance highlights">
+		              <div class="finance-kpi">
+		                <span>May actual revenue</span>
+		                <strong>₹7.22L</strong>
+		                <small>ARR run-rate: ₹0.87 Cr</small>
+		              </div>
+		              <div class="finance-kpi">
+		                <span>Sep expected revenue</span>
+		                <strong>₹14.91L</strong>
+		                <small>Based on client confirmations</small>
+		              </div>
+		              <div class="finance-kpi">
+		                <span>Break-even expected</span>
+		                <strong>Sep ’26</strong>
+		                <small>+₹2.92L operating profit</small>
+		              </div>
+		            </div>
 
-	            <div class="split efficiency-grid">
-	              <!-- Operating Loss -->
-	              <div class="card-block chart-card">
-                <div class="chart-stack">
-                  <div class="chart-panel" data-chart="operating-loss">
-                    <h3>Monthly P&L (₹)</h3>
-                    <div class="chart-meta" aria-live="polite"></div>
-                    <div class="chart-wrapper">
-                      <div class="chart-inner">
+		            <div class="split efficiency-grid">
+		              <!-- Revenue vs expenses -->
+		              <div class="card-block chart-card">
+	                <div class="chart-stack">
+	                  <div class="chart-panel" data-chart="operating-loss">
+	                    <h3>Revenue vs expenses (₹L)</h3>
+	                    <div class="chart-meta" aria-live="polite"></div>
+	                    <div class="chart-wrapper">
+	                      <div class="chart-inner">
                         <div class="chart-axis" aria-hidden="true"></div>
                         <div class="chart-bars"></div>
                       </div>
                       <div class="chart-tooltip multi" role="status" aria-live="polite"></div>
                     </div>
                   </div>
-                </div>
-              </div>
+	                </div>
+	              </div>
 
-              <!-- Revenue / Expense Ratio -->
-              <div class="card-block chart-card">
-                <div class="chart-stack">
-                  <div class="chart-panel" data-chart="rev-exp">
-                    <h3>Revenue-to-expense ratio</h3>
-                    <div class="chart-meta" aria-live="polite"></div>
-                    <div class="chart-wrapper">
-                      <div class="chart-inner">
+	              <!-- Operating profit -->
+	              <div class="card-block chart-card">
+	                <div class="chart-stack">
+	                  <div class="chart-panel" data-chart="operating-profit">
+	                    <h3>Operating profit / loss (₹L)</h3>
+	                    <div class="chart-meta" aria-live="polite"></div>
+	                    <div class="chart-wrapper">
+	                      <div class="chart-inner">
                         <div class="chart-axis" aria-hidden="true"></div>
                         <div class="chart-bars"></div>
-                      </div>
-                      <div class="chart-tooltip" role="status" aria-live="polite"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+	                      </div>
+	                      <div class="chart-tooltip" role="status" aria-live="polite"></div>
+	                    </div>
+	                    <table class="finance-forecast-table" aria-label="Expected forecast from client confirmations">
+	                      <thead>
+	                        <tr>
+	                          <th>Expected</th>
+	                          <th>Revenue</th>
+	                          <th>Expenses</th>
+	                          <th>Op. profit</th>
+	                        </tr>
+	                      </thead>
+	                      <tbody>
+	                        <tr><td>Jun ’26</td><td>₹8.98L</td><td>₹10.93L</td><td class="profit-negative">-₹1.95L</td></tr>
+	                        <tr><td>Jul ’26</td><td>₹9.63L</td><td>₹11.19L</td><td class="profit-negative">-₹1.56L</td></tr>
+	                        <tr><td>Aug ’26</td><td>₹9.95L</td><td>₹10.75L</td><td class="profit-negative">-₹0.80L</td></tr>
+	                        <tr><td>Sep ’26</td><td>₹14.91L</td><td>₹11.99L</td><td class="profit-positive">+₹2.92L</td></tr>
+	                      </tbody>
+	                    </table>
+	                  </div>
+	                </div>
+	              </div>
             </div>
           </div>
 
@@ -5444,41 +5703,20 @@
 		        customers: '',
 		      };
 	      const charts = [
-        // Operating loss + revenue + expenses (multi-line)
-	        {
-	          selector: '[data-chart="operating-loss"]',
-	          type: 'line-multi',
-	          axis: [2200000, 1400000, 600000, 0, -600000, -1400000, -2200000],
+	        // Revenue + expenses (multi-line)
+		        {
+		          selector: '[data-chart="operating-loss"]',
+		          type: 'line-multi',
+	          axis: [2200000, 1650000, 1100000, 550000, 0],
+	          axisFormatter: formatCurrencyAxisLakhs,
+	          forecastStartLabel: 'Jun-26',
 	          legendItems: [
 	            { label: 'Actual revenue', color: '#01684d', kind: 'line' },
 	            { label: 'Actual expenses', color: '#344054', kind: 'line' },
-	            { label: 'Actual operating profit/loss', color: '#b42318', kind: 'line' },
 	            { label: 'Expected from client confirmations', color: '#667085', kind: 'line', dashed: true },
 	          ],
 	          caption: 'Actuals through May ’26; Jun–Sep ’26 expected from client confirmations.',
 	          series: [
-	            {
-	              key: 'operating-profit-actual',
-	              label: 'Operating profit/loss',
-	              color: '#b42318',
-	              formatter: formatCurrencyShort,
-	              data: [
-	                { quarter: 'Apr-25', value: -1708070 },
-	                { quarter: 'May-25', value: -1916331 },
-		                { quarter: 'Jun-25', value: -1289249 },
-	                { quarter: 'Jul-25', value: -1429711 },
-	                { quarter: 'Aug-25', value: -1481344 },
-		                { quarter: 'Sep-25', value: -1373492 },
-		                { quarter: 'Oct-25', value: -1623589 },
-		                { quarter: 'Nov-25', value: -1214568 },
-		                { quarter: 'Dec-25', value: -1144329 },
-		                { quarter: 'Jan-26', value: -1055965 },
-		                { quarter: 'Feb-26', value: -1083200 },
-		                { quarter: 'Mar-26', value: -650013 },
-		                { quarter: 'Apr-26', value: -366927 },
-		                { quarter: 'May-26', value: -307087 },
-	              ],
-	            },
 		            {
 		              key: 'revenue-actual',
 		              label: 'Revenue',
@@ -5499,6 +5737,20 @@
 		                { quarter: 'Mar-26', value: 892406 },
 		                { quarter: 'Apr-26', value: 688655 },
 		                { quarter: 'May-26', value: 722098 },
+	              ],
+	            },
+	            {
+	              key: 'revenue-expected',
+	              label: 'Expected revenue',
+	              color: '#01684d',
+	              dashed: true,
+	              formatter: formatCurrencyShort,
+	              data: [
+	                { quarter: 'May-26', value: 722098 },
+	                { quarter: 'Jun-26', value: 898472 },
+	                { quarter: 'Jul-26', value: 963372 },
+	                { quarter: 'Aug-26', value: 995232 },
+	                { quarter: 'Sep-26', value: 1490832 },
 	              ],
 	            },
 		            {
@@ -5524,38 +5776,13 @@
 	              ],
 	            },
 	            {
-	              key: 'operating-profit-expected',
-	              label: 'Expected operating profit/loss',
-	              color: '#b42318',
-	              dashed: true,
-	              formatter: formatCurrencyShort,
-	              data: [
-	                { quarter: 'Jun-26', value: -194788 },
-	                { quarter: 'Jul-26', value: -155888 },
-	                { quarter: 'Aug-26', value: -80029 },
-	                { quarter: 'Sep-26', value: 291571 },
-	              ],
-	            },
-	            {
-	              key: 'revenue-expected',
-	              label: 'Expected revenue',
-	              color: '#01684d',
-	              dashed: true,
-	              formatter: formatCurrencyShort,
-	              data: [
-	                { quarter: 'Jun-26', value: 898472 },
-	                { quarter: 'Jul-26', value: 963372 },
-	                { quarter: 'Aug-26', value: 995232 },
-	                { quarter: 'Sep-26', value: 1490832 },
-	              ],
-	            },
-	            {
 	              key: 'expenses-expected',
 	              label: 'Expected expenses',
 	              color: '#344054',
 	              dashed: true,
 	              formatter: formatCurrencyShort,
 	              data: [
+	                { quarter: 'May-26', value: 1029185 },
 	                { quarter: 'Jun-26', value: 1093260 },
 	                { quarter: 'Jul-26', value: 1119260 },
 	                { quarter: 'Aug-26', value: 1075261 },
@@ -5564,8 +5791,36 @@
 	            },
 	          ],
           tooltipSuffix: '',
-          meta: false,
-        },
+	          meta: false,
+	        },
+
+	        // Operating profit / loss (bars)
+	        {
+	          selector: '[data-chart="operating-profit"]',
+	          type: 'profit-bars',
+	          axis: [600000, 0, -600000, -1200000, -1800000],
+	          axisFormatter: formatCurrencyAxisLakhs,
+	          caption: 'Recent actuals through May ’26; Jun–Sep ’26 expected from client confirmations.',
+	          legendItems: [
+	            { label: 'Loss', color: '#b42318', kind: 'box' },
+	            { label: 'Profit', color: '#01684d', kind: 'box' },
+	            { label: 'Expected', color: '#667085', kind: 'box' },
+	          ],
+	          data: [
+	            { quarter: 'Nov-25', value: -1214568 },
+	            { quarter: 'Dec-25', value: -1144329 },
+	            { quarter: 'Jan-26', value: -1055965 },
+	            { quarter: 'Feb-26', value: -1083200 },
+	            { quarter: 'Mar-26', value: -650013 },
+	            { quarter: 'Apr-26', value: -366927 },
+	            { quarter: 'May-26', value: -307087 },
+	            { quarter: 'Jun-26', value: -194788, expected: true },
+	            { quarter: 'Jul-26', value: -155888, expected: true },
+	            { quarter: 'Aug-26', value: -80029, expected: true },
+	            { quarter: 'Sep-26', value: 291571, expected: true, highlight: true },
+	          ],
+	          meta: false,
+	        },
 
         // Revenue / expense ratio (line)
         {
@@ -5645,8 +5900,9 @@
           lineAreaColor: 'rgba(0,0,0,0.1)',
 	          legend: true,
 	          legendLabel: 'Revenue',
-	          maxValue: 1800000,
-	          axis: [1800000, 1350000, 900000, 450000, 0],
+		          maxValue: 1800000,
+		          axis: [1800000, 1350000, 900000, 450000, 0],
+		          axisFormatter: formatCurrencyAxisLakhs,
 	          caption: 'Actuals through May ’26; dashed segment is expected from client confirmations.',
 	          legendItems: [
 	            { label: 'Actual revenue', color: '#111111', kind: 'line' },
@@ -5680,8 +5936,8 @@
 		            { quarter: 'Sep-26', value: 1490832, color: '#111111', expected: true },
           ],
           tooltipSuffix: '',
-          shortFormatter: (value) => `${formatShort(value)}`,
-          fullFormatter: (value) => `${formatFull(value)}`,
+	          shortFormatter: formatCurrencyShort,
+	          fullFormatter: formatCurrencyShort,
           meta: false,
           // baselineLabel: 'Bridge base',
           // highlightLabel: 'Record quarter',
@@ -5768,16 +6024,20 @@
         const wrapper = root.querySelector('.chart-wrapper');
         const metaEl = root.querySelector('.chart-meta');
         const formatShortValue = cfg.shortFormatter || formatShort;
-        const formatFullValue = cfg.fullFormatter || formatFull;
-        if (cfg.type === 'line-multi') {
-          buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl });
-          return;
-        }
-        const dataset = cfg.data || [];
-        if (cfg.type === 'line') {
-          buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue });
-          return;
-        }
+	        const formatFullValue = cfg.fullFormatter || formatFull;
+	        if (cfg.type === 'line-multi') {
+	          buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl });
+	          return;
+	        }
+	        const dataset = cfg.data || [];
+	        if (cfg.type === 'line') {
+	          buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue });
+	          return;
+	        }
+	        if (cfg.type === 'profit-bars') {
+	          buildProfitBarChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue });
+	          return;
+	        }
         const values = dataset.map(point => point.value);
         const datasetMax = values.length ? Math.max(...values) : 0;
         const axisSteps = cfg.axisSteps ?? 4;
@@ -5793,9 +6053,10 @@
 
         const peakValue = datasetMax;
 
-        if (axisEl) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
-        }
+	        const axisFormatter = cfg.axisFormatter || formatAxis;
+	        if (axisEl) {
+	          axisEl.innerHTML = axisValues.map(value => `<span>${axisFormatter(value)}</span>`).join('');
+	        }
 
         if (barsEl) {
           const dense = dataset.length > 4;
@@ -5859,7 +6120,7 @@
         });
       }
 
-      function buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue }) {
+	      function buildLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue }) {
         if (!barsEl) return;
         const dataset = cfg.data || [];
         const formatShortValue = cfg.shortFormatter || formatCurrencyShort;
@@ -5882,9 +6143,10 @@
         }
         const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
 
-        if (axisEl && axisValues) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
-        }
+	        const axisFormatter = cfg.axisFormatter || formatAxis;
+	        if (axisEl && axisValues) {
+	          axisEl.innerHTML = axisValues.map(value => `<span>${axisFormatter(value)}</span>`).join('');
+	        }
 
         const lineColor = cfg.lineColor || '#111111';
         const areaColor = cfg.lineAreaColor || 'rgba(0,0,0,0.08)';
@@ -5915,6 +6177,13 @@
 	        const areaD = actualPoints.length && actualPathD
 	          ? `${actualPathD} L ${actualPoints[actualPoints.length - 1].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} L ${actualPoints[0].x.toFixed(2)} ${(viewHeight - padding.bottom).toFixed(2)} Z`
 	          : '';
+	        const forecastZoneMarkup = hasForecast
+	          ? (() => {
+	              const x = forecastPoints[0]?.x ?? points[forecastStartIndex]?.x;
+	              const width = Math.max(0, viewWidth - x);
+	              return `<rect class="forecast-zone" x="${x.toFixed(2)}" y="0" width="${width.toFixed(2)}" height="${viewHeight}"></rect>`;
+	            })()
+	          : '';
         const refLine = cfg.refLine && isFinite(cfg.refLine.value) ? cfg.refLine : null;
         const refLineMarkup = refLine
           ? (() => {
@@ -5929,14 +6198,15 @@
         barsEl.classList.add('line-chart');
         barsEl.innerHTML = `
           <svg class="line-chart-svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="none" style="--line-color:${lineColor}">
-            <g class="line-grid">
+	            <g class="line-grid">
               ${axisValues.map(value => {
                 const ratio = scaleMax ? clamp((value - scaleMin) / range, 0, 1) : 0;
                 const y = padding.top + (1 - ratio) * innerHeight;
                 return `<line x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
-              }).join('')}
-            </g>
-            ${refLineMarkup}
+	              }).join('')}
+	            </g>
+	            ${forecastZoneMarkup}
+	            ${refLineMarkup}
 	            ${areaD ? `<path class="line-area" d="${areaD}" style="fill:${areaColor};"></path>` : ''}
 	            ${actualPathD ? `<path class="line-path" d="${actualPathD}" stroke="${lineColor}"></path>` : ''}
 	            ${forecastPathD ? `<path class="line-path is-dashed" d="${forecastPathD}" stroke="${lineColor}"></path>` : ''}
@@ -6016,7 +6286,117 @@
         attachLineHover(barsEl, overlay, state);
       }
 
-      function buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl }) {
+	      function buildProfitBarChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl, formatFullValue }) {
+	        if (!barsEl) return;
+	        const dataset = cfg.data || [];
+	        if (!dataset.length) return;
+	        const values = dataset.map(point => point.value).filter(value => isFinite(value));
+	        const axisValues = cfg.axis || buildAxisValues(Math.max(...values.map(Math.abs), 1), cfg.axisSteps ?? 4);
+	        const scaleMax = Math.max(axisValues[0] ?? Math.max(...values), Math.max(...values));
+	        const scaleMin = Math.min(axisValues[axisValues.length - 1] ?? Math.min(...values), Math.min(...values));
+	        const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
+	        const axisFormatter = cfg.axisFormatter || formatAxis;
+	        if (axisEl) axisEl.innerHTML = axisValues.map(value => `<span>${axisFormatter(value)}</span>`).join('');
+
+	        const viewWidth = Math.max(640, dataset.length * 54);
+	        const viewHeight = 220;
+	        const padding = { top: 18, right: 18, bottom: 18, left: 12 };
+	        const innerWidth = viewWidth - padding.left - padding.right;
+	        const innerHeight = viewHeight - padding.top - padding.bottom;
+	        const slot = dataset.length ? innerWidth / dataset.length : innerWidth;
+	        const barWidth = Math.min(34, Math.max(16, slot * 0.54));
+	        const yFor = (value) => {
+	          const ratio = clamp((value - scaleMin) / range, 0, 1);
+	          return padding.top + (1 - ratio) * innerHeight;
+	        };
+	        const zeroY = yFor(0);
+	        const points = dataset.map((entry, index) => {
+	          const xCenter = padding.left + slot * index + slot / 2;
+	          const yValue = yFor(entry.value);
+	          const y = Math.min(yValue, zeroY);
+	          const height = Math.max(2, Math.abs(zeroY - yValue));
+	          const displayQuarter = formatQuarterDisplay(entry.quarter);
+	          return {
+	            ...entry,
+	            displayQuarter,
+	            xCenter,
+	            x: xCenter,
+	            rectX: xCenter - barWidth / 2,
+	            y,
+	            height,
+	            displayValue: formatCurrencyShort(entry.value),
+	          };
+	        });
+	        const forecastStart = points.find(point => point.expected === true);
+	        const forecastZoneMarkup = forecastStart
+	          ? (() => {
+	              const x = Math.max(0, forecastStart.x - slot * 0.18);
+	              const width = Math.max(0, viewWidth - x);
+	              return `<rect class="forecast-zone" x="${x.toFixed(2)}" y="0" width="${width.toFixed(2)}" height="${viewHeight}"></rect>`;
+	            })()
+	          : '';
+
+	        barsEl.classList.add('profit-bars');
+	        barsEl.innerHTML = `
+	          <svg class="profit-bars-svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="none">
+	            ${forecastZoneMarkup}
+	            <g class="line-grid">
+	              ${axisValues.map(value => {
+	                const y = yFor(value);
+	                return `<line x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
+	              }).join('')}
+	            </g>
+	            <line class="profit-zero" x1="0" x2="${viewWidth}" y1="${zeroY.toFixed(2)}" y2="${zeroY.toFixed(2)}"></line>
+	            ${points.map(point => {
+	              const tone = point.value >= 0 ? 'is-positive' : 'is-negative';
+	              const expected = point.expected ? ' is-expected' : '';
+	              const showLabel = point.highlight || point.expected || Math.abs(point.value) <= 400000;
+	              const labelY = point.value >= 0 ? point.y - 7 : point.y + point.height + 14;
+	              return `
+	                <rect class="profit-bar ${tone}${expected}" x="${point.rectX.toFixed(2)}" y="${point.y.toFixed(2)}" width="${barWidth.toFixed(2)}" height="${point.height.toFixed(2)}"></rect>
+	                ${showLabel ? `<text class="profit-value-label" x="${point.xCenter.toFixed(2)}" y="${clamp(labelY, 10, viewHeight - 4).toFixed(2)}">${point.displayValue}</text>` : ''}
+	              `;
+	            }).join('')}
+	            <line class="line-cursor" x1="${points[0]?.xCenter.toFixed(2) || 0}" x2="${points[0]?.xCenter.toFixed(2) || 0}" y1="${padding.top}" y2="${viewHeight - padding.bottom}"></line>
+	          </svg>
+	        `;
+	        if (axisEl) {
+	          axisEl.style.paddingTop = `${padding.top}px`;
+	          axisEl.style.paddingBottom = `${padding.bottom}px`;
+	        }
+	        if (metaEl) {
+	          renderChartExtras(metaEl, { caption: cfg.caption, legendItems: cfg.legendItems });
+	        }
+
+	        const overlay = document.createElement('div');
+	        overlay.className = 'line-hit-layer';
+	        overlay.style.setProperty('--points', points.length || 1);
+	        overlay.style.height = `${viewHeight}px`;
+	        overlay.style.top = '0';
+	        overlay.style.bottom = 'auto';
+	        overlay.innerHTML = points.map((pt, index) => `
+	          <button class="line-hit" type="button" data-index="${index}" aria-label="${pt.displayQuarter}${pt.expected ? ' expected' : ''}: ${pt.displayValue}"></button>
+	        `).join('');
+	        barsEl.appendChild(overlay);
+
+	        const state = {
+	          points,
+	          viewWidth,
+	          viewHeight,
+	          padding,
+	          tooltip,
+	          wrapper,
+	          svg: barsEl.querySelector('.profit-bars-svg'),
+	          cursor: barsEl.querySelector('.line-cursor'),
+	          activeIndex: null,
+	          suffix: '',
+	          formatShortValue: formatCurrencyShort,
+	        };
+	        lineChartStates.push({ container: barsEl, state, render: (idx) => showLineHover(state, idx) });
+	        attachLineHover(barsEl, overlay, state);
+	      }
+
+	      function buildMultiLineChart({ cfg, axisEl, barsEl, tooltip, wrapper, metaEl }) {
         if (!barsEl) return;
         const seriesList = (cfg.series || [])
 	          .map(series => ({
@@ -6057,9 +6437,10 @@
         }
         const range = Math.max(scaleMax - scaleMin, Number.EPSILON);
 
-        if (axisEl && axisValues) {
-          axisEl.innerHTML = axisValues.map(value => `<span>${formatAxis(value)}</span>`).join('');
-        }
+	        const axisFormatter = cfg.axisFormatter || formatAxis;
+	        if (axisEl && axisValues) {
+	          axisEl.innerHTML = axisValues.map(value => `<span>${axisFormatter(value)}</span>`).join('');
+	        }
 
         const viewWidth = Math.max(700, labels.length * 65);
         const viewHeight = 230;
@@ -6093,19 +6474,28 @@
 	          return `<path class="${pathClass}" data-series="${series.key || series.label}" d="${pathD}" style="--line-color:${series.color};" stroke="${series.color}"${dashMarkup}></path>`;
 	        }).join('');
 
-        const firstX = seriesPoints[0]?.points[0]?.x ?? padding.left;
+	        const forecastStartIndex = cfg.forecastStartLabel ? labels.indexOf(cfg.forecastStartLabel) : -1;
+	        const forecastZoneMarkup = forecastStartIndex > 0
+	          ? (() => {
+	              const x = padding.left + step * forecastStartIndex - step * 0.25;
+	              const width = Math.max(0, viewWidth - x);
+	              return `<rect class="forecast-zone" x="${x.toFixed(2)}" y="0" width="${width.toFixed(2)}" height="${viewHeight}"></rect>`;
+	            })()
+	          : '';
+	        const firstX = seriesPoints[0]?.points[0]?.x ?? padding.left;
 
         barsEl.classList.add('line-chart');
         barsEl.innerHTML = `
-          <svg class="line-chart-svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="none">
-            <g class="line-grid">
+	          <svg class="line-chart-svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="none">
+	            <g class="line-grid">
               ${axisValues.map(value => {
                 const ratio = scaleMax ? clamp((value - scaleMin) / range, 0, 1) : 0;
                 const y = padding.top + (1 - ratio) * innerHeight;
-                return `<line x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
-              }).join('')}
-            </g>
-            ${paths}
+	                return `<line x1="0" y1="${y.toFixed(2)}" x2="${viewWidth}" y2="${y.toFixed(2)}"></line>`;
+	              }).join('')}
+	            </g>
+	            ${forecastZoneMarkup}
+	            ${paths}
             <line class="line-cursor" x1="${firstX.toFixed(2)}" x2="${firstX.toFixed(2)}" y1="${padding.top}" y2="${viewHeight - padding.bottom}"></line>
           </svg>
         `;
@@ -6415,15 +6805,31 @@
         const prefix = rounded > 0 ? '+' : '';
         return `${prefix}${rounded}%`;
       }
+	      function formatCurrencyAxisLakhs(value) {
+	        if (!isFinite(value)) return '₹0';
+	        if (value === 0) return '₹0';
+	        const sign = value < 0 ? '-' : '';
+	        const lakhs = Math.abs(value) / 100000;
+	        const formatted = lakhs >= 10
+	          ? lakhs.toFixed(0)
+	          : lakhs.toFixed(1).replace(/\.0$/, '');
+	        return `${sign}₹${formatted}L`;
+	      }
       function formatCurrencyShort(value) {
         if (!isFinite(value)) return '₹0';
-        if (Math.abs(value) >= 1000000) {
-          return `₹${(value / 1000000).toFixed(2)}M`;
-        }
-        if (Math.abs(value) >= 1000) {
-          return `₹${(value / 1000).toFixed(2)}K`;
-        }
-        return `₹${Math.round(value)}`;
+	        if (value === 0) return '₹0';
+	        const sign = value < 0 ? '-' : '';
+	        const absolute = Math.abs(value);
+	        if (absolute >= 10000000) {
+	          const crores = absolute / 10000000;
+	          const formattedCr = crores >= 10 ? crores.toFixed(0) : crores.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+	          return `${sign}₹${formattedCr}Cr`;
+	        }
+	        const lakhs = absolute / 100000;
+	        const formatted = lakhs >= 10
+	          ? lakhs.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
+	          : lakhs.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+	        return `${sign}₹${formatted}L`;
       }
       function formatQuarterDisplay(label) {
         if (!label) return '';
