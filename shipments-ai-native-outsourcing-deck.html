@@ -157,6 +157,11 @@
       gap: 16px;
     }
 
+    .content.dense {
+      align-content: start;
+      gap: 12px;
+    }
+
     .hero {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
@@ -481,6 +486,11 @@
       gap: 8px;
     }
 
+    .timeline.phases {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
     .step {
       min-height: 88px;
       padding: 10px;
@@ -504,8 +514,18 @@
       font-size: 12px;
     }
 
+    .timeline.phases .step {
+      min-height: 116px;
+      padding: 13px;
+    }
+
     .step strong {
       font-size: 12px;
+      line-height: 1.18;
+    }
+
+    .timeline.phases .step strong {
+      font-size: 15px;
       line-height: 1.18;
     }
 
@@ -513,6 +533,11 @@
       color: var(--subtle);
       font-size: 10.5px;
       line-height: 1.25;
+    }
+
+    .timeline.phases .step small {
+      font-size: 12px;
+      line-height: 1.32;
     }
 
     .workspace {
@@ -715,7 +740,7 @@
 
     .callout-band span {
       color: #d7efec;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.4;
       max-width: 42em;
     }
@@ -774,32 +799,31 @@
     .logo-board {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 16px;
     }
 
     .logo-card {
-      min-height: 150px;
-      padding: 18px;
+      min-height: 178px;
+      padding: 22px;
       border: 1px solid #dbe3df;
       border-radius: 8px;
       background: #ffffff;
       display: grid;
       align-content: center;
       justify-items: center;
-      gap: 12px;
       text-align: center;
     }
 
     .logo-card img {
       width: 100%;
-      max-width: 210px;
-      max-height: 76px;
+      max-width: 250px;
+      max-height: 92px;
       object-fit: contain;
       display: block;
     }
 
     .logo-card.hermes img {
-      max-height: 96px;
+      max-height: 112px;
     }
 
     .logo-card span {
@@ -812,9 +836,338 @@
 
     .validation-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 18px;
+      gap: 14px;
       align-items: stretch;
+    }
+
+    .validation-tiles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .validation-tile {
+      min-height: 96px;
+      padding: 15px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .validation-tile h3 {
+      margin: 0;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .validation-tile .chip-row {
+      gap: 7px;
+    }
+
+    .source-note {
+      color: var(--subtle);
+      font-size: 9.5px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .benchmark {
+      min-height: 142px;
+      padding: 15px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+    }
+
+    .benchmark .value {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--teal-dark);
+    }
+
+    .benchmark .label {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.24;
+    }
+
+    .benchmark .note {
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.35;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .compare-card {
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .compare-card h3 {
+      margin: 0;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .handoff-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .handoff {
+      min-height: 42px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #f7faf8;
+      padding: 9px 10px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px;
+      align-items: start;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.28;
+    }
+
+    .handoff b {
+      color: var(--ink);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .kpi-card {
+      min-height: 126px;
+      padding: 14px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .kpi-card .label {
+      color: var(--subtle);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+
+    .kpi-card strong {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.14;
+    }
+
+    .kpi-card p {
+      color: var(--muted);
+      font-size: 12.2px;
+      line-height: 1.34;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11.5px;
+      line-height: 1.34;
+    }
+
+    .source-list b {
+      color: var(--ink);
+    }
+
+    .impact-strip {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .impact-pill {
+      min-height: 66px;
+      padding: 10px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      grid-template-rows: 32px auto;
+      align-content: start;
+      gap: 4px;
+    }
+
+    .impact-pill strong {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.12;
+      display: flex;
+      align-items: start;
+    }
+
+    .impact-pill span {
+      color: var(--muted);
+      font-size: 10.8px;
+      line-height: 1.25;
+    }
+
+    .chaos-map {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      align-content: start;
+    }
+
+    .chaos-item {
+      min-height: 86px;
+      padding: 12px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      align-content: start;
+      gap: 7px;
+    }
+
+    .chaos-item b {
+      font-size: 13.5px;
+      line-height: 1.18;
+    }
+
+    .chaos-item span {
+      color: var(--muted);
+      font-size: 11.8px;
+      line-height: 1.3;
+    }
+
+    .roi-formula {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .formula-cell {
+      min-height: 86px;
+      padding: 11px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      align-content: center;
+      gap: 6px;
+      text-align: center;
+    }
+
+    .formula-cell strong {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .formula-cell span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .proof-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .proof-metric {
+      min-height: 78px;
+      padding: 11px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+    }
+
+    .proof-metric strong {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.1;
+    }
+
+    .proof-metric span {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .final-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .compact-plan {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .compact-step {
+      min-height: 86px;
+      padding: 10px;
+      border: 1px solid #dbe3df;
+      border-radius: 8px;
+      background: #ffffff;
+      display: grid;
+      gap: 5px;
+      align-content: start;
+    }
+
+    .compact-step strong {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.12;
+    }
+
+    .compact-step span {
+      color: var(--muted);
+      font-size: 10.5px;
+      line-height: 1.25;
     }
 
     @media print {
@@ -855,15 +1208,22 @@
         </header>
         <div class="content hero">
           <div class="stack">
-            <div class="eyebrow">Product marketing deck</div>
-            <h1 class="title large">From booking confirmation to sailed, without the manual drag.</h1>
-            <p class="subtitle">Shipments AI keeps confirmed shipments moving: AI checks the trail, Fracto handles exceptions, and branches stay in control.</p>
+            <div class="eyebrow">Client impact deck</div>
+            <h1 class="title large">Reduce pre-sail workload without replacing your TMS.</h1>
+            <p class="subtitle">For Indian freight forwarder owners and IT heads: Shipments AI runs the booking-to-sail desk around your current email, portals, TMS, and SOPs while your branch keeps approval authority.</p>
             <div class="chip-row">
-              <span class="chip teal">Booking confirmation</span>
-              <span class="chip">Job creation</span>
-              <span class="chip gold">SI and VGM</span>
+              <span class="chip teal">Client instruction</span>
+              <span class="chip">Carrier booking</span>
+              <span class="chip gold">SI / VGM</span>
               <span class="chip">BL review</span>
-              <span class="chip coral">Sailing confirmation</span>
+              <span class="chip coral">Sailed proof</span>
+            </div>
+            <div class="impact-strip">
+              <div class="impact-pill"><strong>3,000/month base</strong><span>Validation workflows across Hermes and Noble.</span></div>
+              <div class="impact-pill"><strong>Less chasing</strong><span>Docs, approvals, portals, and TMS updates move to a queue.</span></div>
+              <div class="impact-pill"><strong>Fewer surprises</strong><span>Cutoff risk and missing items surface earlier.</span></div>
+              <div class="impact-pill"><strong>Better updates</strong><span>Customers get structured status and requests.</span></div>
+              <div class="impact-pill"><strong>Full proof</strong><span>Every action keeps owner, source, and timestamp.</span></div>
             </div>
           </div>
           <div class="visual">
@@ -876,21 +1236,21 @@
                   <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
                 </div>
                 <div class="ops-console">
-                  <div class="console-row"><i class="status"></i><span>Booking confirmed</span><b>09:12</b></div>
+                  <div class="console-row"><i class="status"></i><span>Client asked to book</span><b>09:12</b></div>
                   <div class="console-row"><i class="status warn"></i><span>SI cutoff today</span><b>16:00</b></div>
                   <div class="console-row"><i class="status block"></i><span>Invoice missing</span><b>Client</b></div>
-                  <div class="console-row"><i class="status"></i><span>Route checked</span><b>Fracto</b></div>
+                  <div class="console-row"><i class="status"></i><span>Booking placed</span><b>Fracto</b></div>
                 </div>
               </div>
               <div class="chip-row">
                 <span class="chip teal">Fields captured</span>
-                <span class="chip">Carrier portal checked</span>
-                <span class="chip gold">Fracto review queue</span>
+                <span class="chip">Carrier booking placed</span>
+                <span class="chip gold">Human review queue</span>
               </div>
             </div>
           </div>
         </div>
-        <footer class="footer"><span>Shipments AI</span><span>01</span></footer>
+        <footer class="footer"><span>Built first for Indian freight forwarders: owners, ops leaders, and IT heads</span><span>01</span></footer>
       </div>
     </section>
 
@@ -898,30 +1258,49 @@
       <div class="slide-inner">
         <header class="topbar">
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
-          <div>The operations gap</div>
+          <div>Evidence for change</div>
+        </header>
+        <div class="content">
+          <div class="stack tight">
+            <div class="eyebrow">Why now</div>
+            <h2 class="title">Manual documentation is no longer a small back-office problem.</h2>
+            <p class="subtitle">The industry is moving toward paperless, standardized, data-rich operations because document friction shows up as cost, delay, and weak customer visibility.</p>
+          </div>
+          <div class="benchmark-grid">
+            <div class="benchmark"><div class="value">45M</div><div class="label">ocean bills of lading issued annually</div><div class="note">DCSA estimate for container shipping.</div></div>
+            <div class="benchmark"><div class="value">$6.5B</div><div class="label">direct cost-saving potential</div><div class="note">DCSA on switching away from physical paper BL transfer.</div></div>
+            <div class="benchmark"><div class="value">40%</div><div class="label">possible cost reduction in selected ops areas</div><div class="note">BCG estimate for automating manual forwarding processes.</div></div>
+            <div class="benchmark"><div class="value">29.4%</div><div class="label">freight forwarder eBL adoption in 2024 survey</div><div class="note">FIT Alliance: adoption is rising, but forwarders lag other segments.</div></div>
+          </div>
+          <p class="source-note">Sources: DCSA, "DCSA's member carriers commit to a fully standardised, electronic bill of lading by 2030"; BCG, "The Digital Imperative in Freight Forwarding"; FIT Alliance / FIATA 2024 eBL survey.</p>
+        </div>
+        <footer class="footer"><span>Industry benchmarks show the prize; each branch pilot measures its own baseline</span><span>02</span></footer>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <header class="topbar">
+          <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
+          <div>The branch pain</div>
         </header>
         <div class="content two-col">
           <div class="stack">
-            <div class="eyebrow">Why this matters</div>
+            <div class="eyebrow">The hidden cost</div>
             <h2 class="title">Freight forwarders do not lose margin on one task. They lose it across every handoff.</h2>
-            <p class="subtitle">After confirmation, work splits across emails, portals, PDFs, TMS screens, and manual follow-ups.</p>
+            <p class="subtitle">Once a client confirms that a shipment should be booked, the work becomes a deadline-driven trail across inboxes, TMS screens, carrier portals, documents, customer approvals, and operator memory.</p>
+            <p class="source-note">BCG notes that forwarding still carries an unusually high number of manual processes, including email, handoffs, and document exchange.</p>
           </div>
-          <div class="stack">
-            <div class="card">
-              <h3>Cutoffs move faster than inboxes</h3>
-              <p>SI, VGM, gate-in, docs, and customs cutoffs sit in scattered messages.</p>
-            </div>
-            <div class="card">
-              <h3>Operators re-key the same facts</h3>
-              <p>Ports, parties, containers, weights, references, and contacts get copied again and again.</p>
-            </div>
-            <div class="card">
-              <h3>Exceptions are invisible until late</h3>
-              <p>Missing invoices, BL mismatches, and portal failures show up too late.</p>
-            </div>
+          <div class="chaos-map">
+            <div class="chaos-item"><b>Client email</b><span>Booking instruction, cargo details, and last-minute changes.</span></div>
+            <div class="chaos-item"><b>Document trail</b><span>Booking request, confirmation, SI, VGM, invoice, packing list, MSDS, and gaps.</span></div>
+            <div class="chaos-item"><b>Carrier portal</b><span>Booking, SI/VGM, status, BL draft, updates, and sailing proof.</span></div>
+            <div class="chaos-item"><b>TMS / Logisys</b><span>Duplicate updates, job fields, tracker rows, and manual status fields.</span></div>
+            <div class="chaos-item"><b>WhatsApp chase</b><span>Customer reminders, branch nudges, and escalation noise.</span></div>
+            <div class="chaos-item"><b>Cutoff clock</b><span>SI, VGM, gate-in, BL approval, and release risk.</span></div>
           </div>
         </div>
-        <footer class="footer"><span>Confirmation-to-sail work is high-volume, deadline-driven, and detail-heavy</span><span>02</span></footer>
+        <footer class="footer"><span>The operational burden is high-volume, deadline-driven, and detail-heavy</span><span>03</span></footer>
       </div>
     </section>
 
@@ -929,46 +1308,123 @@
       <div class="slide-inner">
         <header class="topbar">
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
-          <div>What Fracto can run</div>
+          <div>Before and after</div>
         </header>
         <div class="content">
           <div class="stack tight">
-            <div class="eyebrow">What Fracto delivers</div>
-            <h2 class="title">Fracto runs the pre-sail follow-up desk for each shipment.</h2>
-            <p class="subtitle">AI does the first pass. Fracto operators handle exceptions. Each correction improves the next check.</p>
+            <div class="eyebrow">Operating transformation</div>
+            <h2 class="title">From inbox-led follow-up to a controlled shipment queue.</h2>
+          </div>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <h3>Today: fragmented execution</h3>
+              <div class="handoff-list">
+                <div class="handoff"><span class="dot coral"></span><span><b>Email and WhatsApp:</b> customer docs, approvals, reminders.</span></div>
+                <div class="handoff"><span class="dot gold"></span><span><b>Carrier portals:</b> booking placement, SI/VGM, sailing status, BL drafts.</span></div>
+                <div class="handoff"><span class="dot"></span><span><b>TMS / Excel:</b> duplicate updates and manual status trackers.</span></div>
+                <div class="handoff"><span class="dot coral"></span><span><b>Branch memory:</b> who owns the next action and which cutoff is at risk.</span></div>
+              </div>
+            </div>
+            <div class="compare-card">
+              <h3>With Shipments AI: controlled service lane</h3>
+              <div class="handoff-list">
+                <div class="handoff"><span class="dot"></span><span><b>Live queue:</b> every shipment has owner, cutoff, status, and next action.</span></div>
+                <div class="handoff"><span class="dot gold"></span><span><b>AI extraction:</b> facts, deadlines, mismatches, and missing fields with source proof.</span></div>
+                <div class="handoff"><span class="dot"></span><span><b>Fracto desk:</b> carrier booking, document chase, carrier checks, and exception resolution.</span></div>
+                <div class="handoff"><span class="dot coral"></span><span><b>Your control:</b> approvals, escalation rules, and sensitive customer decisions stay with branch leadership.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="callout-band"><strong>No TMS replacement</strong><span>Start around your existing email, portals, documents, and operating rules; measure branch impact before expanding.</span></div>
+        </div>
+        <footer class="footer"><span>The pitch is branch throughput with auditability, not AI for its own sake</span><span>04</span></footer>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <header class="topbar">
+          <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
+          <div>Control tower view</div>
+        </header>
+        <div class="content">
+          <div class="stack tight"><div class="eyebrow">What leadership sees</div><h2 class="title">One live view of every shipment's next action and risk.</h2></div>
+          <div class="workspace panel" style="padding:0;">
+            <div class="sidebar">
+              <div class="shipment-item"><strong>NSV-1428</strong><span>SI cutoff 16:00 today</span><span>Owner: Fracto</span></div>
+              <div class="shipment-item"><strong>MUN-2190</strong><span>BL draft mismatch</span><span>Owner: Branch review</span></div>
+              <div class="shipment-item"><strong>DXB-0761</strong><span>VGM pending</span><span>Owner: Customer</span></div>
+              <div class="shipment-item"><strong>RTM-8840</strong><span>Sailed proof received</span><span>Owner: Closed</span></div>
+            </div>
+            <div class="mainpane">
+              <div class="pane-head"><div><h3>Shipment NSV-1428</h3><p class="source-note">Client booking instruction received | Carrier: Maersk | Lane: Nhava Sheva to Rotterdam</p></div><span class="chip gold">At risk</span></div>
+              <div class="grid-2">
+                <div class="field"><label>Next action</label><span>File SI before 16:00</span></div>
+                <div class="field"><label>Missing item</label><span>Commercial invoice approval</span></div>
+                <div class="field"><label>Source proof</label><span>Booking PDF + customer email</span></div>
+                <div class="field"><label>Escalation</label><span>Client reminder sent 11:20</span></div>
+              </div>
+              <div class="table">
+                <div class="table-row header"><div>Check</div><div>Status</div><div>Owner</div></div>
+                <div class="table-row"><div>Booking placement</div><div>Carrier booking placed; confirmation captured</div><div>Fracto</div></div>
+                <div class="table-row"><div>SI filing</div><div>Prepared, waiting invoice approval</div><div>Fracto</div></div>
+                <div class="table-row"><div>BL review</div><div>Not started</div><div>Branch</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer"><span>Operators get a queue; leaders get pattern visibility</span><span>05</span></footer>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <header class="topbar">
+          <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
+          <div>Daily ownership model</div>
+        </header>
+        <div class="content dense">
+          <div class="stack tight">
+            <div class="eyebrow">What Fracto actually takes over</div>
+            <h2 class="title">A managed booking-to-sail desk with clear approval boundaries.</h2>
+            <p class="subtitle">Fracto moves repetitive work out of the inbox while sensitive customer, commercial, and exception decisions stay with your branch.</p>
+          </div>
+          <div class="table">
+            <div class="table-row header"><div>Workflow</div><div>Fracto owns</div><div>Client keeps</div></div>
+            <div class="table-row"><div>Booking placement</div><div>Prepare data, submit to carrier or portal, track release, capture confirmation.</div><div>Approve unusual routing or commercial exceptions.</div></div>
+            <div class="table-row"><div>SI / VGM</div><div>Prepare, chase missing inputs, file where rules allow, attach proof.</div><div>Set filing rules and approve high-risk cases.</div></div>
+            <div class="table-row"><div>BL review</div><div>Detect mismatches, prepare comments, route unresolved issues.</div><div>Final sign-off and customer-facing risk calls.</div></div>
+            <div class="table-row"><div>Customer follow-up</div><div>Send structured reminders on email and WhatsApp, status updates, and document chases.</div><div>Relationship-sensitive decisions and escalations.</div></div>
+            <div class="table-row"><div>Portal / TMS updates</div><div>Update carrier portals and agreed TMS fields; flag portal failures and cutoff risk.</div><div>Final decision on blocked or commercially sensitive shipments.</div></div>
+          </div>
+          <div class="callout-band"><strong>Accountable service</strong><span>Software alone creates another queue. Shipments AI combines AI, trained operators, SOPs, and weekly governance to move shipments forward.</span></div>
+        </div>
+        <footer class="footer"><span>Clear ownership makes outsourcing feel controlled, not risky</span><span>06</span></footer>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <header class="topbar">
+          <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
+          <div>Service engine</div>
+        </header>
+        <div class="content">
+          <div class="stack tight">
+            <div class="eyebrow">Why this is not just software</div>
+            <h2 class="title">The work needs a system of record, a queue, and an accountable operating team.</h2>
+            <p class="subtitle">Shipments AI is built as an AI-native outsourcing lane: technology structures the work, Fracto operators clear the exceptions, and governance converts recurring issues into process fixes.</p>
           </div>
           <div class="three-col">
-            <div class="card">
-              <h3>Read and audit documents</h3>
-              <p>Check confirmations, invoices, VGM, BL drafts, screenshots, and emails.</p>
-            </div>
-            <div class="card">
-              <h3>Prepare and place booking</h3>
-              <p>Prepare booking details, submit through agreed flows, and track confirmation.</p>
-            </div>
-            <div class="card">
-              <h3>Confirm to right parties</h3>
-              <p>Share booking number, carrier, vessel, ETD/ETA, and next steps.</p>
-            </div>
-            <div class="card">
-              <h3>File SI and VGM</h3>
-              <p>Prepare and submit SI/VGM, with review for unclear cases.</p>
-            </div>
-            <div class="card">
-              <h3>Send reminders</h3>
-              <p>Chase missing invoices, SI details, VGM, approvals, and BL sign-off.</p>
-            </div>
-            <div class="card">
-              <h3>Human review when needed</h3>
-              <p>Review unclear fields, BL mismatches, approvals, and portal failures.</p>
-            </div>
-          </div>
-          <div class="callout-band">
-            <strong>AI-native service model</strong>
-            <span>AI reads first. Humans review exceptions. Every action keeps source proof.</span>
+            <div class="card"><h3>Shipment brain</h3><p>Trusted fields, source authority, conflicts, proposed changes, and approvals stay in one record.</p></div>
+            <div class="card"><h3>State gates</h3><p>Each shipment state defines required fields, documents, automations, SLAs, and approval gates.</p></div>
+            <div class="card"><h3>Deadline risk board</h3><p>SI, VGM, gate-in, BL approval, document, customs, and customer-approval risk surface early.</p></div>
+            <div class="card"><h3>Document templates</h3><p>Booking requests, confirmations, SI, VGM, MSDS, invoices, packing lists, BL drafts, and more.</p></div>
+            <div class="card"><h3>Carrier and TMS coverage</h3><p>MSC, OOCL, HMM, CMA CGM, Maersk, Logisys, email, and WhatsApp workflows.</p></div>
+            <div class="card"><h3>Operator loop</h3><p>Exceptions, unclear fields, customer decisions, TMS updates, and portal failures are routed with evidence.</p></div>
           </div>
         </div>
-        <footer class="footer"><span>Software plus Fracto operators, delivered as one accountable service</span><span>03</span></footer>
+        <footer class="footer"><span>The buyer is purchasing operational movement, not a passive dashboard</span><span>07</span></footer>
       </div>
     </section>
 
@@ -976,96 +1432,26 @@
       <div class="slide-inner">
         <header class="topbar">
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
-          <div>Scope of work</div>
+          <div>Operating model</div>
         </header>
         <div class="content">
           <div class="stack tight">
-            <div class="eyebrow">Confirmation to sail</div>
-            <h2 class="title">A complete service lane from booking confirmation to sailing.</h2>
-            <p class="subtitle">The day-to-day work Fracto can support for an export/import desk.</p>
+            <div class="eyebrow">AI plus human loop</div>
+            <h2 class="title">The model is designed for control, not blind automation.</h2>
           </div>
-          <div class="timeline">
-            <div class="step"><span class="num">1</span><strong>Booking received</strong><small>Read customer request and documents</small></div>
-            <div class="step"><span class="num">2</span><strong>Booking placed</strong><small>Prepare, submit, track confirmation</small></div>
-            <div class="step"><span class="num">3</span><strong>Parties updated</strong><small>Share booking confirmation and next steps</small></div>
-            <div class="step"><span class="num">4</span><strong>Container details</strong><small>Number, seal, size, weight, pickup</small></div>
-            <div class="step"><span class="num">5</span><strong>SI and VGM filed</strong><small>Prepare, check, submit, follow up</small></div>
-            <div class="step"><span class="num">6</span><strong>Cut-offs and docs</strong><small>Track deadlines and missing papers</small></div>
-            <div class="step"><span class="num">7</span><strong>BL and approval</strong><small>Check draft BL and chase approval</small></div>
-            <div class="step"><span class="num">8</span><strong>Release and sailed</strong><small>Final BL, release, sailing confirmation</small></div>
+          <div class="flow">
+            <div class="flow-node"><div class="tag">1. Intake</div><strong>Read the trail</strong><p>Emails, docs, attachments, carrier status, and branch SOPs are captured.</p></div>
+            <div class="flow-node"><div class="tag">2. Extract</div><strong>Build shipment facts</strong><p>Shipment fields, cutoffs, parties, containers, and proof links are structured.</p></div>
+            <div class="flow-node"><div class="tag">3. Decide</div><strong>Classify next action</strong><p>Clean tasks move forward; uncertain items enter Fracto review.</p></div>
+            <div class="flow-node"><div class="tag">4. Resolve</div><strong>Operate the desk</strong><p>Fracto handles booking placement, follow-up, portal checks, reminders, and exception preparation.</p></div>
+            <div class="flow-node"><div class="tag">5. Govern</div><strong>Report outcomes</strong><p>Branch sees risk, throughput, recurring exceptions, and improvement actions.</p></div>
           </div>
           <div class="two-col">
-            <div class="panel">
-              <h3>Included Fracto services</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Prepare bookings and maintain the shipment file.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Read documents, file SI/VGM, and chase gaps.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Check carrier status and keep source proof.</span></div>
-              </div>
-            </div>
-            <div class="panel">
-              <h3>Where humans stay in the loop</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Unclear or conflicting fields go to review.</span></div>
-                <div class="li"><span class="dot gold"></span><span>BL, approval, and release issues get operator attention.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Portal failures and sailing-risk cases escalate with evidence.</span></div>
-              </div>
-            </div>
+            <div class="panel"><h3>AI can proceed when</h3><div class="bullets"><div class="li"><span class="dot"></span><span>Source data is clear and matches configured rules.</span></div><div class="li"><span class="dot"></span><span>The action is low-risk and already allowed by SOP.</span></div><div class="li"><span class="dot"></span><span>Proof can be attached to the shipment record.</span></div></div></div>
+            <div class="panel"><h3>Humans review when</h3><div class="bullets"><div class="li"><span class="dot coral"></span><span>Fields conflict across documents or portals.</span></div><div class="li"><span class="dot gold"></span><span>BL approval, customer decision, or commercial risk is involved.</span></div><div class="li"><span class="dot coral"></span><span>Cutoff risk, portal failure, or carrier ambiguity appears.</span></div></div></div>
           </div>
         </div>
-        <footer class="footer"><span>Built for export and import operations teams that live by cutoffs</span><span>04</span></footer>
-      </div>
-    </section>
-
-    <section class="slide">
-      <div class="slide-inner">
-        <header class="topbar">
-          <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
-          <div>Forwarder value</div>
-        </header>
-        <div class="content">
-          <div class="stack tight">
-            <div class="eyebrow">Business impact</div>
-            <h2 class="title">What changes for a freight forwarding branch.</h2>
-          </div>
-          <div class="four-col">
-            <div class="card">
-              <h3>More shipments per operator</h3>
-              <p>Routine checks, follow-ups, and reminders move to Fracto.</p>
-            </div>
-            <div class="card">
-              <h3>Fewer cutoff misses</h3>
-              <p>Every shipment has cut-offs, risk flags, owner, and next action.</p>
-            </div>
-            <div class="card">
-              <h3>Cleaner customer experience</h3>
-              <p>Customers get document requests, approval nudges, and timely status.</p>
-            </div>
-            <div class="card">
-              <h3>Better audit and control</h3>
-              <p>Leaders see source proof, notes, and operator decisions.</p>
-            </div>
-          </div>
-          <div class="two-col">
-            <div class="panel">
-              <h3>Operating metrics we track</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Shipments by carrier, client, branch, and lane.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Cutoff adherence and document aging.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Reviews, escalations, and recurring exceptions.</span></div>
-              </div>
-            </div>
-            <div class="panel">
-              <h3>What leadership gets</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>A live pre-sail dashboard.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Standard process across branches.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Less manual work, with control intact.</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <footer class="footer"><span>The sale is not "AI". The sale is branch throughput with control.</span><span>05</span></footer>
+        <footer class="footer"><span>The operating model makes exceptions visible early</span><span>08</span></footer>
       </div>
     </section>
 
@@ -1075,51 +1461,31 @@
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
           <div>Forwarder validation</div>
         </header>
-        <div class="content">
+        <div class="content dense">
           <div class="stack tight">
-            <div class="eyebrow">Market proof to pursue</div>
-            <h2 class="title">Validate on freight forwarders with real documentation density.</h2>
-            <p class="subtitle">Two target profiles with dense documents, deadlines, follow-ups, and repeat lanes.</p>
+            <div class="eyebrow">Validated forwarder workflows</div>
+            <h2 class="title">We have run document-heavy shipment workflows with Hermes and Noble.</h2>
+            <p class="subtitle">For your branch, we can start with the same India-forwarder operating pattern: dense documentation, carrier portals, TMS updates, email, and WhatsApp follow-ups.</p>
           </div>
           <div class="validation-grid">
-            <div class="panel">
-              <h3>Forwarder profiles</h3>
-              <div class="logo-board">
-                <div class="logo-card hermes">
-                  <img src="clients/hermes-travel-cargo.svg" alt="Hermes Travel and Cargo logo" />
-                  <span>Hermes Travel &amp; Cargo</span>
-                </div>
-                <div class="logo-card">
-                  <img src="clients/noble-shipping.png" alt="Noble Shipping Private Limited logo" />
-                  <span>Noble Shipping Pvt. Ltd.</span>
-                </div>
+            <div class="logo-board">
+              <div class="logo-card hermes">
+                <img src="clients/hermes-travel-cargo.svg" alt="Hermes Travel and Cargo logo" />
+              </div>
+              <div class="logo-card">
+                <img src="clients/noble-shipping.png" alt="Noble Shipping Private Limited logo" />
               </div>
             </div>
-            <div class="panel">
-              <h3>Why these accounts fit the wedge</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Hermes spans air, ocean, multimodal, and customs brokerage.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Noble focuses on documentation, forwarding, NVOCC, LCL, and USA lanes.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Both create pre-sail work: docs, cut-offs, BL review, and exceptions.</span></div>
-              </div>
+            <div class="proof-metrics">
+              <div class="proof-metric"><strong>3,000/month</strong><span>Validation volume across Hermes and Noble shipment workflows.</span></div>
+              <div class="proof-metric"><strong>Docs covered</strong><span>Booking request, confirmation, SI, VGM, MSDS, invoice, packing list.</span></div>
+              <div class="proof-metric"><strong>Carriers</strong><span>MSC, OOCL, HMM, CMA CGM, Maersk, Logisys, email, WhatsApp.</span></div>
+              <div class="proof-metric"><strong>Workflow proof</strong><span>Booking-to-sail execution across docs, portals, TMS updates, email, and WhatsApp.</span></div>
             </div>
           </div>
-          <div class="three-col">
-            <div class="card">
-              <h3>Validation question</h3>
-              <p>Can we reduce workload without changing the branch’s TMS, portals, or email flow?</p>
-            </div>
-            <div class="card">
-              <h3>Proof package</h3>
-              <p>Run confirmations, SI/VGM, BL drafts, invoices, packing lists, and carrier updates.</p>
-            </div>
-            <div class="card">
-              <h3>Decision readout</h3>
-              <p>Show status, pending docs, cut-off risk, interventions, and recurring exceptions.</p>
-            </div>
-          </div>
+          <div class="quote">Let us prove this on your shipment lane without changing your TMS, carrier portals, or customer communication flow.</div>
         </div>
-        <footer class="footer"><span>Validation should prove workflow control, not just document extraction</span><span>06</span></footer>
+        <footer class="footer"><span>Validated on Indian forwarder workflows; measured on your branch</span><span>09</span></footer>
       </div>
     </section>
 
@@ -1127,36 +1493,21 @@
       <div class="slide-inner">
         <header class="topbar">
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
-          <div>Service packaging</div>
+          <div>Trust and governance</div>
         </header>
         <div class="content">
-          <div class="stack tight">
-            <div class="eyebrow">How to buy</div>
-            <h2 class="title">Start with one lane. Scale to an outsourced pre-sail pod.</h2>
-          </div>
+          <div class="stack tight"><div class="eyebrow">Control stays with your team</div><h2 class="title">Built for sensitive freight operations where mistakes are expensive.</h2></div>
           <div class="three-col">
-            <div class="card">
-              <h3>Pilot pod</h3>
-              <p>One branch, 1-2 carriers, limited volume, weekly readout.</p>
-              <div class="chip-row" style="margin-top:12px;"><span class="chip teal">30 days</span><span class="chip">Proof</span></div>
-            </div>
-            <div class="card">
-              <h3>Managed service</h3>
-              <p>Dedicated coverage for follow-ups, document chase, carrier checks, and dashboards.</p>
-              <div class="chip-row" style="margin-top:12px;"><span class="chip gold">Monthly</span><span class="chip">SLA</span></div>
-            </div>
-            <div class="card">
-              <h3>Scaled control tower</h3>
-              <p>More branches, carriers, TMS updates, SOPs, and exception reduction.</p>
-              <div class="chip-row" style="margin-top:12px;"><span class="chip coral">Scale</span><span class="chip">Governance</span></div>
-            </div>
+            <div class="card"><h3>Source-backed actions</h3><p>Every extracted field and task links back to email, document, or portal evidence.</p></div>
+            <div class="card"><h3>Approval boundaries</h3><p>BL sign-off, commercial decisions, customer exceptions, and risk calls stay with the client.</p></div>
+            <div class="card"><h3>Configurable escalation</h3><p>Rules by branch, carrier, client, lane, cutoff type, value, and exception severity.</p></div>
+            <div class="card"><h3>No forced migration</h3><p>Start with existing email, TMS, and carrier portal workflows before deeper integration.</p></div>
+            <div class="card"><h3>Weekly governance</h3><p>Risk register, open exceptions, aging, root causes, and process improvement actions.</p></div>
+            <div class="card"><h3>Access control</h3><p>Role-based permissions, named owners, and explicit handoff points for Fracto and branch teams.</p></div>
           </div>
-          <div class="panel">
-            <h3>Commercial model options</h3>
-            <p>Per-shipment, managed pod, or hybrid pricing. Final model depends on volume, carrier mix, customer complexity, and system-update scope.</p>
-          </div>
+          <div class="callout-band"><strong>Trust claim</strong><span>Shipments AI does not ask the branch to surrender control. It gives the branch a better operating surface.</span></div>
         </div>
-        <footer class="footer"><span>Position as an operations outcome, priced around shipments and service coverage</span><span>07</span></footer>
+        <footer class="footer"><span>Controls make the service credible to operations, finance, and leadership</span><span>10</span></footer>
       </div>
     </section>
 
@@ -1164,51 +1515,30 @@
       <div class="slide-inner">
         <header class="topbar">
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
-          <div>Implementation plan</div>
+          <div>Impact scorecard</div>
         </header>
-        <div class="content">
-          <div class="stack tight">
-            <div class="eyebrow">Rollout</div>
-            <h2 class="title">A pilot path without big-bang transformation.</h2>
+          <div class="content dense">
+            <div class="stack tight">
+              <div class="eyebrow">Measured during pilot</div>
+              <h2 class="title">In 30 days, we show your branch impact in operating metrics.</h2>
+            <p class="subtitle">For a high-volume forwarding operation, we baseline your current work and show movement on workload, cutoff visibility, exception aging, and ROI.</p>
           </div>
-          <div class="four-col">
-            <div class="card">
-              <h3>1. Map the lane</h3>
-              <p>Collect samples, SOPs, portal steps, and escalation rules.</p>
-            </div>
-            <div class="card">
-              <h3>2. Configure the service</h3>
-              <p>Set fields, cut-offs, templates, actions, and review queues.</p>
-            </div>
-            <div class="card">
-              <h3>3. Shadow operations</h3>
-              <p>Observe, assist, then take over agreed steps.</p>
-            </div>
-            <div class="card">
-              <h3>4. Go live and scale</h3>
-              <p>Move selected volume, measure outcomes, then expand.</p>
-            </div>
+          <div class="kpi-grid">
+            <div class="kpi-card"><div class="label">Throughput</div><strong>Shipments per operator</strong><p>Baseline current volume, then compare handled volume per operator-hour.</p></div>
+            <div class="kpi-card"><div class="label">Time</div><strong>20-35 min target</strong><p>Estimated manual minutes to validate across booking, checking, chasing, updating, and confirming.</p></div>
+            <div class="kpi-card"><div class="label">Risk</div><strong>95%+ visible cutoffs</strong><p>Target every SI, VGM, BL approval, gate-in, and sailing-risk deadline with owner and status.</p></div>
+            <div class="kpi-card"><div class="label">Quality</div><strong>Exception aging</strong><p>Measure how long missing docs, mismatches, and approvals remain open.</p></div>
+            <div class="kpi-card"><div class="label">Customer</div><strong>Status response time</strong><p>Track how quickly customers get accurate shipment updates and requests.</p></div>
+            <div class="kpi-card"><div class="label">Control</div><strong>Proof completeness</strong><p>Measure shipments with source-backed action history and final sailed proof.</p></div>
           </div>
-          <div class="two-col">
-            <div class="panel">
-              <h3>Inputs needed from the forwarder</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Carrier portal access and TMS test login.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Sample emails, documents, BL drafts, and confirmations.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Contacts, templates, approvals, and escalation rules.</span></div>
-              </div>
-            </div>
-            <div class="panel">
-              <h3>Outputs from Shipments AI</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Live shipment list with owner and next action.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Configured checks for docs, SI, VGM, BL, and approvals.</span></div>
-                <div class="li"><span class="dot coral"></span><span>Weekly readout on risk, exceptions, and improvements.</span></div>
-              </div>
-            </div>
+          <div class="roi-formula">
+            <div class="formula-cell"><strong>Shipment volume</strong><span>Example base: 3,000 shipments/month across validated workflows.</span></div>
+            <div class="formula-cell"><strong>Manual work removed</strong><span>Booking, checking, chasing, updating, confirming.</span></div>
+            <div class="formula-cell"><strong>Cost and risk avoided</strong><span>Loaded operator cost plus verified escalation and cutoff-risk costs.</span></div>
           </div>
+          <p class="source-note"><b>ROI readout:</b> monthly value = shipment volume x manual minutes avoided x loaded operator cost, plus verified escalation and cutoff-risk costs. Time saved and cutoff targets are estimates to validate during pilots.</p>
         </div>
-        <footer class="footer"><span>Shipments AI can start as a narrow lane and expand with proof</span><span>08</span></footer>
+        <footer class="footer"><span>Your pilot readout: workload, risk, service, and ROI</span><span>11</span></footer>
       </div>
     </section>
 
@@ -1218,48 +1548,43 @@
           <div class="brand"><img class="fracto-logo" src="fracto_logo.svg" alt="Fracto logo" /><span class="product-name">Shipments AI</span></div>
           <div>Next step</div>
         </header>
-        <div class="content hero">
+        <div class="content final-grid">
           <div class="stack">
-            <div class="eyebrow">Pilot proposal</div>
-            <h2 class="title large">Let us run one pre-sail lane end to end.</h2>
-            <p class="subtitle">Pick one branch, one lane, two carriers, and representative volume. Fracto runs the workflow and reports weekly.</p>
-            <div class="chip-row">
-              <span class="chip teal">Lane selected</span>
-              <span class="chip">Carrier access</span>
-              <span class="chip gold">Sample documents</span>
-              <span class="chip coral">Ops owner</span>
+            <div class="eyebrow">30-day pilot proposal</div>
+            <h2 class="title large">Use one branch to prove the operating model in 30 days.</h2>
+            <p class="subtitle">Fracto will return a measured readout on workload saved, cutoff visibility, exception aging, proof completeness, TMS update quality, and scale readiness.</p>
+            <div class="chip-row"><span class="chip teal">Hermes / Noble base</span><span class="chip">Carrier access</span><span class="chip gold">Sample docs</span><span class="chip coral">Ops + IT owner</span></div>
+            <div class="panel">
+              <h3>Success criteria</h3>
+              <div class="bullets">
+                <div class="li"><span class="dot"></span><span>Every shipment has owner, cutoff, next action, risk, and proof.</span></div>
+                <div class="li"><span class="dot gold"></span><span>Docs, BL issues, TMS updates, and carrier portal actions are tracked.</span></div>
+                <div class="li"><span class="dot coral"></span><span>Scale recommendation is based on measured effort and coverage depth.</span></div>
+              </div>
             </div>
           </div>
           <div class="stack">
             <div class="panel">
-              <h3>Success criteria for the pilot</h3>
-              <div class="bullets">
-                <div class="li"><span class="dot"></span><span>Every shipment has owner, cut-off, next action, and status.</span></div>
-                <div class="li"><span class="dot gold"></span><span>Missing docs and approvals are chased.</span></div>
-                <div class="li"><span class="dot coral"></span><span>BL, portal, and carrier issues get human review.</span></div>
-                <div class="li"><span class="dot"></span><span>Leadership gets a weekly risk and throughput readout.</span></div>
+              <h3>30-day path</h3>
+              <div class="compact-plan">
+                <div class="compact-step"><strong>Week 1</strong><span>Baseline lane, documents, portals, SOPs, and current manual time.</span></div>
+                <div class="compact-step"><strong>Week 2</strong><span>Shadow live shipments; configure fields, cutoffs, owners, and escalation rules.</span></div>
+                <div class="compact-step"><strong>Week 3</strong><span>Take over agreed booking-to-sail steps with human review thresholds.</span></div>
+                <div class="compact-step"><strong>Week 4</strong><span>Report impact, confirm operating model, and decide scale path.</span></div>
               </div>
             </div>
             <div class="contact-panel">
               <h3>Talk to Fracto</h3>
               <div class="contact-grid">
-                <div class="contact-item">
-                  <div class="label">Email</div>
-                  <div class="value">sales@fracto.tech</div>
-                </div>
-                <div class="contact-item">
-                  <div class="label">Phone</div>
-                  <div class="value">+91 84483 33277</div>
-                </div>
-                <div class="contact-item">
-                  <div class="label">Website</div>
-                  <div class="value">fracto.tech</div>
-                </div>
+                <div class="contact-item"><div class="label">Email</div><div class="value">sales@fracto.tech</div></div>
+                <div class="contact-item"><div class="label">Phone</div><div class="value">+91 84483 33277</div></div>
+                <div class="contact-item"><div class="label">Website</div><div class="value">fracto.tech</div></div>
               </div>
             </div>
+            <div class="source-list"><div><b>Sources used:</b> DCSA eBL commitment, BCG Digital Imperative in Freight Forwarding, IATA e-freight / e-AWB, UNCTAD Review of Maritime Transport 2024, FIT Alliance 2024 eBL survey.</div></div>
           </div>
         </div>
-        <footer class="footer"><span>From confirmation to sailed</span><span>09</span></footer>
+        <footer class="footer"><span>From client instruction to sailed, with proof</span><span>12</span></footer>
       </div>
     </section>
   </main>
