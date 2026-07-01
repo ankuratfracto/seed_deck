@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shipments AI WhatsApp Outbound</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #101828;
+      --muted: #475467;
+      --subtle: #667085;
+      --paper: #fbfcf8;
+      --panel: #ffffff;
+      --soft: #f1f5f2;
+      --line: #d8e0dc;
+      --teal: #0d7f74;
+      --teal-dark: #085d56;
+      --teal-soft: #ddf3ef;
+      --gold: #d79122;
+      --gold-soft: #fff1d8;
+      --coral: #d85f49;
+      --coral-soft: #ffe7e1;
+      --blue: #315f8f;
+      --blue-soft: #e2edf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 1080px;
+      min-height: 1350px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", Arial, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    .creative {
+      position: relative;
+      width: 1080px;
+      height: 1350px;
+      overflow: hidden;
+      padding: 52px 64px 36px;
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      gap: 18px;
+      background:
+        linear-gradient(112deg, rgba(13, 127, 116, 0.12), transparent 34%),
+        linear-gradient(236deg, rgba(216, 95, 73, 0.10), transparent 33%),
+        var(--paper);
+    }
+
+    .creative::before {
+      content: "";
+      position: absolute;
+      inset: 32px;
+      border: 1px solid rgba(16, 24, 40, 0.08);
+      pointer-events: none;
+    }
+
+    .topbar,
+    .footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .brand img {
+      width: 174px;
+      height: auto;
+      display: block;
+      clip-path: inset(0 0 3px 0);
+    }
+
+    .product-name {
+      padding-left: 20px;
+      border-left: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .audience {
+      color: var(--subtle);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .main {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 34px;
+      align-content: center;
+      align-items: center;
+      min-height: 0;
+    }
+
+    .copy {
+      display: grid;
+      gap: 24px;
+      align-content: start;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      padding: 10px 14px;
+      border: 1px solid #9edbd4;
+      border-radius: 8px;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .headline {
+      max-width: 660px;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 64px;
+      line-height: 0.99;
+      letter-spacing: 0;
+    }
+
+    .headline strong {
+      color: var(--teal-dark);
+    }
+
+    .subtitle {
+      max-width: 610px;
+      color: var(--muted);
+      font-size: 27px;
+      line-height: 1.34;
+      font-weight: 500;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 660px;
+    }
+
+    .pill {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.12;
+    }
+
+    .pill.teal {
+      border-color: #9edbd4;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+    }
+
+    .pill.gold {
+      border-color: #f0c982;
+      background: var(--gold-soft);
+      color: #7a4b05;
+    }
+
+    .pill.coral {
+      border-color: #f0b1a4;
+      background: var(--coral-soft);
+      color: #8a2d1c;
+    }
+
+    .value-list {
+      display: grid;
+      gap: 14px;
+      max-width: 610px;
+    }
+
+    .value-item {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--muted);
+      font-size: 23px;
+      line-height: 1.16;
+      font-weight: 700;
+    }
+
+    .value-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      display: grid;
+      place-items: center;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .visual {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .queue {
+      border: 1px solid #d4ded9;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 24px 54px rgba(16, 24, 40, 0.10);
+    }
+
+    .queue-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--line);
+      background: #f7faf7;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .status {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: inline-block;
+    }
+
+    .status.warn {
+      background: var(--gold);
+    }
+
+    .status.block {
+      background: var(--coral);
+    }
+
+    .queue-list {
+      display: grid;
+    }
+
+    .shipment {
+      display: grid;
+      gap: 7px;
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .shipment:last-child {
+      border-bottom: 0;
+    }
+
+    .shipment-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .shipment strong {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .shipment b {
+      padding: 6px 9px;
+      border-radius: 6px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .shipment p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 600;
+    }
+
+    .ship-card {
+      position: relative;
+      min-height: 270px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #ffffff, #eef6f4);
+      overflow: hidden;
+    }
+
+    .route {
+      position: absolute;
+      top: 22px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--muted);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .route span {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+    }
+
+    .container-stack {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 62px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 7px;
+    }
+
+    .box {
+      height: 31px;
+      border: 2px solid rgba(16, 24, 40, 0.12);
+      border-radius: 5px;
+      background: var(--teal);
+    }
+
+    .box:nth-child(3n) {
+      background: var(--gold);
+    }
+
+    .box:nth-child(4n) {
+      background: var(--coral);
+    }
+
+    .hull {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      bottom: 34px;
+      height: 29px;
+      border-radius: 0 0 24px 24px;
+      background: var(--ink);
+    }
+
+    .water {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 34px;
+      background: repeating-linear-gradient(90deg, rgba(49, 95, 143, 0.22) 0 32px, rgba(13, 127, 116, 0.18) 32px 64px);
+    }
+
+    .section {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      min-height: 206px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.84);
+    }
+
+    .panel h2 {
+      margin-bottom: 16px;
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 28px;
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .bullets {
+      display: grid;
+      gap: 10px;
+    }
+
+    .li {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.24;
+      font-weight: 600;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .dot.gold {
+      background: var(--gold);
+    }
+
+    .dot.coral {
+      background: var(--coral);
+    }
+
+    .cta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      padding: 20px 24px;
+      border-radius: 8px;
+      background: var(--teal-dark);
+      color: #fff;
+    }
+
+    .pilot {
+      display: grid;
+      gap: 9px;
+      max-width: 570px;
+    }
+
+    .pilot h2 {
+      font-family: "Space Grotesk", Arial, sans-serif;
+      font-size: 30px;
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .pilot p {
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 18px;
+      line-height: 1.26;
+      font-weight: 600;
+    }
+
+    .contact {
+      min-width: 326px;
+      padding: 15px 18px;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .contact h3 {
+      margin-bottom: 10px;
+      color: var(--subtle);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .contact-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .contact-item span {
+      color: var(--subtle);
+      font-weight: 700;
+    }
+
+    .contact-item strong {
+      color: var(--ink);
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .footer {
+      padding-top: 0;
+      color: var(--subtle);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .footer strong {
+      color: var(--ink);
+    }
+
+    .logo-strip {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 560px;
+    }
+
+    .logo-card {
+      height: 72px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.86);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-card img {
+      max-width: 100%;
+      max-height: 50px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hermes-logo {
+      opacity: 0.92;
+    }
+  </style>
+</head>
+<body>
+  <article class="creative" aria-label="Shipments AI outbound WhatsApp creative">
+    <header class="topbar">
+      <div class="brand">
+        <img src="fracto_logo.svg" alt="Fracto" />
+        <span class="product-name">Shipments AI</span>
+      </div>
+      <div class="audience">For freight forwarders</div>
+    </header>
+
+    <main class="main">
+      <section class="copy">
+        <div class="eyebrow">AI-native outsourcing</div>
+        <h1 class="headline">Automate carrier booking, SI/VGM and BL follow-up.</h1>
+        <p class="subtitle">Fracto runs the pre-sail desk across portals, TMS, email, and WhatsApp while your branch keeps approvals.</p>
+        <div class="pill-row" aria-label="Covered shipment workflows">
+          <span class="pill">Carrier booking</span>
+          <span class="pill gold">SI filing</span>
+          <span class="pill gold">VGM filing</span>
+          <span class="pill">BL review</span>
+          <span class="pill teal">Portal / TMS updates</span>
+          <span class="pill coral">Sailed proof</span>
+        </div>
+        <div class="value-list">
+          <div class="value-item"><span class="value-icon">1</span><span>Submit bookings and capture confirmations</span></div>
+          <div class="value-item"><span class="value-icon">2</span><span>Chase docs, cutoffs, SI, VGM and BL issues</span></div>
+          <div class="value-item"><span class="value-icon">3</span><span>Update portals/TMS and attach proof</span></div>
+        </div>
+      </section>
+
+      <aside class="visual" aria-label="Live shipment queue illustration">
+        <div class="queue">
+          <div class="queue-head"><span>Live shipment queue</span><i class="status"></i></div>
+          <div class="queue-list">
+            <div class="shipment">
+              <div class="shipment-top"><strong>NSV-1428</strong><b>At risk</b></div>
+              <p>SI cutoff today.</p>
+            </div>
+            <div class="shipment">
+              <div class="shipment-top"><strong>MUN-2190</strong><b>Review</b></div>
+              <p>BL mismatch routed.</p>
+            </div>
+            <div class="shipment">
+              <div class="shipment-top"><strong>RTM-8840</strong><b>Closed</b></div>
+              <p>Sailed proof logged.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ship-card">
+          <div class="route"><b>Nhava Sheva</b><span></span><b>Rotterdam</b></div>
+          <div class="container-stack" aria-hidden="true">
+            <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
+            <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
+            <div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div><div class="box"></div>
+          </div>
+          <div class="hull"></div>
+          <div class="water"></div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="logo-strip" aria-label="Validated forwarder workflows">
+      <div class="logo-card"><img class="hermes-logo" src="clients/hermes-travel-cargo-mono.png" alt="Hermes Travel and Cargo" /></div>
+      <div class="logo-card"><img src="clients/noble-shipping.png" alt="Noble Shipping" /></div>
+    </section>
+
+    <section class="cta">
+      <div class="pilot">
+        <h2>Want to test this on one branch?</h2>
+        <p>30-day pilot. No TMS replacement. Measure workload saved and cutoff visibility.</p>
+      </div>
+      <div class="contact">
+        <h3>Talk to Fracto</h3>
+        <div class="contact-grid">
+          <div class="contact-item"><span>Email</span><strong>sales@fracto.tech</strong></div>
+          <div class="contact-item"><span>Phone</span><strong>+91 84483 33277</strong></div>
+          <div class="contact-item"><span>Web</span><strong>fracto.tech</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span><strong>Shipments AI</strong></span>
+      <span>Fracto</span>
+    </footer>
+  </article>
+</body>
+</html>
